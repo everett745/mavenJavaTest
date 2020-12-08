@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.simpleframework.xml.Serializer;
@@ -50,7 +52,7 @@ public class DataProviderXML {
         }
     }
     
-    public User getUserById(long id) throws IOException, Exception{
+    public User getUserById(UUID id) throws IOException, Exception{
         List<User> list = this.select(User.class);
         try{
             User bean1=list.stream()

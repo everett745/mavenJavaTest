@@ -1,55 +1,75 @@
 package ru.sfedu.maven1.dataProviders;
 
-import org.junit.Test;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import ru.sfedu.maven1.Constants;
 import ru.sfedu.maven1.TestBase;
+import ru.sfedu.maven1.enums.RequestStatuses;
+import ru.sfedu.maven1.model.Address;
+import ru.sfedu.maven1.model.Queue;
 import ru.sfedu.maven1.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.UUID;
 
 public class DataProviderCSVTest extends TestBase {
 
+  private static final DataProvider dataProvider = DataProviderCSV.getInstance();
+  private static Logger log = LogManager.getLogger(DataProviderCSVTest.class);
 
-  @Test
-  public void testInsertUserSuccess() throws Exception {
-    System.out.println("testInsertUserSuccess");
-    List<User> listUsers = new ArrayList<User>() ;
+  private Queue getCorrectTestQueue() throws IOException {
+    Queue queue = new Queue();
+    long[] items = {1, 2, 3};
+    queue.setId(UUID.randomUUID());
+    queue.setItems(items);
+    return queue;
+  }
 
-    User user1 = createUser(1, "Test1");
-    User user2 = createUser(2, "Test2");
-    User user3 = createUser(3, "Test3");
+  private Address getCorrectTestAddress() throws IOException {
+    Address address = new Address();
+    address.setId(1);
+    address.setCity("Ростов-на-Дону");
+    address.setRegion("Ростовская область");
+    address.setDistrict("Южный");
+    return address;
+  }
 
-
-    listUsers.add(user1);
-    listUsers.add(user2);
-    listUsers.add(user3);
-
-    DataProviderCSV instance = new DataProviderCSV();
-
-    instance.insertIntoCsv(listUsers);
-
-    Assertions.assertEquals(user1, instance.getUserById(1));
+  private User getCorrectTestUser() throws IOException {
+    User user = new User();
+    user.setId(Constants.TEST_USER_ID);
+    user.setName(Constants.TEST_USER_NAME);
+    user.setPhone(Constants.TEST_USER_PHONE);
+    user.setQueue(getCorrectTestQueue());
+    user.setAddress(getCorrectTestAddress());
+    return user;
   }
 
   @Test
-  public void testInsertUserFailure() throws Exception {
-    System.out.println("testInsertUserSuccess");
-    List<User> listUsers = new ArrayList<User>() ;
+  @Order(0)
+  void createUserTest() throws IOException {
+    User user = getCorrectTestUser();
+    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.createUser(user.getName(),
+            user.getPhone(),
+            user.getAddress())
+    );
+  }
 
-    User user1 = createUser(1, "Test1");
-    User user2 = createUser(2, "Test2");
-    User user3 = createUser(3, "Test3");
-
-
-    listUsers.add(user1);
-    listUsers.add(user2);
-    listUsers.add(user3);
-
-    DataProviderCSV instance = new DataProviderCSV();
-
-    instance.insertIntoCsv(listUsers);
-
-    Assertions.assertNull(instance.getUserById(4));
+  @Test
+  @Order(1)
+  void getUserByIdCorrect() throws IOException {
+    User correctUser = getCorrectTestUser();
+    Optional<User> user = dataProvider.getUser(Constants.TEST_USER_ID);
+    if (user.isEmpty()) {
+      Assertions.fail("Fail test -- getUserByIdCorrect");
+    }
+    log.debug(user.get());
+    Assertions.assertEquals(correctUser.getName(), user.get().getName());
+    Assertions.assertEquals(correctUser.getPhone(), user.get().getPhone());
+    Assertions.assertEquals(correctUser.getQueue(), user.get().getQueue());
+    Assertions.assertEquals(correctUser.getAddress(), user.get().getAddress());
   }
 }
