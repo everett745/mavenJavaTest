@@ -1,29 +1,34 @@
 package ru.sfedu.maven1;
 
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import ru.sfedu.maven1.dataProviders.DataProviderCSV;
+import ru.sfedu.maven1.model.Address;
+import ru.sfedu.maven1.model.Queue;
 import ru.sfedu.maven1.model.User;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.UUID;
 
 public class Main {
 
   private static Logger log = LogManager.getLogger(Main.class);
 
-  public static void main(String args[]) throws CsvRequiredFieldEmptyException, IOException, CsvDataTypeMismatchException {
-//    User user = new User();
-//    user.setId(1);
-//    user.setName("Test Name");
+  public static void main(String args[]) {
+
+    DataProviderCSV dataProviderCSV = new DataProviderCSV();
+
+    Address address = dataProviderCSV.getAddress(1).get();
+    Address address1 = dataProviderCSV.getAddress(2).get();
+    Address address2 = dataProviderCSV.getAddress(3).get();
 //
-//    List<User> listUsers = new ArrayList<>();
-//    listUsers.add(user);
 //
-//    DataProviderCSV providerCSV = new DataProviderCSV();
-//    providerCSV.insertUsers(listUsers);
+     dataProviderCSV.createUser("Иван", "896416", address);
+
+    dataProviderCSV.createUser("Адрей", "", address1);
+    dataProviderCSV.createUser("Семен", "", address2);
+
+
+     System.out.println(dataProviderCSV.getUserList());
 
   }
 }
