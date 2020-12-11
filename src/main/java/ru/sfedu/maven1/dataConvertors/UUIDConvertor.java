@@ -1,18 +1,25 @@
 package ru.sfedu.maven1.dataConvertors;
 
 import com.opencsv.bean.AbstractBeanField;
-import ru.sfedu.maven1.model.Queue;
 
 import java.util.UUID;
 
-public class UUIDConvertor extends AbstractBeanField<Queue, Integer>  {
+public class UUIDConvertor extends AbstractBeanField<UUID, Integer>  {
   @Override
   protected Object convert(String s) {
-    return UUID.fromString(s);
+    try {
+      return UUID.fromString(s);
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   @Override
   protected String convertToWrite(Object value) {
-    return value.toString();
+    try {
+      return value.toString();
+    } catch (NullPointerException e) {
+      return null;
+    }
   }
 }

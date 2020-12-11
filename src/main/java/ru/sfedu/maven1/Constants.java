@@ -16,8 +16,18 @@ public class Constants {
     public static final String ARRAY_DELIMITER = ",";
 
 
-    /*TEST*/
-    public static final UUID TEST_USER_ID = UUID.fromString("5fe6d630-61fd-42a0-ac07-82b9ad68ced5");
-    public static final String TEST_USER_NAME = "Иван Тест";
-    public static final String TEST_USER_PHONE = "8922222222";
+    /*MESSAGES*/
+    public static final String UNDEFINED_USERS_LIST = "Users list not found";
+    public static final String UNDEFINED_USER = "User not found";
+
+    public static final String UNDEFINED_DEALS_LIST = "Deals list not found";
+    public static final String UNDEFINED_DEAL = "Deal not found";
+
+    public static final String UNDEFINED_QUEUES_LIST = "Queues list not found";
+    public static final String UNDEFINED_QUEUE_FOR_DELETE = "Error where delete queue";
+    public static final String UNDEFINED_QUEUE = "Queue not found";
+    public static final String ALREADY_IN_QUEUE = "Queue already contain this uuid   ";
+    public static final String ALREADY_PERFORMER = "This user already deal performer. You cant send request   ";
+    public static final String ALREADY_DEAL_PERFORMER = "This deal already have performer. You cant been performer   ";
+    public static final String UNDEFINED_PERFORM = "Perform not found";
 }

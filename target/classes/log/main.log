@@ -135,3 +135,274 @@
 2020-12-05 22:39:37 DEBUG Main:121 - [Queue{id=1d944f6d-ee49-4b2a-b13a-a555453557ba, items=[]}]
 2020-12-05 22:39:37 DEBUG Main:33 - Optional[Queue{id=1d944f6d-ee49-4b2a-b13a-a555453557ba, items=[]}]
 2020-12-05 22:40:03 DEBUG Main:33 - Optional[Queue{id=1d944f6d-ee49-4b2a-b13a-a555453557ba, items=[]}]
+2020-12-10 21:57:34 ERROR Main:404 - Deal not found
+2020-12-10 22:04:16 DEBUG Main:127 - true
+2020-12-10 22:04:38 ERROR Main:187 - Users list not found
+2020-12-10 22:04:58 ERROR Main:187 - Users list not found
+2020-12-10 22:05:09 ERROR Main:187 - Users list not found
+2020-12-10 22:05:21 ERROR Main:187 - Users list not found
+2020-12-10 22:05:52 ERROR Main:187 - Users list not found
+2020-12-10 22:06:11 ERROR Main:187 - Users list not found
+2020-12-10 22:06:56 DEBUG Main:127 - true
+2020-12-10 23:43:16 ERROR Main:187 - Users list not found
+2020-12-11 00:05:25 DEBUG Main:127 - true
+2020-12-11 02:14:57 ERROR Main:188 - Users list not found
+2020-12-11 02:24:20 ERROR Main:188 - Users list not found
+2020-12-11 02:25:09 ERROR Main:188 - Users list not found
+2020-12-11 02:25:44 ERROR Main:188 - Users list not found
+2020-12-11 02:26:12 DEBUG DataProviderCSVTest:98 - User{id=ac144e7a-9e47-4c10-8e88-b6b351d07ea3, address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, queue=Queue{id=57c1e268-c97b-4e77-9f19-00f8387554ae, items=[]}, name='Иван Тест', phone='8922222222'}
+2020-12-11 03:15:15 INFO  DataProviderCSVTest:110 - []
+2020-12-11 03:15:58 INFO  DataProviderCSVTest:108 - Optional[[]]
+2020-12-11 03:15:58 INFO  DataProviderCSVTest:110 - Optional[[]]
+2020-12-11 03:21:54 INFO  DataProviderCSVTest:108 - Optional[[]]
+2020-12-11 03:21:54 INFO  DataProviderCSVTest:110 - Optional[[]]
+2020-12-11 03:22:30 INFO  DataProviderCSVTest:108 - Optional[[Deal{id=007a93dc-5c12-4209-abf3-291308f2a8b4, name='Продажа нового дома', description='Продается дом в 16 здании', address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, requests=Queue{id=38058ab9-e7a4-41b6-8c3b-cb9f3ac69ba2, items=[]}, owner=5fe6d630-61fd-42a0-ac07-82b9ad68ced5, performer=null, dealType=PURCHASE, object=BUILDING, created_at=null, price='150 000'}, Deal{id=58c8b5b2-8250-47b9-814f-f64a28e8553e, name='Продажа нового дома', description='Продается дом в 16 здании', address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, requests=Queue{id=7d5ebc1b-c329-4625-b378-15f12200f406, items=[]}, owner=5fe6d630-61fd-42a0-ac07-82b9ad68ced5, performer=null, dealType=PURCHASE, object=BUILDING, created_at=null, price='150 000'}]]
+2020-12-11 03:22:30 INFO  DataProviderCSVTest:110 - Optional[[Deal{id=007a93dc-5c12-4209-abf3-291308f2a8b4, name='Продажа нового дома', description='Продается дом в 16 здании', address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, requests=Queue{id=38058ab9-e7a4-41b6-8c3b-cb9f3ac69ba2, items=[]}, owner=5fe6d630-61fd-42a0-ac07-82b9ad68ced5, performer=null, dealType=PURCHASE, object=BUILDING, created_at=null, price='150 000'}, Deal{id=58c8b5b2-8250-47b9-814f-f64a28e8553e, name='Продажа нового дома', description='Продается дом в 16 здании', address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, requests=Queue{id=7d5ebc1b-c329-4625-b378-15f12200f406, items=[]}, owner=5fe6d630-61fd-42a0-ac07-82b9ad68ced5, performer=null, dealType=PURCHASE, object=BUILDING, created_at=null, price='150 000'}]]
+2020-12-11 03:22:59 DEBUG Main:128 - true
+2020-12-11 03:23:09 DEBUG Main:128 - true
+2020-12-11 03:23:09 ERROR Main:467 - Deal not found
+2020-12-11 03:42:59 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=[]}
+2020-12-11 03:44:01 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=[]}
+2020-12-11 03:44:43 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=[]}
+2020-12-11 03:45:14 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=null}
+2020-12-11 03:46:16 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=[]}
+2020-12-11 03:46:46 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=[null]}
+2020-12-11 04:01:45 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=[]}
+2020-12-11 04:02:23 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=[]}
+2020-12-11 04:03:04 INFO  DataProviderCSVTest:172 - Queue{id=ef9a3e4b-8cb7-4ac7-9153-822e5dd7460e, items=[]}
+2020-12-11 04:03:38 INFO  DataProviderCSVTest:172 - Queue{id=23e97a35-1e85-4b3e-9d2c-501b693f9794, items=[]}
+2020-12-11 04:04:13 INFO  DataProviderCSVTest:172 - Queue{id=23e97a35-1e85-4b3e-9d2c-501b693f9794, items=[]}
+2020-12-11 04:06:37 INFO  DataProviderCSVTest:172 - Queue{id=a4d96dd0-0cb3-4442-ae44-20289c9b1882, items=[]}
+2020-12-11 04:24:16 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 04:24:16 INFO  DataProviderCSVTest:174 - Optional[Deal{id=218f05d4-c615-418f-b9e8-62ee07134c80, name='Продажа нового дома', description='Продается дом в 16 здании', address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, requests=Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}, owner=5fe6d630-61fd-42a0-ac07-82b9ad68ced5, performer=null, dealType=PURCHASE, object=BUILDING, created_at=null, price='150 000'}]
+2020-12-11 04:24:34 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 04:24:34 INFO  DataProviderCSVTest:174 - Optional[Deal{id=218f05d4-c615-418f-b9e8-62ee07134c80, name='Продажа нового дома', description='Продается дом в 16 здании', address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, requests=Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}, owner=5fe6d630-61fd-42a0-ac07-82b9ad68ced5, performer=null, dealType=PURCHASE, object=BUILDING, created_at=null, price='150 000'}]
+2020-12-11 04:25:00 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 04:25:00 INFO  DataProviderCSVTest:174 - Optional[Deal{id=218f05d4-c615-418f-b9e8-62ee07134c80, name='Продажа нового дома', description='Продается дом в 16 здании', address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, requests=Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}, owner=5fe6d630-61fd-42a0-ac07-82b9ad68ced5, performer=null, dealType=PURCHASE, object=BUILDING, created_at=null, price='150 000'}]
+2020-12-11 04:25:25 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 04:25:25 INFO  DataProviderCSVTest:174 - Optional[Deal{id=218f05d4-c615-418f-b9e8-62ee07134c80, name='Продажа нового дома', description='Продается дом в 16 здании', address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, requests=Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}, owner=5fe6d630-61fd-42a0-ac07-82b9ad68ced5, performer=null, dealType=PURCHASE, object=BUILDING, created_at=null, price='150 000'}]
+2020-12-11 04:25:50 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 04:25:51 INFO  DataProviderCSVTest:174 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 04:26:16 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 04:26:16 INFO  DataProviderCSVTest:174 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 05:10:58 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 05:10:58 INFO  DataProviderCSVTest:174 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 05:12:48 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 05:19:29 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[0fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 05:19:29 INFO  DataProviderCSVTest:174 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[0fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 05:34:23 INFO  DataProviderCSVTest:172 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 05:34:24 INFO  DataProviderCSVTest:174 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 06:57:08 ERROR Main:175 - Users list not found
+2020-12-11 06:57:36 ERROR Main:195 - Users list not found
+2020-12-11 06:57:36 ERROR Main:674 - Queue not found
+2020-12-11 15:03:56 ERROR Main:195 - Users list not found
+2020-12-11 15:03:56 ERROR Main:675 - Queue not found
+2020-12-11 15:11:04 INFO  DataProviderCSVTest:207 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 15:11:04 INFO  DataProviderCSVTest:212 - Queue{id=86a78185-d8d7-4278-9059-b4894b35c7be, items=[]}
+2020-12-11 15:11:52 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-006903449d3b]}
+2020-12-11 15:11:52 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-006903449d3b, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:17:07 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-006903449d3b, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:17:07 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:17:35 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:17:35 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:17:44 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:17:44 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:18:15 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:18:15 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:18:19 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:18:19 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:18:56 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[]}
+2020-12-11 15:18:56 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:19:02 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:19:02 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0a593b9c-4d78-44e3-8468-06903449d3bf, ca593b9c-4d78-44e3-8468-06903449d3bf]}
+2020-12-11 15:19:33 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[]}
+2020-12-11 15:19:33 ERROR Main:194 - Users list not found
+2020-12-11 15:19:33 ERROR Main:676 - Queue not found
+2020-12-11 15:20:02 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[]}
+2020-12-11 15:20:02 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:20:36 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:20:36 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:20:45 INFO  DataProviderCSVTest:207 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:20:45 INFO  DataProviderCSVTest:212 - Queue{id=63225ed0-426d-4827-a45a-dd9d1415446c, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:46:15 INFO  DataProviderCSVTest:99 - User{id=4dc0577f-05dc-400c-b64d-18424f14090c, address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, queue=Queue{id=353ca14b-ad11-49de-bda1-a2857bc8c3c7, items=[]}, name='Иван Тест', phone='8922222222'}
+2020-12-11 15:46:40 INFO  DataProviderCSVTest:99 - User{id=4dc0577f-05dc-400c-b64d-18424f14090c, address=Address{id=744, city='Ростов-на-Дону', region='Ростовская область', district='Южный'}, queue=Queue{id=353ca14b-ad11-49de-bda1-a2857bc8c3c7, items=[053ca14b-ad11-49de-bda1-0a2857bc8c3c]}, name='Иван Тест', phone='8922222222'}
+2020-12-11 15:47:23 INFO  DataProviderCSVTest:172 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[]}
+2020-12-11 15:47:23 INFO  DataProviderCSVTest:174 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:47:30 INFO  DataProviderCSVTest:172 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:47:30 INFO  DataProviderCSVTest:174 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:49:36 INFO  DataProviderCSVTest:180 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[]}
+2020-12-11 15:49:36 INFO  DataProviderCSVTest:183 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:50:59 INFO  DataProviderCSVTest:180 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[]}
+2020-12-11 15:50:59 INFO  DataProviderCSVTest:183 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced, 5fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:51:56 INFO  DataProviderCSVTest:180 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[]}
+2020-12-11 15:51:56 INFO  DataProviderCSVTest:183 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063, 79356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:52:40 INFO  DataProviderCSVTest:180 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063, 79356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:52:40 INFO  DataProviderCSVTest:183 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063, 79356e63-da22-4048-978f-0aae08265063, 79356e63-da22-4048-978f-0aae08265063, 79356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:53:31 INFO  DataProviderCSVTest:180 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:53:31 INFO  DataProviderCSVTest:183 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063, 79356e63-da22-4048-978f-0aae08265063, 79356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:54:36 INFO  DataProviderCSVTest:180 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[]}
+2020-12-11 15:54:36 INFO  Main:581 - Queue already contain this uuid
+2020-12-11 15:54:36 INFO  Main:581 - Queue already contain this uuid
+2020-12-11 15:54:36 INFO  DataProviderCSVTest:183 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:55:28 INFO  DataProviderCSVTest:180 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:55:28 INFO  DataProviderCSVTest:183 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:56:23 INFO  DataProviderCSVTest:180 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[09356e63-da22-4048-978f-0aae08265063]}
+2020-12-11 15:56:24 INFO  DataProviderCSVTest:183 - Queue{id=ee853b6b-c02a-4d88-89ad-9aa1cf435a59, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 15:57:47 ERROR Main:595 - Deal not found
+2020-12-11 15:57:47 INFO  DataProviderCSVTest:189 - Optional.empty
+2020-12-11 15:59:33 ERROR Main:595 - Deal not found
+2020-12-11 15:59:33 INFO  DataProviderCSVTest:189 - Optional.empty
+2020-12-11 16:01:37 ERROR Main:595 - Deal not found
+2020-12-11 16:01:37 INFO  DataProviderCSVTest:190 - Optional.empty
+2020-12-11 16:02:28 ERROR Main:595 - Deal not found
+2020-12-11 16:02:28 INFO  DataProviderCSVTest:191 - Optional.empty
+2020-12-11 16:02:54 ERROR Main:595 - Deal not found
+2020-12-11 16:02:54 INFO  DataProviderCSVTest:190 - Optional.empty
+2020-12-11 16:03:49 ERROR Main:597 - Deal not found
+2020-12-11 16:03:49 INFO  DataProviderCSVTest:189 - Optional.empty
+2020-12-11 16:04:22 ERROR Main:596 - Deal not found
+2020-12-11 16:04:22 INFO  DataProviderCSVTest:189 - Optional.empty
+2020-12-11 16:04:50 ERROR Main:595 - Deal not found
+2020-12-11 16:04:50 INFO  DataProviderCSVTest:190 - Optional.empty
+2020-12-11 16:05:13 ERROR Main:595 - Deal not found
+2020-12-11 16:05:13 INFO  DataProviderCSVTest:190 - Optional.empty
+2020-12-11 16:05:53 ERROR Main:595 - Deal not found
+2020-12-11 16:05:53 INFO  DataProviderCSVTest:191 - Optional.empty
+2020-12-11 16:06:38 ERROR Main:597 - Deal not found
+2020-12-11 16:06:38 INFO  DataProviderCSVTest:189 - Optional.empty
+2020-12-11 16:07:47 INFO  DataProviderCSVTest:189 - Optional[Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}]
+2020-12-11 16:08:50 INFO  DataProviderCSVTest:172 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}
+2020-12-11 16:08:50 INFO  DataProviderCSVTest:174 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:08:57 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:08:57 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:10:31 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:10:31 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:10:48 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:10:48 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:11:14 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:11:14 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:12:09 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:12:09 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:12:53 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:12:53 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:13:27 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:13:28 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:14:15 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:14:15 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[0fe6d630-61fd-42a0-ac07-082b9ad68ced]}
+2020-12-11 16:15:17 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:15:17 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:15:45 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:15:45 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:16:42 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:16:42 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:17:47 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:17:47 INFO  Main:577 - Queue already contain this uuid
+2020-12-11 16:17:47 INFO  Main:577 - Queue already contain this uuid
+2020-12-11 16:17:47 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:18:02 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}
+2020-12-11 16:18:02 INFO  Main:577 - Queue already contain this uuid
+2020-12-11 16:18:02 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:18:42 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:18:42 INFO  Main:577 - Queue already contain this uuid
+2020-12-11 16:18:42 INFO  Main:577 - Queue already contain this uuid
+2020-12-11 16:18:42 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5, 5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:18:55 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}
+2020-12-11 16:18:55 INFO  Main:577 - Queue already contain this uuid
+2020-12-11 16:18:55 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:20:45 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:20:45 INFO  Main:577 - Queue already contain this uuid   5fe6d630-61fd-42a0-ac07-82b9ad68ced5
+2020-12-11 16:20:45 INFO  Main:577 - Queue already contain this uuid   5fe6d630-61fd-42a0-ac07-82b9ad68ced5
+2020-12-11 16:20:45 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:20:54 INFO  DataProviderCSVTest:189 - Optional[Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}]
+2020-12-11 16:25:38 INFO  DataProviderCSVTest:172 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}
+2020-12-11 16:25:38 INFO  DataProviderCSVTest:174 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[5fe6d630-61fd-42a0-ac07-82b9ad68ced5]}
+2020-12-11 16:29:33 INFO  DataProviderCSVTest:172 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}
+2020-12-11 16:29:33 INFO  Main:583 - This user already deal performer. You cant send request   
+2020-12-11 16:29:33 INFO  DataProviderCSVTest:174 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}
+2020-12-11 18:21:55 INFO  DataProviderCSVTest:228 - Optional[Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[]}]
+2020-12-11 18:24:16 INFO  DataProviderCSVTest:216 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[]}
+2020-12-11 18:24:16 ERROR Main:194 - Users list not found
+2020-12-11 18:24:16 ERROR Main:681 - Queue not found
+2020-12-11 18:28:22 INFO  DataProviderCSVTest:216 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[]}
+2020-12-11 18:28:22 ERROR Main:194 - Users list not found
+2020-12-11 18:28:22 ERROR Main:683 - Queue not found
+2020-12-11 18:28:58 INFO  DataProviderCSVTest:216 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[]}
+2020-12-11 18:28:58 INFO  DataProviderCSVTest:221 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:29:08 INFO  DataProviderCSVTest:227 - Optional[Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50]}]
+2020-12-11 18:29:48 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:29:48 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:30:46 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:30:46 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:33:40 INFO  DataProviderCSVTest:180 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}
+2020-12-11 18:33:40 INFO  Main:583 - This user already deal performer. You cant send request   
+2020-12-11 18:33:40 INFO  Main:583 - This user already deal performer. You cant send request   
+2020-12-11 18:33:40 INFO  DataProviderCSVTest:183 - Queue{id=67cd551b-df54-4006-bc72-96238b4d8f2e, items=[]}
+2020-12-11 18:35:37 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:35:37 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:35:54 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:35:54 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:37:15 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[]}
+2020-12-11 18:37:15 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:38:32 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[]}
+2020-12-11 18:38:32 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:39:11 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[]}
+2020-12-11 18:39:11 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[27493fd4-1890-459d-8b93-c7e7bbd3cb50, 27493fd4-1890-459d-8b93-c7e7bbd3cb50]}
+2020-12-11 18:39:50 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[]}
+2020-12-11 18:39:50 INFO  Main:681 - Queue already contain this uuid   4178a3f1-a9be-457c-a608-f9fdf5cd63dd
+2020-12-11 18:39:50 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[4178a3f1-a9be-457c-a608-f9fdf5cd63dd]}
+2020-12-11 18:40:01 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[4178a3f1-a9be-457c-a608-f9fdf5cd63dd]}
+2020-12-11 18:40:01 INFO  Main:681 - Queue already contain this uuid   4178a3f1-a9be-457c-a608-f9fdf5cd63dd
+2020-12-11 18:40:01 INFO  Main:681 - Queue already contain this uuid   4178a3f1-a9be-457c-a608-f9fdf5cd63dd
+2020-12-11 18:40:01 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[4178a3f1-a9be-457c-a608-f9fdf5cd63dd]}
+2020-12-11 18:40:15 INFO  DataProviderCSVTest:229 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[4178a3f1-a9be-457c-a608-f9fdf5cd63dd]}
+2020-12-11 18:40:15 INFO  Main:674 - Queue already contain this uuid   4178a3f1-a9be-457c-a608-f9fdf5cd63dd
+2020-12-11 18:40:15 INFO  Main:674 - Queue already contain this uuid   4178a3f1-a9be-457c-a608-f9fdf5cd63dd
+2020-12-11 18:40:15 INFO  DataProviderCSVTest:233 - Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[4178a3f1-a9be-457c-a608-f9fdf5cd63dd]}
+2020-12-11 18:40:25 INFO  DataProviderCSVTest:239 - Optional[Queue{id=a767d063-11ba-4178-aead-f5305b72e2b4, items=[4178a3f1-a9be-457c-a608-f9fdf5cd63dd]}]
+2020-12-11 18:45:33 ERROR Main:194 - Users list not found
+2020-12-11 18:45:33 ERROR Main:708 - User not found
+2020-12-11 18:46:01 ERROR Main:194 - Users list not found
+2020-12-11 18:46:01 ERROR Main:708 - User not found
+2020-12-11 18:48:32 INFO  DataProviderCSVTest:239 - Optional[Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[]}]
+2020-12-11 18:48:39 INFO  DataProviderCSVTest:216 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[]}
+2020-12-11 18:48:39 INFO  DataProviderCSVTest:221 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}
+2020-12-11 18:50:18 ERROR Main:734 - This deal already have performer. You cant been performer   
+2020-12-11 18:51:11 ERROR Main:735 - This deal already have performer. You cant been performer   
+2020-12-11 18:51:46 ERROR Main:734 - This deal already have performer. You cant been performer   
+2020-12-11 18:54:23 ERROR Main:735 - This deal already have performer. You cant been performer   
+2020-12-11 19:01:21 INFO  DataProviderCSVTest:216 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[]}
+2020-12-11 19:01:22 INFO  DataProviderCSVTest:221 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}
+2020-12-11 19:04:39 INFO  DataProviderCSVTest:216 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[]}
+2020-12-11 19:04:39 INFO  DataProviderCSVTest:221 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}
+2020-12-11 19:05:20 INFO  DataProviderCSVTest:216 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}
+2020-12-11 19:05:20 INFO  Main:676 - Queue already contain this uuid   a81875a8-8f8c-4d52-9d72-3fe1d4389c40
+2020-12-11 19:05:20 INFO  DataProviderCSVTest:221 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}
+2020-12-11 19:05:32 INFO  DataProviderCSVTest:216 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[]}
+2020-12-11 19:05:32 INFO  DataProviderCSVTest:221 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}
+2020-12-11 19:07:00 INFO  DataProviderCSVTest:239 - Optional[Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}]
+2020-12-11 19:07:34 INFO  DataProviderCSVTest:229 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}
+2020-12-11 19:07:34 INFO  Main:676 - Queue already contain this uuid   a81875a8-8f8c-4d52-9d72-3fe1d4389c40
+2020-12-11 19:07:34 INFO  Main:676 - Queue already contain this uuid   a81875a8-8f8c-4d52-9d72-3fe1d4389c40
+2020-12-11 19:07:34 INFO  DataProviderCSVTest:233 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}
+2020-12-11 19:09:41 INFO  DataProviderCSVTest:239 - Optional[Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[a81875a8-8f8c-4d52-9d72-3fe1d4389c40]}]
+2020-12-11 19:11:31 INFO  DataProviderCSVTest:216 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[]}
+2020-12-11 19:11:31 INFO  DataProviderCSVTest:221 - Queue{id=d6e426b1-a9c3-49d2-9981-6df985d36a93, items=[]}
+2020-12-11 19:12:37 INFO  DataProviderCSVTest:216 - Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[]}
+2020-12-11 19:12:37 INFO  DataProviderCSVTest:221 - Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[]}
+2020-12-11 19:13:18 INFO  DataProviderCSVTest:239 - Optional[Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[]}]
+2020-12-11 19:13:55 INFO  DataProviderCSVTest:239 - Optional[Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[]}]
+2020-12-11 19:14:16 INFO  DataProviderCSVTest:239 - Optional[Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[]}]
+2020-12-11 19:14:23 INFO  DataProviderCSVTest:239 - Optional[Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[3993c5e8-54af-4560-9f6f-e039eac985e8]}]
+2020-12-11 19:15:30 INFO  DataProviderCSVTest:216 - Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[3993c5e8-54af-4560-9f6f-e039eac985e8]}
+2020-12-11 19:15:30 INFO  Main:674 - Queue already contain this uuid   3993c5e8-54af-4560-9f6f-e039eac985e8
+2020-12-11 19:15:30 INFO  DataProviderCSVTest:221 - Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[3993c5e8-54af-4560-9f6f-e039eac985e8]}
+2020-12-11 19:15:45 INFO  DataProviderCSVTest:216 - Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[3993c5e8-54af-4560-9f6f-e039eac985e8]}
+2020-12-11 19:15:45 INFO  Main:674 - Queue already contain this uuid   3993c5e8-54af-4560-9f6f-e039eac985e8
+2020-12-11 19:15:45 INFO  DataProviderCSVTest:221 - Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[3993c5e8-54af-4560-9f6f-e039eac985e8]}
+2020-12-11 19:15:58 INFO  DataProviderCSVTest:239 - Optional[Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[3993c5e8-54af-4560-9f6f-e039eac985e8]}]
+2020-12-11 19:22:28 ERROR Main:739 - This deal already have performer. You cant been performer   
+2020-12-11 19:25:21 ERROR Main:742 - This deal already have performer. You cant been performer   
+2020-12-11 19:35:10 INFO  DataProviderCSVTest:216 - Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[]}
+2020-12-11 19:35:11 INFO  DataProviderCSVTest:221 - Queue{id=263714d7-9b6a-4f64-893b-2dca1667498f, items=[3993c5e8-54af-4560-9f6f-e039eac985e8]}
+2020-12-11 19:36:02 INFO  DataProviderCSVTest:216 - Queue{id=b61b4dc3-9e98-4942-b09f-6658fc384715, items=[]}
+2020-12-11 19:36:02 INFO  DataProviderCSVTest:221 - Queue{id=b61b4dc3-9e98-4942-b09f-6658fc384715, items=[80ea2c7b-9592-4268-9b31-4375366f5158]}

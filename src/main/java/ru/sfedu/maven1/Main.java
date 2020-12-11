@@ -3,10 +3,11 @@ package ru.sfedu.maven1;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import ru.sfedu.maven1.dataProviders.DataProviderCSV;
-import ru.sfedu.maven1.model.Address;
-import ru.sfedu.maven1.model.Queue;
-import ru.sfedu.maven1.model.User;
+import ru.sfedu.maven1.enums.DealTypes;
+import ru.sfedu.maven1.enums.ObjectTypes;
+import ru.sfedu.maven1.model.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class Main {
@@ -16,19 +17,35 @@ public class Main {
   public static void main(String args[]) {
 
     DataProviderCSV dataProviderCSV = new DataProviderCSV();
+    Address address = new Address();
+    address.setId(1);
 
-    Address address = dataProviderCSV.getAddress(1).get();
-    Address address1 = dataProviderCSV.getAddress(2).get();
-    Address address2 = dataProviderCSV.getAddress(3).get();
-//
-//
-     dataProviderCSV.createUser("Иван", "896416", address);
+    // dataProviderCSV.createUser("Иванов Иван", "7864514", address);
 
-    dataProviderCSV.createUser("Адрей", "", address1);
-    dataProviderCSV.createUser("Семен", "", address2);
+//      Optional<User> userO = dataProviderCSV.getUser(UUID.fromString("05b9499d-c8fd-452b-a807-6fba0c797d56"));
+//      User user = userO.get();
+//      dataProviderCSV.createDeal(
+//              user.getId(),
+//              "Новая сделка",
+//              "Тестовое описание",
+//              user.getAddress(),
+//              DealTypes.PURCHASE,
+//              ObjectTypes.BUILDING,
+//              "100000"
+//      );
+
+    // System.out.println(dataProviderCSV.getUser(UUID.fromString("05b9499d-c8fd-452b-a807-6fba0c797d56")));
+
+    Optional<Deal> dealO = dataProviderCSV.manageDeal(UUID.fromString("79356e63-da22-4048-978f-aae08265063a"));
+    Deal deal = dealO.get();
 
 
-     System.out.println(dataProviderCSV.getUserList());
+    deal.setPrice("23423");
+    deal.setName("новое имя");
+    dataProviderCSV.updateDeal(deal);
+
+    System.out.println(dataProviderCSV.manageDeal(UUID.fromString("79356e63-da22-4048-978f-aae08265063a")));
+     // System.out.println(dataProviderCSV.removeDeal(UUID.fromString("cbd166ab-4d06-4a9c-b799-aef04d77546a")));
 
   }
 }
