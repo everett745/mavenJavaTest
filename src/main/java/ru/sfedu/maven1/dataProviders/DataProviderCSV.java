@@ -24,7 +24,7 @@ public class DataProviderCSV implements DataProvider {
 
   private static DataProvider INSTANCE = null;
 
-  private static Logger log = LogManager.getLogger(Main.class);
+  private static final Logger log = LogManager.getLogger(Main.class);
 
   public static DataProvider getInstance() {
     if (INSTANCE == null) {
@@ -122,6 +122,7 @@ public class DataProviderCSV implements DataProvider {
     classList.add(DealHistory.class);
     classList.add(Queue.class);
     classList.add(User.class);
+    classList.add(Company.class);
     classList.forEach(this::deleteFile);
   }
 
@@ -135,107 +136,42 @@ public class DataProviderCSV implements DataProvider {
 
   private <T> String getFilePath(Class<T> tClass) throws IOException{
     return PropertyProvider.getProperty(Constants.CSV_PATH)
-            + tClass.getSimpleName().toString().toLowerCase()
+            + tClass.getSimpleName().toLowerCase()
             + PropertyProvider.getProperty(Constants.CSV_EXTENSION);
   }
-
-
 
   @Override
   public RequestStatuses createUser(
           @NotNull String name,
           @NotNull String phone,
           @NotNull Address address) {
-    try {
-      UUID uuid = UUID.randomUUID();
-      Optional<Queue> queueOptional = createQueue();
-      if (queueOptional.isPresent()) {
-        User user = new User();
-        user.setId(uuid);
-        user.setName(name);
-        user.setPhone(phone);
-        user.setAddress(address);
-        user.setQueue(queueOptional.get());
-        insertIntoCsv(user);
-        return RequestStatuses.SUCCESS;
-      } else {
-        return RequestStatuses.FAILED;
-      }
-    } catch (IOException e) {
-      log.error(e);
+    Optional<User> userOptional = createUserOptional(name, phone, address);
+    if (userOptional.isPresent()) {
+      return RequestStatuses.SUCCESS;
+    } else {
       return RequestStatuses.FAILED;
     }
   }
 
   @Override
   public Optional<List<User>> getUsers() {
-    try {
-      List<User> userList = getFromCsv(User.class);
-      if (!userList.isEmpty()) {
-        return Optional.of(userList);
-      } else {
-        log.error(Constants.UNDEFINED_USERS_LIST);
-        return Optional.empty();
-      }
-    } catch (IOException e) {
-      log.error(e);
+    Optional<List<User>> userList = getUsersOptional();
+    if (userList.isPresent()) {
+      return userList;
+    } else {
+      log.error(Constants.UNDEFINED_USERS_LIST_EMPTY);
       return Optional.empty();
     }
   }
 
   @Override
-  public Optional<User> getUser(UUID userId) {
-    Optional<List<User>> optionalUsers = getUsers();
-    if (optionalUsers.isPresent()) {
-      List<User> users = optionalUsers.get();
-      Optional<User> optionalUser = users
-                    .stream()
-                    .filter(user -> user.getId().equals(userId))
-                    .findFirst();
-      if (optionalUser.isPresent()) {
-        return optionalUser;
-      } else {
-        log.error(Constants.UNDEFINED_USER);
-        return Optional.empty();
-      }
+  public Optional<User> getUser(@NotNull UUID userId) {
+    Optional<User> optionalUser = getUserOptional(userId);
+    if (optionalUser.isPresent()) {
+      return optionalUser;
     } else {
-      log.error(Constants.UNDEFINED_USERS_LIST);
+      log.error(Constants.UNDEFINED_USER);
       return Optional.empty();
-    }
-  }
-
-  private boolean isEditValid(User user, User editedUser) {
-    return user.getAddress().equals(editedUser.getAddress())
-            && user.getPhone().equals(editedUser.getPhone())
-            && user.getName().equals(editedUser.getName())
-            && user.getQueue().equals(editedUser.getQueue());
-  }
-
-  private RequestStatuses updateUser(@NotNull User editedUser) {
-    Optional<List<User>> userList = getUsers();
-    if (userList.isPresent()) {
-      List<User> users = userList.get();
-      Optional<User> optionalUser = users.stream()
-              .filter(user -> user.getId().equals(editedUser.getId()))
-              .findFirst();
-
-      if (optionalUser.isEmpty()) {
-        return RequestStatuses.NOT_FOUNDED;
-      }
-
-      users = users.stream()
-              .filter(user -> !user.getId().equals(editedUser.getId()))
-              .collect(Collectors.toList());
-      users.add(editedUser);
-      try {
-        insertIntoCsv(User.class, users, true);
-        return RequestStatuses.SUCCESS;
-      } catch (IOException e) {
-        log.error(e);
-        return RequestStatuses.FAILED;
-      }
-    } else {
-      return RequestStatuses.FAILED;
     }
   }
 
@@ -251,21 +187,19 @@ public class DataProviderCSV implements DataProvider {
 
   @Override
   public RequestStatuses deleteUser(@NotNull UUID userId) {
+    Optional<List<User>> userListOptional = getUsers();
     Optional<User> optionalUser = getUser(userId);
-    if (optionalUser.isPresent()) {
-      List<User> users = getUsers().get();
+    if (userListOptional.isPresent() && optionalUser.isPresent()) {
+      List<User> users = userListOptional.get();
+
       users = users.stream()
               .filter(user -> !user.getId()
               .equals(userId))
               .collect(Collectors.toList());
+
+      deleteUserFromCompany(userId);
       deleteQueue(optionalUser.get().getQueue().getId());
-      try {
-        insertIntoCsv(User.class, users, true);
-        return RequestStatuses.SUCCESS;
-      } catch (IOException e) {
-        log.error(e);
-        return RequestStatuses.FAILED;
-      }
+      return rewriteUsers(users);
     } else {
       return RequestStatuses.FAILED;
     }
@@ -286,7 +220,7 @@ public class DataProviderCSV implements DataProvider {
     Optional<List<Address>> optionalAddresses = getAddresses();
     if (optionalAddresses.isPresent()) {
       List<Address> addresses = optionalAddresses.get();
-      return addresses .stream()
+      return addresses.stream()
               .filter(address -> address.getId() == id)
               .findFirst();
     } else {
@@ -301,148 +235,18 @@ public class DataProviderCSV implements DataProvider {
       List<Address> addresses = optionalAddresses.get();
       return addresses
               .stream()
-              .filter(address -> address.getCity().toLowerCase().contains(city.toLowerCase()))
+              .filter(address ->
+                      address.getCity().toLowerCase()
+                              .contains(city.toLowerCase()))
               .findFirst();
     } else {
       return Optional.empty();
-    }
-  }
-
-  private Optional<Queue> createQueue() {
-    Queue queue = new Queue();
-    try {
-      insertIntoCsv(queue);
-      return Optional.of(queue);
-    } catch (IOException e) {
-      log.error(e);
-      return Optional.empty();
-    }
-  }
-
-  private Optional<List<Queue>> getQueuesList() {
-    try {
-      List<Queue> queues = getFromCsv(Queue.class);
-      return Optional.of(queues);
-    } catch (IOException e) {
-      log.error(e);
-      log.error(Constants.UNDEFINED_QUEUES_LIST);
-      return Optional.empty();
-    }
-  }
-
-  private Optional<Queue> getQueueById(UUID id) {
-    Optional<List<Queue>> queuesOptional = getQueuesList();
-    if (queuesOptional.isPresent()) {
-      List<Queue> queues = queuesOptional.get();
-      return queues
-              .stream()
-              .filter(queue -> queue.getId().equals(id))
-              .findFirst();
-    } else {
-      log.error(Constants.UNDEFINED_QUEUE);
-      return Optional.empty();
-    }
-  }
-
-  private RequestStatuses updateQueue(@NotNull Queue queue) {
-    Optional<List<Queue>> optionalQueues = getQueuesList();
-    Optional<Queue> optionalQueue = getQueueById(queue.getId());
-    if (optionalQueues.isPresent()) {
-      List<Queue> queues = optionalQueues.get();
-      if (optionalQueue.isPresent()) {
-        queues = queues.stream()
-                .filter(queueL -> !queueL.getId().equals(queue.getId()))
-                .collect(Collectors.toList());
-        queues.add(queue);
-        try {
-          insertIntoCsv(Queue.class, queues, true);
-        } catch (IOException e) {
-          log.error(e);
-          return RequestStatuses.FAILED;
-        }
-        return RequestStatuses.SUCCESS;
-      } else {
-        log.error(Constants.UNDEFINED_QUEUE);
-        return RequestStatuses.FAILED;
-      }
-    } else {
-      log.error(Constants.UNDEFINED_QUEUES_LIST);
-      return RequestStatuses.FAILED;
     }
   }
 
   @Override
   public Optional<Queue> getQueue(@NotNull UUID id) {
     return getQueueById(id);
-  }
-
-  private RequestStatuses deleteQueue(@NotNull UUID id) {
-    Optional<List<Queue>> optionalQueues = getQueuesList();
-    if (optionalQueues.isPresent()) {
-      List<Queue> queues = optionalQueues.get();
-      queues = queues.stream()
-              .filter(user -> !user.getId()
-              .equals(id))
-              .collect(Collectors.toList());
-      try {
-        insertIntoCsv(Queue.class, queues, true);
-        return RequestStatuses.SUCCESS;
-      } catch (IOException e) {
-        log.error(e);
-        return RequestStatuses.FAILED;
-      }
-    } else {
-      log.error(Constants.UNDEFINED_QUEUE_FOR_DELETE);
-      return RequestStatuses.FAILED;
-    }
-  }
-
-  private Optional<List<Deal>> getDealsList() {
-    try {
-      return Optional.of(getFromCsv(Deal.class));
-    } catch (IOException e) {
-      log.error(e);
-      log.error(Constants.UNDEFINED_DEALS_LIST);
-      return Optional.empty();
-    }
-  }
-
-  private Optional<List<PublicDeal>> getPublicDealsList() {
-    try {
-      List<PublicDeal> dealList = getFromCsv(PublicDeal.class);
-      if (dealList.isEmpty()) {
-        log.debug(Constants.EMPTY_PUBLIC_DEALS);
-      }
-      return Optional.of(getFromCsv(PublicDeal.class));
-    } catch (IOException e) {
-      log.error(e);
-      log.error(Constants.UNDEFINED_DEALS_LIST);
-      return Optional.empty();
-    }
-  }
-
-  private Optional<List<Deal>> getAllDeals() {
-    try {
-      List<Deal> deals = getFromCsv(Deal.class);
-      deals.addAll(getFromCsv(PublicDeal.class));
-      return Optional.of(deals);
-    } catch (IOException e) {
-      log.error(e);
-      return Optional.empty();
-    }
-  }
-
-  private Optional<Deal> getDealById(UUID id) {
-    Optional<List<Deal>> deals = getAllDeals();
-    if (deals.isPresent()) {
-      List<Deal> dealList = deals.get();
-      return dealList.stream()
-              .filter(queue -> queue.getId().equals(id))
-              .findFirst();
-    } else {
-      log.error(Constants.UNDEFINED_DEAL);
-      return Optional.empty();
-    }
   }
 
   @Override
@@ -472,6 +276,7 @@ public class DataProviderCSV implements DataProvider {
         deal.setCreated_at(new Date());
         deal.setPrice(price);
         insertIntoCsv(deal);
+        addDealToCompany(userId, uuid);
         return RequestStatuses.SUCCESS;
       } else {
         return RequestStatuses.FAILED;
@@ -512,6 +317,7 @@ public class DataProviderCSV implements DataProvider {
         publicDeal.setCreated_at(new Date());
         publicDeal.setPrice(price);
         insertIntoCsv(publicDeal);
+        addDealToCompany(userId, uuid);
         return RequestStatuses.SUCCESS;
       } else {
         return RequestStatuses.FAILED;
@@ -521,84 +327,6 @@ public class DataProviderCSV implements DataProvider {
       return RequestStatuses.FAILED;
     }
   }
-
-  private List<DealHistory> createFirstDealHistory(UUID parentId, DealStatus currentStatus) {
-    List<DealHistory> dealHistoryList = new ArrayList<>();
-    DealHistory dealHistory = new DealHistory();
-    dealHistory.setId(parentId);
-    dealHistory.setStatus(currentStatus);
-    dealHistory.setText(currentStatus.getMessage());
-    dealHistory.setCreated_at(new Date());
-    addDealHistory(dealHistory);
-    dealHistoryList.add(dealHistory);
-    return dealHistoryList;
-  }
-
-  private void insertDealHistory(List<DealHistory> dealHistoryList) {
-    try {
-      insertIntoCsv(DealHistory.class, dealHistoryList, true);
-    } catch (IOException e) {
-      log.error(e);
-    }
-  }
-
-  private RequestStatuses addDealHistory(DealHistory dealHistoryItem) {
-    Optional<List<DealHistory>> optionalDealHistories = getOptionalDealHistoryList();
-    if (optionalDealHistories.isPresent()) {
-      List<DealHistory> dealHistoryList = optionalDealHistories.get();
-      dealHistoryList.add(dealHistoryItem);
-      insertDealHistory(dealHistoryList);
-      return RequestStatuses.SUCCESS;
-    } else {
-      log.error(Constants.UNDEFINED_DEAL_HISTORY);
-      return RequestStatuses.FAILED;
-    }
-  }
-
-  private Optional<List<DealHistory>> getOptionalDealHistoryList() {
-    try {
-      List<DealHistory> dealHistory = getFromCsv(DealHistory.class);
-      return Optional.of(dealHistory);
-    } catch (IOException e) {
-      log.error(e);
-      return Optional.empty();
-    }
-  }
-
-  public Optional<List<DealHistory>> getDealHistoryByDeal(UUID id) {
-    Optional<List<DealHistory>> optionalDealHistories = getOptionalDealHistoryList();
-    if (optionalDealHistories.isPresent()) {
-      List<DealHistory> dealHistoryList = optionalDealHistories.get();
-      dealHistoryList = dealHistoryList.stream()
-              .filter(item -> item.getId().equals(id))
-              .collect(Collectors.toList());
-      if (dealHistoryList.isEmpty()) {
-        log.error(Constants.EMPTY_DEAL_HISTORY);
-        return Optional.empty();
-      } else {
-        return Optional.of(dealHistoryList);
-      }
-    } else {
-      log.error(Constants.UNDEFINED_DEAL_HISTORY);
-      return Optional.empty();
-    }
-  }
-
-  private RequestStatuses removeDealHistoryByDeal(UUID id) {
-    Optional<List<DealHistory>> optionalDealHistories = getOptionalDealHistoryList();
-    if (optionalDealHistories.isPresent()) {
-      List<DealHistory> dealHistoryList = optionalDealHistories.get();
-      dealHistoryList = dealHistoryList.stream()
-              .filter(item -> !item.getId().equals(id))
-              .collect(Collectors.toList());
-      insertDealHistory(dealHistoryList);
-      return RequestStatuses.SUCCESS;
-    } else {
-      log.error(Constants.UNDEFINED_DEAL_HISTORY);
-      return RequestStatuses.FAILED;
-    }
-  }
-
 
   @Override
   public Optional<Deal> manageDeal(@NotNull UUID id) {
@@ -613,22 +341,14 @@ public class DataProviderCSV implements DataProvider {
 
   @Override
   public RequestStatuses removeDeal(@NotNull UUID id) {
-    Optional<List<Deal>> optionalDeals = getDealsList();
     Optional<Deal> optionalDeal = getDealById(id);
-    if (optionalDeals.isPresent() && optionalDeal.isPresent()) {
-      List<Deal> deals = optionalDeals.get();
-      deals = deals.stream()
-              .filter(deal -> !deal.getId()
-              .equals(id))
-              .collect(Collectors.toList());
-      deleteQueue(optionalDeal.get().getRequests().getId());
-      try {
-        insertIntoCsv(Deal.class, deals, true);
-        return RequestStatuses.SUCCESS;
-      } catch (IOException e) {
-        log.error(e);
-        return RequestStatuses.FAILED;
-      }
+    if (optionalDeal.isPresent()) {
+      Deal deal = optionalDeal.get();
+
+      return switch (deal.getDealModel()) {
+        case PUBLIC -> removePublicDeal((PublicDeal) deal);
+        case PRIVATE -> removeSimpleDeal(deal);
+      };
     } else {
       log.error(Constants.UNDEFINED_DEAL);
       return RequestStatuses.FAILED;
@@ -639,26 +359,22 @@ public class DataProviderCSV implements DataProvider {
   public RequestStatuses updateDeal(@NotNull Deal deal) {
     Optional<List<Deal>> optionalDeals = getDealsList();
     Optional<Deal> optionalDeal = getDealById(deal.getId());
-    if (optionalDeals.isPresent()) {
+    if (optionalDeals.isPresent() && optionalDeal.isPresent()) {
       List<Deal> deals = optionalDeals.get();
-      if (optionalDeal.isPresent()) {
-        deals = deals.stream()
-                .filter(dealL -> !dealL.getId().equals(deal.getId()))
-                .collect(Collectors.toList());
-        deals.add(deal);
-        try {
-          insertIntoCsv(Deal.class, deals, true);
-        } catch (IOException e) {
-          log.error(e);
-          return RequestStatuses.FAILED;
-        }
-        return RequestStatuses.SUCCESS;
-      } else {
-        log.error(Constants.UNDEFINED_DEAL);
+
+      deals = deals.stream()
+              .filter(dealL -> !dealL.getId().equals(deal.getId()))
+              .collect(Collectors.toList());
+      deals.add(deal);
+      try {
+        insertIntoCsv(Deal.class, deals, true);
+      } catch (IOException e) {
+        log.error(e);
         return RequestStatuses.FAILED;
       }
+      return RequestStatuses.SUCCESS;
     } else {
-      log.error(Constants.UNDEFINED_DEALS_LIST);
+      log.error(Constants.UNDEFINED_DEAL);
       return RequestStatuses.FAILED;
     }
   }
@@ -681,15 +397,14 @@ public class DataProviderCSV implements DataProvider {
   @Override
   public Optional<List<Deal>> getMyDeals(@NotNull UUID userId) {
     Optional<List<Deal>> optionalDeals = getAllDeals();
-    Optional<User> optionalUser = getUser(userId);
-    if (optionalDeals.isPresent()) {
+    Optional<User> checkUser = getUser(userId);
+    if (optionalDeals.isPresent() && checkUser.isPresent()) {
       List<Deal> deals = optionalDeals.get();
       deals = deals.stream()
               .filter(deal -> deal.getOwner().equals(userId))
               .collect(Collectors.toList());
       return Optional.of(deals);
     } else {
-      log.error(Constants.UNDEFINED_DEALS_LIST);
       return Optional.empty();
     }
   }
@@ -715,30 +430,22 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private boolean userIsPerformer(@NotNull UUID userId, @NotNull Deal deal) {
-    try {
-      return deal.getPerformer().equals(userId);
-    } catch (NullPointerException e) {
-      return false;
-    }
-  }
-
   @Override
   public RequestStatuses addDealRequest(@NotNull UUID userId, @NotNull UUID id) {
     Optional<Deal> dealOptional = getDealById(id);
     Optional<User> optionalUser = getUser(userId);
-    if (!optionalUser.isPresent()) {
-      return RequestStatuses.FAILED;
-    }
-    if (dealOptional.isPresent()) {
+
+    if (dealOptional.isPresent() && optionalUser.isPresent()) {
       Deal deal = dealOptional.get();
       Queue requests = deal.getRequests();
       List<UUID> requestsList = requests.getItems();
 
       if (requestsList.contains(userId)) {
-        log.info(Constants.ALREADY_IN_QUEUE + userId);
+        log.error(Constants.ALREADY_IN_QUEUE + userId);
+        return RequestStatuses.FAILED;
       } else if (userIsPerformer(userId, deal)) {
-        log.info(Constants.ALREADY_PERFORMER);
+        log.error(Constants.ALREADY_PERFORMER);
+        return RequestStatuses.FAILED;
       } else {
         requestsList.add(userId);
         requests.setItems(requestsList);
@@ -786,7 +493,7 @@ public class DataProviderCSV implements DataProvider {
       Queue requests = deal.getRequests();
 
       if (requests.getItems().contains(userId)) {
-        requests.setItems(new ArrayList<UUID>());
+        requests.setItems(new ArrayList<>());
         updateQueue(requests);
 
         deal.setPerformer(userId);
@@ -908,7 +615,7 @@ public class DataProviderCSV implements DataProvider {
         return RequestStatuses.FAILED;
       }
     } else {
-      log.error(Constants.UNDEFINED_DEAL);
+      log.error(Constants.UNDEFINED_PERFORM);
       return RequestStatuses.FAILED;
     }
   }
@@ -916,26 +623,476 @@ public class DataProviderCSV implements DataProvider {
   @Override
   public RequestStatuses refuseDealPerform(@NotNull UUID userId, @NotNull UUID id) {
     Optional<User> userOptional = getUser(userId);
-    if (userOptional.isPresent()) {
+    if (userOptional.isPresent() && userOptional.get().getQueue().getItems().contains(id)) {
       User user = userOptional.get();
       Queue requests = user.getQueue();
 
-      if (requests.getItems().contains(id)) {
-        List<UUID> requestsList = requests.getItems()
-                .stream().filter(requestId -> !requestId.equals(id))
-                .collect(Collectors.toList());
+      List<UUID> requestsList = requests.getItems()
+              .stream().filter(requestId -> !requestId.equals(id))
+              .collect(Collectors.toList());
 
-        requests.setItems(requestsList);
-        updateQueue(requests);
-        return RequestStatuses.SUCCESS;
-      } else {
-        log.error(Constants.UNDEFINED_PERFORM);
-        return RequestStatuses.FAILED;
-      }
+      requests.setItems(requestsList);
+      updateQueue(requests);
+      return RequestStatuses.SUCCESS;
     } else {
-      log.error(Constants.UNDEFINED_DEAL);
+      log.error(Constants.UNDEFINED_PERFORM);
       return RequestStatuses.FAILED;
     }
   }
+
+
+  private Optional<Company> createCompany() {
+    Company company = new Company();
+    UUID uuid = UUID.randomUUID();
+    company.setId(uuid);
+    try {
+      insertIntoCsv(company);
+      return Optional.of(company);
+    } catch (IOException e) {
+      log.error(e);
+      return Optional.empty();
+    }
+  }
+
+  private void updateCompany(Company updatedCompany) {
+    Optional<List<Company>> optionalCompanies = getCompanies();
+    if (optionalCompanies.isPresent()) {
+      List<Company> companies = optionalCompanies.get();
+      companies = companies.stream()
+              .filter(company -> !company.getId().equals(updatedCompany.getId()))
+              .collect(Collectors.toList());
+
+      companies.add(updatedCompany);
+      try {
+        if (updatedCompany.getEmployees().isEmpty()) {
+          deleteCompany(updatedCompany.getId());
+        } else {
+          insertIntoCsv(Company.class, companies, true);
+        }
+      } catch (IOException e) {
+        log.error(e);
+      }
+    }
+  }
+
+  private void deleteCompany(UUID id) {
+    Optional<List<Company>> optionalCompanies = getCompanies();
+    Optional<Company> optionalCompany = getCompany(id);
+    if (optionalCompanies.isPresent() && optionalCompany.isPresent()) {
+      List<Company> companies = optionalCompanies.get();
+      companies = companies.stream()
+              .filter(company -> !company.getId().equals(id) )
+              .collect(Collectors.toList());
+      try {
+        optionalCompany.get().getDeals().forEach(this::removeDeal);
+        insertIntoCsv(Company.class, companies, true);
+      } catch (IOException e) {
+        log.error(e);
+      }
+    }
+  }
+
+  private Optional<List<Company>> getCompanies() {
+    try {
+      return Optional.of(getFromCsv(Company.class));
+    } catch (IOException e) {
+      log.error(e);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<Company> getCompany(UUID id){
+    Optional<List<Company>> optionalCompanies = getCompanies();
+    if (optionalCompanies.isPresent()) {
+      List<Company> companies = optionalCompanies.get();
+      return companies.stream()
+              .filter(company -> company.getId().equals(id))
+              .findFirst();
+    } else {
+      return Optional.empty();
+    }
+  }
+
+  private Optional<Company> getUserCompany(UUID userId) {
+    Optional<List<Company>> optionalCompanies = getCompanies();
+    if (optionalCompanies.isPresent()) {
+      List<Company> companies = optionalCompanies.get();
+      return companies.stream()
+              .filter(company -> company.getEmployees().contains(userId))
+              .findFirst();
+    } else {
+      return Optional.empty();
+    }
+  }
+
+  private void addUserToCompany(UUID id, UUID userId) {
+    Optional<Company> companyOptional = getCompany(id);
+    if (companyOptional.isPresent()) {
+      Company company = companyOptional.get();
+      List<UUID> employees = company.getEmployees();
+      employees.add(userId);
+      company.setEmployees(employees);
+      updateCompany(company);
+    }
+  }
+
+  private void deleteUserFromCompany(UUID userId) {
+    Optional<Company> companyOptional = getUserCompany(userId);
+    if (companyOptional.isPresent()) {
+      Company company = companyOptional.get();
+      List<UUID> employees = company.getEmployees();
+      employees.remove(userId);
+      company.setEmployees(employees);
+      updateCompany(company);
+    }
+  }
+
+  private void addDealToCompany(UUID userId, UUID deal) {
+    Optional<Company> companyOptional = getUserCompany(userId);
+    if (companyOptional.isPresent()) {
+      Company company = companyOptional.get();
+      List<UUID> deals = company.getDeals();
+      deals.add(deal);
+      company.setDeals(deals);
+      updateCompany(company);
+    }
+  }
+
+  private void deleteCompanyDeal(Deal deal) {
+    Optional<Company> companyOptional = getUserCompany(deal.getOwner());
+    if (companyOptional.isPresent()) {
+      Company company = companyOptional.get();
+      List<UUID> deals = company.getDeals();
+      deals.remove(deal.getId());
+      company.setDeals(deals);
+      updateCompany(company);
+    }
+  }
+
+  private Optional<User> createUserOptional(
+          @NotNull String name,
+          @NotNull String phone,
+          @NotNull Address address) {
+    try {
+      UUID uuid = UUID.randomUUID();
+      Optional<Queue> queueOptional = createQueue();
+      Optional<Company> company = createCompany();
+      if (queueOptional.isPresent() && company.isPresent()) {
+        User user = new User();
+        user.setId(uuid);
+        user.setName(name);
+        user.setPhone(phone);
+        user.setAddress(address);
+        user.setQueue(queueOptional.get());
+        insertIntoCsv(user);
+        addUserToCompany(company.get().getId(), uuid);
+        return Optional.of(user);
+      } else {
+        return Optional.empty();
+      }
+    } catch (IOException e) {
+      log.error(e);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<List<User>> getUsersOptional() {
+    try {
+      return Optional.of(getFromCsv(User.class));
+    } catch (IOException e) {
+      log.error(e);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<User> getUserOptional(UUID userId) {
+    Optional<List<User>> userList = getUsers();
+    if (userList.isPresent()) {
+      List<User> users = userList.get();
+      return users
+              .stream()
+              .filter(user -> user.getId().equals(userId))
+              .findFirst();
+    } else {
+      return Optional.empty();
+    }
+  }
+
+  private RequestStatuses rewriteUsers(List<User> users) {
+    try {
+      insertIntoCsv(User.class, users, true);
+      return RequestStatuses.SUCCESS;
+    } catch (IOException e) {
+      log.error(e);
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private RequestStatuses updateUser(@NotNull User editedUser) {
+    Optional<List<User>> userList = getUsers();
+    Optional<User> userOptional = getUser(editedUser.getId());
+    if (userList.isPresent() && userOptional.isPresent()) {
+      List<User> users = userList.get();
+
+      users = users.stream()
+              .filter(user -> !user.getId().equals(editedUser.getId()))
+              .collect(Collectors.toList());
+      users.add(editedUser);
+
+      return rewriteUsers(users);
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private Optional<Queue> createQueue() {
+    Queue queue = new Queue();
+    try {
+      insertIntoCsv(queue);
+      return Optional.of(queue);
+    } catch (IOException e) {
+      log.error(e);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<List<Queue>> getQueuesList() {
+    try {
+      return Optional.of(getFromCsv(Queue.class));
+    } catch (IOException e) {
+      log.error(e);
+      log.error(Constants.UNDEFINED_QUEUES_LIST);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<Queue> getQueueById(UUID id) {
+    Optional<List<Queue>> queuesOptional = getQueuesList();
+    if (queuesOptional.isPresent()) {
+      List<Queue> queues = queuesOptional.get();
+      return queues
+              .stream()
+              .filter(queue -> queue.getId().equals(id))
+              .findFirst();
+    } else {
+      log.error(Constants.UNDEFINED_QUEUE);
+      return Optional.empty();
+    }
+  }
+
+  private void updateQueue(@NotNull Queue queue) {
+    Optional<List<Queue>> optionalQueues = getQueuesList();
+    Optional<Queue> optionalQueue = getQueueById(queue.getId());
+    if (optionalQueues.isPresent() && optionalQueue.isPresent()) {
+      List<Queue> queues = optionalQueues.get();
+
+      queues = queues.stream()
+              .filter(queueL -> !queueL.getId().equals(queue.getId()))
+              .collect(Collectors.toList());
+      queues.add(queue);
+      try {
+        insertIntoCsv(Queue.class, queues, true);
+      } catch (IOException e) {
+        log.error(e);
+      }
+    } else {
+      log.error(Constants.UNDEFINED_QUEUE);
+    }
+  }
+
+  private void deleteQueue(@NotNull UUID id) {
+    Optional<List<Queue>> optionalQueues = getQueuesList();
+    if (optionalQueues.isPresent()) {
+      List<Queue> queues = optionalQueues.get();
+      queues = queues.stream()
+              .filter(user -> !user.getId()
+                      .equals(id))
+              .collect(Collectors.toList());
+      try {
+        insertIntoCsv(Queue.class, queues, true);
+      } catch (IOException e) {
+        log.error(e);
+      }
+    } else {
+      log.error(Constants.UNDEFINED_QUEUE_FOR_DELETE);
+    }
+  }
+
+  private Optional<List<Deal>> getDealsList() {
+    try {
+      return Optional.of(getFromCsv(Deal.class));
+    } catch (IOException e) {
+      log.error(e);
+      log.error(Constants.UNDEFINED_DEALS_LIST);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<List<PublicDeal>> getPublicDealsList() {
+    try {
+      List<PublicDeal> dealList = getFromCsv(PublicDeal.class);
+      if (dealList.isEmpty()) {
+        log.debug(Constants.EMPTY_PUBLIC_DEALS);
+      }
+      return Optional.of(getFromCsv(PublicDeal.class));
+    } catch (IOException e) {
+      log.error(e);
+      log.error(Constants.UNDEFINED_DEALS_LIST);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<List<Deal>> getAllDeals() {
+    try {
+      List<Deal> deals = getFromCsv(Deal.class);
+      deals.addAll(getFromCsv(PublicDeal.class));
+      return Optional.of(deals);
+    } catch (IOException e) {
+      log.error(e);
+      log.error(Constants.UNDEFINED_DEALS_LIST);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<Deal> getDealById(UUID id) {
+    Optional<List<Deal>> deals = getAllDeals();
+    if (deals.isPresent()) {
+      List<Deal> dealList = deals.get();
+      return dealList.stream()
+              .filter(queue -> queue.getId().equals(id))
+              .findFirst();
+    } else {
+      log.error(Constants.UNDEFINED_DEAL);
+      return Optional.empty();
+    }
+  }
+
+  private List<DealHistory> createFirstDealHistory(UUID parentId, DealStatus currentStatus) {
+    List<DealHistory> dealHistoryList = new ArrayList<>();
+    DealHistory dealHistory = new DealHistory();
+    dealHistory.setId(parentId);
+    dealHistory.setStatus(currentStatus);
+    dealHistory.setText(currentStatus.getMessage());
+    dealHistory.setCreated_at(new Date());
+    addDealHistory(dealHistory);
+    dealHistoryList.add(dealHistory);
+    return dealHistoryList;
+  }
+
+  private void insertDealHistory(List<DealHistory> dealHistoryList) {
+    try {
+      insertIntoCsv(DealHistory.class, dealHistoryList, true);
+    } catch (IOException e) {
+      log.error(e);
+    }
+  }
+
+  private RequestStatuses addDealHistory(DealHistory dealHistoryItem) {
+    Optional<List<DealHistory>> optionalDealHistories = getOptionalDealHistoryList();
+    if (optionalDealHistories.isPresent()) {
+      List<DealHistory> dealHistoryList = optionalDealHistories.get();
+      dealHistoryList.add(dealHistoryItem);
+      insertDealHistory(dealHistoryList);
+      return RequestStatuses.SUCCESS;
+    } else {
+      log.error(Constants.UNDEFINED_DEAL_HISTORY);
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private Optional<List<DealHistory>> getOptionalDealHistoryList() {
+    try {
+      List<DealHistory> dealHistory = getFromCsv(DealHistory.class);
+      return Optional.of(dealHistory);
+    } catch (IOException e) {
+      log.error(e);
+      return Optional.empty();
+    }
+  }
+
+  public Optional<List<DealHistory>> getDealHistoryByDeal(UUID id) {
+    Optional<List<DealHistory>> optionalDealHistories = getOptionalDealHistoryList();
+    if (optionalDealHistories.isPresent()) {
+      List<DealHistory> dealHistoryList = optionalDealHistories.get();
+      dealHistoryList = dealHistoryList.stream()
+              .filter(item -> item.getId().equals(id))
+              .collect(Collectors.toList());
+      if (dealHistoryList.isEmpty()) {
+        log.error(Constants.EMPTY_DEAL_HISTORY);
+        return Optional.empty();
+      } else {
+        return Optional.of(dealHistoryList);
+      }
+    } else {
+      log.error(Constants.UNDEFINED_DEAL_HISTORY);
+      return Optional.empty();
+    }
+  }
+
+  private void removeDealHistoryByDeal(UUID id) {
+    Optional<List<DealHistory>> optionalDealHistories = getOptionalDealHistoryList();
+    if (optionalDealHistories.isPresent()) {
+      List<DealHistory> dealHistoryList = optionalDealHistories.get();
+      dealHistoryList = dealHistoryList.stream()
+              .filter(item -> !item.getId().equals(id))
+              .collect(Collectors.toList());
+      insertDealHistory(dealHistoryList);
+    } else {
+      log.error(Constants.UNDEFINED_DEAL_HISTORY);
+    }
+  }
+
+  private RequestStatuses removePublicDeal(PublicDeal removedDeal) {
+    Optional<List<PublicDeal>> publicDeals = getPublicDealsList();
+    if (publicDeals.isPresent()) {
+      List<PublicDeal> deals = publicDeals.get();
+      deals = deals.stream()
+              .filter(deal -> !deal.getId().equals(removedDeal.getId()))
+              .collect(Collectors.toList());
+
+      try {
+        deleteQueue(removedDeal.getRequests().getId());
+        deleteCompanyDeal(removedDeal);
+        removeDealHistoryByDeal(removedDeal.getId());
+        insertIntoCsv(PublicDeal.class, deals, true);
+        return RequestStatuses.SUCCESS;
+      } catch (IOException e) {
+        log.error(e);
+        return RequestStatuses.FAILED;
+      }
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private RequestStatuses removeSimpleDeal(Deal removedDeal) {
+    Optional<List<Deal>> dealsList = getDealsList();
+    if (dealsList.isPresent()) {
+      List<Deal> deals = dealsList.get();
+      deals = deals.stream()
+              .filter(deal -> !deal.getId().equals(removedDeal.getId()))
+              .collect(Collectors.toList());
+      try {
+        deleteQueue(removedDeal.getRequests().getId());
+        deleteCompanyDeal(removedDeal);
+        insertIntoCsv(PublicDeal.class, deals, true);
+        return RequestStatuses.SUCCESS;
+      } catch (IOException e) {
+        log.error(e);
+        return RequestStatuses.FAILED;
+      }
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private boolean userIsPerformer(@NotNull UUID userId, @NotNull Deal deal) {
+    try {
+      return deal.getPerformer().equals(userId);
+    } catch (NullPointerException e) {
+      return false;
+    }
+  }
+
 }
 

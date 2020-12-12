@@ -20,11 +20,14 @@ public class Constants {
 
     /*MESSAGES*/
     public static final String UNDEFINED_USERS_LIST = "Users list not found";
+    public static final String UNDEFINED_USERS_LIST_EMPTY = "Users list empty";
     public static final String UNDEFINED_USER = "User not found";
+    public static final String UNDEFINED_ADDRESS = "Address not found";
 
     public static final String UNDEFINED_DEALS_LIST = "Deals list not found";
     public static final String UNDEFINED_DEAL = "Deal not found";
     public static final String EMPTY_PUBLIC_DEALS = "Public deals list is empty";
+    public static final String NOT_EMPTY_COMPANY = "Company must been empty";
 
     public static final String UNDEFINED_DEAL_HISTORY = "Deal history not found";
     public static final String EMPTY_DEAL_HISTORY = "Deal history is empty";
