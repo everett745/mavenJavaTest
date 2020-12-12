@@ -1,6 +1,12 @@
 package ru.sfedu.maven1.model;
 
+import com.opencsv.bean.CsvCustomBindByName;
+import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
+import ru.sfedu.maven1.dataConvertors.UUIDListConvertor;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Class Company
@@ -11,9 +17,12 @@ public class Company {
   // Fields
   //
 
-  private long id;
-  private List<User> employees;
-  private List<Deal> deals;
+  @CsvCustomBindByName(converter = UUIDConvertor.class)
+  private UUID id;
+  @CsvCustomBindByName(converter = UUIDListConvertor.class)
+  private List<UUID> employees = new ArrayList<UUID>();
+  @CsvCustomBindByName(converter = UUIDListConvertor.class)
+  private List<UUID> deals  = new ArrayList<UUID>();
   
   //
   // Constructors
@@ -33,7 +42,7 @@ public class Company {
    * Set the value of id
    * @param newVar the new value of id
    */
-  public void setId (long newVar) {
+  public void setId (UUID newVar) {
     id = newVar;
   }
 
@@ -41,7 +50,7 @@ public class Company {
    * Get the value of id
    * @return the value of id
    */
-  public long getId () {
+  public UUID getId () {
     return id;
   }
 
@@ -49,7 +58,7 @@ public class Company {
    * Set the value of employees
    * @param newVar the new value of employees
    */
-  public void setEmployees (List<User> newVar) {
+  public void setEmployees (List<UUID> newVar) {
     employees = newVar;
   }
 
@@ -57,7 +66,7 @@ public class Company {
    * Get the value of employees
    * @return the value of employees
    */
-  public List<User> getEmployees () {
+  public List<UUID> getEmployees () {
     return employees;
   }
 
@@ -65,7 +74,7 @@ public class Company {
    * Set the value of deals
    * @param newVar the new value of deals
    */
-  public void setDeals (List<Deal> newVar) {
+  public void setDeals (List<UUID> newVar) {
     deals = newVar;
   }
 
@@ -73,7 +82,7 @@ public class Company {
    * Get the value of deals
    * @return the value of deals
    */
-  public List<Deal> getDeals () {
+  public List<UUID> getDeals () {
     return deals;
   }
 

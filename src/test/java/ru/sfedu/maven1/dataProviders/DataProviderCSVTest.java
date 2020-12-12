@@ -15,9 +15,7 @@ import ru.sfedu.maven1.enums.DealStatus;
 import ru.sfedu.maven1.enums.RequestStatuses;
 import ru.sfedu.maven1.model.*;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.UUID;
 
 public class DataProviderCSVTest extends TestBase {
@@ -327,6 +325,7 @@ public class DataProviderCSVTest extends TestBase {
   @Test
   void getGlobalDealsCorrect() {
     Assertions.assertTrue(dataProvider.getGlobalDeals(savedUser.getId()).isPresent());
+    log.info(dataProvider.getGlobalDeals(savedUser.getId()).get());
   }
 
   @Test
@@ -338,26 +337,30 @@ public class DataProviderCSVTest extends TestBase {
   @Test
   void getMyDealsCorrect() {
     Assertions.assertTrue(dataProvider.getMyDeals(savedUser.getId()).isPresent());
+    log.info(dataProvider.getMyDeals(savedUser.getId()).get());
   }
 
   @Test
   void getMyDealsIncorrect() {
     Assertions.assertTrue(dataProvider.getMyDeals(UUID.randomUUID()).isPresent());
+    log.info(dataProvider.getMyDeals(UUID.randomUUID()).get());
   }
 
   @Test
   void manageDealCorrect() {
     Assertions.assertTrue(dataProvider.manageDeal(savedDeal.getId()).isPresent());
+    log.info(dataProvider.manageDeal(savedDeal.getId()).get());
   }
 
   @Test
   void manageDealIncorrect() {
     Assertions.assertTrue(dataProvider.manageDeal(UUID.randomUUID()).isPresent());
+    log.info(dataProvider.manageDeal(savedDeal.getId()).get());
   }
 
   @Test
   void removeDealCorrect() {
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(savedDeal.getId()));
+    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(savedPublicDeal.getId()));
   }
 
   @Test
