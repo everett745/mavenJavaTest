@@ -1,10 +1,11 @@
 package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.*;
+import ru.sfedu.maven1.Constants;
 import ru.sfedu.maven1.dataConvertors.AddressConvertor;
-import ru.sfedu.maven1.dataConvertors.DateConvertor;
 import ru.sfedu.maven1.dataConvertors.QueueConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
+import ru.sfedu.maven1.enums.DealModel;
 import ru.sfedu.maven1.enums.DealStatus;
 import ru.sfedu.maven1.enums.DealTypes;
 import ru.sfedu.maven1.enums.ObjectTypes;
@@ -32,14 +33,11 @@ public class Deal implements Serializable {
   @CsvBindByName
   private String description;
 
-
   @CsvCustomBindByName(converter = AddressConvertor.class)
   private Address address;
 
-
   @CsvCustomBindByName(converter = QueueConvertor.class)
   private Queue requests;
-
 
   @CsvCustomBindByName(converter = UUIDConvertor.class)
   private UUID owner;
@@ -54,9 +52,9 @@ public class Deal implements Serializable {
   private ObjectTypes object;
 
   @CsvBindByName
-  private DealStatus dealStatus;
+  private DealModel dealModel;
 
-  @CsvDate()
+  @CsvDate(value = Constants.DATE_FORMAT)
   private Date created_at;
 
   @CsvBindByName
@@ -252,18 +250,6 @@ public class Deal implements Serializable {
     return price;
   }
 
-  /**
-   * Get the value of status
-   * @return the value of status
-   */
-  public DealStatus getDealStatus() { return dealStatus; }
-
-  /**
-   * Set the value of status
-   * @param newStatus the new value of price
-   */
-  public void setDealStatus(DealStatus newStatus) { this.dealStatus = newStatus; }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -314,6 +300,14 @@ public class Deal implements Serializable {
             ", created_at=" + created_at +
             ", price='" + price + '\'' +
             '}';
+  }
+
+  public DealModel getDealModel() {
+    return dealModel;
+  }
+
+  public void setDealModel(DealModel dealModel) {
+    this.dealModel = dealModel;
   }
 
   //

@@ -1,5 +1,7 @@
 package ru.sfedu.maven1.dataProviders;
 
+import ru.sfedu.maven1.enums.DealModel;
+import ru.sfedu.maven1.enums.DealStatus;
 import ru.sfedu.maven1.enums.DealTypes;
 import ru.sfedu.maven1.enums.ObjectTypes;
 
@@ -29,14 +31,18 @@ public class TestsConstants {
 
 
   /*DEAL*/
-  public static final String TEST_DEAL_NAME = "Продажа нового дома";
-  public static final String TEST_DEAL_DESCRIPTION = "Продается дом в 16 здании";
+  public static final String TEST_DEAL_NAME = "Новая обычная сделка";
+  public static final String TEST_DEAL_DESCRIPTION = "тестовое описание сделки";
   public static final DealTypes TEST_DEAL_TYPE = DealTypes.PURCHASE;
   public static final ObjectTypes TEST_DEAL_OBJECT = ObjectTypes.BUILDING;
   public static final String TEST_DEAL_PRICE = "150 000";
 
-  public static final String TEST_DEAL_2_NAME = "Новое название";
-  public static final String TEST_DEAL_2_DESCRIPTION = "Новое описание";
+  public static final String TEST_PUBLIC_DEAL_NAME = "Новая публичная сделка";
+  public static final String TEST_PUBLIC_DEAL_DESCRIPTION = "тестовое описание публичной сделки";
+  public static final DealTypes TEST_PUBLIC_DEAL_TYPE = DealTypes.SALE;
+  public static final ObjectTypes TEST_PUBLIC_DEAL_OBJECT = ObjectTypes.LAND;
+  public static final DealStatus TEST_PUBLIC_DEAL_STATUS = DealStatus.NEW_DEAL;
+  public static final String TEST_PUBLIC_DEAL_PRICE = "123 000";
 
   /* DEAL_QUEUE */
   public static final UUID TEST_DEAL_QUEUE_ID = UUID.fromString("5fe6d630-61fd-42a0-ac07-82b9ad68ced5");

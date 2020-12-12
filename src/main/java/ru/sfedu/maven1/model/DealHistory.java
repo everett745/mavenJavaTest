@@ -1,48 +1,38 @@
 package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import com.opencsv.bean.CsvDate;
+import ru.sfedu.maven1.Constants;
+import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 import ru.sfedu.maven1.enums.DealStatus;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Class DealHistory
  */
 public class DealHistory implements Serializable {
 
-  //
-  // Fields
-  //
-
-  private long id;
+  @CsvCustomBindByName(converter = UUIDConvertor.class)
+  private UUID id;
   @CsvBindByName
   private String text;
   @CsvBindByName
   private DealStatus status;
-  @CsvBindByName
+  @CsvDate(value = Constants.DATE_FORMAT)
   private Date created_at;
-  
-  //
-  // Constructors
-  //
+
   public DealHistory () { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
 
   /**
    * Set the value of id
    * @param newVar the new value of id
    */
-  public void setId (long newVar) {
+  public void setId (UUID newVar) {
     id = newVar;
   }
 
@@ -50,7 +40,7 @@ public class DealHistory implements Serializable {
    * Get the value of id
    * @return the value of id
    */
-  public long getId () {
+  public UUID getId () {
     return id;
   }
 

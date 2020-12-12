@@ -1,7 +1,21 @@
 package ru.sfedu.maven1.enums;
 
 public enum DealStatus {
-  GLOBAL,
-  PRIVATE,
-  IN_PROGRESS
+  NEW_DEAL("Новая сделка"),
+  FIRST_CONTACT("Первый контакт"),
+  AD("Заклечен АД"),
+  DOY("Заключен ДОУ"),
+  SUCCESS_CLOSED("Успешно закрыта"),
+  AWAIT("Отложенный спрос"),
+  CANCEL("Отказ");
+
+  private final String message;
+
+  DealStatus(String message) {
+    this.message = message;
+  }
+
+  public String getMessage() {
+    return message;
+  }
 }

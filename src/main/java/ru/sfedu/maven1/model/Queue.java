@@ -1,8 +1,7 @@
 package ru.sfedu.maven1.model;
 
-import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
-import ru.sfedu.maven1.dataConvertors.UUIDArrayConvertor;
+import ru.sfedu.maven1.dataConvertors.UUIDListConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 
 import java.util.*;
@@ -18,7 +17,7 @@ public class Queue {
 
   @CsvCustomBindByName(converter = UUIDConvertor.class)
   private UUID id = UUID.randomUUID();
-  @CsvCustomBindByName(converter = UUIDArrayConvertor.class)
+  @CsvCustomBindByName(converter = UUIDListConvertor.class)
   private List<UUID> items = new ArrayList<UUID>();
 
   //

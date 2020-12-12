@@ -5,10 +5,7 @@ import ru.sfedu.maven1.enums.DealStatus;
 import ru.sfedu.maven1.enums.DealTypes;
 import ru.sfedu.maven1.enums.ObjectTypes;
 import ru.sfedu.maven1.enums.RequestStatuses;
-import ru.sfedu.maven1.model.Address;
-import ru.sfedu.maven1.model.Deal;
-import ru.sfedu.maven1.model.Queue;
-import ru.sfedu.maven1.model.User;
+import ru.sfedu.maven1.model.*;
 
 import java.io.IOException;
 import java.util.Date;
@@ -28,9 +25,9 @@ public interface DataProvider {
    * @return RequestStatuses
    */
   RequestStatuses createUser(
-          @NotNull final String name,
-          @NotNull final String phone,
-          @NotNull final Address address);
+          @NotNull String name,
+          @NotNull String phone,
+          @NotNull Address address);
 
   /**
    * Получить отдельного пользователя по личному идентификатору
@@ -44,7 +41,7 @@ public interface DataProvider {
    * @param user модель пользователя
    * @return RequestStatuses
    */
-  RequestStatuses editUser(@NotNull final User user);
+  RequestStatuses editUser(@NotNull User user);
 
   /**
    * Метод удаления пользователя из системы
@@ -62,18 +59,6 @@ public interface DataProvider {
 
   /*Address*/
   /**
-   * Добавить новый адрес
-   * @param city город
-   * @param region область
-   * @param district район
-   * @return RequestStatuses
-   */
-  RequestStatuses addAddress(
-          @NotNull final String city,
-          @NotNull final String region,
-          @NotNull final String district);
-
-  /**
    * Получить полный список адресов в системе
    * @return набор объектов адресов
    */
@@ -84,30 +69,23 @@ public interface DataProvider {
    * @param id идентификатор адреса
    * @return объект адреса
    */
-  Optional<Address> getAddress(@NotNull final long id);
+  Optional<Address> getAddress(@NotNull long id);
 
   /**
    * Получить адрес по ключевому слову "Город"
    * @param city ключевое слово для поиска по названию города
    * @return объект адреса
    */
-  Optional<Address> getAddress(@NotNull final String city);
+  Optional<Address> getAddress(@NotNull String city);
 
 
   /*Queue*/
-  /**
-   * Добавить новую очередь
-   * @param queue объект очереди
-   * @return RequestStatuses
-   */
-  RequestStatuses addQueue(@NotNull final Queue queue);
-
   /**
    * Получить очередь по идентификатору
    * @param id идентификатор очереди
    * @return объект очереди
    */
-  Optional<Queue> getQueue(@NotNull final UUID id);
+  Optional<Queue> getQueue(@NotNull UUID id);
 
 
   /*Deal*/
@@ -123,48 +101,70 @@ public interface DataProvider {
    * @return RequestStatuses
    */
   RequestStatuses createDeal(
-          @NotNull final UUID userId,
-          @NotNull final String name,
-          @NotNull final String description,
-          @NotNull final Address address,
-          @NotNull final DealTypes dealType,
-          @NotNull final ObjectTypes objectType,
-          @NotNull final String price);
+          @NotNull UUID userId,
+          @NotNull String name,
+          @NotNull String description,
+          @NotNull Address address,
+          @NotNull DealTypes dealType,
+          @NotNull ObjectTypes objectType,
+          @NotNull String price);
+
+  /**
+   * Метод создания новой публичной сделки
+   * @param userId идентификатор пользователя, создающего сделку
+   * @param name название сделки
+   * @param description описание сделки
+   * @param address объект адрес сделки
+   * @param currentStatus при передаче статуса сделка становится публичной и ей присваивается указанный статус
+   * @param dealType тип сделки
+   * @param objectType объект сделки
+   * @param price цена
+   * @return RequestStatuses
+   */
+  RequestStatuses createDeal(
+          @NotNull UUID userId,
+          @NotNull String name,
+          @NotNull String description,
+          @NotNull Address address,
+          @NotNull DealStatus currentStatus,
+          @NotNull DealTypes dealType,
+          @NotNull ObjectTypes objectType,
+          @NotNull String price);
 
   /**
    * Получить глобальные сделки для пользователя
    * @param id личный идентификатор пользователя
    * @return набор объектов сделок
    */
-  Optional<List<Deal>> getGlobalDeals(@NotNull final UUID id);
+  Optional<List<PublicDeal>> getGlobalDeals(@NotNull UUID id);
 
   /**
    * Получить сделки, созданные пользователем
    * @param id личный идентификатор пользователя
    * @return набор объектов сделок
    */
-  Optional<List<Deal>> getMyDeals(@NotNull final UUID id);
+  Optional<List<Deal>> getMyDeals(@NotNull UUID id);
 
   /**
    * Получить сделку
    * @param id идентификатор сделки, которую необходимо получить
    * @return объект сделки
    */
-  Optional<Deal> manageDeal(@NotNull final UUID id);
+  Optional<Deal> manageDeal(@NotNull UUID id);
 
   /**
    * Удалить сделку
    * @param id идентификатор сделки, которую необходимо удалить
    * @return RequestStatuses
    */
-  RequestStatuses removeDeal(@NotNull final UUID id);
+  RequestStatuses removeDeal(@NotNull UUID id);
 
   /**
    * Обновить информацию сделки
    * @param deal объект сделки
    * @return RequestStatuses
    */
-  RequestStatuses updateDeal(@NotNull final Deal deal);
+  RequestStatuses updateDeal(@NotNull Deal deal);
 
   /**
    * Обновить статус сделки
@@ -172,26 +172,26 @@ public interface DataProvider {
    * @param newStatus новый статус
    * @return RequestStatuses
    */
-  RequestStatuses setStatus(@NotNull final UUID id,
-                            @NotNull final DealStatus newStatus);
+  RequestStatuses setStatus(@NotNull UUID id,
+                            @NotNull DealStatus newStatus);
 
 
   /* Deal Requests */
   /**
-   * Отправить запрос владельцу сделки на передачу сделки себе
+   * Отправить запрос на передачу сделки себе
    * @param id идентификатор сделки
    * @param userId идентификатор пользователя
    * @return RequestStatuses
    */
-  RequestStatuses addDealRequest(@NotNull final UUID id,
-                                 @NotNull final UUID userId);
+  RequestStatuses addDealRequest(@NotNull UUID userId,
+                                 @NotNull UUID id);
 
   /**
    * Получить список "запросов" на сделку
    * @param id идентификатор сделки
    * @return объект сделки
    */
-  Optional<Queue> getDealQueue(@NotNull final UUID id);
+  Optional<Queue> getDealQueue(@NotNull UUID id);
 
   /**
    * Управление запросом на передачу сделки
@@ -200,9 +200,9 @@ public interface DataProvider {
    * @param accept true - принять запрос, false - отклонить запрос
    * @return RequestStatuses
    */
-  RequestStatuses manageDealRequest(@NotNull final UUID userId,
-                                 @NotNull final UUID id,
-                                 @NotNull final boolean accept);
+  RequestStatuses manageDealRequest(@NotNull UUID userId,
+                                 @NotNull UUID id,
+                                 @NotNull boolean accept);
 
   /**
    * Принять запрос пользователя на передачу сделки ему
@@ -210,8 +210,8 @@ public interface DataProvider {
    * @param id идентификатор сделки, на которную направлен запрос
    * @return RequestStatuses
    */
-  RequestStatuses acceptDealRequest(@NotNull final UUID userId,
-                                    @NotNull final UUID id);
+  RequestStatuses acceptDealRequest(@NotNull UUID userId,
+                                    @NotNull UUID id);
 
   /**
    * Отклонить запрос пользователя на передачу сделки ему
@@ -219,8 +219,8 @@ public interface DataProvider {
    * @param id идентификатор сделки, на которную направлен запрос
    * @return RequestStatuses
    */
-  RequestStatuses refuseDealRequest(@NotNull final UUID userId,
-                                    @NotNull final UUID id);
+  RequestStatuses refuseDealRequest(@NotNull UUID userId,
+                                    @NotNull UUID id);
 
 
   /* Deal Performs */
@@ -230,15 +230,15 @@ public interface DataProvider {
    * @param userId идентификатор пользователя, кому направлен запрос
    * @return RequestStatuses
    */
-  RequestStatuses addDealPerformer(@NotNull final UUID id,
-                                 @NotNull final UUID userId);
+  RequestStatuses addDealPerformer(@NotNull UUID userId,
+                                   @NotNull UUID id);
 
   /**
    * Получить очередь из сделок, которые пытаются передать пользователю
    * @param userId идентификатор пользователя
    * @return объект очереди
    */
-  Optional<Queue> getMyQueue(@NotNull final UUID userId);
+  Optional<Queue> getMyQueue(@NotNull UUID userId);
 
   /**
    * Управление запросом на принятие сделки
@@ -247,9 +247,9 @@ public interface DataProvider {
    * @param accept true - принять запрос, false - отклонить запрос
    * @return RequestStatuses
    */
-  RequestStatuses manageDealPerform(@NotNull final UUID userId,
-                                    @NotNull final UUID id,
-                                    final boolean accept);
+  RequestStatuses manageDealPerform(@NotNull UUID userId,
+                                    @NotNull UUID id,
+                                    boolean accept);
 
   /**
    * Принять сделку
@@ -257,8 +257,8 @@ public interface DataProvider {
    * @param id идентификатор сделки
    * @return RequestStatuses
    */
-  RequestStatuses acceptDealPerform(@NotNull final UUID userId,
-                                    @NotNull final UUID id);
+  RequestStatuses acceptDealPerform(@NotNull UUID userId,
+                                    @NotNull UUID id);
 
   /**
    * Отклонить сделку
@@ -266,7 +266,11 @@ public interface DataProvider {
    * @param id идентификатор сделки
    * @return RequestStatuses
    */
-  RequestStatuses refuseDealPerform(@NotNull final UUID userId,
-                                    @NotNull final UUID id);
+  RequestStatuses refuseDealPerform(@NotNull UUID userId,
+                                    @NotNull UUID id);
+  /**
+   * Очистить базу
+   */
+  void deleteAll();
 
 }
