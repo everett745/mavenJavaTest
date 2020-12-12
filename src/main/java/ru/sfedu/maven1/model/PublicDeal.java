@@ -1,31 +1,24 @@
 package ru.sfedu.maven1.model;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import ru.sfedu.maven1.dataConvertors.DealHistoryListConvertor;
+import ru.sfedu.maven1.enums.DealStatus;
+
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class PublicDeal
  */
 public class PublicDeal extends Deal {
 
-  //
-  // Fields
-  //
-
+  @CsvBindByName
+  private DealStatus currentStatus;
+  @CsvCustomBindByName(converter = DealHistoryListConvertor.class)
   private List<DealHistory> history;
-  
-  //
-  // Constructors
-  //
+
   public PublicDeal () { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
 
   /**
    * Set the value of history
@@ -41,6 +34,56 @@ public class PublicDeal extends Deal {
    */
   public List<DealHistory> getHistory () {
     return history;
+  }
+
+  /**
+   * Get the value of currentStatus
+   * @return the value of currentStatus
+   */
+  public DealStatus getCurrentStatus() {
+    return currentStatus;
+  }
+
+  /**
+   * Set the value of history
+   * @param currentStatus the new value of currentStatus
+   */
+  public void setCurrentStatus(DealStatus currentStatus) {
+    this.currentStatus = currentStatus;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    PublicDeal that = (PublicDeal) o;
+    return currentStatus == that.currentStatus &&
+            Objects.equals(getHistory(), that.getHistory());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), currentStatus, getHistory());
+  }
+
+  @Override
+  public String toString() {
+    return "PublicDeal{" +
+            "id=" + this.getId() +
+            ", name='" + this.getId() + '\'' +
+            ", description='" + this.getDescription() + '\'' +
+            ", address=" + this.getAddress() +
+            ", currentStatus=" + currentStatus +
+            ", history=" + history +
+            ", requests=" + this.getRequests() +
+            ", owner=" + this.getOwner() +
+            ", performer=" + this.getPerformer() +
+            ", dealType=" + this.getDealType() +
+            ", object=" + this.getObject() +
+            ", created_at=" + this.getCreated_at() +
+            ", price='" + this.getCreated_at() + '\'' +
+            '}';
   }
 
   //

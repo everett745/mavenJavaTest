@@ -1,12 +1,19 @@
 package ru.sfedu.maven1.model;
 
-import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.*;
+import ru.sfedu.maven1.Constants;
+import ru.sfedu.maven1.dataConvertors.AddressConvertor;
+import ru.sfedu.maven1.dataConvertors.QueueConvertor;
+import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
+import ru.sfedu.maven1.enums.DealModel;
+import ru.sfedu.maven1.enums.DealStatus;
 import ru.sfedu.maven1.enums.DealTypes;
 import ru.sfedu.maven1.enums.ObjectTypes;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Class Deal
@@ -17,26 +24,39 @@ public class Deal implements Serializable {
   // Fields
   //
 
-  @CsvBindByName
-  private long id;
+  @CsvCustomBindByName(converter = UUIDConvertor.class)
+  private UUID id;
+
   @CsvBindByName
   private String name;
+
   @CsvBindByName
   private String description;
-  @CsvBindByName
+
+  @CsvCustomBindByName(converter = AddressConvertor.class)
   private Address address;
-  @CsvBindByName
+
+  @CsvCustomBindByName(converter = QueueConvertor.class)
   private Queue requests;
-  @CsvBindByName
-  private long owner;
-  @CsvBindByName
-  private long performer;
+
+  @CsvCustomBindByName(converter = UUIDConvertor.class)
+  private UUID owner;
+
+  @CsvCustomBindByName(converter = UUIDConvertor.class)
+  private UUID performer;
+
   @CsvBindByName
   private DealTypes dealType;
+
   @CsvBindByName
   private ObjectTypes object;
+
   @CsvBindByName
+  private DealModel dealModel;
+
+  @CsvDate(value = Constants.DATE_FORMAT)
   private Date created_at;
+
   @CsvBindByName
   private String price;
   
@@ -58,7 +78,7 @@ public class Deal implements Serializable {
    * Set the value of id
    * @param newVar the new value of id
    */
-  public void setId (long newVar) {
+  public void setId (UUID newVar) {
     id = newVar;
   }
 
@@ -66,7 +86,7 @@ public class Deal implements Serializable {
    * Get the value of id
    * @return the value of id
    */
-  public long getId () {
+  public UUID getId () {
     return id;
   }
 
@@ -138,7 +158,7 @@ public class Deal implements Serializable {
    * Set the value of owner
    * @param newVar the new value of owner
    */
-  public void setOwner (long newVar) {
+  public void setOwner (UUID newVar) {
     owner = newVar;
   }
 
@@ -146,7 +166,7 @@ public class Deal implements Serializable {
    * Get the value of owner
    * @return the value of owner
    */
-  public long getOwner () {
+  public UUID getOwner () {
     return owner;
   }
 
@@ -154,7 +174,7 @@ public class Deal implements Serializable {
    * Set the value of performer
    * @param newVar the new value of performer
    */
-  public void setPerformer (long newVar) {
+  public void setPerformer (UUID newVar) {
     performer = newVar;
   }
 
@@ -162,7 +182,7 @@ public class Deal implements Serializable {
    * Get the value of performer
    * @return the value of performer
    */
-  public long getPerformer () {
+  public UUID getPerformer () {
     return performer;
   }
 
@@ -280,6 +300,14 @@ public class Deal implements Serializable {
             ", created_at=" + created_at +
             ", price='" + price + '\'' +
             '}';
+  }
+
+  public DealModel getDealModel() {
+    return dealModel;
+  }
+
+  public void setDealModel(DealModel dealModel) {
+    this.dealModel = dealModel;
   }
 
   //

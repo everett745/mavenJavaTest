@@ -1,13 +1,10 @@
 package ru.sfedu.maven1.model;
 
-import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
+import ru.sfedu.maven1.dataConvertors.UUIDListConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Class Queue
@@ -20,8 +17,8 @@ public class Queue {
 
   @CsvCustomBindByName(converter = UUIDConvertor.class)
   private UUID id = UUID.randomUUID();
-  @CsvBindByName
-  private long[] items = new long[0];
+  @CsvCustomBindByName(converter = UUIDListConvertor.class)
+  private List<UUID> items = new ArrayList<UUID>();
 
   //
   // Constructors
@@ -57,7 +54,7 @@ public class Queue {
    * Set the value of items
    * @param newVar the new value of items
    */
-  public void setItems (long[] newVar) {
+  public void setItems (List<UUID> newVar) {
     items = newVar;
   }
 
@@ -65,7 +62,7 @@ public class Queue {
    * Get the value of items
    * @return the value of items
    */
-  public long[] getItems () {
+  public List<UUID> getItems () {
     return items;
   }
 
@@ -75,13 +72,13 @@ public class Queue {
     if (o == null || getClass() != o.getClass()) return false;
     Queue queue = (Queue) o;
     return getId() == queue.getId() &&
-            Arrays.equals(getItems(), queue.getItems());
+            List.of(getItems()).equals(queue.getItems());
   }
 
   @Override
   public int hashCode() {
     int result = Objects.hash(getId());
-    result = 31 * result + Arrays.hashCode(getItems());
+    result = 31 * result + List.of(getItems()).hashCode();
     return result;
   }
 
@@ -89,7 +86,7 @@ public class Queue {
   public String toString() {
     return "Queue{" +
             "id=" + id +
-            ", items=" + Arrays.toString(items) +
+            ", items=" + items.toString() +
             '}';
   }
 
