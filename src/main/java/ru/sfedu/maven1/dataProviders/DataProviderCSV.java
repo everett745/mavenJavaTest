@@ -33,16 +33,16 @@ public class DataProviderCSV implements DataProvider {
     return INSTANCE;
   }
 
-  private <T> void insertIntoCsv(T object) throws IOException {
-    insertIntoCsv(object.getClass(), Collections.singletonList(object), false);
+  private <T> void insertIntoCSV(T object) throws IOException {
+    insertIntoCSV(object.getClass(), Collections.singletonList(object), false);
   }
 
-  private <T> void insertIntoCsv(Class<?> tClass,
+  private <T> void insertIntoCSV(Class<?> tClass,
                                  List<T> objectList,
                                  boolean overwrite) throws IOException {
     List<T> tList;
     if (!overwrite) {
-      tList = (List<T>) getFromCsv(tClass);
+      tList = (List<T>) getFromCSV(tClass);
       tList.addAll(objectList);
     } else {
       tList = objectList;
@@ -98,7 +98,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
 
-  private <T> List<T> getFromCsv(Class<T> tClass) throws IOException {
+  private <T> List<T> getFromCSV(Class<T> tClass) throws IOException {
     List<T> tList;
     try {
       CSVReader csvReader = getCsvReader(tClass);
@@ -197,9 +197,12 @@ public class DataProviderCSV implements DataProvider {
               .equals(userId))
               .collect(Collectors.toList());
 
-      deleteUserFromCompany(userId);
-      deleteQueue(optionalUser.get().getQueue().getId());
-      return rewriteUsers(users);
+      if (deleteUserFromCompany(optionalUser.get().getId()) == RequestStatuses.SUCCESS) {
+        deleteQueue(optionalUser.get().getQueue().getId());
+        return rewriteUsers(users);
+      } else {
+        return RequestStatuses.FAILED;
+      }
     } else {
       return RequestStatuses.FAILED;
     }
@@ -208,7 +211,7 @@ public class DataProviderCSV implements DataProvider {
   @Override
   public Optional<List<Address>> getAddresses() {
     try {
-      return Optional.of(getFromCsv(Address.class));
+      return Optional.of(getFromCSV(Address.class));
     } catch (IOException e) {
       log.error(e);
       return Optional.empty();
@@ -244,7 +247,6 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  @Override
   public Optional<Queue> getQueue(@NotNull UUID id) {
     return getQueueById(id);
   }
@@ -275,8 +277,8 @@ public class DataProviderCSV implements DataProvider {
         deal.setObject(objectType);
         deal.setCreated_at(new Date());
         deal.setPrice(price);
-        insertIntoCsv(deal);
-        addDealToCompany(userId, uuid);
+        insertIntoCSV(deal);
+        addDealToCompany(userId, deal);
         return RequestStatuses.SUCCESS;
       } else {
         return RequestStatuses.FAILED;
@@ -316,8 +318,8 @@ public class DataProviderCSV implements DataProvider {
         publicDeal.setObject(objectType);
         publicDeal.setCreated_at(new Date());
         publicDeal.setPrice(price);
-        insertIntoCsv(publicDeal);
-        addDealToCompany(userId, uuid);
+        insertIntoCSV(publicDeal);
+        addDealToCompany(userId, publicDeal);
         return RequestStatuses.SUCCESS;
       } else {
         return RequestStatuses.FAILED;
@@ -345,10 +347,11 @@ public class DataProviderCSV implements DataProvider {
     if (optionalDeal.isPresent()) {
       Deal deal = optionalDeal.get();
 
-      return switch (deal.getDealModel()) {
-        case PUBLIC -> removePublicDeal((PublicDeal) deal);
-        case PRIVATE -> removeSimpleDeal(deal);
-      };
+      switch (deal.getDealModel()) {
+        case PUBLIC: return removePublicDeal((PublicDeal) deal);
+        case PRIVATE: return removeSimpleDeal(deal);
+        default: return RequestStatuses.FAILED;
+      }
     } else {
       log.error(Constants.UNDEFINED_DEAL);
       return RequestStatuses.FAILED;
@@ -367,7 +370,7 @@ public class DataProviderCSV implements DataProvider {
               .collect(Collectors.toList());
       deals.add(deal);
       try {
-        insertIntoCsv(Deal.class, deals, true);
+        insertIntoCSV(Deal.class, deals, true);
       } catch (IOException e) {
         log.error(e);
         return RequestStatuses.FAILED;
@@ -646,7 +649,7 @@ public class DataProviderCSV implements DataProvider {
     UUID uuid = UUID.randomUUID();
     company.setId(uuid);
     try {
-      insertIntoCsv(company);
+      insertIntoCSV(company);
       return Optional.of(company);
     } catch (IOException e) {
       log.error(e);
@@ -654,7 +657,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private void updateCompany(Company updatedCompany) {
+  private RequestStatuses updateCompany(Company updatedCompany) {
     Optional<List<Company>> optionalCompanies = getCompanies();
     if (optionalCompanies.isPresent()) {
       List<Company> companies = optionalCompanies.get();
@@ -667,11 +670,15 @@ public class DataProviderCSV implements DataProvider {
         if (updatedCompany.getEmployees().isEmpty()) {
           deleteCompany(updatedCompany.getId());
         } else {
-          insertIntoCsv(Company.class, companies, true);
+          insertIntoCSV(Company.class, companies, true);
         }
+        return RequestStatuses.SUCCESS;
       } catch (IOException e) {
         log.error(e);
+        return RequestStatuses.FAILED;
       }
+    } else {
+      return RequestStatuses.FAILED;
     }
   }
 
@@ -684,8 +691,8 @@ public class DataProviderCSV implements DataProvider {
               .filter(company -> !company.getId().equals(id) )
               .collect(Collectors.toList());
       try {
-        optionalCompany.get().getDeals().forEach(this::removeDeal);
-        insertIntoCsv(Company.class, companies, true);
+        optionalCompany.get().getDeals().forEach(deal -> removeDeal(deal.getId()));
+        insertIntoCSV(Company.class, companies, true);
       } catch (IOException e) {
         log.error(e);
       }
@@ -694,7 +701,7 @@ public class DataProviderCSV implements DataProvider {
 
   private Optional<List<Company>> getCompanies() {
     try {
-      return Optional.of(getFromCsv(Company.class));
+      return Optional.of(getFromCSV(Company.class));
     } catch (IOException e) {
       log.error(e);
       return Optional.empty();
@@ -718,40 +725,50 @@ public class DataProviderCSV implements DataProvider {
     if (optionalCompanies.isPresent()) {
       List<Company> companies = optionalCompanies.get();
       return companies.stream()
-              .filter(company -> company.getEmployees().contains(userId))
+              .filter(company -> company
+                      .getEmployees()
+                      .stream()
+                      .anyMatch(item -> item.getId()
+                              .equals(userId)
+                      )
+              )
               .findFirst();
     } else {
       return Optional.empty();
     }
   }
 
-  private void addUserToCompany(UUID id, UUID userId) {
+  private void addUserToCompany(UUID id, User user) {
     Optional<Company> companyOptional = getCompany(id);
     if (companyOptional.isPresent()) {
       Company company = companyOptional.get();
-      List<UUID> employees = company.getEmployees();
-      employees.add(userId);
+      List<User> employees = company.getEmployees();
+      employees.add(user);
       company.setEmployees(employees);
       updateCompany(company);
     }
   }
 
-  private void deleteUserFromCompany(UUID userId) {
+  private RequestStatuses deleteUserFromCompany(UUID userId) {
     Optional<Company> companyOptional = getUserCompany(userId);
     if (companyOptional.isPresent()) {
       Company company = companyOptional.get();
-      List<UUID> employees = company.getEmployees();
-      employees.remove(userId);
+      List<User> employees = company.getEmployees();
+      employees = employees.stream()
+              .filter(user -> !user.getId().equals(userId))
+              .collect(Collectors.toList());
       company.setEmployees(employees);
-      updateCompany(company);
+      return updateCompany(company);
+    } else {
+      return RequestStatuses.FAILED;
     }
   }
 
-  private void addDealToCompany(UUID userId, UUID deal) {
+  private void addDealToCompany(UUID userId, Deal deal) {
     Optional<Company> companyOptional = getUserCompany(userId);
     if (companyOptional.isPresent()) {
       Company company = companyOptional.get();
-      List<UUID> deals = company.getDeals();
+      List<Deal> deals = company.getDeals();
       deals.add(deal);
       company.setDeals(deals);
       updateCompany(company);
@@ -762,8 +779,10 @@ public class DataProviderCSV implements DataProvider {
     Optional<Company> companyOptional = getUserCompany(deal.getOwner());
     if (companyOptional.isPresent()) {
       Company company = companyOptional.get();
-      List<UUID> deals = company.getDeals();
-      deals.remove(deal.getId());
+      List<Deal> deals = company.getDeals();
+      deals = deals.stream()
+              .filter(dealE -> !dealE.getId().equals(deal.getId()))
+              .collect(Collectors.toList());
       company.setDeals(deals);
       updateCompany(company);
     }
@@ -784,8 +803,8 @@ public class DataProviderCSV implements DataProvider {
         user.setPhone(phone);
         user.setAddress(address);
         user.setQueue(queueOptional.get());
-        insertIntoCsv(user);
-        addUserToCompany(company.get().getId(), uuid);
+        insertIntoCSV(user);
+        addUserToCompany(company.get().getId(), user);
         return Optional.of(user);
       } else {
         return Optional.empty();
@@ -798,7 +817,7 @@ public class DataProviderCSV implements DataProvider {
 
   private Optional<List<User>> getUsersOptional() {
     try {
-      return Optional.of(getFromCsv(User.class));
+      return Optional.of(getFromCSV(User.class));
     } catch (IOException e) {
       log.error(e);
       return Optional.empty();
@@ -820,7 +839,7 @@ public class DataProviderCSV implements DataProvider {
 
   private RequestStatuses rewriteUsers(List<User> users) {
     try {
-      insertIntoCsv(User.class, users, true);
+      insertIntoCSV(User.class, users, true);
       return RequestStatuses.SUCCESS;
     } catch (IOException e) {
       log.error(e);
@@ -848,7 +867,7 @@ public class DataProviderCSV implements DataProvider {
   private Optional<Queue> createQueue() {
     Queue queue = new Queue();
     try {
-      insertIntoCsv(queue);
+      insertIntoCSV(queue);
       return Optional.of(queue);
     } catch (IOException e) {
       log.error(e);
@@ -858,7 +877,7 @@ public class DataProviderCSV implements DataProvider {
 
   private Optional<List<Queue>> getQueuesList() {
     try {
-      return Optional.of(getFromCsv(Queue.class));
+      return Optional.of(getFromCSV(Queue.class));
     } catch (IOException e) {
       log.error(e);
       log.error(Constants.UNDEFINED_QUEUES_LIST);
@@ -891,7 +910,7 @@ public class DataProviderCSV implements DataProvider {
               .collect(Collectors.toList());
       queues.add(queue);
       try {
-        insertIntoCsv(Queue.class, queues, true);
+        insertIntoCSV(Queue.class, queues, true);
       } catch (IOException e) {
         log.error(e);
       }
@@ -909,7 +928,7 @@ public class DataProviderCSV implements DataProvider {
                       .equals(id))
               .collect(Collectors.toList());
       try {
-        insertIntoCsv(Queue.class, queues, true);
+        insertIntoCSV(Queue.class, queues, true);
       } catch (IOException e) {
         log.error(e);
       }
@@ -920,7 +939,7 @@ public class DataProviderCSV implements DataProvider {
 
   private Optional<List<Deal>> getDealsList() {
     try {
-      return Optional.of(getFromCsv(Deal.class));
+      return Optional.of(getFromCSV(Deal.class));
     } catch (IOException e) {
       log.error(e);
       log.error(Constants.UNDEFINED_DEALS_LIST);
@@ -930,11 +949,12 @@ public class DataProviderCSV implements DataProvider {
 
   private Optional<List<PublicDeal>> getPublicDealsList() {
     try {
-      List<PublicDeal> dealList = getFromCsv(PublicDeal.class);
+      List<PublicDeal> dealList = getFromCSV(PublicDeal.class);
       if (dealList.isEmpty()) {
         log.debug(Constants.EMPTY_PUBLIC_DEALS);
+        return Optional.empty();
       }
-      return Optional.of(getFromCsv(PublicDeal.class));
+      return Optional.of(getFromCSV(PublicDeal.class));
     } catch (IOException e) {
       log.error(e);
       log.error(Constants.UNDEFINED_DEALS_LIST);
@@ -944,8 +964,8 @@ public class DataProviderCSV implements DataProvider {
 
   private Optional<List<Deal>> getAllDeals() {
     try {
-      List<Deal> deals = getFromCsv(Deal.class);
-      deals.addAll(getFromCsv(PublicDeal.class));
+      List<Deal> deals = getFromCSV(Deal.class);
+      deals.addAll(getFromCSV(PublicDeal.class));
       return Optional.of(deals);
     } catch (IOException e) {
       log.error(e);
@@ -981,7 +1001,7 @@ public class DataProviderCSV implements DataProvider {
 
   private void insertDealHistory(List<DealHistory> dealHistoryList) {
     try {
-      insertIntoCsv(DealHistory.class, dealHistoryList, true);
+      insertIntoCSV(DealHistory.class, dealHistoryList, true);
     } catch (IOException e) {
       log.error(e);
     }
@@ -1002,7 +1022,7 @@ public class DataProviderCSV implements DataProvider {
 
   private Optional<List<DealHistory>> getOptionalDealHistoryList() {
     try {
-      List<DealHistory> dealHistory = getFromCsv(DealHistory.class);
+      List<DealHistory> dealHistory = getFromCSV(DealHistory.class);
       return Optional.of(dealHistory);
     } catch (IOException e) {
       log.error(e);
@@ -1054,7 +1074,7 @@ public class DataProviderCSV implements DataProvider {
         deleteQueue(removedDeal.getRequests().getId());
         deleteCompanyDeal(removedDeal);
         removeDealHistoryByDeal(removedDeal.getId());
-        insertIntoCsv(PublicDeal.class, deals, true);
+        insertIntoCSV(PublicDeal.class, deals, true);
         return RequestStatuses.SUCCESS;
       } catch (IOException e) {
         log.error(e);
@@ -1075,7 +1095,7 @@ public class DataProviderCSV implements DataProvider {
       try {
         deleteQueue(removedDeal.getRequests().getId());
         deleteCompanyDeal(removedDeal);
-        insertIntoCsv(PublicDeal.class, deals, true);
+        insertIntoCSV(PublicDeal.class, deals, true);
         return RequestStatuses.SUCCESS;
       } catch (IOException e) {
         log.error(e);

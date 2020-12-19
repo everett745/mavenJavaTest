@@ -2,6 +2,8 @@ package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
 import ru.sfedu.maven1.dataConvertors.AddressConvertor;
 import ru.sfedu.maven1.dataConvertors.QueueConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
@@ -15,34 +17,22 @@ import java.util.UUID;
  */
 public class User implements Serializable {
 
-  //
-  // Fields
-  //
-
   @CsvCustomBindByName(converter = UUIDConvertor.class)
   private UUID id;
+
   @CsvCustomBindByName(converter = AddressConvertor.class)
   private Address address;
+
   @CsvCustomBindByName(converter = QueueConvertor.class)
   private Queue queue;
+
   @CsvBindByName
   private String name;
+
   @CsvBindByName
   private String phone;
-  
-  //
-  // Constructors
-  //
+
   public User() { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
 
   /**
    * Set the value of id
@@ -60,10 +50,21 @@ public class User implements Serializable {
     return id;
   }
 
+  @Element(name = "id")
+  public void setIdXml (String newVar) {
+    id = UUID.fromString(newVar);
+  }
+
+  @Element(name = "id")
+  public String getIdXml () {
+    return id.toString();
+  }
+
   /**
    * Set the value of address
    * @param newVar the new value of address
    */
+  @Element(name = "address")
   public void setAddress (Address newVar) {
     address = newVar;
   }
@@ -72,6 +73,7 @@ public class User implements Serializable {
    * Get the value of address
    * @return the value of address
    */
+  @Element(name = "address")
   public Address getAddress () {
     return address;
   }
@@ -80,6 +82,7 @@ public class User implements Serializable {
    * Set the value of queue
    * @param newVar the new value of queue
    */
+  @Element(name = "queue", required = false)
   public void setQueue (Queue newVar) {
     queue = newVar;
   }
@@ -88,6 +91,7 @@ public class User implements Serializable {
    * Get the value of queue
    * @return the value of queue
    */
+  @Element(name = "queue", required = false)
   public Queue getQueue () {
     return queue;
   }
@@ -96,6 +100,7 @@ public class User implements Serializable {
    * Set the value of name
    * @param newVar the new value of name
    */
+  @Attribute(name = "name")
   public void setName (String newVar) {
     name = newVar;
   }
@@ -104,6 +109,7 @@ public class User implements Serializable {
    * Get the value of name
    * @return the value of name
    */
+  @Attribute(name = "name")
   public String getName () {
     return name;
   }
@@ -112,6 +118,7 @@ public class User implements Serializable {
    * Set the value of phone
    * @param newVar the new value of phone
    */
+  @Attribute(name = "phone")
   public void setPhone (String newVar) {
     phone = newVar;
   }
@@ -120,6 +127,7 @@ public class User implements Serializable {
    * Get the value of phone
    * @return the value of phone
    */
+  @Attribute(name = "phone")
   public String getPhone () {
     return phone;
   }
@@ -151,9 +159,5 @@ public class User implements Serializable {
   public int hashCode() {
     return Objects.hash(getId(), getAddress(), getQueue(), getName(), getPhone());
   }
-
-  //
-  // Other methods
-  //
 
 }

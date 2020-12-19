@@ -1,6 +1,7 @@
 package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.CsvBindByName;
+import org.simpleframework.xml.Attribute;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,37 +11,25 @@ import java.util.Objects;
  */
 public class Address implements Serializable {
 
-  //
-  // Fields
-  //
-
   @CsvBindByName(column = "ID")
   private long id;
+
   @CsvBindByName(column = "CITY")
   private String city;
+
   @CsvBindByName(column = "REGION")
   private String region;
+
   @CsvBindByName(column = "DISTRICT")
   private String district;
-  
-  //
-  // Constructors
-  //
+
   public Address () { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
 
   /**
    * Set the value of id
    * @param newVar the new value of id
    */
+  @Attribute(name = "id")
   public void setId (long newVar) {
     id = newVar;
   }
@@ -49,6 +38,7 @@ public class Address implements Serializable {
    * Get the value of id
    * @return the value of id
    */
+  @Attribute(name = "id")
   public long getId () {
     return id;
   }
@@ -57,6 +47,7 @@ public class Address implements Serializable {
    * Set the value of city
    * @param newVar the new value of city
    */
+  @Attribute(name = "city")
   public void setCity (String newVar) {
     city = newVar;
   }
@@ -65,6 +56,7 @@ public class Address implements Serializable {
    * Get the value of city
    * @return the value of city
    */
+  @Attribute(name = "city")
   public String getCity () {
     return city;
   }
@@ -73,6 +65,7 @@ public class Address implements Serializable {
    * Set the value of country
    * @param newVar the new value of country
    */
+  @Attribute(name = "region")
   public void setRegion (String newVar) {
     region = newVar;
   }
@@ -81,6 +74,7 @@ public class Address implements Serializable {
    * Get the value of country
    * @return the value of country
    */
+  @Attribute(name = "region")
   public String getRegion () {
     return region;
   }
@@ -89,6 +83,7 @@ public class Address implements Serializable {
    * Set the value of region
    * @param newVar the new value of region
    */
+  @Attribute(name = "district")
   public void setDistrict (String newVar) {
     district = newVar;
   }
@@ -97,6 +92,7 @@ public class Address implements Serializable {
    * Get the value of region
    * @return the value of region
    */
+  @Attribute(name = "district")
   public String getDistrict () {
     return district;
   }
@@ -126,9 +122,4 @@ public class Address implements Serializable {
             ", district='" + district + '\'' +
             '}';
   }
-
-  //
-  // Other methods
-  //
-
 }

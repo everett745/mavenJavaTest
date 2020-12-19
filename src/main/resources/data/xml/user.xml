@@ -1,14 +1,10 @@
-<main>
-   <object class="ru.sfedu.maven1.model.User">
-      <id>1</id>
-      <name>Test1</name>
+<List>
+   <object class="ru.sfedu.maven1.model.User" name="Петр Тест" phone="0000000">
+      <queue>
+         <id>a4cecc40-adbd-4468-bdd2-516a0ff7b2dd</id>
+         <items class="java.util.ArrayList"/>
+      </queue>
+      <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
+      <id>5893d707-4239-4ebf-922c-2eaf8c745ce6</id>
    </object>
-   <object class="ru.sfedu.maven1.model.User">
-      <id>2</id>
-      <name>Test2</name>
-   </object>
-   <object class="ru.sfedu.maven1.model.User">
-      <id>3</id>
-      <name>Test3</name>
-   </object>
-</main>
+</List>
