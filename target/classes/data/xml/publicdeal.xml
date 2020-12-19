@@ -1,0 +1,13 @@
+<List>
+   <object class="ru.sfedu.maven1.model.PublicDeal" object="LAND" name="Новая публичная сделка" description="тестовое описание публичной сделки" dealType="SALE" price="123 000" owner="528468a2-ea6e-40c6-aafc-bcee9454afd4" id="47b85e49-2f31-4f88-98f3-6f657e852767" createdAt="2020-12-19 16:59:49.862 MSK" performer="" model="PUBLIC" currentStatus="NEW_DEAL">
+      <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
+      <requests id="ea9e5719-38f1-4fd4-9f00-d86e7107c337">
+         <items class="java.util.ArrayList"/>
+      </requests>
+      <history class="java.util.ArrayList">
+         <dealHistory status="NEW_DEAL" text="Новая сделка" created_at="2020-12-19 16:59:49.862 MSK">
+            <id>47b85e49-2f31-4f88-98f3-6f657e852767</id>
+         </dealHistory>
+      </history>
+   </object>
+</List>

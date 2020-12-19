@@ -258,8 +258,13 @@ public interface DataProvider {
   RequestStatuses refuseDealPerform(@NotNull UUID userId,
                                     @NotNull UUID id);
   /**
-   * Очистить базу
+   * Очиститка бд
    */
   void deleteAll();
+
+  /**
+   * Инициализация
+   */
+  void initDB();
 
 }

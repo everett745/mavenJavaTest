@@ -9,7 +9,6 @@ package ru.sfedu.maven1.dataProviders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import ru.sfedu.maven1.Constants;
 import ru.sfedu.maven1.enums.*;
@@ -37,31 +36,35 @@ public class DataProviderXML implements DataProvider {
     }
 
     private <T> void insertIntoXML(Class<?> tClass, List<T> objectList, boolean overwrite) throws IOException {
-        FileWriter writer = new FileWriter(getFile(tClass));
-        Persister serializer = new Persister();
+        List<T> tList;
+        WrapperXML<T> xmlWrap = new WrapperXML<T>();
+        if (!overwrite) {
+            tList = (List<T>) getFromXML(tClass);
+            tList.addAll(objectList);
+        } else {
+            tList = objectList;
+        }
+
         try {
-            List<T> tList;
-            WrapperXML xmlWrap = new WrapperXML();
-            if (!overwrite) {
-                tList = (List<T>) getFromXML(tClass);
-                tList.addAll(objectList);
-            } else {
-                tList = objectList;
-            }
+            FileWriter writer = new FileWriter(getFile(tClass));
+            Persister serializer = new Persister();
 
             xmlWrap.setList(tList);
             serializer.write(xmlWrap, writer);
+            writer.close();
         } catch (Exception e) {
             log.error(e);
             throw new IOException(e);
         }
     }
 
-    public <T> List getFromXML(Class<T> tClass) throws IOException {
+    public <T> List<T> getFromXML(Class<T> tClass) throws IOException {
+        Reader reader = new FileReader(getFile(tClass));
         Persister serializer = new Persister();
         WrapperXML<T> xmlList = new WrapperXML<>();
         try {
-            xmlList = serializer.read(xmlList.getClass(), getFile(tClass));
+            xmlList = serializer.read(xmlList.getClass(), reader);
+            reader.close();
             return xmlList.getList() == null ? new ArrayList<>() : xmlList.getList();
         } catch (Exception e) {
             log.error(e);
@@ -102,6 +105,18 @@ public class DataProviderXML implements DataProvider {
         classList.add(User.class);
         classList.add(Company.class);
         classList.forEach(this::deleteFile);
+    }
+
+    @Override
+    public void initDB() {
+        try {
+            insertIntoXML(Deal.class, new ArrayList<>(), true);
+            insertIntoXML(PublicDeal.class, new ArrayList<>(), true);
+            insertIntoXML(User.class, new ArrayList<>(), true);
+            insertIntoXML(Company.class, new ArrayList<>(), true);
+        } catch (IOException e) {
+            log.error(e);
+        }
     }
 
     @Override
@@ -211,14 +226,12 @@ public class DataProviderXML implements DataProvider {
     public RequestStatuses createDeal(@NotNull UUID userId, @NotNull String name, @NotNull String description, @NotNull Address address, @NotNull DealTypes dealType, @NotNull ObjectTypes objectType, @NotNull String price) {
         try {
             Deal deal = new Deal();
-            UUID uuid = UUID.randomUUID();
-            Queue queue = new Queue();
 
-            deal.setId(uuid);
+            deal.setId(UUID.randomUUID());
             deal.setName(name);
             deal.setDescription(description);
             deal.setAddress(address);
-            deal.setRequests(queue);
+            deal.setRequests(new Queue());
             deal.setOwner(userId);
             deal.setDealModel(DealModel.PRIVATE);
             deal.setDealType(dealType);
@@ -322,23 +335,16 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses updateDeal(@NotNull Deal deal) {
-        Optional<List<Deal>> optionalDeals = getDealsList();
-        Optional<Deal> optionalDeal = getDealById(deal.getId());
-        if (optionalDeals.isPresent() && optionalDeal.isPresent()) {
-            List<Deal> deals = optionalDeals.get();
+    public RequestStatuses updateDeal(@NotNull Deal updatedDeal) {
+        Optional<Deal> optionalDeal = getDealById(updatedDeal.getId());
+        if (optionalDeal.isPresent()) {
+            Deal deal = optionalDeal.get();
 
-            deals = deals.stream()
-                    .filter(dealL -> !dealL.getId().equals(deal.getId()))
-                    .collect(Collectors.toList());
-            deals.add(deal);
-            try {
-                insertIntoXML(Deal.class, deals, true);
-            } catch (IOException e) {
-                log.error(e);
-                return RequestStatuses.FAILED;
+            switch (deal.getDealModel()) {
+                case PUBLIC: return updatePublicDeal((PublicDeal) updatedDeal);
+                case PRIVATE: return updateSimpleDeal(updatedDeal);
+                default: return RequestStatuses.FAILED;
             }
-            return RequestStatuses.SUCCESS;
         } else {
             log.error(Constants.UNDEFINED_DEAL);
             return RequestStatuses.FAILED;
@@ -359,6 +365,7 @@ public class DataProviderXML implements DataProvider {
                 newDHistory.setCreated_at(new Date());
                 dealHistoryList.add(newDHistory);
                 publicDeal.setHistory(dealHistoryList);
+                publicDeal.setCurrentStatus(newStatus);
                 return updateDeal(publicDeal);
             } catch (ClassCastException e) {
                 log.error(Constants.DEAL_NOT_PUBLIC);
@@ -588,8 +595,8 @@ public class DataProviderXML implements DataProvider {
         try {
             UUID uuid = UUID.randomUUID();
             Queue queue = new Queue();
-            // Optional<Company> company = createCompany();
-            // if (company.isPresent()) {
+            Optional<Company> company = createCompany();
+            if (company.isPresent()) {
                 User user = new User();
                 user.setId(uuid);
                 user.setName(name);
@@ -597,11 +604,11 @@ public class DataProviderXML implements DataProvider {
                 user.setAddress(address);
                 user.setQueue(queue);
                 insertIntoXML(user);
-                // addUserToCompany(company.get().getId(), user);
+                addUserToCompany(company.get().getId(), user);
                 return Optional.of(user);
-//            } else {
-//                return Optional.empty();
-//            }
+            } else {
+                return Optional.empty();
+            }
         } catch (IOException e) {
             log.error(e);
             return Optional.empty();
@@ -853,6 +860,31 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
+    private void updateCompanyDeal(Deal updatedDeal) {
+        Optional<Company> companyOptional = getUserCompany(updatedDeal.getOwner());
+        if (companyOptional.isPresent()) {
+            Company company = companyOptional.get();
+            List<Deal> deals = company.getDeals();
+            deals = deals.stream()
+                    .filter(dealE -> !dealE.getId().equals(updatedDeal.getId()))
+                    .collect(Collectors.toList());
+
+            deals.add(updatedDeal);
+            company.setDeals(deals);
+            updateCompany(company);
+        }
+    }
+
+    private Optional<List<Deal>> getDealsList() {
+        try {
+            return Optional.of(getFromXML(Deal.class));
+        } catch (IOException e) {
+            log.error(e);
+            log.error(Constants.UNDEFINED_DEALS_LIST);
+            return Optional.empty();
+        }
+    }
+
     private RequestStatuses removePublicDeal(PublicDeal removedDeal) {
         Optional<List<PublicDeal>> publicDeals = getPublicDealsList();
         if (publicDeals.isPresent()) {
@@ -874,16 +906,6 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private Optional<List<Deal>> getDealsList() {
-        try {
-            return Optional.of(getFromXML(Deal.class));
-        } catch (IOException e) {
-            log.error(e);
-            log.error(Constants.UNDEFINED_DEALS_LIST);
-            return Optional.empty();
-        }
-    }
-
     private RequestStatuses removeSimpleDeal(Deal removedDeal) {
         Optional<List<Deal>> dealsList = getDealsList();
         if (dealsList.isPresent()) {
@@ -893,7 +915,51 @@ public class DataProviderXML implements DataProvider {
                     .collect(Collectors.toList());
             try {
                 deleteCompanyDeal(removedDeal);
+                insertIntoXML(Deal.class, deals, true);
+                return RequestStatuses.SUCCESS;
+            } catch (IOException e) {
+                log.error(e);
+                return RequestStatuses.FAILED;
+            }
+        } else {
+            return RequestStatuses.FAILED;
+        }
+    }
+
+    private RequestStatuses updateSimpleDeal(Deal updatedDeal) {
+        Optional<List<Deal>> dealsList = getDealsList();
+        if (dealsList.isPresent()) {
+            List<Deal> deals = dealsList.get();
+            deals = deals.stream()
+                    .filter(deal -> !deal.getId().equals(updatedDeal.getId()))
+                    .collect(Collectors.toList());
+
+            deals.add(updatedDeal);
+            try {
+                insertIntoXML(Deal.class, deals, true);
+                updateCompanyDeal(updatedDeal);
+                return RequestStatuses.SUCCESS;
+            } catch (IOException e) {
+                log.error(e);
+                return RequestStatuses.FAILED;
+            }
+        } else {
+            return RequestStatuses.FAILED;
+        }
+    }
+
+    private RequestStatuses updatePublicDeal(PublicDeal updatedDeal) {
+        Optional<List<PublicDeal>> publicDeals = getPublicDealsList();
+        if (publicDeals.isPresent()) {
+            List<PublicDeal> deals = publicDeals.get();
+            deals = deals.stream()
+                    .filter(deal -> !deal.getId().equals(updatedDeal.getId()))
+                    .collect(Collectors.toList());
+
+            deals.add(updatedDeal);
+            try {
                 insertIntoXML(PublicDeal.class, deals, true);
+                updateCompanyDeal(updatedDeal);
                 return RequestStatuses.SUCCESS;
             } catch (IOException e) {
                 log.error(e);

@@ -65,7 +65,7 @@ public class DataProviderCSV implements DataProvider {
   private <T> CSVWriter getCsvWriter(Class<T> tClass) throws IOException {
     FileWriter writer;
     File path = new File(PropertyProvider.getProperty(Constants.CSV_PATH));
-    File file = new File(getFilePath(tClass));
+    File file = getFile(tClass);
     if (!file.exists()) {
       if (path.mkdirs()) {
         if (!file.createNewFile()) {
@@ -79,9 +79,8 @@ public class DataProviderCSV implements DataProvider {
     return new CSVWriter(writer);
   }
 
-
   private <T> CSVReader getCsvReader(Class<T> tClass) throws IOException {
-    File file = new File(getFilePath(tClass));
+    File file = getFile(tClass);
 
     if (!file.exists()) {
       if (!file.createNewFile()) {
@@ -96,7 +95,6 @@ public class DataProviderCSV implements DataProvider {
     BufferedReader bufferedReader = new BufferedReader(fileReader);
     return new CSVReader(bufferedReader);
   }
-
 
   private <T> List<T> getFromCSV(Class<T> tClass) throws IOException {
     List<T> tList;
@@ -126,18 +124,33 @@ public class DataProviderCSV implements DataProvider {
     classList.forEach(this::deleteFile);
   }
 
-  private <T> void deleteFile(Class<T> tClass) {
+  @Override
+  public void initDB() {
     try {
-      log.debug(new File(getFilePath(tClass)).delete());
+      insertIntoCSV(Deal.class, new ArrayList<>(), true);
+      insertIntoCSV(PublicDeal.class, new ArrayList<>(), true);
+      insertIntoCSV(DealHistory.class, new ArrayList<>(), true);
+      insertIntoCSV(Queue.class, new ArrayList<>(), true);
+      insertIntoCSV(User.class, new ArrayList<>(), true);
+      insertIntoCSV(Company.class, new ArrayList<>(), true);
     } catch (IOException e) {
       log.error(e);
     }
   }
 
-  private <T> String getFilePath(Class<T> tClass) throws IOException{
-    return PropertyProvider.getProperty(Constants.CSV_PATH)
+  private <T> void deleteFile(Class<T> tClass) {
+    try {
+      log.debug(Constants.DELETE_FILE + getFile(tClass));
+      log.debug(getFile(tClass).delete());
+    } catch (IOException e) {
+      log.error(e);
+    }
+  }
+
+  private <T> File getFile(Class<T> tClass) throws IOException{
+    return new File(PropertyProvider.getProperty(Constants.CSV_PATH)
             + tClass.getSimpleName().toLowerCase()
-            + PropertyProvider.getProperty(Constants.CSV_EXTENSION);
+            + PropertyProvider.getProperty(Constants.CSV_EXTENSION));
   }
 
   @Override
@@ -359,23 +372,16 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses updateDeal(@NotNull Deal deal) {
-    Optional<List<Deal>> optionalDeals = getDealsList();
-    Optional<Deal> optionalDeal = getDealById(deal.getId());
-    if (optionalDeals.isPresent() && optionalDeal.isPresent()) {
-      List<Deal> deals = optionalDeals.get();
+  public RequestStatuses updateDeal(@NotNull Deal updatedDeal) {
+    Optional<Deal> optionalDeal = getDealById(updatedDeal.getId());
+    if (optionalDeal.isPresent()) {
+      Deal deal = optionalDeal.get();
 
-      deals = deals.stream()
-              .filter(dealL -> !dealL.getId().equals(deal.getId()))
-              .collect(Collectors.toList());
-      deals.add(deal);
-      try {
-        insertIntoCSV(Deal.class, deals, true);
-      } catch (IOException e) {
-        log.error(e);
-        return RequestStatuses.FAILED;
+      switch (deal.getDealModel()) {
+        case PUBLIC: return updatePublicDeal((PublicDeal) deal);
+        case PRIVATE: return updateSimpleDeal(deal);
+        default: return RequestStatuses.FAILED;
       }
-      return RequestStatuses.SUCCESS;
     } else {
       log.error(Constants.UNDEFINED_DEAL);
       return RequestStatuses.FAILED;
@@ -423,6 +429,8 @@ public class DataProviderCSV implements DataProvider {
         newDHistory.setStatus(newStatus);
         newDHistory.setText(newStatus.getMessage());
         newDHistory.setCreated_at(new Date());
+        publicDeal.setCurrentStatus(newStatus);
+        updatePublicDeal(publicDeal);
         return addDealHistory(newDHistory);
       } catch (ClassCastException e) {
         log.error(Constants.DEAL_NOT_PUBLIC);
@@ -1095,6 +1103,50 @@ public class DataProviderCSV implements DataProvider {
       try {
         deleteQueue(removedDeal.getRequests().getId());
         deleteCompanyDeal(removedDeal);
+        insertIntoCSV(Deal.class, deals, true);
+        return RequestStatuses.SUCCESS;
+      } catch (IOException e) {
+        log.error(e);
+        return RequestStatuses.FAILED;
+      }
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private RequestStatuses updateSimpleDeal(Deal updatedDeal) {
+    Optional<List<Deal>> dealsList = getDealsList();
+    if (dealsList.isPresent()) {
+      List<Deal> deals = dealsList.get();
+      deals = deals.stream()
+              .filter(deal -> !deal.getId().equals(updatedDeal.getId()))
+              .collect(Collectors.toList());
+
+      deals.add(updatedDeal);
+      try {
+        updateQueue(updatedDeal.getRequests());
+        insertIntoCSV(Deal.class, deals, true);
+        return RequestStatuses.SUCCESS;
+      } catch (IOException e) {
+        log.error(e);
+        return RequestStatuses.FAILED;
+      }
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private RequestStatuses updatePublicDeal(PublicDeal updatedDeal) {
+    Optional<List<PublicDeal>> publicDeals = getPublicDealsList();
+    if (publicDeals.isPresent()) {
+      List<PublicDeal> deals = publicDeals.get();
+      deals = deals.stream()
+              .filter(deal -> !deal.getId().equals(updatedDeal.getId()))
+              .collect(Collectors.toList());
+
+      deals.add(updatedDeal);
+      try {
+        updateQueue(updatedDeal.getRequests());
         insertIntoCSV(PublicDeal.class, deals, true);
         return RequestStatuses.SUCCESS;
       } catch (IOException e) {
