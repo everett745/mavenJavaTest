@@ -2,6 +2,8 @@ package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.ElementList;
 import ru.sfedu.maven1.dataConvertors.DealHistoryListConvertor;
 import ru.sfedu.maven1.enums.DealStatus;
 
@@ -13,8 +15,10 @@ import java.util.Objects;
  */
 public class PublicDeal extends Deal {
 
+  @Attribute
   @CsvBindByName
   private DealStatus currentStatus;
+  @ElementList
   @CsvCustomBindByName(converter = DealHistoryListConvertor.class)
   private List<DealHistory> history;
 

@@ -77,18 +77,9 @@ public interface DataProvider {
   Optional<Address> getAddress(@NotNull String city);
 
 
-  /*Queue*/
-  /**
-   * Получить очередь по идентификатору
-   * @param id идентификатор очереди
-   * @return объект очереди
-   */
-  Optional<Queue> getQueue(@NotNull UUID id);
-
-
   /*Deal*/
   /**
-   * Метод создания новой сделки
+   * Создать новую обычную сделку сделки
    * @param userId идентификатор пользователя, создающего сделку
    * @param name название сделки
    * @param description описание сделки
@@ -108,7 +99,7 @@ public interface DataProvider {
           @NotNull String price);
 
   /**
-   * Метод создания новой публичной сделки
+   * Создать новой публичной сделки
    * @param userId идентификатор пользователя, создающего сделку
    * @param name название сделки
    * @param description описание сделки
@@ -131,17 +122,17 @@ public interface DataProvider {
 
   /**
    * Получить глобальные сделки для пользователя
-   * @param id личный идентификатор пользователя
+   * @param userId личный идентификатор пользователя
    * @return набор объектов сделок
    */
-  Optional<List<PublicDeal>> getGlobalDeals(@NotNull UUID id);
+  Optional<List<PublicDeal>> getGlobalDeals(@NotNull UUID userId);
 
   /**
    * Получить сделки, созданные пользователем
-   * @param id личный идентификатор пользователя
+   * @param userId личный идентификатор пользователя
    * @return набор объектов сделок
    */
-  Optional<List<Deal>> getMyDeals(@NotNull UUID id);
+  Optional<List<Deal>> getMyDeals(@NotNull UUID userId);
 
   /**
    * Получить сделку
@@ -200,7 +191,7 @@ public interface DataProvider {
    */
   RequestStatuses manageDealRequest(@NotNull UUID userId,
                                  @NotNull UUID id,
-                                 @NotNull boolean accept);
+                                 boolean accept);
 
   /**
    * Принять запрос пользователя на передачу сделки ему

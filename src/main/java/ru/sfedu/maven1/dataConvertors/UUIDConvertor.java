@@ -1,10 +1,15 @@
 package ru.sfedu.maven1.dataConvertors;
 
 import com.opencsv.bean.AbstractBeanField;
+import org.simpleframework.xml.convert.Converter;
+import org.simpleframework.xml.stream.InputNode;
+import org.simpleframework.xml.stream.OutputNode;
+import org.simpleframework.xml.transform.Matcher;
+import org.simpleframework.xml.transform.Transform;
 
 import java.util.UUID;
 
-public class UUIDConvertor extends AbstractBeanField<UUID, Integer>  {
+public class UUIDConvertor extends AbstractBeanField<UUID, Integer> {
   @Override
   protected Object convert(String s) {
     try {

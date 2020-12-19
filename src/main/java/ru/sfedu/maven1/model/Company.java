@@ -1,11 +1,18 @@
 package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.CsvCustomBindByName;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.convert.Convert;
+import ru.sfedu.maven1.dataConvertors.DealListConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDListConvertor;
+import ru.sfedu.maven1.dataConvertors.UsersListConvertor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -13,30 +20,16 @@ import java.util.UUID;
  */
 public class Company {
 
-  //
-  // Fields
-  //
-
   @CsvCustomBindByName(converter = UUIDConvertor.class)
   private UUID id;
-  @CsvCustomBindByName(converter = UUIDListConvertor.class)
-  private List<UUID> employees = new ArrayList<UUID>();
-  @CsvCustomBindByName(converter = UUIDListConvertor.class)
-  private List<UUID> deals  = new ArrayList<UUID>();
-  
-  //
-  // Constructors
-  //
+
+  @CsvCustomBindByName(converter = UsersListConvertor.class)
+  private List<User> employees = new ArrayList<User>();
+
+  @CsvCustomBindByName(converter = DealListConvertor.class)
+  private List<Deal> deals  = new ArrayList<Deal>();
+
   public Company () { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
 
   /**
    * Set the value of id
@@ -54,11 +47,22 @@ public class Company {
     return id;
   }
 
+  @Element(name = "id")
+  public void setIdXml (String newVar) {
+    id = UUID.fromString(newVar);
+  }
+
+  @Element(name = "id")
+  public String getIdXml () {
+    return id.toString();
+  }
+
   /**
    * Set the value of employees
    * @param newVar the new value of employees
    */
-  public void setEmployees (List<UUID> newVar) {
+  @ElementList(name = "employees")
+  public void setEmployees (List<User> newVar) {
     employees = newVar;
   }
 
@@ -66,7 +70,8 @@ public class Company {
    * Get the value of employees
    * @return the value of employees
    */
-  public List<UUID> getEmployees () {
+  @ElementList(name = "employees")
+  public List<User> getEmployees () {
     return employees;
   }
 
@@ -74,7 +79,8 @@ public class Company {
    * Set the value of deals
    * @param newVar the new value of deals
    */
-  public void setDeals (List<UUID> newVar) {
+  @ElementList(name = "deals")
+  public void setDeals (List<Deal> newVar) {
     deals = newVar;
   }
 
@@ -82,12 +88,32 @@ public class Company {
    * Get the value of deals
    * @return the value of deals
    */
-  public List<UUID> getDeals () {
+  @ElementList(name = "deals")
+  public List<Deal> getDeals () {
     return deals;
   }
 
-  //
-  // Other methods
-  //
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Company company = (Company) o;
+    return Objects.equals(getId(), company.getId()) &&
+            Objects.equals(getEmployees(), company.getEmployees()) &&
+            Objects.equals(getDeals(), company.getDeals());
+  }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getEmployees(), getDeals());
+  }
+
+  @Override
+  public String toString() {
+    return "Company{" +
+            "id=" + id +
+            ", employees=" + employees +
+            ", deals=" + deals +
+            '}';
+  }
 }

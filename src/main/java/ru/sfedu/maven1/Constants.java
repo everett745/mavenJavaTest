@@ -41,4 +41,7 @@ public class Constants {
     public static final String ALREADY_PERFORMER = "This user already deal performer. You cant send request   ";
     public static final String ALREADY_DEAL_PERFORMER = "This deal already have performer. You cant been performer   ";
     public static final String UNDEFINED_PERFORM = "This deal not send by current user";
+
+    public static final String DELETE_FILE = "Delete file: ";
+    public static final String CREATE_FILE = "Create file: ";
 }

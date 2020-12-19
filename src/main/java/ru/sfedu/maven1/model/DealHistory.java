@@ -3,6 +3,8 @@ package ru.sfedu.maven1.model;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
 import ru.sfedu.maven1.Constants;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 import ru.sfedu.maven1.enums.DealStatus;
@@ -19,10 +21,13 @@ public class DealHistory implements Serializable {
 
   @CsvCustomBindByName(converter = UUIDConvertor.class)
   private UUID id;
+
   @CsvBindByName
   private String text;
+
   @CsvBindByName
   private DealStatus status;
+
   @CsvDate(value = Constants.DATE_FORMAT)
   private Date created_at;
 
@@ -44,10 +49,21 @@ public class DealHistory implements Serializable {
     return id;
   }
 
+  @Element(name = "id")
+  public void setIdXml (String newVar) {
+    id = UUID.fromString(newVar);
+  }
+
+  @Element(name = "id")
+  public String getIdXml () {
+    return id.toString();
+  }
+
   /**
    * Set the value of text
    * @param newVar the new value of text
    */
+  @Attribute(name = "text")
   public void setText (String newVar) {
     text = newVar;
   }
@@ -56,6 +72,7 @@ public class DealHistory implements Serializable {
    * Get the value of text
    * @return the value of text
    */
+  @Attribute(name = "text")
   public String getText () {
     return text;
   }
@@ -64,6 +81,7 @@ public class DealHistory implements Serializable {
    * Set the value of status
    * @param newVar the new value of status
    */
+  @Attribute(name = "status")
   public void setStatus (DealStatus newVar) {
     status = newVar;
   }
@@ -72,6 +90,7 @@ public class DealHistory implements Serializable {
    * Get the value of status
    * @return the value of status
    */
+  @Attribute(name = "status")
   public DealStatus getStatus () {
     return status;
   }
@@ -80,6 +99,7 @@ public class DealHistory implements Serializable {
    * Set the value of created_at
    * @param newVar the new value of created_at
    */
+  @Attribute(name = "created_at")
   public void setCreated_at (Date newVar) {
     created_at = newVar;
   }
@@ -88,6 +108,7 @@ public class DealHistory implements Serializable {
    * Get the value of created_at
    * @return the value of created_at
    */
+  @Attribute(name = "created_at")
   public Date getCreated_at () {
     return created_at;
   }

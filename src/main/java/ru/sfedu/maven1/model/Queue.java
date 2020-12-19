@@ -1,6 +1,8 @@
 package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.CsvCustomBindByName;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import ru.sfedu.maven1.dataConvertors.UUIDListConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 
@@ -11,28 +13,13 @@ import java.util.*;
  */
 public class Queue {
 
-  //
-  // Fields
-  //
-
   @CsvCustomBindByName(converter = UUIDConvertor.class)
   private UUID id = UUID.randomUUID();
+
   @CsvCustomBindByName(converter = UUIDListConvertor.class)
   private List<UUID> items = new ArrayList<UUID>();
 
-  //
-  // Constructors
-  //
   public Queue () { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
 
   /**
    * Set the value of id
@@ -50,10 +37,21 @@ public class Queue {
     return id;
   }
 
+  @Element(name = "id")
+  public void setIdXml (String newVar) {
+    id = UUID.fromString(newVar);
+  }
+
+  @Element(name = "id")
+  public String getIdXml () {
+    return id.toString();
+  }
+
   /**
    * Set the value of items
    * @param newVar the new value of items
    */
+  @ElementList(name = "items")
   public void setItems (List<UUID> newVar) {
     items = newVar;
   }
@@ -62,6 +60,7 @@ public class Queue {
    * Get the value of items
    * @return the value of items
    */
+  @ElementList(name = "items")
   public List<UUID> getItems () {
     return items;
   }
@@ -89,9 +88,5 @@ public class Queue {
             ", items=" + items.toString() +
             '}';
   }
-
-  //
-  // Other methods
-  //
 
 }

@@ -1,12 +1,14 @@
 package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.*;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import ru.sfedu.maven1.Constants;
 import ru.sfedu.maven1.dataConvertors.AddressConvertor;
 import ru.sfedu.maven1.dataConvertors.QueueConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 import ru.sfedu.maven1.enums.DealModel;
-import ru.sfedu.maven1.enums.DealStatus;
 import ru.sfedu.maven1.enums.DealTypes;
 import ru.sfedu.maven1.enums.ObjectTypes;
 
@@ -19,10 +21,6 @@ import java.util.UUID;
  * Class Deal
  */
 public class Deal implements Serializable {
-
-  //
-  // Fields
-  //
 
   @CsvCustomBindByName(converter = UUIDConvertor.class)
   private UUID id;
@@ -59,20 +57,8 @@ public class Deal implements Serializable {
 
   @CsvBindByName
   private String price;
-  
-  //
-  // Constructors
-  //
+
   public Deal () { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
 
   /**
    * Set the value of id
@@ -90,10 +76,21 @@ public class Deal implements Serializable {
     return id;
   }
 
+  @Element(name = "id")
+  public void setIdXml (String newVar) {
+    id = UUID.fromString(newVar);
+  }
+
+  @Element(name = "id")
+  public String getIdXml () {
+    return id.toString();
+  }
+
   /**
    * Set the value of name
    * @param newVar the new value of name
    */
+  @Attribute(name = "name")
   public void setName (String newVar) {
     name = newVar;
   }
@@ -102,6 +99,7 @@ public class Deal implements Serializable {
    * Get the value of name
    * @return the value of name
    */
+  @Attribute(name = "name")
   public String getName () {
     return name;
   }
@@ -110,6 +108,7 @@ public class Deal implements Serializable {
    * Set the value of description
    * @param newVar the new value of description
    */
+  @Attribute(name = "description")
   public void setDescription (String newVar) {
     description = newVar;
   }
@@ -118,6 +117,7 @@ public class Deal implements Serializable {
    * Get the value of description
    * @return the value of description
    */
+  @Attribute(name = "description")
   public String getDescription () {
     return description;
   }
@@ -126,6 +126,7 @@ public class Deal implements Serializable {
    * Set the value of address
    * @param newVar the new value of address
    */
+  @Element(name = "address")
   public void setAddress (Address newVar) {
     address = newVar;
   }
@@ -134,6 +135,7 @@ public class Deal implements Serializable {
    * Get the value of address
    * @return the value of address
    */
+  @Element(name = "address")
   public Address getAddress () {
     return address;
   }
@@ -142,6 +144,7 @@ public class Deal implements Serializable {
    * Set the value of requests
    * @param newVar the new value of requests
    */
+  @Element(name = "requests")
   public void setRequests (Queue newVar) {
     requests = newVar;
   }
@@ -150,6 +153,7 @@ public class Deal implements Serializable {
    * Get the value of requests
    * @return the value of requests
    */
+  @Element(name = "requests")
   public Queue getRequests () {
     return requests;
   }
@@ -158,6 +162,7 @@ public class Deal implements Serializable {
    * Set the value of owner
    * @param newVar the new value of owner
    */
+  @Element(name = "owner")
   public void setOwner (UUID newVar) {
     owner = newVar;
   }
@@ -166,6 +171,7 @@ public class Deal implements Serializable {
    * Get the value of owner
    * @return the value of owner
    */
+  @Element(name = "owner")
   public UUID getOwner () {
     return owner;
   }
@@ -174,6 +180,7 @@ public class Deal implements Serializable {
    * Set the value of performer
    * @param newVar the new value of performer
    */
+  @Element(name = "performer", required = false)
   public void setPerformer (UUID newVar) {
     performer = newVar;
   }
@@ -182,6 +189,7 @@ public class Deal implements Serializable {
    * Get the value of performer
    * @return the value of performer
    */
+  @Element(name = "performer", required = false)
   public UUID getPerformer () {
     return performer;
   }
@@ -190,6 +198,7 @@ public class Deal implements Serializable {
    * Set the value of dealType
    * @param newVar the new value of dealType
    */
+  @Attribute(name = "dealType")
   public void setDealType (DealTypes newVar) {
     dealType = newVar;
   }
@@ -198,6 +207,7 @@ public class Deal implements Serializable {
    * Get the value of dealType
    * @return the value of dealType
    */
+  @Attribute(name = "dealType")
   public DealTypes getDealType () {
     return dealType;
   }
@@ -206,6 +216,7 @@ public class Deal implements Serializable {
    * Set the value of object
    * @param newVar the new value of object
    */
+  @Attribute(name = "object")
   public void setObject (ObjectTypes newVar) {
     object = newVar;
   }
@@ -214,6 +225,7 @@ public class Deal implements Serializable {
    * Get the value of object
    * @return the value of object
    */
+  @Attribute(name = "object")
   public ObjectTypes getObject () {
     return object;
   }
@@ -222,6 +234,7 @@ public class Deal implements Serializable {
    * Set the value of created_at
    * @param newVar the new value of created_at
    */
+  @Attribute(name = "createdAt")
   public void setCreated_at (Date newVar) {
     created_at = newVar;
   }
@@ -230,6 +243,7 @@ public class Deal implements Serializable {
    * Get the value of created_at
    * @return the value of created_at
    */
+  @Attribute(name = "createdAt")
   public Date getCreated_at () {
     return created_at;
   }
@@ -238,6 +252,7 @@ public class Deal implements Serializable {
    * Set the value of price
    * @param newVar the new value of price
    */
+  @Attribute(name = "price")
   public void setPrice (String newVar) {
     price = newVar;
   }
@@ -246,6 +261,7 @@ public class Deal implements Serializable {
    * Get the value of price
    * @return the value of price
    */
+  @Attribute(name = "price")
   public String getPrice () {
     return price;
   }
@@ -309,9 +325,5 @@ public class Deal implements Serializable {
   public void setDealModel(DealModel dealModel) {
     this.dealModel = dealModel;
   }
-
-  //
-  // Other methods
-  //
 
 }
