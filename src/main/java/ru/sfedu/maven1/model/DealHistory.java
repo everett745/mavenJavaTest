@@ -50,12 +50,12 @@ public class DealHistory implements Serializable {
   }
 
   @Element(name = "id")
-  public void setIdXml (String newVar) {
+  private void setIdXml (String newVar) {
     id = UUID.fromString(newVar);
   }
 
   @Element(name = "id")
-  public String getIdXml () {
+  private String getIdXml () {
     return id.toString();
   }
 

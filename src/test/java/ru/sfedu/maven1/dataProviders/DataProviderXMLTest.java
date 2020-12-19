@@ -12,9 +12,7 @@ public class DataProviderXMLTest extends DataProviderTests {
   }
 
   @Test
-  void preTest() {
-    super.preTest();
-  }
+  void preTest() { }
 
   @Test
   void createUserCorrect() {
@@ -90,12 +88,6 @@ public class DataProviderXMLTest extends DataProviderTests {
   void getAddressByNameIncorrect() {
     super.getAddressByNameIncorrect();
   }
-
-  @Test
-  void getQueueCorrect() { }
-
-  @Test
-  void getQueueIncorrect() { }
 
   @Test
   void createDealCorrect() {
@@ -248,8 +240,8 @@ public class DataProviderXMLTest extends DataProviderTests {
   }
 
   @Test
-  void manageDealPerformerQueueCorrect(){
-    super.manageDealPerformerQueueCorrect();
+  void manageDealPerformerCorrect(){
+    super.manageDealPerformerCorrect();
   }
 
   @Test

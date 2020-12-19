@@ -15,10 +15,9 @@ import java.util.Objects;
  */
 public class PublicDeal extends Deal {
 
-  @Attribute
   @CsvBindByName
   private DealStatus currentStatus;
-  @ElementList
+
   @CsvCustomBindByName(converter = DealHistoryListConvertor.class)
   private List<DealHistory> history;
 
@@ -28,6 +27,7 @@ public class PublicDeal extends Deal {
    * Set the value of history
    * @param newVar the new value of history
    */
+  @ElementList(name = "history")
   public void setHistory (List<DealHistory> newVar) {
     history = newVar;
   }
@@ -36,6 +36,7 @@ public class PublicDeal extends Deal {
    * Get the value of history
    * @return the value of history
    */
+  @ElementList(name = "history")
   public List<DealHistory> getHistory () {
     return history;
   }
@@ -44,6 +45,7 @@ public class PublicDeal extends Deal {
    * Get the value of currentStatus
    * @return the value of currentStatus
    */
+  @Attribute(name = "currentStatus")
   public DealStatus getCurrentStatus() {
     return currentStatus;
   }
@@ -52,6 +54,7 @@ public class PublicDeal extends Deal {
    * Set the value of history
    * @param currentStatus the new value of currentStatus
    */
+  @Attribute(name = "currentStatus")
   public void setCurrentStatus(DealStatus currentStatus) {
     this.currentStatus = currentStatus;
   }
@@ -75,7 +78,7 @@ public class PublicDeal extends Deal {
   public String toString() {
     return "PublicDeal{" +
             "id=" + this.getId() +
-            ", name='" + this.getId() + '\'' +
+            ", name='" + this.getName() + '\'' +
             ", description='" + this.getDescription() + '\'' +
             ", address=" + this.getAddress() +
             ", currentStatus=" + currentStatus +
@@ -85,8 +88,9 @@ public class PublicDeal extends Deal {
             ", performer=" + this.getPerformer() +
             ", dealType=" + this.getDealType() +
             ", object=" + this.getObject() +
+            ", model=" + this.getDealModel() +
             ", created_at=" + this.getCreated_at() +
-            ", price='" + this.getCreated_at() + '\'' +
+            ", price='" + this.getPrice() + '\'' +
             '}';
   }
 

@@ -1,0 +1,1113 @@
+<List>
+    <object class="ru.sfedu.maven1.model.Address" city="Тест" district="Тест" id="0" region="Тест" />
+    <object class="ru.sfedu.maven1.model.Address" city="Адыгейск" district="Южный" id="1" region="Адыгея" />
+    <object class="ru.sfedu.maven1.model.Address" city="Майкоп" district="Южный" id="2" region="Адыгея" />
+    <object class="ru.sfedu.maven1.model.Address" city="Горно-Алтайск" district="Сибирский" id="3" region="Алтай" />
+    <object class="ru.sfedu.maven1.model.Address" city="Алейск" district="Сибирский" id="4" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Барнаул" district="Сибирский" id="5" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белокуриха" district="Сибирский" id="6" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бийск" district="Сибирский" id="7" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Горняк" district="Сибирский" id="8" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заринск" district="Сибирский" id="9" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Змеиногорск" district="Сибирский" id="10" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Камень-на-Оби" district="Сибирский" id="11" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новоалтайск" district="Сибирский" id="12" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рубцовск" district="Сибирский" id="13" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Славгород" district="Сибирский" id="14" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Яровое" district="Сибирский" id="15" region="Алтайский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белогорск" district="Дальневосточный" id="16" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Благовещенск" district="Дальневосточный" id="17" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Завитинск" district="Дальневосточный" id="18" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зея" district="Дальневосточный" id="19" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Райчихинск" district="Дальневосточный" id="20" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Свободный" district="Дальневосточный" id="21" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сковородино" district="Дальневосточный" id="22" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тында" district="Дальневосточный" id="23" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шимановск" district="Дальневосточный" id="24" region="Амурская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Архангельск" district="Северо-Западный" id="25" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вельск" district="Северо-Западный" id="26" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Каргополь" district="Северо-Западный" id="27" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Коряжма" district="Северо-Западный" id="28" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Котлас" district="Северо-Западный" id="29" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мезень" district="Северо-Западный" id="30" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мирный" district="Северо-Западный" id="31" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новодвинск" district="Северо-Западный" id="32" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Няндома" district="Северо-Западный" id="33" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Онега" district="Северо-Западный" id="34" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Северодвинск" district="Северо-Западный" id="35" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сольвычегодск" district="Северо-Западный" id="36" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шенкурск" district="Северо-Западный" id="37" region="Архангельская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Астрахань" district="Южный" id="38" region="Астраханская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ахтубинск" district="Южный" id="39" region="Астраханская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Знаменск" district="Южный" id="40" region="Астраханская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Камызяк" district="Южный" id="41" region="Астраханская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нариманов" district="Южный" id="42" region="Астраханская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Харабали" district="Южный" id="43" region="Астраханская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Агидель" district="Приволжский" id="44" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Баймак" district="Приволжский" id="45" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белебей" district="Приволжский" id="46" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белорецк" district="Приволжский" id="47" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бирск" district="Приволжский" id="48" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Благовещенск" district="Приволжский" id="49" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Давлеканово" district="Приволжский" id="50" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дюртюли" district="Приволжский" id="51" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ишимбай" district="Приволжский" id="52" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кумертау" district="Приволжский" id="53" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Межгорье" district="Приволжский" id="54" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мелеуз" district="Приволжский" id="55" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нефтекамск" district="Приволжский" id="56" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Октябрьский" district="Приволжский" id="57" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Салават" district="Приволжский" id="58" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сибай" district="Приволжский" id="59" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Стерлитамак" district="Приволжский" id="60" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Туймазы" district="Приволжский" id="61" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Уфа" district="Приволжский" id="62" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Учалы" district="Приволжский" id="63" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Янаул" district="Приволжский" id="64" region="Башкортостан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Алексеевка" district="Центральный" id="65" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белгород" district="Центральный" id="66" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бирюч" district="Центральный" id="67" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Валуйки" district="Центральный" id="68" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Грайворон" district="Центральный" id="69" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Губкин" district="Центральный" id="70" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Короча" district="Центральный" id="71" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новый Оскол" district="Центральный" id="72" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Старый Оскол" district="Центральный" id="73" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Строитель" district="Центральный" id="74" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шебекино" district="Центральный" id="75" region="Белгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Брянск" district="Центральный" id="76" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дятьково" district="Центральный" id="77" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Жуковка" district="Центральный" id="78" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Злынка" district="Центральный" id="79" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Карачев" district="Центральный" id="80" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Клинцы" district="Центральный" id="81" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мглин" district="Центральный" id="82" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новозыбков" district="Центральный" id="83" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Почеп" district="Центральный" id="84" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Севск" district="Центральный" id="85" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сельцо" district="Центральный" id="86" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Стародуб" district="Центральный" id="87" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сураж" district="Центральный" id="88" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Трубчевск" district="Центральный" id="89" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Унеча" district="Центральный" id="90" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Фокино" district="Центральный" id="91" region="Брянская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бабушкин" district="Сибирский" id="92" region="Бурятия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гусиноозёрск" district="Сибирский" id="93" region="Бурятия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Закаменск" district="Сибирский" id="94" region="Бурятия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кяхта" district="Сибирский" id="95" region="Бурятия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Северобайкальск" district="Сибирский" id="96" region="Бурятия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Улан-Удэ" district="Сибирский" id="97" region="Бурятия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Александров" district="Центральный" id="98" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Владимир" district="Центральный" id="99" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вязники" district="Центральный" id="100" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гороховец" district="Центральный" id="101" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гусь-Хрустальный" district="Центральный" id="102" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Камешково" district="Центральный" id="103" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Карабаново" district="Центральный" id="104" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Киржач" district="Центральный" id="105" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ковров" district="Центральный" id="106" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кольчугино" district="Центральный" id="107" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Костерёво" district="Центральный" id="108" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Курлово" district="Центральный" id="109" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лакинск" district="Центральный" id="110" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Меленки" district="Центральный" id="111" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Муром" district="Центральный" id="112" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Петушки" district="Центральный" id="113" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Покров" district="Центральный" id="114" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Радужный" district="Центральный" id="115" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Собинка" district="Центральный" id="116" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Струнино" district="Центральный" id="117" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Судогда" district="Центральный" id="118" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Суздаль" district="Центральный" id="119" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Юрьев-Польский" district="Центральный" id="120" region="Владимирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волгоград" district="Южный" id="121" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волжский" district="Южный" id="122" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дубовка" district="Южный" id="123" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Жирновск" district="Южный" id="124" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Калач-на-Дону" district="Южный" id="125" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Камышин" district="Южный" id="126" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Котельниково" district="Южный" id="127" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Котово" district="Южный" id="128" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснослободск" district="Южный" id="129" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ленинск" district="Южный" id="130" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Михайловка" district="Южный" id="131" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Николаевск" district="Южный" id="132" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новоаннинский" district="Южный" id="133" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Палласовка" district="Южный" id="134" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Петров Вал" district="Южный" id="135" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Серафимович" district="Южный" id="136" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Суровикино" district="Южный" id="137" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Урюпинск" district="Южный" id="138" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Фролово" district="Южный" id="139" region="Волгоградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бабаево" district="Северо-Западный" id="140" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белозерск" district="Северо-Западный" id="141" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Великий Устюг" district="Северо-Западный" id="142" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вологда" district="Северо-Западный" id="143" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вытегра" district="Северо-Западный" id="144" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Грязовец" district="Северо-Западный" id="145" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кадников" district="Северо-Западный" id="146" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кириллов" district="Северо-Западный" id="147" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красавино" district="Северо-Западный" id="148" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Никольск" district="Северо-Западный" id="149" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сокол" district="Северо-Западный" id="150" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тотьма" district="Северо-Западный" id="151" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Устюжна" district="Северо-Западный" id="152" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Харовск" district="Северо-Западный" id="153" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Череповец" district="Северо-Западный" id="154" region="Вологодская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бобров" district="Центральный" id="155" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Богучар" district="Центральный" id="156" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Борисоглебск" district="Центральный" id="157" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бутурлиновка" district="Центральный" id="158" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Воронеж" district="Центральный" id="159" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Калач" district="Центральный" id="160" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лиски" district="Центральный" id="161" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нововоронеж" district="Центральный" id="162" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новохопёрск" district="Центральный" id="163" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Острогожск" district="Центральный" id="164" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Павловск" district="Центральный" id="165" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Поворино" district="Центральный" id="166" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Россошь" district="Центральный" id="167" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Семилуки" district="Центральный" id="168" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Эртиль" district="Центральный" id="169" region="Воронежская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Буйнакск" district="Северо-Кавказский" id="170" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дагестанские Огни" district="Северо-Кавказский" id="171" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дербент" district="Северо-Кавказский" id="172" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Избербаш" district="Северо-Кавказский" id="173" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Каспийск" district="Северо-Кавказский" id="174" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кизилюрт" district="Северо-Кавказский" id="175" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кизляр" district="Северо-Кавказский" id="176" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Махачкала" district="Северо-Кавказский" id="177" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Хасавюрт" district="Северо-Кавказский" id="178" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Южно-Сухокумск" district="Северо-Кавказский" id="179" region="Дагестан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Биробиджан" district="Дальневосточный" id="180" region="Еврейская АО" />
+    <object class="ru.sfedu.maven1.model.Address" city="Облучье" district="Дальневосточный" id="181" region="Еврейская АО" />
+    <object class="ru.sfedu.maven1.model.Address" city="Балей" district="Сибирский" id="182" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Борзя" district="Сибирский" id="183" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснокаменск" district="Сибирский" id="184" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Могоча" district="Сибирский" id="185" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нерчинск" district="Сибирский" id="186" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Петровск-Забайкальский" district="Сибирский" id="187" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сретенск" district="Сибирский" id="188" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Хилок" district="Сибирский" id="189" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чита" district="Сибирский" id="190" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шилка" district="Сибирский" id="191" region="Забайкальский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вичуга" district="Центральный" id="192" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гаврилов Посад" district="Центральный" id="193" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заволжск" district="Центральный" id="194" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Иваново" district="Центральный" id="195" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кинешма" district="Центральный" id="196" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Комсомольск" district="Центральный" id="197" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кохма" district="Центральный" id="198" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Наволоки" district="Центральный" id="199" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Плёс" district="Центральный" id="200" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Приволжск" district="Центральный" id="201" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пучеж" district="Центральный" id="202" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Родники" district="Центральный" id="203" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тейково" district="Центральный" id="204" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Фурманов" district="Центральный" id="205" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шуя" district="Центральный" id="206" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Южа" district="Центральный" id="207" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Юрьевец" district="Центральный" id="208" region="Ивановская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Карабулак" district="Северо-Кавказский" id="209" region="Ингушетия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Магас" district="Северо-Кавказский" id="210" region="Ингушетия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Малгобек" district="Северо-Кавказский" id="211" region="Ингушетия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Назрань" district="Северо-Кавказский" id="212" region="Ингушетия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Алзамай" district="Сибирский" id="213" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ангарск" district="Сибирский" id="214" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Байкальск" district="Сибирский" id="215" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бирюсинск" district="Сибирский" id="216" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бодайбо" district="Сибирский" id="217" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Братск" district="Сибирский" id="218" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вихоревка" district="Сибирский" id="219" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Железногорск-Илимский" district="Сибирский" id="220" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зима" district="Сибирский" id="221" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Иркутск" district="Сибирский" id="222" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Киренск" district="Сибирский" id="223" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижнеудинск" district="Сибирский" id="224" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Саянск" district="Сибирский" id="225" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Свирск" district="Сибирский" id="226" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Слюдянка" district="Сибирский" id="227" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тайшет" district="Сибирский" id="228" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тулун" district="Сибирский" id="229" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усолье-Сибирское" district="Сибирский" id="230" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усть-Илимск" district="Сибирский" id="231" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усть-Кут" district="Сибирский" id="232" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Черемхово" district="Сибирский" id="233" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шелехов" district="Сибирский" id="234" region="Иркутская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Баксан" district="Северо-Кавказский" id="235" region="Кабардино-Балкария" />
+    <object class="ru.sfedu.maven1.model.Address" city="Майский" district="Северо-Кавказский" id="236" region="Кабардино-Балкария" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нальчик" district="Северо-Кавказский" id="237" region="Кабардино-Балкария" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нарткала" district="Северо-Кавказский" id="238" region="Кабардино-Балкария" />
+    <object class="ru.sfedu.maven1.model.Address" city="Прохладный" district="Северо-Кавказский" id="239" region="Кабардино-Балкария" />
+    <object class="ru.sfedu.maven1.model.Address" city="Терек" district="Северо-Кавказский" id="240" region="Кабардино-Балкария" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тырныауз" district="Северо-Кавказский" id="241" region="Кабардино-Балкария" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чегем" district="Северо-Кавказский" id="242" region="Кабардино-Балкария" />
+    <object class="ru.sfedu.maven1.model.Address" city="Багратионовск" district="Северо-Западный" id="243" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Балтийск" district="Северо-Западный" id="244" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гвардейск" district="Северо-Западный" id="245" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гурьевск" district="Северо-Западный" id="246" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гусев" district="Северо-Западный" id="247" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зеленоградск" district="Северо-Западный" id="248" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Калининград" district="Северо-Западный" id="249" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснознаменск" district="Северо-Западный" id="250" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ладушкин" district="Северо-Западный" id="251" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мамоново" district="Северо-Западный" id="252" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Неман" district="Северо-Западный" id="253" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нестеров" district="Северо-Западный" id="254" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Озёрск" district="Северо-Западный" id="255" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пионерский" district="Северо-Западный" id="256" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Полесск" district="Северо-Западный" id="257" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Правдинск" district="Северо-Западный" id="258" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Светлогорск" district="Северо-Западный" id="259" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Светлый" district="Северо-Западный" id="260" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Славск" district="Северо-Западный" id="261" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Советск" district="Северо-Западный" id="262" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Черняховск" district="Северо-Западный" id="263" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Приморск" district="Северо-Западный" id="264" region="Калининградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Городовиковск" district="Южный" id="265" region="Калмыкия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лагань" district="Южный" id="266" region="Калмыкия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Элиста" district="Южный" id="267" region="Калмыкия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Балабаново" district="Центральный" id="268" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белоусово" district="Центральный" id="269" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Боровск" district="Центральный" id="270" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ермолино" district="Центральный" id="271" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Жиздра" district="Центральный" id="272" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Жуков" district="Центральный" id="273" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Калуга" district="Центральный" id="274" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Киров" district="Центральный" id="275" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Козельск" district="Центральный" id="276" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кондрово" district="Центральный" id="277" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кремёнки" district="Центральный" id="278" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Людиново" district="Центральный" id="279" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Малоярославец" district="Центральный" id="280" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Медынь" district="Центральный" id="281" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мещовск" district="Центральный" id="282" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мосальск" district="Центральный" id="283" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Обнинск" district="Центральный" id="284" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сосенский" district="Центральный" id="285" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Спас-Деменск" district="Центральный" id="286" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сухиничи" district="Центральный" id="287" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Таруса" district="Центральный" id="288" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Юхнов" district="Центральный" id="289" region="Калужская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вилючинск" district="Дальневосточный" id="290" region="Камчатский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Елизово" district="Дальневосточный" id="291" region="Камчатский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Петропавловск-Камчатский" district="Дальневосточный" id="292" region="Камчатский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Карачаевск" district="Северо-Кавказский" id="293" region="Карачаево-Черкесия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Теберда" district="Северо-Кавказский" id="294" region="Карачаево-Черкесия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усть-Джегута" district="Северо-Кавказский" id="295" region="Карачаево-Черкесия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Черкесск" district="Северо-Кавказский" id="296" region="Карачаево-Черкесия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Беломорск" district="Северо-Западный" id="297" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кемь" district="Северо-Западный" id="298" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кондопога" district="Северо-Западный" id="299" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Костомукша" district="Северо-Западный" id="300" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лахденпохья" district="Северо-Западный" id="301" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Медвежьегорск" district="Северо-Западный" id="302" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Олонец" district="Северо-Западный" id="303" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Петрозаводск" district="Северо-Западный" id="304" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Питкяранта" district="Северо-Западный" id="305" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пудож" district="Северо-Западный" id="306" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сегежа" district="Северо-Западный" id="307" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сортавала" district="Северо-Западный" id="308" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Суоярви" district="Северо-Западный" id="309" region="Карелия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Анжеро-Судженск" district="Сибирский" id="310" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белово" district="Сибирский" id="311" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Берёзовский" district="Сибирский" id="312" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гурьевск" district="Сибирский" id="313" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Калтан" district="Сибирский" id="314" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кемерово" district="Сибирский" id="315" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Киселёвск" district="Сибирский" id="316" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ленинск-Кузнецкий" district="Сибирский" id="317" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мариинск" district="Сибирский" id="318" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Междуреченск" district="Сибирский" id="319" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мыски" district="Сибирский" id="320" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новокузнецк" district="Сибирский" id="321" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Осинники" district="Сибирский" id="322" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Полысаево" district="Сибирский" id="323" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Прокопьевск" district="Сибирский" id="324" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Салаир" district="Сибирский" id="325" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тайга" district="Сибирский" id="326" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Таштагол" district="Сибирский" id="327" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Топки" district="Сибирский" id="328" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Юрга" district="Сибирский" id="329" region="Кемеровская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белая Холуница" district="Приволжский" id="330" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вятские Поляны" district="Приволжский" id="331" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зуевка" district="Приволжский" id="332" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Киров" district="Приволжский" id="333" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кирово-Чепецк" district="Приволжский" id="334" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кирс" district="Приволжский" id="335" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Котельнич" district="Приволжский" id="336" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Луза" district="Приволжский" id="337" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Малмыж" district="Приволжский" id="338" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мураши" district="Приволжский" id="339" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нолинск" district="Приволжский" id="340" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Омутнинск" district="Приволжский" id="341" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Орлов" district="Приволжский" id="342" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Слободской" district="Приволжский" id="343" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Советск" district="Приволжский" id="344" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сосновка" district="Приволжский" id="345" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Уржум" district="Приволжский" id="346" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Яранск" district="Приволжский" id="347" region="Кировская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Воркута" district="Северо-Западный" id="348" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вуктыл" district="Северо-Западный" id="349" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Емва" district="Северо-Западный" id="350" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Инта" district="Северо-Западный" id="351" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Микунь" district="Северо-Западный" id="352" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Печора" district="Северо-Западный" id="353" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сосногорск" district="Северо-Западный" id="354" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сыктывкар" district="Северо-Западный" id="355" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усинск" district="Северо-Западный" id="356" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ухта" district="Северо-Западный" id="357" region="Коми" />
+    <object class="ru.sfedu.maven1.model.Address" city="Буй" district="Центральный" id="358" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волгореченск" district="Центральный" id="359" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Галич" district="Центральный" id="360" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кологрив" district="Центральный" id="361" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кострома" district="Центральный" id="362" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Макарьев" district="Центральный" id="363" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мантурово" district="Центральный" id="364" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нерехта" district="Центральный" id="365" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нея" district="Центральный" id="366" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Солигалич" district="Центральный" id="367" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чухлома" district="Центральный" id="368" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шарья" district="Центральный" id="369" region="Костромская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Абинск" district="Южный" id="370" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Анапа" district="Южный" id="371" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Апшеронск" district="Южный" id="372" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Армавир" district="Южный" id="373" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белореченск" district="Южный" id="374" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Геленджик" district="Южный" id="375" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Горячий Ключ" district="Южный" id="376" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гулькевичи" district="Южный" id="377" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ейск" district="Южный" id="378" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кореновск" district="Южный" id="379" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснодар" district="Южный" id="380" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кропоткин" district="Южный" id="381" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Крымск" district="Южный" id="382" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Курганинск" district="Южный" id="383" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лабинск" district="Южный" id="384" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новокубанск" district="Южный" id="385" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новороссийск" district="Южный" id="386" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Приморско-Ахтарск" district="Южный" id="387" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Славянск-на-Кубани" district="Южный" id="388" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сочи" district="Южный" id="389" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Темрюк" district="Южный" id="390" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тимашёвск" district="Южный" id="391" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тихорецк" district="Южный" id="392" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Туапсе" district="Южный" id="393" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усть-Лабинск" district="Южный" id="394" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Хадыженск" district="Южный" id="395" region="Краснодарский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Артёмовск" district="Сибирский" id="396" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ачинск" district="Сибирский" id="397" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Боготол" district="Сибирский" id="398" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бородино" district="Сибирский" id="399" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дивногорск" district="Сибирский" id="400" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дудинка" district="Сибирский" id="401" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Енисейск" district="Сибирский" id="402" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Железногорск" district="Сибирский" id="403" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заозёрный" district="Сибирский" id="404" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зеленогорск" district="Сибирский" id="405" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Игарка" district="Сибирский" id="406" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Иланский" district="Сибирский" id="407" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Канск" district="Сибирский" id="408" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кодинск" district="Сибирский" id="409" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красноярск" district="Сибирский" id="410" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лесосибирск" district="Сибирский" id="411" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Минусинск" district="Сибирский" id="412" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Назарово" district="Сибирский" id="413" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Норильск" district="Сибирский" id="414" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сосновоборск" district="Сибирский" id="415" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ужур" district="Сибирский" id="416" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Уяр" district="Сибирский" id="417" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шарыпово" district="Сибирский" id="418" region="Красноярский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Далматово" district="Уральский" id="419" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Катайск" district="Уральский" id="420" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Курган" district="Уральский" id="421" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Куртамыш" district="Уральский" id="422" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Макушино" district="Уральский" id="423" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Петухово" district="Уральский" id="424" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шадринск" district="Уральский" id="425" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шумиха" district="Уральский" id="426" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Щучье" district="Уральский" id="427" region="Курганская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дмитриев" district="Центральный" id="428" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Железногорск" district="Центральный" id="429" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Курск" district="Центральный" id="430" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Курчатов" district="Центральный" id="431" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Льгов" district="Центральный" id="432" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Обоянь" district="Центральный" id="433" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рыльск" district="Центральный" id="434" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Суджа" district="Центральный" id="435" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Фатеж" district="Центральный" id="436" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Щигры" district="Центральный" id="437" region="Курская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бокситогорск" district="Северо-Западный" id="438" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волосово" district="Северо-Западный" id="439" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волхов" district="Северо-Западный" id="440" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Всеволожск" district="Северо-Западный" id="441" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Выборг" district="Северо-Западный" id="442" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Высоцк" district="Северо-Западный" id="443" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гатчина" district="Северо-Западный" id="444" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ивангород" district="Северо-Западный" id="445" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Каменногорск" district="Северо-Западный" id="446" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кингисепп" district="Северо-Западный" id="447" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кириши" district="Северо-Западный" id="448" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кировск" district="Северо-Западный" id="449" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Коммунар" district="Северо-Западный" id="450" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лодейное Поле" district="Северо-Западный" id="451" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Луга" district="Северо-Западный" id="452" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Любань" district="Северо-Западный" id="453" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Никольское" district="Северо-Западный" id="454" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новая Ладога" district="Северо-Западный" id="455" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Отрадное" district="Северо-Западный" id="456" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пикалёво" district="Северо-Западный" id="457" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Подпорожье" district="Северо-Западный" id="458" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Приморск" district="Северо-Западный" id="459" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Приозерск" district="Северо-Западный" id="460" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Светогорск" district="Северо-Западный" id="461" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сертолово" district="Северо-Западный" id="462" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сланцы" district="Северо-Западный" id="463" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сосновый Бор" district="Северо-Западный" id="464" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сясьстрой" district="Северо-Западный" id="465" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тихвин" district="Северо-Западный" id="466" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тосно" district="Северо-Западный" id="467" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шлиссельбург" district="Северо-Западный" id="468" region="Ленинградская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Грязи" district="Центральный" id="469" region="Липецкая область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Данков" district="Центральный" id="470" region="Липецкая область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Елец" district="Центральный" id="471" region="Липецкая область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Задонск" district="Центральный" id="472" region="Липецкая область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лебедянь" district="Центральный" id="473" region="Липецкая область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Липецк" district="Центральный" id="474" region="Липецкая область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усмань" district="Центральный" id="475" region="Липецкая область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чаплыгин" district="Центральный" id="476" region="Липецкая область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Магадан" district="Дальневосточный" id="477" region="Магаданская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сусуман" district="Дальневосточный" id="478" region="Магаданская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волжск" district="Приволжский" id="479" region="Марий Эл" />
+    <object class="ru.sfedu.maven1.model.Address" city="Звенигово" district="Приволжский" id="480" region="Марий Эл" />
+    <object class="ru.sfedu.maven1.model.Address" city="Йошкар-Ола" district="Приволжский" id="481" region="Марий Эл" />
+    <object class="ru.sfedu.maven1.model.Address" city="Козьмодемьянск" district="Приволжский" id="482" region="Марий Эл" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ардатов" district="Приволжский" id="483" region="Мордовия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Инсар" district="Приволжский" id="484" region="Мордовия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ковылкино" district="Приволжский" id="485" region="Мордовия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснослободск" district="Приволжский" id="486" region="Мордовия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рузаевка" district="Приволжский" id="487" region="Мордовия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Саранск" district="Приволжский" id="488" region="Мордовия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Темников" district="Приволжский" id="489" region="Мордовия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Москва" district="Центральный" id="490" region="Москва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Апрелевка" district="Центральный" id="491" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Балашиха" district="Центральный" id="492" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бронницы" district="Центральный" id="493" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верея" district="Центральный" id="494" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Видное" district="Центральный" id="495" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волоколамск" district="Центральный" id="496" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Воскресенск" district="Центральный" id="497" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Высоковск" district="Центральный" id="498" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Голицыно" district="Центральный" id="499" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дедовск" district="Центральный" id="500" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дзержинский" district="Центральный" id="501" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дмитров" district="Центральный" id="502" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Долгопрудный" district="Центральный" id="503" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Домодедово" district="Центральный" id="504" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дрезна" district="Центральный" id="505" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дубна" district="Центральный" id="506" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Егорьевск" district="Центральный" id="507" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Железнодорожный" district="Центральный" id="508" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Жуковский" district="Центральный" id="509" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зарайск" district="Центральный" id="510" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Звенигород" district="Центральный" id="511" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ивантеевка" district="Центральный" id="512" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Истра" district="Центральный" id="513" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кашира" district="Центральный" id="514" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Климовск" district="Центральный" id="515" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Клин" district="Центральный" id="516" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Коломна" district="Центральный" id="517" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Котельники" district="Центральный" id="518" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Королёв" district="Центральный" id="519" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красноармейск" district="Центральный" id="520" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красногорск" district="Центральный" id="521" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснозаводск" district="Центральный" id="522" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснознаменск" district="Центральный" id="523" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кубинка" district="Центральный" id="524" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Куровское" district="Центральный" id="525" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ликино-Дулёво" district="Центральный" id="526" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лобня" district="Центральный" id="527" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лосино-Петровский" district="Центральный" id="528" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Луховицы" district="Центральный" id="529" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лыткарино" district="Центральный" id="530" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Люберцы" district="Центральный" id="531" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Можайск" district="Центральный" id="532" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Московский" district="Центральный" id="533" region="Москва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мытищи" district="Центральный" id="534" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Наро-Фоминск" district="Центральный" id="535" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ногинск" district="Центральный" id="536" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Одинцово" district="Центральный" id="537" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ожерелье" district="Центральный" id="538" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Озёры" district="Центральный" id="539" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Орехово-Зуево" district="Центральный" id="540" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Павловский Посад" district="Центральный" id="541" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пересвет" district="Центральный" id="542" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Подольск" district="Центральный" id="543" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Протвино" district="Центральный" id="544" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пушкино" district="Центральный" id="545" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пущино" district="Центральный" id="546" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Раменское" district="Центральный" id="547" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Реутов" district="Центральный" id="548" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рошаль" district="Центральный" id="549" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Руза" district="Центральный" id="550" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сергиев Посад" district="Центральный" id="551" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Серпухов" district="Центральный" id="552" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Солнечногорск" district="Центральный" id="553" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Старая Купавна" district="Центральный" id="554" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ступино" district="Центральный" id="555" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Талдом" district="Центральный" id="556" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Троицк" district="Центральный" id="557" region="Москва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Фрязино" district="Центральный" id="558" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Химки" district="Центральный" id="559" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Хотьково" district="Центральный" id="560" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Черноголовка" district="Центральный" id="561" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чехов" district="Центральный" id="562" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шатура" district="Центральный" id="563" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Щёлково" district="Центральный" id="564" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Щербинка" district="Центральный" id="565" region="Москва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Электрогорск" district="Центральный" id="566" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Электросталь" district="Центральный" id="567" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Электроугли" district="Центральный" id="568" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Юбилейный" district="Центральный" id="569" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Яхрома" district="Центральный" id="570" region="Московская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Апатиты" district="Северо-Западный" id="571" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гаджиево" district="Северо-Западный" id="572" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заозёрск" district="Северо-Западный" id="573" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заполярный" district="Северо-Западный" id="574" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кандалакша" district="Северо-Западный" id="575" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кировск" district="Северо-Западный" id="576" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ковдор" district="Северо-Западный" id="577" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кола" district="Северо-Западный" id="578" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мончегорск" district="Северо-Западный" id="579" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мурманск" district="Северо-Западный" id="580" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Оленегорск" district="Северо-Западный" id="581" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Островной" district="Северо-Западный" id="582" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Полярные Зори" district="Северо-Западный" id="583" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Полярный" district="Северо-Западный" id="584" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Североморск" district="Северо-Западный" id="585" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Снежногорск" district="Северо-Западный" id="586" region="Мурманская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нарьян-Мар" district="Северо-Западный" id="587" region="Ненецкий Авт. Окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Арзамас" district="Приволжский" id="588" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Балахна" district="Приволжский" id="589" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Богородск" district="Приволжский" id="590" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бор" district="Приволжский" id="591" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ветлуга" district="Приволжский" id="592" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Володарск" district="Приволжский" id="593" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ворсма" district="Приволжский" id="594" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Выкса" district="Приволжский" id="595" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Горбатов" district="Приволжский" id="596" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Городец" district="Приволжский" id="597" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дзержинск" district="Приволжский" id="598" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заволжье" district="Приволжский" id="599" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Княгинино" district="Приволжский" id="600" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кстово" district="Приволжский" id="601" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кулебаки" district="Приволжский" id="602" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лукоянов" district="Приволжский" id="603" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лысково" district="Приволжский" id="604" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Навашино" district="Приволжский" id="605" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижний Новгород" district="Приволжский" id="606" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Павлово" district="Приволжский" id="607" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Первомайск" district="Приволжский" id="608" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Перевоз" district="Приволжский" id="609" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Саров" district="Приволжский" id="610" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Семёнов" district="Приволжский" id="611" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сергач" district="Приволжский" id="612" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Урень" district="Приволжский" id="613" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чкаловск" district="Приволжский" id="614" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шахунья" district="Приволжский" id="615" region="Нижегородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Боровичи" district="Северо-Западный" id="616" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Валдай" district="Северо-Западный" id="617" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Великий Новгород" district="Северо-Западный" id="618" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Малая Вишера" district="Северо-Западный" id="619" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Окуловка" district="Северо-Западный" id="620" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пестово" district="Северо-Западный" id="621" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сольцы" district="Северо-Западный" id="622" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Старая Русса" district="Северо-Западный" id="623" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Холм" district="Северо-Западный" id="624" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чудово" district="Северо-Западный" id="625" region="Новгородская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Барабинск" district="Сибирский" id="626" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бердск" district="Сибирский" id="627" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Болотное" district="Сибирский" id="628" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Искитим" district="Сибирский" id="629" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Карасук" district="Сибирский" id="630" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Каргат" district="Сибирский" id="631" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Куйбышев" district="Сибирский" id="632" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Купино" district="Сибирский" id="633" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новосибирск" district="Сибирский" id="634" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Обь" district="Сибирский" id="635" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Татарск" district="Сибирский" id="636" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тогучин" district="Сибирский" id="637" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Черепаново" district="Сибирский" id="638" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чулым" district="Сибирский" id="639" region="Новосибирская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Исилькуль" district="Сибирский" id="640" region="Омская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Калачинск" district="Сибирский" id="641" region="Омская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Называевск" district="Сибирский" id="642" region="Омская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Омск" district="Сибирский" id="643" region="Омская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тара" district="Сибирский" id="644" region="Омская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тюкалинск" district="Сибирский" id="645" region="Омская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Абдулино" district="Приволжский" id="646" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бугуруслан" district="Приволжский" id="647" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бузулук" district="Приволжский" id="648" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гай" district="Приволжский" id="649" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кувандык" district="Приволжский" id="650" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Медногорск" district="Приволжский" id="651" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новотроицк" district="Приволжский" id="652" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Оренбург" district="Приволжский" id="653" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Орск" district="Приволжский" id="654" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Соль-Илецк" district="Приволжский" id="655" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сорочинск" district="Приволжский" id="656" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ясный" district="Приволжский" id="657" region="Оренбургская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Болхов" district="Центральный" id="658" region="Орловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дмитровск" district="Центральный" id="659" region="Орловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ливны" district="Центральный" id="660" region="Орловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Малоархангельск" district="Центральный" id="661" region="Орловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мценск" district="Центральный" id="662" region="Орловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новосиль" district="Центральный" id="663" region="Орловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Орёл" district="Центральный" id="664" region="Орловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белинский" district="Приволжский" id="665" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Городище" district="Приволжский" id="666" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заречный" district="Приволжский" id="667" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Каменка" district="Приволжский" id="668" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кузнецк" district="Приволжский" id="669" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижний Ломов" district="Приволжский" id="670" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Никольск" district="Приволжский" id="671" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пенза" district="Приволжский" id="672" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сердобск" district="Приволжский" id="673" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Спасск" district="Приволжский" id="674" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сурск" district="Приволжский" id="675" region="Пензенская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Александровск" district="Приволжский" id="676" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Березники" district="Приволжский" id="677" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верещагино" district="Приволжский" id="678" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Горнозаводск" district="Приволжский" id="679" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гремячинск" district="Приволжский" id="680" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Губаха" district="Приволжский" id="681" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Добрянка" district="Приволжский" id="682" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кизел" district="Приволжский" id="683" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красновишерск" district="Приволжский" id="684" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснокамск" district="Приволжский" id="685" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кудымкар" district="Приволжский" id="686" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кунгур" district="Приволжский" id="687" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лысьва" district="Приволжский" id="688" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нытва" district="Приволжский" id="689" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Оса" district="Приволжский" id="690" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Оханск" district="Приволжский" id="691" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Очёр" district="Приволжский" id="692" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пермь" district="Приволжский" id="693" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Соликамск" district="Приволжский" id="694" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усолье" district="Приволжский" id="695" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чайковский" district="Приволжский" id="696" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чердынь" district="Приволжский" id="697" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чёрмоз" district="Приволжский" id="698" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чернушка" district="Приволжский" id="699" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чусовой" district="Приволжский" id="700" region="Пермский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Арсеньев" district="Дальневосточный" id="701" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Артём" district="Дальневосточный" id="702" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Большой Камень" district="Дальневосточный" id="703" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Владивосток" district="Дальневосточный" id="704" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дальнегорск" district="Дальневосточный" id="705" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дальнереченск" district="Дальневосточный" id="706" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лесозаводск" district="Дальневосточный" id="707" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Находка" district="Дальневосточный" id="708" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Партизанск" district="Дальневосточный" id="709" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Спасск-Дальний" district="Дальневосточный" id="710" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Уссурийск" district="Дальневосточный" id="711" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Фокино" district="Дальневосточный" id="712" region="Приморский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Великие Луки" district="Северо-Западный" id="713" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гдов" district="Северо-Западный" id="714" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дно" district="Северо-Западный" id="715" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Невель" district="Северо-Западный" id="716" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новоржев" district="Северо-Западный" id="717" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новосокольники" district="Северо-Западный" id="718" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Опочка" district="Северо-Западный" id="719" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Остров" district="Северо-Западный" id="720" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Печоры" district="Северо-Западный" id="721" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Порхов" district="Северо-Западный" id="722" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Псков" district="Северо-Западный" id="723" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пустошка" district="Северо-Западный" id="724" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пыталово" district="Северо-Западный" id="725" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Себеж" district="Северо-Западный" id="726" region="Псковская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Азов" district="Южный" id="727" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Аксай" district="Южный" id="728" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Батайск" district="Южный" id="729" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белая Калитва" district="Южный" id="730" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волгодонск" district="Южный" id="731" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гуково" district="Южный" id="732" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Донецк" district="Южный" id="733" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зверево" district="Южный" id="734" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зерноград" district="Южный" id="735" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Каменск-Шахтинский" district="Южный" id="736" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Константиновск" district="Южный" id="737" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красный Сулин" district="Южный" id="738" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Миллерово" district="Южный" id="739" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Морозовск" district="Южный" id="740" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новочеркасск" district="Южный" id="741" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новошахтинск" district="Южный" id="742" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пролетарск" district="Южный" id="743" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ростов-на-Дону" district="Южный" id="744" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сальск" district="Южный" id="745" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Семикаракорск" district="Южный" id="746" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Таганрог" district="Южный" id="747" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Цимлянск" district="Южный" id="748" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шахты" district="Южный" id="749" region="Ростовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Касимов" district="Центральный" id="750" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кораблино" district="Центральный" id="751" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Михайлов" district="Центральный" id="752" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новомичуринск" district="Центральный" id="753" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рыбное" district="Центральный" id="754" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ряжск" district="Центральный" id="755" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рязань" district="Центральный" id="756" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сасово" district="Центральный" id="757" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Скопин" district="Центральный" id="758" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Спас-Клепики" district="Центральный" id="759" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Спасск-Рязанский" district="Центральный" id="760" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шацк" district="Центральный" id="761" region="Рязанская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Жигулёвск" district="Приволжский" id="762" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кинель" district="Приволжский" id="763" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нефтегорск" district="Приволжский" id="764" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новокуйбышевск" district="Приволжский" id="765" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Октябрьск" district="Приволжский" id="766" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Отрадный" district="Приволжский" id="767" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Похвистнево" district="Приволжский" id="768" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Самара" district="Приволжский" id="769" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сызрань" district="Приволжский" id="770" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тольятти" district="Приволжский" id="771" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чапаевск" district="Приволжский" id="772" region="Самарская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зеленогорск" district="Северо-Западный" id="773" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Колпино" district="Северо-Западный" id="774" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красное Село" district="Северо-Западный" id="775" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кронштадт" district="Северо-Западный" id="776" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ломоносов" district="Северо-Западный" id="777" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Павловск" district="Северо-Западный" id="778" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Петергоф" district="Северо-Западный" id="779" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пушкин" district="Северо-Западный" id="780" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Санкт-Петербург" district="Северо-Западный" id="781" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сестрорецк" district="Северо-Западный" id="782" region="Санкт-Петербург" />
+    <object class="ru.sfedu.maven1.model.Address" city="Аркадак" district="Приволжский" id="783" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Аткарск" district="Приволжский" id="784" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Балаково" district="Приволжский" id="785" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Балашов" district="Приволжский" id="786" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вольск" district="Приволжский" id="787" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ершов" district="Приволжский" id="788" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Калининск" district="Приволжский" id="789" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красноармейск" district="Приволжский" id="790" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красный Кут" district="Приволжский" id="791" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Маркс" district="Приволжский" id="792" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новоузенск" district="Приволжский" id="793" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Петровск" district="Приволжский" id="794" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пугачёв" district="Приволжский" id="795" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ртищево" district="Приволжский" id="796" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Саратов" district="Приволжский" id="797" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Хвалынск" district="Приволжский" id="798" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шиханы" district="Приволжский" id="799" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Энгельс" district="Приволжский" id="800" region="Саратовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Александровск-Сахалинский" district="Дальневосточный" id="801" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Анива" district="Дальневосточный" id="802" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Долинск" district="Дальневосточный" id="803" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Корсаков" district="Дальневосточный" id="804" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Курильск" district="Дальневосточный" id="805" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Макаров" district="Дальневосточный" id="806" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Невельск" district="Дальневосточный" id="807" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Оха" district="Дальневосточный" id="808" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Поронайск" district="Дальневосточный" id="809" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Северо-Курильск" district="Дальневосточный" id="810" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Томари" district="Дальневосточный" id="811" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Углегорск" district="Дальневосточный" id="812" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Холмск" district="Дальневосточный" id="813" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шахтёрск" district="Дальневосточный" id="814" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Южно-Сахалинск" district="Дальневосточный" id="815" region="Сахалинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Алапаевск" district="Уральский" id="816" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Арамиль" district="Уральский" id="817" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Артёмовский" district="Уральский" id="818" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Асбест" district="Уральский" id="819" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Берёзовский" district="Уральский" id="820" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Богданович" district="Уральский" id="821" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верхний Тагил" district="Уральский" id="822" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верхняя Пышма" district="Уральский" id="823" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верхняя Салда" district="Уральский" id="824" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верхняя Тура" district="Уральский" id="825" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верхотурье" district="Уральский" id="826" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Волчанск" district="Уральский" id="827" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дегтярск" district="Уральский" id="828" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Екатеринбург" district="Уральский" id="829" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заречный" district="Уральский" id="830" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ивдель" district="Уральский" id="831" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ирбит" district="Уральский" id="832" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Каменск-Уральский" district="Уральский" id="833" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Камышлов" district="Уральский" id="834" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Карпинск" district="Уральский" id="835" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Качканар" district="Уральский" id="836" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кировград" district="Уральский" id="837" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Краснотурьинск" district="Уральский" id="838" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красноуральск" district="Уральский" id="839" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красноуфимск" district="Уральский" id="840" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кушва" district="Уральский" id="841" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лесной" district="Уральский" id="842" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Михайловск" district="Уральский" id="843" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Невьянск" district="Уральский" id="844" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижние Серги" district="Уральский" id="845" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижний Тагил" district="Уральский" id="846" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижняя Салда" district="Уральский" id="847" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижняя Тура" district="Уральский" id="848" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новая Ляля" district="Уральский" id="849" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новоуральск" district="Уральский" id="850" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Первоуральск" district="Уральский" id="851" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Полевской" district="Уральский" id="852" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ревда" district="Уральский" id="853" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Реж" district="Уральский" id="854" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Североуральск" district="Уральский" id="855" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Серов" district="Уральский" id="856" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Среднеуральск" district="Уральский" id="857" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сухой Лог" district="Уральский" id="858" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сысерть" district="Уральский" id="859" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тавда" district="Уральский" id="860" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Талица" district="Уральский" id="861" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Туринск" district="Уральский" id="862" region="Свердловская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Алагир" district="Северо-Кавказский" id="863" region="Северная Осетия - Алания" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ардон" district="Северо-Кавказский" id="864" region="Северная Осетия - Алания" />
+    <object class="ru.sfedu.maven1.model.Address" city="Беслан" district="Северо-Кавказский" id="865" region="Северная Осетия - Алания" />
+    <object class="ru.sfedu.maven1.model.Address" city="Владикавказ" district="Северо-Кавказский" id="866" region="Северная Осетия - Алания" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дигора" district="Северо-Кавказский" id="867" region="Северная Осетия - Алания" />
+    <object class="ru.sfedu.maven1.model.Address" city="Моздок" district="Северо-Кавказский" id="868" region="Северная Осетия - Алания" />
+    <object class="ru.sfedu.maven1.model.Address" city="Велиж" district="Центральный" id="869" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вязьма" district="Центральный" id="870" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гагарин" district="Центральный" id="871" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Демидов" district="Центральный" id="872" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Десногорск" district="Центральный" id="873" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Дорогобуж" district="Центральный" id="874" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Духовщина" district="Центральный" id="875" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ельня" district="Центральный" id="876" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Починок" district="Центральный" id="877" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рославль" district="Центральный" id="878" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рудня" district="Центральный" id="879" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сафоново" district="Центральный" id="880" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Смоленск" district="Центральный" id="881" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сычёвка" district="Центральный" id="882" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ярцево" district="Центральный" id="883" region="Смоленская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Благодарный" district="Северо-Кавказский" id="884" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Будённовск" district="Северо-Кавказский" id="885" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Георгиевск" district="Северо-Кавказский" id="886" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ессентуки" district="Северо-Кавказский" id="887" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Железноводск" district="Северо-Кавказский" id="888" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зеленокумск" district="Северо-Кавказский" id="889" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Изобильный" district="Северо-Кавказский" id="890" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ипатово" district="Северо-Кавказский" id="891" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кисловодск" district="Северо-Кавказский" id="892" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лермонтов" district="Северо-Кавказский" id="893" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Минеральные Воды" district="Северо-Кавказский" id="894" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Михайловск" district="Северо-Кавказский" id="895" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Невинномысск" district="Северо-Кавказский" id="896" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нефтекумск" district="Северо-Кавказский" id="897" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новоалександровск" district="Северо-Кавказский" id="898" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новопавловск" district="Северо-Кавказский" id="899" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пятигорск" district="Северо-Кавказский" id="900" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Светлоград" district="Северо-Кавказский" id="901" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ставрополь" district="Северо-Кавказский" id="902" region="Ставропольский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Жердевка" district="Центральный" id="903" region="Тамбовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кирсанов" district="Центральный" id="904" region="Тамбовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Котовск" district="Центральный" id="905" region="Тамбовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мичуринск" district="Центральный" id="906" region="Тамбовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Моршанск" district="Центральный" id="907" region="Тамбовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рассказово" district="Центральный" id="908" region="Тамбовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тамбов" district="Центральный" id="909" region="Тамбовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Уварово" district="Центральный" id="910" region="Тамбовская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Агрыз" district="Приволжский" id="911" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Азнакаево" district="Приволжский" id="912" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Альметьевск" district="Приволжский" id="913" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Арск" district="Приволжский" id="914" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бавлы" district="Приволжский" id="915" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Болгар" district="Приволжский" id="916" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бугульма" district="Приволжский" id="917" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Буинск" district="Приволжский" id="918" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Елабуга" district="Приволжский" id="919" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заинск" district="Приволжский" id="920" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зеленодольск" district="Приволжский" id="921" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Казань" district="Приволжский" id="922" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лаишево" district="Приволжский" id="923" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лениногорск" district="Приволжский" id="924" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мамадыш" district="Приволжский" id="925" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Менделеевск" district="Приволжский" id="926" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мензелинск" district="Приволжский" id="927" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Набережные Челны" district="Приволжский" id="928" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижнекамск" district="Приволжский" id="929" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нурлат" district="Приволжский" id="930" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тетюши" district="Приволжский" id="931" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чистополь" district="Приволжский" id="932" region="Татарстан" />
+    <object class="ru.sfedu.maven1.model.Address" city="Андреаполь" district="Центральный" id="933" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бежецк" district="Центральный" id="934" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белый" district="Центральный" id="935" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бологое" district="Центральный" id="936" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Весьегонск" district="Центральный" id="937" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вышний Волочёк" district="Центральный" id="938" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Западная Двина" district="Центральный" id="939" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Зубцов" district="Центральный" id="940" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Калязин" district="Центральный" id="941" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кашин" district="Центральный" id="942" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кимры" district="Центральный" id="943" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Конаково" district="Центральный" id="944" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Красный Холм" district="Центральный" id="945" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кувшиново" district="Центральный" id="946" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Лихославль" district="Центральный" id="947" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нелидово" district="Центральный" id="948" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Осташков" district="Центральный" id="949" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ржев" district="Центральный" id="950" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Старица" district="Центральный" id="951" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тверь" district="Центральный" id="952" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Торжок" district="Центральный" id="953" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Торопец" district="Центральный" id="954" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Удомля" district="Центральный" id="955" region="Тверская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Асино" district="Сибирский" id="956" region="Томская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кедровый" district="Сибирский" id="957" region="Томская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Колпашево" district="Сибирский" id="958" region="Томская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Северск" district="Сибирский" id="959" region="Томская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Стрежевой" district="Сибирский" id="960" region="Томская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Томск" district="Сибирский" id="961" region="Томская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Алексин" district="Центральный" id="962" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белёв" district="Центральный" id="963" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Богородицк" district="Центральный" id="964" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Болохово" district="Центральный" id="965" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Венёв" district="Центральный" id="966" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Донской" district="Центральный" id="967" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ефремов" district="Центральный" id="968" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кимовск" district="Центральный" id="969" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Киреевск" district="Центральный" id="970" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Липки" district="Центральный" id="971" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новомосковск" district="Центральный" id="972" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Плавск" district="Центральный" id="973" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Суворов" district="Центральный" id="974" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тула" district="Центральный" id="975" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Узловая" district="Центральный" id="976" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чекалин" district="Центральный" id="977" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Щёкино" district="Центральный" id="978" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ясногорск" district="Центральный" id="979" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Советск" district="Центральный" id="980" region="Тульская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ак-Довурак" district="Сибирский" id="981" region="Тыва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кызыл" district="Сибирский" id="982" region="Тыва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Туран" district="Сибирский" id="983" region="Тыва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чадан" district="Сибирский" id="984" region="Тыва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шагонар" district="Сибирский" id="985" region="Тыва" />
+    <object class="ru.sfedu.maven1.model.Address" city="Заводоуковск" district="Уральский" id="986" region="Тюменская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ишим" district="Уральский" id="987" region="Тюменская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тобольск" district="Уральский" id="988" region="Тюменская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тюмень" district="Уральский" id="989" region="Тюменская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ялуторовск" district="Уральский" id="990" region="Тюменская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Воткинск" district="Приволжский" id="991" region="Удмуртия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Глазов" district="Приволжский" id="992" region="Удмуртия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ижевск" district="Приволжский" id="993" region="Удмуртия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Камбарка" district="Приволжский" id="994" region="Удмуртия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Можга" district="Приволжский" id="995" region="Удмуртия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сарапул" district="Приволжский" id="996" region="Удмуртия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Барыш" district="Приволжский" id="997" region="Ульяновская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Димитровград" district="Приволжский" id="998" region="Ульяновская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Инза" district="Приволжский" id="999" region="Ульяновская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новоульяновск" district="Приволжский" id="1000" region="Ульяновская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сенгилей" district="Приволжский" id="1001" region="Ульяновская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ульяновск" district="Приволжский" id="1002" region="Ульяновская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Амурск" district="Дальневосточный" id="1003" region="Хабаровский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бикин" district="Дальневосточный" id="1004" region="Хабаровский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вяземский" district="Дальневосточный" id="1005" region="Хабаровский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Комсомольск-на-Амуре" district="Дальневосточный" id="1006" region="Хабаровский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Николаевск-на-Амуре" district="Дальневосточный" id="1007" region="Хабаровский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Советская Гавань" district="Дальневосточный" id="1008" region="Хабаровский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Хабаровск" district="Дальневосточный" id="1009" region="Хабаровский край" />
+    <object class="ru.sfedu.maven1.model.Address" city="Абаза" district="Сибирский" id="1010" region="Хакасия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Абакан" district="Сибирский" id="1011" region="Хакасия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Саяногорск" district="Сибирский" id="1012" region="Хакасия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сорск" district="Сибирский" id="1013" region="Хакасия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Черногорск" district="Сибирский" id="1014" region="Хакасия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Белоярский" district="Уральский" id="1015" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Когалым" district="Уральский" id="1016" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Лангепас" district="Уральский" id="1017" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Лянтор" district="Уральский" id="1018" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Мегион" district="Уральский" id="1019" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Нефтеюганск" district="Уральский" id="1020" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Нижневартовск" district="Уральский" id="1021" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Нягань" district="Уральский" id="1022" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Покачи" district="Уральский" id="1023" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Пыть-Ях" district="Уральский" id="1024" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Радужный" district="Уральский" id="1025" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Советский" district="Уральский" id="1026" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Сургут" district="Уральский" id="1027" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Урай" district="Уральский" id="1028" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Ханты-Мансийск" district="Уральский" id="1029" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Югорск" district="Уральский" id="1030" region="Ханты-Мансийский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Аша" district="Уральский" id="1031" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Бакал" district="Уральский" id="1032" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верхнеуральск" district="Уральский" id="1033" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верхний Уфалей" district="Уральский" id="1034" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Еманжелинск" district="Уральский" id="1035" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Златоуст" district="Уральский" id="1036" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Карабаш" district="Уральский" id="1037" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Карталы" district="Уральский" id="1038" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Касли" district="Уральский" id="1039" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Катав-Ивановск" district="Уральский" id="1040" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Копейск" district="Уральский" id="1041" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Коркино" district="Уральский" id="1042" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Куса" district="Уральский" id="1043" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Кыштым" district="Уральский" id="1044" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Магнитогорск" district="Уральский" id="1045" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Миасс" district="Уральский" id="1046" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Миньяр" district="Уральский" id="1047" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нязепетровск" district="Уральский" id="1048" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Озёрск" district="Уральский" id="1049" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пласт" district="Уральский" id="1050" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сатка" district="Уральский" id="1051" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Сим" district="Уральский" id="1052" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Снежинск" district="Уральский" id="1053" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Трёхгорный" district="Уральский" id="1054" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Троицк" district="Уральский" id="1055" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Усть-Катав" district="Уральский" id="1056" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чебаркуль" district="Уральский" id="1057" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Челябинск" district="Уральский" id="1058" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Южноуральск" district="Уральский" id="1059" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Юрюзань" district="Уральский" id="1060" region="Челябинская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Аргун" district="Северо-Кавказский" id="1061" region="Чечня" />
+    <object class="ru.sfedu.maven1.model.Address" city="Грозный" district="Северо-Кавказский" id="1062" region="Чечня" />
+    <object class="ru.sfedu.maven1.model.Address" city="Гудермес" district="Северо-Кавказский" id="1063" region="Чечня" />
+    <object class="ru.sfedu.maven1.model.Address" city="Урус-Мартан" district="Северо-Кавказский" id="1064" region="Чечня" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шали" district="Северо-Кавказский" id="1065" region="Чечня" />
+    <object class="ru.sfedu.maven1.model.Address" city="Алатырь" district="Приволжский" id="1066" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Канаш" district="Приволжский" id="1067" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Козловка" district="Приволжский" id="1068" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мариинский Посад" district="Приволжский" id="1069" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Новочебоксарск" district="Приволжский" id="1070" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Цивильск" district="Приволжский" id="1071" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Чебоксары" district="Приволжский" id="1072" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Шумерля" district="Приволжский" id="1073" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ядрин" district="Приволжский" id="1074" region="Чувашия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Анадырь" district="Дальневосточный" id="1075" region="Чукотский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Билибино" district="Дальневосточный" id="1076" region="Чукотский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Певек" district="Дальневосточный" id="1077" region="Чукотский авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Алдан" district="Дальневосточный" id="1078" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Верхоянск" district="Дальневосточный" id="1079" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Вилюйск" district="Дальневосточный" id="1080" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ленск" district="Дальневосточный" id="1081" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мирный" district="Дальневосточный" id="1082" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нерюнгри" district="Дальневосточный" id="1083" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Нюрба" district="Дальневосточный" id="1084" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Олёкминск" district="Дальневосточный" id="1085" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Покровск" district="Дальневосточный" id="1086" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Среднеколымск" district="Дальневосточный" id="1087" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Томмот" district="Дальневосточный" id="1088" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Удачный" district="Дальневосточный" id="1089" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Якутск" district="Дальневосточный" id="1090" region="Якутия" />
+    <object class="ru.sfedu.maven1.model.Address" city="Губкинский" district="Уральский" id="1091" region="Ямало-Ненецкий авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Лабытнанги" district="Уральский" id="1092" region="Ямало-Ненецкий авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Муравленко" district="Уральский" id="1093" region="Ямало-Ненецкий авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Надым" district="Уральский" id="1094" region="Ямало-Ненецкий авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Новый Уренгой" district="Уральский" id="1095" region="Ямало-Ненецкий авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Ноябрьск" district="Уральский" id="1096" region="Ямало-Ненецкий авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Салехард" district="Уральский" id="1097" region="Ямало-Ненецкий авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Тарко-Сале" district="Уральский" id="1098" region="Ямало-Ненецкий авт. окр." />
+    <object class="ru.sfedu.maven1.model.Address" city="Гаврилов-Ям" district="Центральный" id="1099" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Данилов" district="Центральный" id="1100" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Любим" district="Центральный" id="1101" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Мышкин" district="Центральный" id="1102" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Переславль-Залесский" district="Центральный" id="1103" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Пошехонье" district="Центральный" id="1104" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ростов" district="Центральный" id="1105" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Рыбинск" district="Центральный" id="1106" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Тутаев" district="Центральный" id="1107" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Углич" district="Центральный" id="1108" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Ярославль" district="Центральный" id="1109" region="Ярославская область" />
+    <object class="ru.sfedu.maven1.model.Address" city="Адыгейск" district="Южный" id="1" region="Адыгея" />
+</List>

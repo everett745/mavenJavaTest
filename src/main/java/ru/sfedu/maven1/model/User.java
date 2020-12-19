@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 import ru.sfedu.maven1.dataConvertors.AddressConvertor;
 import ru.sfedu.maven1.dataConvertors.QueueConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
@@ -12,9 +13,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-/**
- * Class User
- */
+@Root(name = "User")
 public class User implements Serializable {
 
   @CsvCustomBindByName(converter = UUIDConvertor.class)
@@ -50,13 +49,13 @@ public class User implements Serializable {
     return id;
   }
 
-  @Element(name = "id")
-  public void setIdXml (String newVar) {
+  @Attribute(name = "id")
+  private void setIdXml (String newVar) {
     id = UUID.fromString(newVar);
   }
 
-  @Element(name = "id")
-  public String getIdXml () {
+  @Attribute(name = "id")
+  private String getIdXml () {
     return id.toString();
   }
 

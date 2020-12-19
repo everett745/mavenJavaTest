@@ -1,16 +1,16 @@
 package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.CsvCustomBindByName;
-import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
 import ru.sfedu.maven1.dataConvertors.UUIDListConvertor;
 import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-/**
- * Class Queue
- */
+@Root(name = "Queue")
 public class Queue {
 
   @CsvCustomBindByName(converter = UUIDConvertor.class)
@@ -37,12 +37,12 @@ public class Queue {
     return id;
   }
 
-  @Element(name = "id")
+  @Attribute(name = "id")
   public void setIdXml (String newVar) {
     id = UUID.fromString(newVar);
   }
 
-  @Element(name = "id")
+  @Attribute(name = "id")
   public String getIdXml () {
     return id.toString();
   }
@@ -51,7 +51,6 @@ public class Queue {
    * Set the value of items
    * @param newVar the new value of items
    */
-  @ElementList(name = "items")
   public void setItems (List<UUID> newVar) {
     items = newVar;
   }
@@ -60,9 +59,18 @@ public class Queue {
    * Get the value of items
    * @return the value of items
    */
-  @ElementList(name = "items")
   public List<UUID> getItems () {
     return items;
+  }
+
+  @ElementList(name = "items")
+  private void setItemsXml (List<String> newVar) {
+    items = newVar.stream().map(UUID::fromString).collect(Collectors.toList());
+  }
+
+  @ElementList(name = "items")
+  private List<String> getItemsXml () {
+    return items.stream().map(UUID::toString).collect(Collectors.toList());
   }
 
   @Override

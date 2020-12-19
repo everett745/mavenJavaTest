@@ -3,7 +3,6 @@ package ru.sfedu.maven1.model;
 import com.opencsv.bean.*;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
 import ru.sfedu.maven1.Constants;
 import ru.sfedu.maven1.dataConvertors.AddressConvertor;
 import ru.sfedu.maven1.dataConvertors.QueueConvertor;
@@ -76,13 +75,13 @@ public class Deal implements Serializable {
     return id;
   }
 
-  @Element(name = "id")
-  public void setIdXml (String newVar) {
+  @Attribute(name = "id")
+  private void setIdXml (String newVar) {
     id = UUID.fromString(newVar);
   }
 
-  @Element(name = "id")
-  public String getIdXml () {
+  @Attribute(name = "id")
+  private String getIdXml () {
     return id.toString();
   }
 
@@ -162,7 +161,6 @@ public class Deal implements Serializable {
    * Set the value of owner
    * @param newVar the new value of owner
    */
-  @Element(name = "owner")
   public void setOwner (UUID newVar) {
     owner = newVar;
   }
@@ -171,16 +169,24 @@ public class Deal implements Serializable {
    * Get the value of owner
    * @return the value of owner
    */
-  @Element(name = "owner")
   public UUID getOwner () {
     return owner;
+  }
+
+  @Attribute(name = "owner")
+  public void setOwnerXml (String newVar) {
+    owner = UUID.fromString(newVar);
+  }
+
+  @Attribute(name = "owner")
+  public String getOwnerXml () {
+    return owner.toString();
   }
 
   /**
    * Set the value of performer
    * @param newVar the new value of performer
    */
-  @Element(name = "performer", required = false)
   public void setPerformer (UUID newVar) {
     performer = newVar;
   }
@@ -189,9 +195,24 @@ public class Deal implements Serializable {
    * Get the value of performer
    * @return the value of performer
    */
-  @Element(name = "performer", required = false)
   public UUID getPerformer () {
     return performer;
+  }
+
+  @Attribute(name = "performer")
+  public void setPerformerXml (String newVar) {
+    if (!newVar.equals("")) {
+      performer = UUID.fromString(newVar);
+    } else {
+      performer = null;
+    }
+  }
+
+  @Attribute(name = "performer")
+  public String getPerformerXml () {
+    if (performer != null) {
+      return performer.toString();
+    } else return "";
   }
 
   /**
@@ -228,6 +249,24 @@ public class Deal implements Serializable {
   @Attribute(name = "object")
   public ObjectTypes getObject () {
     return object;
+  }
+
+  /**
+   * Get the value of dealModel
+   * @return the value of dealModel
+   */
+  @Attribute(name = "model")
+  public DealModel getDealModel() {
+    return dealModel;
+  }
+
+  /**
+   * Set the value of dealModel
+   * @param dealModel the new value of DealModel
+   */
+  @Attribute(name = "model")
+  public void setDealModel(DealModel dealModel) {
+    this.dealModel = dealModel;
   }
 
   /**
@@ -313,17 +352,9 @@ public class Deal implements Serializable {
             ", performer=" + performer +
             ", dealType=" + dealType +
             ", object=" + object +
+            ", model=" + dealModel +
             ", created_at=" + created_at +
             ", price='" + price + '\'' +
             '}';
   }
-
-  public DealModel getDealModel() {
-    return dealModel;
-  }
-
-  public void setDealModel(DealModel dealModel) {
-    this.dealModel = dealModel;
-  }
-
 }

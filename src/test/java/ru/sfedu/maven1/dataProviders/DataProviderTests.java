@@ -7,12 +7,13 @@ import ru.sfedu.maven1.enums.DealStatus;
 import ru.sfedu.maven1.enums.RequestStatuses;
 import ru.sfedu.maven1.model.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
 public class DataProviderTests {
+  private static final Logger log = LogManager.getLogger(DataProviderTests.class);
   private static DataProvider dataProvider;
-  private static final Logger log = LogManager.getLogger(DataProviderCSVTest.class);
   private static User savedUser;
   private static User savedUser1;
   private static Deal savedDeal;
@@ -67,13 +68,13 @@ public class DataProviderTests {
 
   private static PublicDeal getTestPublicDeal() {
     PublicDeal deal = new PublicDeal();
-    deal.setName(TestsConstants.TEST_DEAL_NAME);
-    deal.setDescription(TestsConstants.TEST_DEAL_NAME);
+    deal.setName(TestsConstants.TEST_PUBLIC_DEAL_NAME);
+    deal.setDescription(TestsConstants.TEST_PUBLIC_DEAL_DESCRIPTION);
     deal.setAddress(getTestAddress());
     deal.setCurrentStatus(TestsConstants.TEST_PUBLIC_DEAL_STATUS);
-    deal.setDealType(TestsConstants.TEST_DEAL_TYPE);
+    deal.setDealType(TestsConstants.TEST_PUBLIC_DEAL_TYPE);
     deal.setObject(TestsConstants.TEST_PUBLIC_DEAL_OBJECT);
-    deal.setPrice(TestsConstants.TEST_DEAL_PRICE);
+    deal.setPrice(TestsConstants.TEST_PUBLIC_DEAL_PRICE);
     return deal;
   }
 
@@ -83,6 +84,7 @@ public class DataProviderTests {
     System.setErr(System.out);
 
     dataProvider.deleteAll();
+    dataProvider.initDB();
 
     User user = getTestUserA();
     dataProvider.createUser(
@@ -96,10 +98,10 @@ public class DataProviderTests {
             user1.getPhone(),
             user1.getAddress());
 
-     savedUser = dataProvider.getUsers().get().get(0);
-     // savedUser1 = dataProvider.getUsers().get().get(1);
+   savedUser = dataProvider.getUsers().get().get(0);
+   savedUser1 = dataProvider.getUsers().get().get(1);
 
-    /*Deal deal = getTestDeal();
+    Deal deal = getTestDeal();
     dataProvider.createDeal(
             savedUser.getId(),
             deal.getName(),
@@ -121,7 +123,7 @@ public class DataProviderTests {
             publicDeal.getPrice());
 
     savedDeal = dataProvider.getMyDeals(savedUser.getId()).get().get(0);
-    savedPublicDeal = dataProvider.getMyDeals(savedUser1.getId()).get().get(0);*/
+    savedPublicDeal = dataProvider.getMyDeals(savedUser1.getId()).get().get(0);
   }
 
   void preTest() {}
@@ -205,6 +207,7 @@ public class DataProviderTests {
 
   void getUsersIncorrect() {
     dataProvider.deleteAll();
+    Assertions.assertNotEquals(new ArrayList<>(), dataProvider.getUsers().get());
     log.debug(dataProvider.getUsers());
   }
 
@@ -213,24 +216,28 @@ public class DataProviderTests {
   }
 
   void getAddressCorrect() {
-    Assertions.assertTrue(dataProvider.getAddress(1).isPresent());
+    Optional<Address> address = dataProvider.getAddress(1);
+    Assertions.assertTrue(address.isPresent());
+    log.debug(address);
   }
 
   void getAddressIncorrect() {
-    Assertions.assertTrue(dataProvider.getAddress(99999).isPresent());
+    Optional<Address> address = dataProvider.getAddress(99999);
+    Assertions.assertTrue(address.isPresent());
+    log.debug(address);
   }
 
   void getAddressByNameCorrect() {
-    Assertions.assertTrue(dataProvider.getAddress("Моск").isPresent());
+    Optional<Address> address = dataProvider.getAddress("Моск");
+    Assertions.assertTrue(address.isPresent());
+    log.debug(address);
   }
 
   void getAddressByNameIncorrect() {
-    Assertions.assertTrue(dataProvider.getAddress("[]asd").isPresent());
+    Optional<Address> address = dataProvider.getAddress("[]asd");
+    Assertions.assertTrue(address.isPresent());
+    log.debug(address);
   }
-
-  void getQueueCorrect() { }
-
-  void getQueueIncorrect() { }
 
   void createDealCorrect() {
     Deal deal = getTestDeal();
@@ -376,6 +383,7 @@ public class DataProviderTests {
   void getDealQueueCorrect(){
     Queue queue = dataProvider.getDealQueue(savedDeal.getId()).get();
     Assertions.assertEquals(queue.getId(), savedDeal.getRequests().getId());
+    log.debug(queue);
   }
 
   void getDealQueueIncorrect(){
@@ -384,7 +392,8 @@ public class DataProviderTests {
   }
 
   void manageDealRequestQueueCorrect(){
-    dataProvider.addDealRequest(savedDeal.getId(), savedUser.getId());
+    dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
+
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
             dataProvider.manageDealRequest(savedUser.getId(),savedDeal.getId(),  true));
@@ -398,7 +407,7 @@ public class DataProviderTests {
   }
 
   void acceptDealRequestCorrect() {
-    dataProvider.addDealRequest(savedDeal.getId(), savedUser.getId());
+    dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
             dataProvider.acceptDealRequest(savedUser.getId(),savedDeal.getId()));
@@ -411,14 +420,14 @@ public class DataProviderTests {
   }
 
   void refuseDealRequestCorrect() {
-    dataProvider.addDealRequest(savedDeal.getId(), savedUser.getId());
+    dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.refuseDealRequest(savedUser.getId(),savedDeal.getId()));
+            dataProvider.refuseDealRequest(savedUser.getId(), savedDeal.getId()));
   }
 
   void refuseDealRequestIncorrect() {
-    dataProvider.addDealRequest(savedDeal.getId(), savedUser.getId());
+    dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
             dataProvider.refuseDealRequest(UUID.randomUUID(),savedDeal.getId()));
@@ -443,7 +452,7 @@ public class DataProviderTests {
     Assertions.assertEquals(queue.getId(), savedUser.getQueue().getId());
   }
 
-  void manageDealPerformerQueueCorrect(){
+  void manageDealPerformerCorrect(){
     dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
