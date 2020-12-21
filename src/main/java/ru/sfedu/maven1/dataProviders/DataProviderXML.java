@@ -58,7 +58,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    public <T> List<T> getFromXML(Class<T> tClass) throws IOException {
+    private <T> List<T> getFromXML(Class<T> tClass) throws IOException {
         Reader reader = new FileReader(getFile(tClass));
         Persister serializer = new Persister();
         WrapperXML<T> xmlList = new WrapperXML<>();
@@ -94,31 +94,6 @@ public class DataProviderXML implements DataProvider {
         return file;
     }
 
-
-    @Override
-    public void deleteAll() {
-        List<Class> classList = new ArrayList<>();
-        classList.add(Deal.class);
-        classList.add(PublicDeal.class);
-        classList.add(DealHistory.class);
-        classList.add(Queue.class);
-        classList.add(User.class);
-        classList.add(Company.class);
-        classList.forEach(this::deleteFile);
-    }
-
-    @Override
-    public void initDB() {
-        try {
-            insertIntoXML(Deal.class, new ArrayList<>(), true);
-            insertIntoXML(PublicDeal.class, new ArrayList<>(), true);
-            insertIntoXML(User.class, new ArrayList<>(), true);
-            insertIntoXML(Company.class, new ArrayList<>(), true);
-        } catch (IOException e) {
-            log.error(e);
-        }
-    }
-
     @Override
     public RequestStatuses createUser(@NotNull String name, @NotNull String phone, @NotNull Address address) {
         Optional<User> userOptional = createUserOptional(name, phone, address);
@@ -141,7 +116,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public Optional<User> getUser(@NotNull UUID userId) {
+    public Optional<User> getUser(@NotNull String userId) {
         Optional<User> optionalUser = getUserOptional(userId);
         if (optionalUser.isPresent()) {
             return optionalUser;
@@ -162,7 +137,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses deleteUser(@NotNull UUID userId) {
+    public RequestStatuses deleteUser(@NotNull String userId) {
         Optional<List<User>> userListOptional = getUsers();
         Optional<User> optionalUser = getUser(userId);
         if (userListOptional.isPresent() && optionalUser.isPresent()) {
@@ -194,7 +169,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public Optional<Address> getAddress(@NotNull long id) {
+    public Optional<Address> getAddress(long id) {
         Optional<List<Address>> optionalAddresses = getAddresses();
         if (optionalAddresses.isPresent()) {
             List<Address> addresses = optionalAddresses.get();
@@ -223,11 +198,18 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses createDeal(@NotNull UUID userId, @NotNull String name, @NotNull String description, @NotNull Address address, @NotNull DealTypes dealType, @NotNull ObjectTypes objectType, @NotNull String price) {
+    public RequestStatuses createDeal(@NotNull String userId,
+                                      @NotNull String name,
+                                      @NotNull String description,
+                                      @NotNull Address address,
+                                      @NotNull DealTypes dealType,
+                                      @NotNull ObjectTypes objectType,
+                                      @NotNull String price
+    ) {
         try {
             Deal deal = new Deal();
 
-            deal.setId(UUID.randomUUID());
+            deal.setId(UUID.randomUUID().toString());
             deal.setName(name);
             deal.setDescription(description);
             deal.setAddress(address);
@@ -248,10 +230,18 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses createDeal(@NotNull UUID userId, @NotNull String name, @NotNull String description, @NotNull Address address, @NotNull DealStatus currentStatus, @NotNull DealTypes dealType, @NotNull ObjectTypes objectType, @NotNull String price) {
+    public RequestStatuses createDeal(@NotNull String userId,
+                                      @NotNull String name,
+                                      @NotNull String description,
+                                      @NotNull Address address,
+                                      @NotNull DealStatus currentStatus,
+                                      @NotNull DealTypes dealType,
+                                      @NotNull ObjectTypes objectType,
+                                      @NotNull String price
+    ) {
         try {
             PublicDeal publicDeal = new PublicDeal();
-            UUID uuid = UUID.randomUUID();
+            String uuid = UUID.randomUUID().toString();
             Queue queue = new Queue();
 
             publicDeal.setId(uuid);
@@ -277,7 +267,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public Optional<List<PublicDeal>> getGlobalDeals(@NotNull UUID userId) {
+    public Optional<List<PublicDeal>> getGlobalDeals(@NotNull String userId) {
         Optional<List<PublicDeal>> optionalDeals = getPublicDealsList();
         if (optionalDeals.isPresent()) {
             List<PublicDeal> deals = optionalDeals.get();
@@ -292,7 +282,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public Optional<List<Deal>> getMyDeals(@NotNull UUID userId) {
+    public Optional<List<Deal>> getMyDeals(@NotNull String userId) {
         Optional<List<Deal>> optionalDeals = getAllDeals();
         Optional<User> checkUser = getUser(userId);
         if (optionalDeals.isPresent() && checkUser.isPresent()) {
@@ -307,7 +297,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public Optional<Deal> manageDeal(@NotNull UUID id) {
+    public Optional<Deal> manageDeal(@NotNull String id) {
         Optional<Deal> deal = getDealById(id);
         if (deal.isPresent()) {
             return deal;
@@ -318,7 +308,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses removeDeal(@NotNull UUID id) {
+    public RequestStatuses removeDeal(@NotNull String id) {
         Optional<Deal> optionalDeal = getDealById(id);
         if (optionalDeal.isPresent()) {
             Deal deal = optionalDeal.get();
@@ -352,7 +342,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses setStatus(@NotNull UUID id, @NotNull DealStatus newStatus) {
+    public RequestStatuses setStatus(@NotNull String id, @NotNull DealStatus newStatus) {
         Optional<Deal> dealOptional = getDealById(id);
         if (dealOptional.isPresent()) {
             try {
@@ -377,14 +367,14 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses addDealRequest(@NotNull UUID userId, @NotNull UUID id) {
+    public RequestStatuses addDealRequest(@NotNull String userId, @NotNull String id) {
         Optional<Deal> dealOptional = getDealById(id);
         Optional<User> optionalUser = getUser(userId);
 
         if (dealOptional.isPresent() && optionalUser.isPresent()) {
             Deal deal = dealOptional.get();
             Queue requests = deal.getRequests();
-            List<UUID> requestsList = requests.getItems();
+            List<String> requestsList = requests.getItems();
 
             if (requestsList.contains(userId)) {
                 log.error(Constants.ALREADY_IN_QUEUE + userId);
@@ -405,7 +395,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public Optional<Queue> getDealQueue(@NotNull UUID id) {
+    public Optional<Queue> getDealQueue(@NotNull String id) {
         Optional<Deal> dealOptional = getDealById(id);
         if (dealOptional.isPresent()) {
             return Optional.of(dealOptional.get().getRequests());
@@ -416,7 +406,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses manageDealRequest(@NotNull UUID userId, @NotNull UUID id, boolean accept) {
+    public RequestStatuses manageDealRequest(@NotNull String userId, @NotNull String id, boolean accept) {
         Optional<Deal> dealOptional = getDealById(id);
         if (dealOptional.isPresent()) {
             if (accept) {
@@ -431,7 +421,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses acceptDealRequest(@NotNull UUID userId, @NotNull UUID id) {
+    public RequestStatuses acceptDealRequest(@NotNull String userId, @NotNull String id) {
         Optional<Deal> dealOptional = getDealById(id);
         if (dealOptional.isPresent()) {
             Deal deal = dealOptional.get();
@@ -455,14 +445,14 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses refuseDealRequest(@NotNull UUID userId, @NotNull UUID id) {
+    public RequestStatuses refuseDealRequest(@NotNull String userId, @NotNull String id) {
         Optional<Deal> dealOptional = getDealById(id);
         if (dealOptional.isPresent()) {
             Deal deal = dealOptional.get();
             Queue requests = deal.getRequests();
 
             if (requests.getItems().contains(userId)) {
-                List<UUID> requestsList = requests.getItems()
+                List<String> requestsList = requests.getItems()
                         .stream().filter(requestId -> !requestId.equals(userId))
                         .collect(Collectors.toList());
 
@@ -481,13 +471,13 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses addDealPerformer(@NotNull UUID userId, @NotNull UUID id) {
+    public RequestStatuses addDealPerformer(@NotNull String userId, @NotNull String id) {
         Optional<User> userOptional = getUser(userId);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             Queue queue = user.getQueue();
 
-            List<UUID> requestsList = queue.getItems();
+            List<String> requestsList = queue.getItems();
 
             if (requestsList.contains(id)) {
                 log.info(Constants.ALREADY_IN_QUEUE + id);
@@ -506,7 +496,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public Optional<Queue> getMyQueue(@NotNull UUID userId) {
+    public Optional<Queue> getMyQueue(@NotNull String userId) {
         Optional<User> userOptional = getUser(userId);
         if (userOptional.isPresent()) {
             return Optional.of(userOptional.get().getQueue());
@@ -517,7 +507,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses manageDealPerform(@NotNull UUID userId, @NotNull UUID id, boolean accept) {
+    public RequestStatuses manageDealPerform(@NotNull String userId, @NotNull String id, boolean accept) {
         Optional<User> userOptional = getUser(userId);
         if (userOptional.isPresent()) {
             if (accept) {
@@ -531,7 +521,7 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses acceptDealPerform(@NotNull UUID userId, @NotNull UUID id) {
+    public RequestStatuses acceptDealPerform(@NotNull String userId, @NotNull String id) {
         Optional<User> userOptional = getUser(userId);
         Optional<Deal> dealOptional = getDealById(id);
         if (userOptional.isPresent() && dealOptional.isPresent()) {
@@ -541,7 +531,7 @@ public class DataProviderXML implements DataProvider {
 
             if (deal.getPerformer() == null) {
                 if (queue.getItems().contains(id)) {
-                    List<UUID> requestsList = queue.getItems()
+                    List<String> requestsList = queue.getItems()
                             .stream().filter(requestId -> !requestId.equals(id))
                             .collect(Collectors.toList());
 
@@ -568,13 +558,13 @@ public class DataProviderXML implements DataProvider {
     }
 
     @Override
-    public RequestStatuses refuseDealPerform(@NotNull UUID userId, @NotNull UUID id) {
+    public RequestStatuses refuseDealPerform(@NotNull String userId, @NotNull String id) {
         Optional<User> userOptional = getUser(userId);
         if (userOptional.isPresent() && userOptional.get().getQueue().getItems().contains(id)) {
             User user = userOptional.get();
             Queue queue = user.getQueue();
 
-            List<UUID> requestsList = queue.getItems()
+            List<String> requestsList = queue.getItems()
                     .stream().filter(requestId -> !requestId.equals(id))
                     .collect(Collectors.toList());
 
@@ -588,12 +578,36 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
+    @Override
+    public void clearDB() {
+        List<Class> classList = new ArrayList<>();
+        classList.add(Deal.class);
+        classList.add(PublicDeal.class);
+        classList.add(DealHistory.class);
+        classList.add(Queue.class);
+        classList.add(User.class);
+        classList.add(Company.class);
+        classList.forEach(this::deleteFile);
+    }
+
+    @Override
+    public void initDB() {
+        try {
+            insertIntoXML(Deal.class, new ArrayList<>(), true);
+            insertIntoXML(PublicDeal.class, new ArrayList<>(), true);
+            insertIntoXML(User.class, new ArrayList<>(), true);
+            insertIntoXML(Company.class, new ArrayList<>(), true);
+        } catch (IOException e) {
+            log.error(e);
+        }
+    }
+
     private Optional<User> createUserOptional(
             @NotNull String name,
             @NotNull String phone,
             @NotNull Address address) {
         try {
-            UUID uuid = UUID.randomUUID();
+            String uuid = UUID.randomUUID().toString();
             Queue queue = new Queue();
             Optional<Company> company = createCompany();
             if (company.isPresent()) {
@@ -617,7 +631,7 @@ public class DataProviderXML implements DataProvider {
 
     private Optional<Company> createCompany() {
         Company company = new Company();
-        UUID uuid = UUID.randomUUID();
+        String uuid = UUID.randomUUID().toString();
         company.setId(uuid);
         try {
             insertIntoXML(company);
@@ -637,7 +651,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private Optional<Company> getCompany(UUID id){
+    private Optional<Company> getCompany(String id){
         Optional<List<Company>> optionalCompanies = getCompanies();
         if (optionalCompanies.isPresent()) {
             List<Company> companies = optionalCompanies.get();
@@ -649,7 +663,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private void addUserToCompany(UUID id, User user) {
+    private void addUserToCompany(String id, User user) {
         Optional<Company> companyOptional = getCompany(id);
         if (companyOptional.isPresent()) {
             Company company = companyOptional.get();
@@ -685,7 +699,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private void deleteCompany(UUID id) {
+    private void deleteCompany(String id) {
         Optional<List<Company>> optionalCompanies = getCompanies();
         Optional<Company> optionalCompany = getCompany(id);
         if (optionalCompanies.isPresent() && optionalCompany.isPresent()) {
@@ -711,7 +725,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private Optional<User> getUserOptional(UUID userId) {
+    private Optional<User> getUserOptional(String userId) {
         Optional<List<User>> userList = getUsers();
         if (userList.isPresent()) {
             List<User> users = userList.get();
@@ -751,7 +765,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private RequestStatuses deleteUserFromCompany(UUID userId) {
+    private RequestStatuses deleteUserFromCompany(String userId) {
         Optional<Company> companyOptional = getUserCompany(userId);
         if (companyOptional.isPresent()) {
             Company company = companyOptional.get();
@@ -766,7 +780,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private Optional<Company> getUserCompany(UUID userId) {
+    private Optional<Company> getUserCompany(String userId) {
         Optional<List<Company>> optionalCompanies = getCompanies();
         if (optionalCompanies.isPresent()) {
             List<Company> companies = optionalCompanies.get();
@@ -784,7 +798,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private void addDealToCompany(UUID userId, Deal deal) {
+    private void addDealToCompany(String userId, Deal deal) {
         Optional<Company> companyOptional = getUserCompany(userId);
         if (companyOptional.isPresent()) {
             Company company = companyOptional.get();
@@ -795,7 +809,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private List<DealHistory> createFirstDealHistory(UUID parentId, DealStatus currentStatus) {
+    private List<DealHistory> createFirstDealHistory(String parentId, DealStatus currentStatus) {
         List<DealHistory> dealHistoryList = new ArrayList<>();
         DealHistory dealHistory = new DealHistory();
         dealHistory.setId(parentId);
@@ -834,7 +848,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private Optional<Deal> getDealById(UUID id) {
+    private Optional<Deal> getDealById(String id) {
         Optional<List<Deal>> deals = getAllDeals();
         if (deals.isPresent()) {
             List<Deal> dealList = deals.get();
@@ -970,7 +984,7 @@ public class DataProviderXML implements DataProvider {
         }
     }
 
-    private boolean userIsPerformer(@NotNull UUID userId, @NotNull Deal deal) {
+    private boolean userIsPerformer(@NotNull String userId, @NotNull Deal deal) {
         try {
             return deal.getPerformer().equals(userId);
         } catch (NullPointerException e) {

@@ -12,7 +12,7 @@ public class DataProviderXMLTest extends DataProviderTests {
   }
 
   @Test
-  void preTest() { }
+  void testBeforeAll() { }
 
   @Test
   void createUserCorrect() {

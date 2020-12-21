@@ -7,7 +7,6 @@ import ru.sfedu.maven1.enums.ObjectTypes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class TestsConstants {
   /* ADDRESS */
@@ -17,17 +16,17 @@ public class TestsConstants {
   public static final String TEST_ADDRESS_DISTRICT = "Южный";
 
   /* USER */
-  public static final UUID TEST_USER_1_ID = UUID.fromString("5fe6d630-61fd-42a0-ac07-82b9ad68ced5");
+  public static final String TEST_USER_1_ID = "5fe6d630-61fd-42a0-ac07-82b9ad68ced5";
   public static final String TEST_USER_1_NAME = "Иван Тест";
   public static final String TEST_USER_1_PHONE = "8922222222";
 
-  public static final UUID TEST_USER_2_ID = UUID.fromString("79356e63-da22-4048-978f-aae08265063a");
+  public static final String TEST_USER_2_ID = "79356e63-da22-4048-978f-aae08265063a";
   public static final String TEST_USER_2_NAME = "Петр Тест";
   public static final String TEST_USER_2_PHONE = "0000000";
 
   /* USER_QUEUE */
-  public static final UUID TEST_USER_QUEUE_ID = UUID.fromString("5fe6d630-61fd-42a0-ac07-82b9ad68ced5");
-  public static final List<UUID> TEST_USER_QUEUE_ITEMS = new ArrayList<UUID>();
+  public static final String TEST_USER_QUEUE_ID = "5fe6d630-61fd-42a0-ac07-82b9ad68ced5";
+  public static final List<String> TEST_USER_QUEUE_ITEMS = new ArrayList<String>();
 
 
   /*DEAL*/
@@ -45,8 +44,8 @@ public class TestsConstants {
   public static final String TEST_PUBLIC_DEAL_PRICE = "123 000";
 
   /* DEAL_QUEUE */
-  public static final UUID TEST_DEAL_QUEUE_ID = UUID.fromString("5fe6d630-61fd-42a0-ac07-82b9ad68ced5");
-  public static final UUID[] TEST_DEAL_QUEUE_ITEMS = new UUID[] {};
+  public static final String TEST_DEAL_QUEUE_ID = "5fe6d630-61fd-42a0-ac07-82b9ad68ced5";
+  public static final String[] TEST_DEAL_QUEUE_ITEMS = new String[] {};
 
 
 

@@ -13,7 +13,7 @@ public class DataProviderCSVTest extends DataProviderTests {
   }
 
   @Test
-  void preTest() { }
+  void testBeforeAll() { }
 
   @Test
   void createUserCorrect() {

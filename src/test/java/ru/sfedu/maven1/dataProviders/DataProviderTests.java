@@ -83,7 +83,7 @@ public class DataProviderTests {
     System.err.close();
     System.setErr(System.out);
 
-    dataProvider.deleteAll();
+    dataProvider.clearDB();
     dataProvider.initDB();
 
     User user = getTestUserA();
@@ -154,10 +154,11 @@ public class DataProviderTests {
     Assertions.assertEquals(savedUser.getName(), user.get().getName());
     Assertions.assertEquals(savedUser.getPhone(), user.get().getPhone());
     Assertions.assertEquals(savedUser.getAddress(), user.get().getAddress());
+    log.info(user.get());
   }
 
   void getUserByIdIncorrect() {
-    Optional<User> user = dataProvider.getUser(UUID.randomUUID());
+    Optional<User> user = dataProvider.getUser(UUID.randomUUID().toString());
     Assertions.assertTrue(user.isPresent());
   }
 
@@ -178,7 +179,7 @@ public class DataProviderTests {
 
   void editUserIncorrect() {
     User user = savedUser;
-    user.setId(UUID.randomUUID());
+    user.setId(UUID.randomUUID().toString());
     user.setName(TestsConstants.TEST_USER_2_NAME);
     user.setPhone(TestsConstants.TEST_USER_2_PHONE);
 
@@ -198,7 +199,7 @@ public class DataProviderTests {
   void deleteUserIncorrect() {
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.deleteUser(UUID.randomUUID()));
+            dataProvider.deleteUser(UUID.randomUUID().toString()));
   }
 
   void getUsersCorrect() {
@@ -206,7 +207,7 @@ public class DataProviderTests {
   }
 
   void getUsersIncorrect() {
-    dataProvider.deleteAll();
+    dataProvider.clearDB();
     Assertions.assertNotEquals(new ArrayList<>(), dataProvider.getUsers().get());
     log.debug(dataProvider.getUsers());
   }
@@ -259,7 +260,7 @@ public class DataProviderTests {
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
             dataProvider.createDeal(
-                    UUID.randomUUID(),
+                    UUID.randomUUID().toString(),
                     deal.getName(),
                     deal.getDescription(),
                     null,
@@ -290,7 +291,7 @@ public class DataProviderTests {
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
             dataProvider.createDeal(
-                    UUID.randomUUID(),
+                    UUID.randomUUID().toString(),
                     publicDeal.getName(),
                     publicDeal.getDescription(),
                     null,
@@ -307,7 +308,7 @@ public class DataProviderTests {
   }
 
   void getGlobalDealsIncorrect() {
-    dataProvider.deleteAll();
+    dataProvider.clearDB();
     Assertions.assertTrue(dataProvider.getGlobalDeals(savedUser.getId()).isPresent());
   }
 
@@ -317,8 +318,8 @@ public class DataProviderTests {
   }
 
   void getMyDealsIncorrect() {
-    Assertions.assertTrue(dataProvider.getMyDeals(UUID.randomUUID()).isPresent());
-    log.info(dataProvider.getMyDeals(UUID.randomUUID()).get());
+    Assertions.assertTrue(dataProvider.getMyDeals(UUID.randomUUID().toString()).isPresent());
+    log.info(dataProvider.getMyDeals(UUID.randomUUID().toString()).get());
   }
 
   void manageDealCorrect() {
@@ -327,7 +328,7 @@ public class DataProviderTests {
   }
 
   void manageDealIncorrect() {
-    Assertions.assertTrue(dataProvider.manageDeal(UUID.randomUUID()).isPresent());
+    Assertions.assertTrue(dataProvider.manageDeal(UUID.randomUUID().toString()).isPresent());
     log.info(dataProvider.manageDeal(savedDeal.getId()).get());
   }
 
@@ -336,7 +337,7 @@ public class DataProviderTests {
   }
 
   void removeDealIncorrect() {
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(UUID.randomUUID()));
+    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(UUID.randomUUID().toString()));
   }
 
   void updateDealCorrect() {
@@ -356,7 +357,7 @@ public class DataProviderTests {
   }
 
   void updateDealIncorrect() {
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(UUID.randomUUID()));
+    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(UUID.randomUUID().toString()));
   }
 
   void setStatusCorrect(){
@@ -387,7 +388,7 @@ public class DataProviderTests {
   }
 
   void getDealQueueIncorrect(){
-    Queue queue = dataProvider.getDealQueue(UUID.randomUUID()).get();
+    Queue queue = dataProvider.getDealQueue(UUID.randomUUID().toString()).get();
     Assertions.assertEquals(queue.getId(), savedDeal.getRequests().getId());
   }
 
@@ -403,7 +404,7 @@ public class DataProviderTests {
     dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.manageDealRequest(UUID.randomUUID(), savedDeal.getId(),  true));
+            dataProvider.manageDealRequest(UUID.randomUUID().toString(), savedDeal.getId(),  true));
   }
 
   void acceptDealRequestCorrect() {
@@ -416,7 +417,7 @@ public class DataProviderTests {
   void acceptDealRequestIncorrect() {
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.acceptDealRequest(UUID.randomUUID(), savedDeal.getId()));
+            dataProvider.acceptDealRequest(UUID.randomUUID().toString(), savedDeal.getId()));
   }
 
   void refuseDealRequestCorrect() {
@@ -430,7 +431,7 @@ public class DataProviderTests {
     dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.refuseDealRequest(UUID.randomUUID(),savedDeal.getId()));
+            dataProvider.refuseDealRequest(UUID.randomUUID().toString(),savedDeal.getId()));
   }
 
   void addDealPerformerCorrect(){
@@ -439,7 +440,7 @@ public class DataProviderTests {
 
   void addDealPerformerIncorrect(){
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId()));
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealPerformer(savedUser.getId(), savedPublicDeal.getId()));
+    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId()));
   }
 
   void getMyQueueCorrect(){
@@ -448,7 +449,7 @@ public class DataProviderTests {
   }
 
   void getMyQueueIncorrect(){
-    Queue queue = dataProvider.getDealQueue(UUID.randomUUID()).get();
+    Queue queue = dataProvider.getDealQueue(UUID.randomUUID().toString()).get();
     Assertions.assertEquals(queue.getId(), savedUser.getQueue().getId());
   }
 

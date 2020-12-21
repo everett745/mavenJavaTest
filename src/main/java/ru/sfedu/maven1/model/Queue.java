@@ -1,23 +1,22 @@
 package ru.sfedu.maven1.model;
 
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import ru.sfedu.maven1.dataConvertors.UUIDListConvertor;
-import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Root(name = "Queue")
 public class Queue {
 
-  @CsvCustomBindByName(converter = UUIDConvertor.class)
-  private UUID id = UUID.randomUUID();
+  @CsvBindByName
+  private String id = UUID.randomUUID().toString();
 
   @CsvCustomBindByName(converter = UUIDListConvertor.class)
-  private List<UUID> items = new ArrayList<UUID>();
+  private List<String> items = new ArrayList<>();
 
   public Queue () { };
 
@@ -25,7 +24,8 @@ public class Queue {
    * Set the value of id
    * @param newVar the new value of id
    */
-  public void setId (UUID newVar) {
+  @Attribute(name = "id")
+  public void setId (String newVar) {
     id = newVar;
   }
 
@@ -33,25 +33,17 @@ public class Queue {
    * Get the value of id
    * @return the value of id
    */
-  public UUID getId () {
+  @Attribute(name = "id")
+  public String getId () {
     return id;
-  }
-
-  @Attribute(name = "id")
-  public void setIdXml (String newVar) {
-    id = UUID.fromString(newVar);
-  }
-
-  @Attribute(name = "id")
-  public String getIdXml () {
-    return id.toString();
   }
 
   /**
    * Set the value of items
    * @param newVar the new value of items
    */
-  public void setItems (List<UUID> newVar) {
+  @ElementList(name = "items")
+  public void setItems (List<String> newVar) {
     items = newVar;
   }
 
@@ -59,18 +51,9 @@ public class Queue {
    * Get the value of items
    * @return the value of items
    */
-  public List<UUID> getItems () {
+  @ElementList(name = "items")
+  public List<String> getItems () {
     return items;
-  }
-
-  @ElementList(name = "items")
-  private void setItemsXml (List<String> newVar) {
-    items = newVar.stream().map(UUID::fromString).collect(Collectors.toList());
-  }
-
-  @ElementList(name = "items")
-  private List<String> getItemsXml () {
-    return items.stream().map(UUID::toString).collect(Collectors.toList());
   }
 
   @Override

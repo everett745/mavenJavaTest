@@ -1,8 +1,1 @@
-<List>
-   <object class="ru.sfedu.maven1.model.Deal" object="LAND" name="Новая обычная сделка" price="150 000" dealType="PURCHASE" description="Новая обычная сделка" id="d1343567-8687-4f60-a886-6ec14d3e0a05" performer="e76899c2-5e9b-4890-ae6a-8fb3c38bb269" createdAt="2020-12-19 17:18:23.620 MSK" model="PRIVATE" owner="e76899c2-5e9b-4890-ae6a-8fb3c38bb269">
-      <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
-      <requests id="56f95020-b151-436f-bfed-c4d605bada46">
-         <items class="java.util.ArrayList"/>
-      </requests>
-   </object>
-</List>
+<List/>

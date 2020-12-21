@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import ru.sfedu.maven1.Constants;
-import ru.sfedu.maven1.Main;
 import ru.sfedu.maven1.enums.*;
 import ru.sfedu.maven1.model.*;
 import ru.sfedu.maven1.model.Queue;
@@ -21,10 +20,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class DataProviderCSV implements DataProvider {
-
   private static DataProvider INSTANCE = null;
-
-  private static final Logger log = LogManager.getLogger(Main.class);
+  private static final Logger log = LogManager.getLogger(DataProviderCSV.class);
 
   public static DataProvider getInstance() {
     if (INSTANCE == null) {
@@ -113,31 +110,6 @@ public class DataProviderCSV implements DataProvider {
     return tList;
   }
 
-  public void deleteAll() {
-    List<Class> classList = new ArrayList<>();
-    classList.add(Deal.class);
-    classList.add(PublicDeal.class);
-    classList.add(DealHistory.class);
-    classList.add(Queue.class);
-    classList.add(User.class);
-    classList.add(Company.class);
-    classList.forEach(this::deleteFile);
-  }
-
-  @Override
-  public void initDB() {
-    try {
-      insertIntoCSV(Deal.class, new ArrayList<>(), true);
-      insertIntoCSV(PublicDeal.class, new ArrayList<>(), true);
-      insertIntoCSV(DealHistory.class, new ArrayList<>(), true);
-      insertIntoCSV(Queue.class, new ArrayList<>(), true);
-      insertIntoCSV(User.class, new ArrayList<>(), true);
-      insertIntoCSV(Company.class, new ArrayList<>(), true);
-    } catch (IOException e) {
-      log.error(e);
-    }
-  }
-
   private <T> void deleteFile(Class<T> tClass) {
     try {
       log.debug(Constants.DELETE_FILE + getFile(tClass));
@@ -178,7 +150,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public Optional<User> getUser(@NotNull UUID userId) {
+  public Optional<User> getUser(@NotNull String userId) {
     Optional<User> optionalUser = getUserOptional(userId);
     if (optionalUser.isPresent()) {
       return optionalUser;
@@ -199,7 +171,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses deleteUser(@NotNull UUID userId) {
+  public RequestStatuses deleteUser(@NotNull String userId) {
     Optional<List<User>> userListOptional = getUsers();
     Optional<User> optionalUser = getUser(userId);
     if (userListOptional.isPresent() && optionalUser.isPresent()) {
@@ -260,13 +232,13 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  public Optional<Queue> getQueue(@NotNull UUID id) {
+  public Optional<Queue> getQueue(@NotNull String id) {
     return getQueueById(id);
   }
 
   @Override
   public RequestStatuses createDeal(
-          @NotNull UUID userId,
+          @NotNull String userId,
           @NotNull String name,
           @NotNull String description,
           @NotNull Address address,
@@ -275,7 +247,7 @@ public class DataProviderCSV implements DataProvider {
           @NotNull String price) {
     try {
       Deal deal = new Deal();
-      UUID uuid = UUID.randomUUID();
+      String uuid = UUID.randomUUID().toString();
       Optional<Queue> queueOptional = createQueue();
 
       if (queueOptional.isPresent()) {
@@ -304,7 +276,7 @@ public class DataProviderCSV implements DataProvider {
 
   @Override
   public RequestStatuses createDeal(
-          @NotNull UUID userId,
+          @NotNull String userId,
           @NotNull String name,
           @NotNull String description,
           @NotNull Address address,
@@ -314,7 +286,7 @@ public class DataProviderCSV implements DataProvider {
           @NotNull String price) {
     try {
       PublicDeal publicDeal = new PublicDeal();
-      UUID uuid = UUID.randomUUID();
+      String uuid = UUID.randomUUID().toString();
       Optional<Queue> queueOptional = createQueue();
 
       if (queueOptional.isPresent()) {
@@ -344,7 +316,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public Optional<Deal> manageDeal(@NotNull UUID id) {
+  public Optional<Deal> manageDeal(@NotNull String id) {
     Optional<Deal> deal = getDealById(id);
     if (deal.isPresent()) {
       return deal;
@@ -355,7 +327,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses removeDeal(@NotNull UUID id) {
+  public RequestStatuses removeDeal(@NotNull String id) {
     Optional<Deal> optionalDeal = getDealById(id);
     if (optionalDeal.isPresent()) {
       Deal deal = optionalDeal.get();
@@ -378,8 +350,8 @@ public class DataProviderCSV implements DataProvider {
       Deal deal = optionalDeal.get();
 
       switch (deal.getDealModel()) {
-        case PUBLIC: return updatePublicDeal((PublicDeal) deal);
-        case PRIVATE: return updateSimpleDeal(deal);
+        case PUBLIC: return updatePublicDeal((PublicDeal) updatedDeal);
+        case PRIVATE: return updateSimpleDeal(updatedDeal);
         default: return RequestStatuses.FAILED;
       }
     } else {
@@ -389,7 +361,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public Optional<List<PublicDeal>> getGlobalDeals(@NotNull UUID userId) {
+  public Optional<List<PublicDeal>> getGlobalDeals(@NotNull String userId) {
     Optional<List<PublicDeal>> optionalDeals = getPublicDealsList();
     if (optionalDeals.isPresent()) {
       List<PublicDeal> deals = optionalDeals.get();
@@ -404,7 +376,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public Optional<List<Deal>> getMyDeals(@NotNull UUID userId) {
+  public Optional<List<Deal>> getMyDeals(@NotNull String userId) {
     Optional<List<Deal>> optionalDeals = getAllDeals();
     Optional<User> checkUser = getUser(userId);
     if (optionalDeals.isPresent() && checkUser.isPresent()) {
@@ -419,7 +391,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses setStatus(@NotNull UUID id, @NotNull DealStatus newStatus) {
+  public RequestStatuses setStatus(@NotNull String id, @NotNull DealStatus newStatus) {
     Optional<Deal> dealOptional = getDealById(id);
     if (dealOptional.isPresent()) {
       try {
@@ -442,14 +414,20 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses addDealRequest(@NotNull UUID userId, @NotNull UUID id) {
+  public RequestStatuses addDealRequest(@NotNull String userId, @NotNull String id) {
     Optional<Deal> dealOptional = getDealById(id);
     Optional<User> optionalUser = getUser(userId);
 
     if (dealOptional.isPresent() && optionalUser.isPresent()) {
       Deal deal = dealOptional.get();
       Queue requests = deal.getRequests();
-      List<UUID> requestsList = requests.getItems();
+
+      List<String> requestsList = new ArrayList<>();
+      requests.getItems().forEach(item -> {
+        if (!item.equals(Constants.EMPTY_STRING)) {
+          requestsList.add(item);
+        }
+      });
 
       if (requestsList.contains(userId)) {
         log.error(Constants.ALREADY_IN_QUEUE + userId);
@@ -471,7 +449,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public Optional<Queue> getDealQueue(@NotNull UUID id) {
+  public Optional<Queue> getDealQueue(@NotNull String id) {
     Optional<Deal> dealOptional = getDealById(id);
     if (dealOptional.isPresent()) {
       return Optional.of(dealOptional.get().getRequests());
@@ -482,7 +460,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses manageDealRequest(@NotNull UUID userId, @NotNull UUID id, boolean accept) {
+  public RequestStatuses manageDealRequest(@NotNull String userId, @NotNull String id, boolean accept) {
     Optional<Deal> dealOptional = getDealById(id);
     if (dealOptional.isPresent()) {
       if (accept) {
@@ -497,7 +475,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses acceptDealRequest(@NotNull UUID userId, @NotNull UUID id) {
+  public RequestStatuses acceptDealRequest(@NotNull String userId, @NotNull String id) {
     Optional<Deal> dealOptional = getDealById(id);
     if (dealOptional.isPresent()) {
       Deal deal = dealOptional.get();
@@ -522,14 +500,14 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses refuseDealRequest(@NotNull UUID userId, @NotNull UUID id) {
+  public RequestStatuses refuseDealRequest(@NotNull String userId, @NotNull String id) {
     Optional<Deal> dealOptional = getDealById(id);
     if (dealOptional.isPresent()) {
       Deal deal = dealOptional.get();
       Queue requests = deal.getRequests();
 
       if (requests.getItems().contains(userId)) {
-        List<UUID> requestsList = requests.getItems()
+        List<String> requestsList = requests.getItems()
                 .stream().filter(requestId -> !requestId.equals(userId))
                 .collect(Collectors.toList());
 
@@ -547,13 +525,18 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses addDealPerformer(@NotNull UUID userId, @NotNull UUID id) {
+  public RequestStatuses addDealPerformer(@NotNull String userId, @NotNull String id) {
     Optional<User> userOptional = getUser(userId);
     if (userOptional.isPresent()) {
       User user = userOptional.get();
       Queue queue = user.getQueue();
 
-      List<UUID> requestsList = queue.getItems();
+      List<String> requestsList = new ArrayList<>();
+      queue.getItems().forEach(item -> {
+        if (!item.equals(Constants.EMPTY_STRING)) {
+          requestsList.add(item);
+        }
+      });
 
       if (requestsList.contains(id)) {
         log.info(Constants.ALREADY_IN_QUEUE + id);
@@ -571,7 +554,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public Optional<Queue> getMyQueue(@NotNull UUID userId) {
+  public Optional<Queue> getMyQueue(@NotNull String userId) {
     Optional<User> userOptional = getUser(userId);
     if (userOptional.isPresent()) {
       return Optional.of(userOptional.get().getQueue());
@@ -582,7 +565,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses manageDealPerform(@NotNull UUID userId, @NotNull UUID id, boolean accept) {
+  public RequestStatuses manageDealPerform(@NotNull String userId, @NotNull String id, boolean accept) {
     Optional<User> userOptional = getUser(userId);
     if (userOptional.isPresent()) {
       if (accept) {
@@ -596,7 +579,7 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses acceptDealPerform(@NotNull UUID userId, @NotNull UUID id) {
+  public RequestStatuses acceptDealPerform(@NotNull String userId, @NotNull String id) {
     Optional<User> userOptional = getUser(userId);
     Optional<Deal> dealOptional = getDealById(id);
     if (userOptional.isPresent() && dealOptional.isPresent()) {
@@ -604,9 +587,9 @@ public class DataProviderCSV implements DataProvider {
       Deal deal = dealOptional.get();
       Queue requests = user.getQueue();
 
-      if (deal.getPerformer() == null) {
+      if (deal.getPerformer().equals(Constants.EMPTY_STRING)) {
         if (requests.getItems().contains(id)) {
-          List<UUID> requestsList = requests.getItems()
+          List<String> requestsList = requests.getItems()
                   .stream().filter(requestId -> !requestId.equals(id))
                   .collect(Collectors.toList());
 
@@ -632,13 +615,13 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses refuseDealPerform(@NotNull UUID userId, @NotNull UUID id) {
+  public RequestStatuses refuseDealPerform(@NotNull String userId, @NotNull String id) {
     Optional<User> userOptional = getUser(userId);
     if (userOptional.isPresent() && userOptional.get().getQueue().getItems().contains(id)) {
       User user = userOptional.get();
       Queue requests = user.getQueue();
 
-      List<UUID> requestsList = requests.getItems()
+      List<String> requestsList = requests.getItems()
               .stream().filter(requestId -> !requestId.equals(id))
               .collect(Collectors.toList());
 
@@ -651,10 +634,36 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
+  @Override
+  public void clearDB() {
+    List<Class> classList = new ArrayList<>();
+    classList.add(Deal.class);
+    classList.add(PublicDeal.class);
+    classList.add(DealHistory.class);
+    classList.add(Queue.class);
+    classList.add(User.class);
+    classList.add(Company.class);
+    classList.forEach(this::deleteFile);
+  }
+
+  @Override
+  public void initDB() {
+    try {
+      insertIntoCSV(Deal.class, new ArrayList<>(), true);
+      insertIntoCSV(PublicDeal.class, new ArrayList<>(), true);
+      insertIntoCSV(DealHistory.class, new ArrayList<>(), true);
+      insertIntoCSV(Queue.class, new ArrayList<>(), true);
+      insertIntoCSV(User.class, new ArrayList<>(), true);
+      insertIntoCSV(Company.class, new ArrayList<>(), true);
+    } catch (IOException e) {
+      log.error(e);
+    }
+  }
+
 
   private Optional<Company> createCompany() {
     Company company = new Company();
-    UUID uuid = UUID.randomUUID();
+    String uuid = UUID.randomUUID().toString();
     company.setId(uuid);
     try {
       insertIntoCSV(company);
@@ -690,7 +699,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private void deleteCompany(UUID id) {
+  private void deleteCompany(String id) {
     Optional<List<Company>> optionalCompanies = getCompanies();
     Optional<Company> optionalCompany = getCompany(id);
     if (optionalCompanies.isPresent() && optionalCompany.isPresent()) {
@@ -716,7 +725,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private Optional<Company> getCompany(UUID id){
+  private Optional<Company> getCompany(String id){
     Optional<List<Company>> optionalCompanies = getCompanies();
     if (optionalCompanies.isPresent()) {
       List<Company> companies = optionalCompanies.get();
@@ -728,7 +737,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private Optional<Company> getUserCompany(UUID userId) {
+  private Optional<Company> getUserCompany(String userId) {
     Optional<List<Company>> optionalCompanies = getCompanies();
     if (optionalCompanies.isPresent()) {
       List<Company> companies = optionalCompanies.get();
@@ -746,7 +755,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private void addUserToCompany(UUID id, User user) {
+  private void addUserToCompany(String id, User user) {
     Optional<Company> companyOptional = getCompany(id);
     if (companyOptional.isPresent()) {
       Company company = companyOptional.get();
@@ -757,7 +766,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private RequestStatuses deleteUserFromCompany(UUID userId) {
+  private RequestStatuses deleteUserFromCompany(String userId) {
     Optional<Company> companyOptional = getUserCompany(userId);
     if (companyOptional.isPresent()) {
       Company company = companyOptional.get();
@@ -772,7 +781,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private void addDealToCompany(UUID userId, Deal deal) {
+  private void addDealToCompany(String userId, Deal deal) {
     Optional<Company> companyOptional = getUserCompany(userId);
     if (companyOptional.isPresent()) {
       Company company = companyOptional.get();
@@ -801,7 +810,7 @@ public class DataProviderCSV implements DataProvider {
           @NotNull String phone,
           @NotNull Address address) {
     try {
-      UUID uuid = UUID.randomUUID();
+      String uuid = UUID.randomUUID().toString();
       Optional<Queue> queueOptional = createQueue();
       Optional<Company> company = createCompany();
       if (queueOptional.isPresent() && company.isPresent()) {
@@ -832,7 +841,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private Optional<User> getUserOptional(UUID userId) {
+  private Optional<User> getUserOptional(String userId) {
     Optional<List<User>> userList = getUsers();
     if (userList.isPresent()) {
       List<User> users = userList.get();
@@ -893,7 +902,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private Optional<Queue> getQueueById(UUID id) {
+  private Optional<Queue> getQueueById(String id) {
     Optional<List<Queue>> queuesOptional = getQueuesList();
     if (queuesOptional.isPresent()) {
       List<Queue> queues = queuesOptional.get();
@@ -927,7 +936,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private void deleteQueue(@NotNull UUID id) {
+  private void deleteQueue(@NotNull String id) {
     Optional<List<Queue>> optionalQueues = getQueuesList();
     if (optionalQueues.isPresent()) {
       List<Queue> queues = optionalQueues.get();
@@ -982,7 +991,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private Optional<Deal> getDealById(UUID id) {
+  private Optional<Deal> getDealById(String id) {
     Optional<List<Deal>> deals = getAllDeals();
     if (deals.isPresent()) {
       List<Deal> dealList = deals.get();
@@ -995,7 +1004,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private List<DealHistory> createFirstDealHistory(UUID parentId, DealStatus currentStatus) {
+  private List<DealHistory> createFirstDealHistory(String parentId, DealStatus currentStatus) {
     List<DealHistory> dealHistoryList = new ArrayList<>();
     DealHistory dealHistory = new DealHistory();
     dealHistory.setId(parentId);
@@ -1038,7 +1047,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  public Optional<List<DealHistory>> getDealHistoryByDeal(UUID id) {
+  public Optional<List<DealHistory>> getDealHistoryByDeal(String id) {
     Optional<List<DealHistory>> optionalDealHistories = getOptionalDealHistoryList();
     if (optionalDealHistories.isPresent()) {
       List<DealHistory> dealHistoryList = optionalDealHistories.get();
@@ -1057,7 +1066,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private void removeDealHistoryByDeal(UUID id) {
+  private void removeDealHistoryByDeal(String id) {
     Optional<List<DealHistory>> optionalDealHistories = getOptionalDealHistoryList();
     if (optionalDealHistories.isPresent()) {
       List<DealHistory> dealHistoryList = optionalDealHistories.get();
@@ -1158,7 +1167,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private boolean userIsPerformer(@NotNull UUID userId, @NotNull Deal deal) {
+  private boolean userIsPerformer(@NotNull String userId, @NotNull Deal deal) {
     try {
       return deal.getPerformer().equals(userId);
     } catch (NullPointerException e) {

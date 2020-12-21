@@ -7,17 +7,15 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 import ru.sfedu.maven1.dataConvertors.AddressConvertor;
 import ru.sfedu.maven1.dataConvertors.QueueConvertor;
-import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
 @Root(name = "User")
 public class User implements Serializable {
 
-  @CsvCustomBindByName(converter = UUIDConvertor.class)
-  private UUID id;
+  @CsvBindByName
+  private String id;
 
   @CsvCustomBindByName(converter = AddressConvertor.class)
   private Address address;
@@ -37,7 +35,8 @@ public class User implements Serializable {
    * Set the value of id
    * @param newVar the new value of id
    */
-  public void setId (UUID newVar) {
+  @Attribute(name = "id")
+  public void setId (String newVar) {
     id = newVar;
   }
 
@@ -45,18 +44,9 @@ public class User implements Serializable {
    * Get the value of id
    * @return the value of id
    */
-  public UUID getId () {
+  @Attribute(name = "id")
+  public String getId () {
     return id;
-  }
-
-  @Attribute(name = "id")
-  private void setIdXml (String newVar) {
-    id = UUID.fromString(newVar);
-  }
-
-  @Attribute(name = "id")
-  private String getIdXml () {
-    return id.toString();
   }
 
   /**

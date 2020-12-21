@@ -1,13 +1,20 @@
 package ru.sfedu.maven1;
 
-import java.util.UUID;
-
 public class Constants {
     public static final String CONFIG_PATH = "config.path";
+
     public static final String CSV_PATH = "csv.path";
     public static final String CSV_EXTENSION = "csv.extension";
+
     public static final String XML_PATH = "xml.path";
     public static final String XML_EXTENSION = "xml.extension";
+
+    public static final String DB_INIT_PATH = "db_init_path";
+    public static final String DB_URL = "db_url";
+    public static final String DB_USER = "db_user";
+    public static final String DB_PASSWORD = "db_password";
+    public static final String DB_DRIVER = "db_driver";
+
     public static final String EXCEPTION_CANNOT_CREATE_FILE = "unable to create file %s";
 
     public static final String DATE_FORMAT = "dd.MM.yyyy";
@@ -44,4 +51,37 @@ public class Constants {
 
     public static final String DELETE_FILE = "Delete file: ";
     public static final String CREATE_FILE = "Create file: ";
+
+    // tables fields
+    public static final String USER_ID = "id";
+    public static final String USER_ADDRESS = "address";
+    public static final String USER_QUEUE = "queue";
+    public static final String USER_NAME = "name";
+    public static final String USER_PHONE = "phone";
+
+    public static final String ADDRESS_ID = "id";
+    public static final String ADDRESS_CITY = "city";
+    public static final String ADDRESS_REGION = "region";
+    public static final String ADDRESS_DISTRICT = "district";
+
+    public static final String QUEUE_ID = "id";
+    public static final String QUEUE_ITEMS = "items";
+
+
+    // queries
+    public static final String INSERT_USER = "INSERT INTO USER VALUES ('%s', '%s', '%s', '%s', '%s');";
+    public static final String SELECT_USERS = "SELECT * FROM USER";
+    public static final String SELECT_USER = "SELECT * FROM USER WHERE id LIKE '%s';";
+    public static final String UPDATE_USER = "UPDATE USER SET address='%s', queue='%s', name='%s', phone='%s' WHERE id LIKE '%s';";
+    public static final String DELETE_USER = "DELETE FROM USER WHERE id LIKE '%s';";
+
+    public static final String INSERT_ADDRESS = "INSERT INTO ADDRESS VALUES (%d, '%s', '%s', '%s');";
+    public static final String SELECT_ADDRESSES = "SELECT * FROM ADDRESS;";
+    public static final String SELECT_ADDRESS = "SELECT * FROM ADDRESS WHERE id=%d;";
+
+    public static final String INSERT_QUEUE = "INSERT INTO QUEUE VALUES ('%s', '%s');";
+    public static final String SELECT_QUEUE = "SELECT * FROM QUEUE WHERE id LIKE '%s';";
+
+
+    public static final String CLEAR_BD = "drop table if exists company cascade; drop table if exists deal cascade; drop table if exists dealHistory cascade; drop table if exists publicDeal cascade; drop table if exists queue cascade; drop table if exists user cascade;";
 }

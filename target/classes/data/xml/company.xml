@@ -1,43 +1,25 @@
 <List>
-   <object class="ru.sfedu.maven1.model.Company" id="75d43026-13cd-4832-8384-8136d75c5c36">
-      <employees class="java.util.ArrayList">
-         <User name="Петр Тест" phone="0000000" id="528468a2-ea6e-40c6-aafc-bcee9454afd4">
-            <queue id="90fb8a83-a092-45cb-abd8-a9f13910da2a">
-               <items class="java.util.ArrayList"/>
-            </queue>
-            <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
-         </User>
-      </employees>
+   <object class="ru.sfedu.maven1.model.Company" id="a8151b21-61b1-46c5-b93d-2dbbff9665e0">
       <deals class="java.util.ArrayList">
-         <deal class="ru.sfedu.maven1.model.PublicDeal" object="LAND" name="Новая публичная сделка" description="тестовое описание публичной сделки" dealType="SALE" price="123 000" owner="528468a2-ea6e-40c6-aafc-bcee9454afd4" id="47b85e49-2f31-4f88-98f3-6f657e852767" createdAt="2020-12-19 16:59:49.862 MSK" performer="" model="PUBLIC" currentStatus="NEW_DEAL">
-            <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
-            <requests id="ea9e5719-38f1-4fd4-9f00-d86e7107c337">
+         <deal class="ru.sfedu.maven1.model.PublicDeal" object="LAND" name="Новая публичная сделка" id="14efa320-694e-4dd8-9706-b9745672d68b" owner="03a798b0-716c-43e2-814c-85c2806eaacf" description="тестовое описание публичной сделки" dealType="SALE" price="123 000" model="PUBLIC" createdAt="2020-12-21 09:52:22.608 MSK" currentStatus="NEW_DEAL">
+            <address id="744" region="Ростовская область" city="Ростов-на-Дону" district="Южный"/>
+            <requests id="3fb93d71-c4d5-492a-aaeb-c658b3b629b4">
                <items class="java.util.ArrayList"/>
             </requests>
             <history class="java.util.ArrayList">
-               <dealHistory status="NEW_DEAL" text="Новая сделка" created_at="2020-12-19 16:59:49.862 MSK">
-                  <id>47b85e49-2f31-4f88-98f3-6f657e852767</id>
+               <dealHistory text="Новая сделка" status="NEW_DEAL" created_at="2020-12-21 09:52:22.608 MSK">
+                  <id>14efa320-694e-4dd8-9706-b9745672d68b</id>
                </dealHistory>
             </history>
          </deal>
       </deals>
-   </object>
-   <object class="ru.sfedu.maven1.model.Company" id="a5607ec9-be83-48ef-917a-fbc395400671">
       <employees class="java.util.ArrayList">
-         <User name="Иван Тест" phone="8922222222" id="065667c5-0940-4110-81ac-fd081648da3b">
-            <queue id="04c6c1d6-06d9-4b03-8c77-5f0380f8aef8">
+         <User name="Петр Тест" id="03a798b0-716c-43e2-814c-85c2806eaacf" phone="0000000">
+            <queue id="d7ac7a9d-7102-4a4c-91aa-085ef2fa878c">
                <items class="java.util.ArrayList"/>
             </queue>
-            <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
+            <address id="744" region="Ростовская область" city="Ростов-на-Дону" district="Южный"/>
          </User>
       </employees>
-      <deals class="java.util.ArrayList">
-         <deal object="LAND" name="Новая обычная сделка" description="Новая обычная сделка" dealType="PURCHASE" price="150 000" owner="065667c5-0940-4110-81ac-fd081648da3b" id="0fbd219b-60d7-4296-82ff-acace11abc50" createdAt="2020-12-19 16:59:49.838 MSK" performer="065667c5-0940-4110-81ac-fd081648da3b" model="PRIVATE">
-            <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
-            <requests id="63946694-cb83-4e65-9927-f930b46888e9">
-               <items class="java.util.ArrayList"/>
-            </requests>
-         </deal>
-      </deals>
    </object>
 </List>
