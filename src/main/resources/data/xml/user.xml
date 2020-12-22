@@ -1,8 +1,14 @@
 <List>
-   <object class="ru.sfedu.maven1.model.User" name="Петр Тест" id="03a798b0-716c-43e2-814c-85c2806eaacf" phone="0000000">
-      <queue id="d7ac7a9d-7102-4a4c-91aa-085ef2fa878c">
+   <object class="ru.sfedu.maven1.model.User" name="Иван Тест" id="40104968-ee49-4d46-a2ca-8a5bf4d9eade" phone="8922222222">
+      <queue id="472787d4-d5de-4da9-b134-c1aa530fc74c">
          <items class="java.util.ArrayList"/>
       </queue>
-      <address id="744" region="Ростовская область" city="Ростов-на-Дону" district="Южный"/>
+      <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
+   </object>
+   <object class="ru.sfedu.maven1.model.User" name="Петр Тест" id="e53a792e-52e6-4f8b-baf8-b5ddfc480897" phone="0000000">
+      <queue id="b0ac168f-ec1b-4fa6-a445-c1a434598712">
+         <items class="java.util.ArrayList"/>
+      </queue>
+      <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
    </object>
 </List>

@@ -1,1 +1,8 @@
-<List/>
+<List>
+   <object class="ru.sfedu.maven1.model.Deal" object="LAND" name="Новая обычная сделка" id="bee07b7e-3261-4261-b7f5-2796f1f7a268" owner="b57c840f-63b4-4758-ada3-bf1b7e44025c" dealType="PURCHASE" price="150 000" description="Новая обычная сделка" model="PRIVATE" createdAt="2020-12-22 22:23:26.388 MSK">
+      <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
+      <requests id="b042495d-8f82-45a0-bbe9-5df35f4c0f26">
+         <items class="java.util.ArrayList"/>
+      </requests>
+   </object>
+</List>

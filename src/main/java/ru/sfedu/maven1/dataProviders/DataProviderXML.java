@@ -74,8 +74,8 @@ public class DataProviderXML implements DataProvider {
 
     private <T> void deleteFile(Class<T> tClass) {
         try {
-            log.debug(Constants.DELETE_FILE + getFile(tClass));
-            log.debug(getFile(tClass).delete());
+            log.info(Constants.DELETE_FILE + getFile(tClass));
+            log.info(getFile(tClass).delete());
         } catch (IOException e) {
             log.error(e);
         }

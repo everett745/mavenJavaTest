@@ -1,13 +1,21 @@
 package ru.sfedu.maven1.dataProviders;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataProviderJdbcTest extends DataProviderTests {
   private static final DataProvider dataProvider = DataProviderJdbc.getInstance();
 
+  @Test
   @BeforeAll
-  static void setUp() {
+  static void refreshDB() {
+    refreshDB(dataProvider);
+  }
+
+  @Test
+  @BeforeEach
+  void setUp() {
     setUp(dataProvider);
   }
 

@@ -112,8 +112,8 @@ public class DataProviderCSV implements DataProvider {
 
   private <T> void deleteFile(Class<T> tClass) {
     try {
-      log.debug(Constants.DELETE_FILE + getFile(tClass));
-      log.debug(getFile(tClass).delete());
+      log.info(Constants.DELETE_FILE + getFile(tClass));
+      log.info(getFile(tClass).delete());
     } catch (IOException e) {
       log.error(e);
     }
@@ -443,7 +443,7 @@ public class DataProviderCSV implements DataProvider {
 
       return RequestStatuses.SUCCESS;
     } else {
-      log.error(Constants.UNDEFINED_DEAL);
+      log.error(Constants.UNDEFINED_USER_OR_DEAL);
       return RequestStatuses.FAILED;
     }
   }
@@ -527,7 +527,8 @@ public class DataProviderCSV implements DataProvider {
   @Override
   public RequestStatuses addDealPerformer(@NotNull String userId, @NotNull String id) {
     Optional<User> userOptional = getUser(userId);
-    if (userOptional.isPresent()) {
+    Optional<Deal> dealOptional = getDealById(id);
+    if (userOptional.isPresent() && dealOptional.isPresent()) {
       User user = userOptional.get();
       Queue queue = user.getQueue();
 
@@ -548,7 +549,7 @@ public class DataProviderCSV implements DataProvider {
         return RequestStatuses.SUCCESS;
       }
     } else {
-      log.error(Constants.UNDEFINED_QUEUE);
+      log.error(Constants.UNDEFINED_USER_OR_DEAL);
       return RequestStatuses.FAILED;
     }
   }
