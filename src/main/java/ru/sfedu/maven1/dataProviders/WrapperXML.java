@@ -7,12 +7,9 @@ package ru.sfedu.maven1.dataProviders;
 
 import java.util.List;
 
-import lombok.Data;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-
-@Data
 @Root(name = "List")
 public class WrapperXML<T> {
   @ElementList(inline = true, required = false)

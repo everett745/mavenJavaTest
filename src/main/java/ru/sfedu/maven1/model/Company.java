@@ -1,25 +1,22 @@
 package ru.sfedu.maven1.model;
 
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
-import org.simpleframework.xml.convert.Convert;
 import ru.sfedu.maven1.dataConvertors.DealListConvertor;
-import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 import ru.sfedu.maven1.dataConvertors.UsersListConvertor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Root(name = "Company")
 public class Company {
 
-  @CsvCustomBindByName(converter = UUIDConvertor.class)
-  private UUID id;
+  @CsvBindByName
+  private String id;
 
   @CsvCustomBindByName(converter = UsersListConvertor.class)
   private List<User> employees = new ArrayList<User>();
@@ -33,7 +30,8 @@ public class Company {
    * Set the value of id
    * @param newVar the new value of id
    */
-  public void setId (UUID newVar) {
+  @Attribute(name = "id")
+  public void setId (String newVar) {
     id = newVar;
   }
 
@@ -41,18 +39,9 @@ public class Company {
    * Get the value of id
    * @return the value of id
    */
-  public UUID getId () {
+  @Attribute(name = "id")
+  public String getId () {
     return id;
-  }
-
-  @Attribute(name = "id")
-  private void setIdXml (String newVar) {
-    id = UUID.fromString(newVar);
-  }
-
-  @Attribute(name = "id")
-  private String getIdXml () {
-    return id.toString();
   }
 
   /**

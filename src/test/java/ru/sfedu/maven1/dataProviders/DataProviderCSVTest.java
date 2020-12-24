@@ -1,6 +1,7 @@
 package ru.sfedu.maven1.dataProviders;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataProviderCSVTest extends DataProviderTests {
@@ -8,12 +9,14 @@ public class DataProviderCSVTest extends DataProviderTests {
   private static final DataProvider dataProvider = DataProviderCSV.getInstance();
 
   @BeforeAll
-  static void setUp() {
-    setUp(dataProvider);
+  static void refreshDB() {
+    refreshDB(dataProvider);
   }
 
-  @Test
-  void preTest() { }
+  @BeforeEach
+  void setUp() {
+    setUp(dataProvider);
+  }
 
   @Test
   void createUserCorrect() {

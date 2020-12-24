@@ -9,10 +9,7 @@ import ru.sfedu.maven1.dataProviders.DataProviderCSV;
 import ru.sfedu.maven1.model.Deal;
 import ru.sfedu.maven1.model.User;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +31,7 @@ public class UsersListConvertor extends AbstractBeanField<User, Integer> {
       } else if (matcherWith.find()) {
         indexString = s.substring(2, s.length() - 2);
       } else {
-        return new CsvDataTypeMismatchException();
+        throw new CsvDataTypeMismatchException();
       }
 
       String[] uuids = indexString.split(Constants.ARRAY_DELIMITER);
@@ -44,9 +41,10 @@ public class UsersListConvertor extends AbstractBeanField<User, Integer> {
       } else {
         List<User> users = new ArrayList<>();
         Arrays.asList(uuids)
-                .forEach(uuid -> users.add(dataProviderCSV
-                        .getUser(UUID.fromString(uuid)).get())
-                );
+                .forEach(uuid -> {
+                  Optional<User> optionalUser = dataProviderCSV.getUser(uuid);
+                  optionalUser.ifPresent(users::add);
+                });
         return users;
       }
     } catch (Exception e) {
@@ -58,7 +56,7 @@ public class UsersListConvertor extends AbstractBeanField<User, Integer> {
   @Override
   protected String convertToWrite(Object value) {
     List<User> userList = (List<User>) value;
-    List<UUID> uuids = new ArrayList<>();
+    List<String> uuids = new ArrayList<>();
     userList.forEach(item -> uuids.add(item.getId()));
     return uuids.toString();
   }

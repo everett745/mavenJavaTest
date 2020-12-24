@@ -15,8 +15,7 @@ import java.util.Properties;
  * @author Boris Jamalov
  */
 public class PropertyProvider {
-    private static final String CUSTOM_CONFIG_PATH=System.getProperty("configPath");
-    private static final String DEFAULT_CONFIG_PATH = "./src/main/resources/environment.properties";//src/main/resources/
+    private static final String DEFAULT_CONFIG_PATH = Constants.DEFAULT_CONFIG_PATH;
     private static final Properties PROPERTIES = new Properties();
     /**
      * Hides default constructor
@@ -33,7 +32,6 @@ public class PropertyProvider {
 
     /**
      * Loads configuration from <code>DEFAULT_CONFIG_PATH</code>
-     *
      * @throws IOException In case of the configuration file read failure
      */
     private static void loadProperty() throws IOException {
@@ -43,7 +41,6 @@ public class PropertyProvider {
         } else {
             nf = new File(DEFAULT_CONFIG_PATH);
         }
-        // DEFAULT_CONFIG_PATH.getClass().getResourceAsStream(DEFAULT_CONFIG_PATH);
         try (InputStream in = new FileInputStream(nf)) {
             PROPERTIES.load(in);
         } catch (IOException ex) {
@@ -52,10 +49,8 @@ public class PropertyProvider {
     }
 
     /**
-     *  * Gets configuration entry value
-     *
+     * Gets configuration entry value
      * @param key Entry key
-     *
      * @return Entry value by key
      * @throws IOException In case of the configuration file read failure
      */

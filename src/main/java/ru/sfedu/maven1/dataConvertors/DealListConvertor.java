@@ -47,7 +47,7 @@ public class DealListConvertor extends AbstractBeanField<Deal, Integer> {
         List<Deal> deals = new ArrayList<>();
         Arrays.asList(uuids)
                 .forEach(uuid -> deals.add(dataProviderCSV
-                        .manageDeal(UUID.fromString(uuid)).get())
+                        .manageDeal(uuid).get())
                 );
         return deals;
       }
@@ -60,7 +60,7 @@ public class DealListConvertor extends AbstractBeanField<Deal, Integer> {
   @Override
   protected String convertToWrite(Object value) {
     List<Deal> userList = (List<Deal>) value;
-    List<UUID> uuids = new ArrayList<>();
+    List<String> uuids = new ArrayList<>();
     userList.forEach(item -> uuids.add(item.getId()));
     return uuids.toString();
   }

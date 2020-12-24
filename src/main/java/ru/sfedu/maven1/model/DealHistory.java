@@ -1,26 +1,23 @@
 package ru.sfedu.maven1.model;
 
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import ru.sfedu.maven1.Constants;
-import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 import ru.sfedu.maven1.enums.DealStatus;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Class DealHistory
  */
 public class DealHistory implements Serializable {
 
-  @CsvCustomBindByName(converter = UUIDConvertor.class)
-  private UUID id;
+  @CsvBindByName
+  private String id;
 
   @CsvBindByName
   private String text;
@@ -37,7 +34,8 @@ public class DealHistory implements Serializable {
    * Set the value of id
    * @param newVar the new value of id
    */
-  public void setId (UUID newVar) {
+  @Element(name = "id")
+  public void setId (String newVar) {
     id = newVar;
   }
 
@@ -45,18 +43,9 @@ public class DealHistory implements Serializable {
    * Get the value of id
    * @return the value of id
    */
-  public UUID getId () {
+  @Element(name = "id")
+  public String getId () {
     return id;
-  }
-
-  @Element(name = "id")
-  private void setIdXml (String newVar) {
-    id = UUID.fromString(newVar);
-  }
-
-  @Element(name = "id")
-  private String getIdXml () {
-    return id.toString();
   }
 
   /**
@@ -118,7 +107,7 @@ public class DealHistory implements Serializable {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     DealHistory that = (DealHistory) o;
-    return getId() == that.getId() &&
+    return getId().equals(that.getId()) &&
             Objects.equals(getText(), that.getText()) &&
             getStatus() == that.getStatus() &&
             Objects.equals(getCreated_at(), that.getCreated_at());

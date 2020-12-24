@@ -6,7 +6,6 @@ import org.simpleframework.xml.Element;
 import ru.sfedu.maven1.Constants;
 import ru.sfedu.maven1.dataConvertors.AddressConvertor;
 import ru.sfedu.maven1.dataConvertors.QueueConvertor;
-import ru.sfedu.maven1.dataConvertors.UUIDConvertor;
 import ru.sfedu.maven1.enums.DealModel;
 import ru.sfedu.maven1.enums.DealTypes;
 import ru.sfedu.maven1.enums.ObjectTypes;
@@ -14,15 +13,14 @@ import ru.sfedu.maven1.enums.ObjectTypes;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Class Deal
  */
 public class Deal implements Serializable {
 
-  @CsvCustomBindByName(converter = UUIDConvertor.class)
-  private UUID id;
+  @CsvBindByName
+  private String id;
 
   @CsvBindByName
   private String name;
@@ -36,11 +34,11 @@ public class Deal implements Serializable {
   @CsvCustomBindByName(converter = QueueConvertor.class)
   private Queue requests;
 
-  @CsvCustomBindByName(converter = UUIDConvertor.class)
-  private UUID owner;
+  @CsvBindByName
+  private String owner;
 
-  @CsvCustomBindByName(converter = UUIDConvertor.class)
-  private UUID performer;
+  @CsvBindByName
+  private String performer;
 
   @CsvBindByName
   private DealTypes dealType;
@@ -63,7 +61,8 @@ public class Deal implements Serializable {
    * Set the value of id
    * @param newVar the new value of id
    */
-  public void setId (UUID newVar) {
+  @Attribute(name = "id")
+  public void setId (String newVar) {
     id = newVar;
   }
 
@@ -71,18 +70,9 @@ public class Deal implements Serializable {
    * Get the value of id
    * @return the value of id
    */
-  public UUID getId () {
+  @Attribute(name = "id")
+  public String getId () {
     return id;
-  }
-
-  @Attribute(name = "id")
-  private void setIdXml (String newVar) {
-    id = UUID.fromString(newVar);
-  }
-
-  @Attribute(name = "id")
-  private String getIdXml () {
-    return id.toString();
   }
 
   /**
@@ -161,7 +151,8 @@ public class Deal implements Serializable {
    * Set the value of owner
    * @param newVar the new value of owner
    */
-  public void setOwner (UUID newVar) {
+  @Attribute(name = "owner")
+  public void setOwner (String newVar) {
     owner = newVar;
   }
 
@@ -169,25 +160,17 @@ public class Deal implements Serializable {
    * Get the value of owner
    * @return the value of owner
    */
-  public UUID getOwner () {
+  @Attribute(name = "owner")
+  public String getOwner () {
     return owner;
-  }
-
-  @Attribute(name = "owner")
-  public void setOwnerXml (String newVar) {
-    owner = UUID.fromString(newVar);
-  }
-
-  @Attribute(name = "owner")
-  public String getOwnerXml () {
-    return owner.toString();
   }
 
   /**
    * Set the value of performer
    * @param newVar the new value of performer
    */
-  public void setPerformer (UUID newVar) {
+  @Attribute(name = "performer", required = false)
+  public void setPerformer (String newVar) {
     performer = newVar;
   }
 
@@ -195,24 +178,9 @@ public class Deal implements Serializable {
    * Get the value of performer
    * @return the value of performer
    */
-  public UUID getPerformer () {
+  @Attribute(name = "performer", required = false)
+  public String getPerformer () {
     return performer;
-  }
-
-  @Attribute(name = "performer")
-  public void setPerformerXml (String newVar) {
-    if (!newVar.equals("")) {
-      performer = UUID.fromString(newVar);
-    } else {
-      performer = null;
-    }
-  }
-
-  @Attribute(name = "performer")
-  public String getPerformerXml () {
-    if (performer != null) {
-      return performer.toString();
-    } else return "";
   }
 
   /**
@@ -310,7 +278,7 @@ public class Deal implements Serializable {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Deal deal = (Deal) o;
-    return getId() == deal.getId() &&
+    return getId().equals(deal.getId()) &&
             getOwner() == deal.getOwner() &&
             getPerformer() == deal.getPerformer() &&
             Objects.equals(getName(), deal.getName()) &&

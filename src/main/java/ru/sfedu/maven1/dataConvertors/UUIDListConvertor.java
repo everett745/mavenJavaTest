@@ -1,21 +1,23 @@
 package ru.sfedu.maven1.dataConvertors;
 
 import com.opencsv.bean.AbstractBeanField;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import ru.sfedu.maven1.Constants;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class UUIDListConvertor extends AbstractBeanField<UUID, Integer> {
   final Pattern patternWithout = Pattern.compile(Constants.CONVERTER_REGEXP_LIST_WITHOUT_QUOTES);
   final Pattern patternWith = Pattern.compile(Constants.CONVERTER_REGEXP_LIST_WITH_QUOTES);
 
   @Override
-  protected Object convert(String s) {
+  protected Object convert(String s) throws CsvDataTypeMismatchException {
     final Matcher matcherWithout = patternWithout.matcher(s);
     final Matcher matcherWith = patternWith.matcher(s);
     String indexString;
@@ -25,18 +27,12 @@ public class UUIDListConvertor extends AbstractBeanField<UUID, Integer> {
     } else if (matcherWith.find()) {
       indexString = s.substring(2, s.length() - 2);
     } else {
-      return new ArrayList<UUID>();
+      throw new CsvDataTypeMismatchException();
     }
 
-    String[] uuids = indexString.split(Constants.ARRAY_DELIMITER);
+    String[] list = indexString.split(Constants.ARRAY_DELIMITER);
 
-    if (uuids.length == 0 || uuids[0].equals(Constants.EMPTY_STRING)) {
-      return new ArrayList<UUID>();
-    } else {
-      return Arrays.stream(uuids)
-              .map(UUID::fromString)
-              .collect(Collectors.toList());
-    }
+    return Arrays.asList(list);
   }
 
   @Override

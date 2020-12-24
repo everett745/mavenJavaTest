@@ -3,7 +3,10 @@ package ru.sfedu.maven1.dataProviders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import ru.sfedu.maven1.enums.DealStatus;
+import ru.sfedu.maven1.enums.DealTypes;
+import ru.sfedu.maven1.enums.ObjectTypes;
 import ru.sfedu.maven1.enums.RequestStatuses;
 import ru.sfedu.maven1.model.*;
 
@@ -78,35 +81,39 @@ public class DataProviderTests {
     return deal;
   }
 
-  static void setUp(DataProvider dataProviderInstance) {
+  static void refreshDB(DataProvider dataProviderInstance) {
     dataProvider = dataProviderInstance;
     System.err.close();
     System.setErr(System.out);
+  }
 
-    dataProvider.deleteAll();
+
+  static void setUp(DataProvider dataProviderInstance) {
+    dataProvider = dataProviderInstance;
+    dataProvider.clearDB();
     dataProvider.initDB();
 
     User user = getTestUserA();
     dataProvider.createUser(
             user.getName(),
             user.getPhone(),
-            user.getAddress());
+            user.getAddress().getId());
 
     User user1 = getTestUserB();
     dataProvider.createUser(
             user1.getName(),
             user1.getPhone(),
-            user1.getAddress());
+            user1.getAddress().getId());
 
-   savedUser = dataProvider.getUsers().get().get(0);
-   savedUser1 = dataProvider.getUsers().get().get(1);
+    savedUser = dataProvider.getUsers().get().get(0);
+    savedUser1 = dataProvider.getUsers().get().get(1);
 
     Deal deal = getTestDeal();
     dataProvider.createDeal(
             savedUser.getId(),
             deal.getName(),
             deal.getDescription(),
-            deal.getAddress(),
+            deal.getAddress().getId(),
             deal.getDealType(),
             deal.getObject(),
             deal.getPrice());
@@ -116,7 +123,7 @@ public class DataProviderTests {
             savedUser1.getId(),
             publicDeal.getName(),
             publicDeal.getDescription(),
-            publicDeal.getAddress(),
+            publicDeal.getAddress().getId(),
             publicDeal.getCurrentStatus(),
             publicDeal.getDealType(),
             publicDeal.getObject(),
@@ -126,49 +133,60 @@ public class DataProviderTests {
     savedPublicDeal = dataProvider.getMyDeals(savedUser1.getId()).get().get(0);
   }
 
-  void preTest() {}
-
   void createUserCorrect() {
+    log.info("createUserCorrect");
     User user = getTestUserB();
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
             dataProvider.createUser(
                     user.getName(),
                     user.getPhone(),
-                    user.getAddress())
+                    user.getAddress().getId())
     );
   }
 
   void createUserIncorrect() {
+    log.info("createUserIncorrect");
     User user = getTestUserB();
 
     Assertions.assertThrows(NullPointerException.class, () -> dataProvider.createUser(
             null,
             user.getPhone(),
-            user.getAddress()));
+            user.getAddress().getId())
+    );
   }
 
   void getUserByIdCorrect() {
+    log.info("getUserByIdCorrect");
     Optional<User> user = dataProvider.getUser(savedUser.getId());
     Assertions.assertTrue(user.isPresent());
     Assertions.assertEquals(savedUser.getName(), user.get().getName());
     Assertions.assertEquals(savedUser.getPhone(), user.get().getPhone());
     Assertions.assertEquals(savedUser.getAddress(), user.get().getAddress());
+    log.info(user.get());
   }
 
   void getUserByIdIncorrect() {
-    Optional<User> user = dataProvider.getUser(UUID.randomUUID());
+    log.info("getUserByIdIncorrect");
+    Optional<User> user = dataProvider.getUser(UUID.randomUUID().toString());
     Assertions.assertTrue(user.isPresent());
   }
 
   void editUserCorrect() {
+    log.info("editUserCorrect");
     User user = savedUser;
     user.setName(TestsConstants.TEST_USER_2_NAME);
     user.setPhone(TestsConstants.TEST_USER_2_PHONE);
 
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.editUser(user));
+            dataProvider.editUser(
+                    user.getId(),
+                    user.getName(),
+                    user.getPhone(),
+                    user.getAddress().getId()
+            )
+    );
 
     User newUser = dataProvider.getUser(user.getId()).get();
 
@@ -177,17 +195,25 @@ public class DataProviderTests {
   }
 
   void editUserIncorrect() {
+    log.info("editUserIncorrect");
     User user = savedUser;
-    user.setId(UUID.randomUUID());
+    user.setId(UUID.randomUUID().toString());
     user.setName(TestsConstants.TEST_USER_2_NAME);
     user.setPhone(TestsConstants.TEST_USER_2_PHONE);
 
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.editUser(user));
+            dataProvider.editUser(
+                    user.getId(),
+                    user.getName(),
+                    user.getPhone(),
+                    user.getAddress().getId()
+            )
+    );
   }
 
   void deleteUserCorrect() {
+    log.info("deleteUserCorrect");
     User user = savedUser;
 
     Assertions.assertEquals(
@@ -196,50 +222,59 @@ public class DataProviderTests {
   }
 
   void deleteUserIncorrect() {
+    log.info("deleteUserIncorrect");
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.deleteUser(UUID.randomUUID()));
+            dataProvider.deleteUser(UUID.randomUUID().toString()));
   }
 
   void getUsersCorrect() {
+    log.info("getUsersCorrect");
     log.debug(dataProvider.getUsers());
   }
 
   void getUsersIncorrect() {
-    dataProvider.deleteAll();
-    Assertions.assertNotEquals(new ArrayList<>(), dataProvider.getUsers().get());
+    log.info("getUsersIncorrect");
+    dataProvider.clearDB();
+    Assertions.assertTrue(dataProvider.getUsers().isPresent());
     log.debug(dataProvider.getUsers());
   }
 
   void getAddresses() {
+    log.info("getAddresses");
     log.debug(dataProvider.getAddresses());
   }
 
   void getAddressCorrect() {
+    log.info("getAddressCorrect");
     Optional<Address> address = dataProvider.getAddress(1);
     Assertions.assertTrue(address.isPresent());
     log.debug(address);
   }
 
   void getAddressIncorrect() {
+    log.info("getAddressIncorrect");
     Optional<Address> address = dataProvider.getAddress(99999);
     Assertions.assertTrue(address.isPresent());
     log.debug(address);
   }
 
   void getAddressByNameCorrect() {
-    Optional<Address> address = dataProvider.getAddress("Моск");
+    log.info("getAddressByNameCorrect");
+    Optional<Address> address = dataProvider.getAddress("моск");
     Assertions.assertTrue(address.isPresent());
     log.debug(address);
   }
 
   void getAddressByNameIncorrect() {
+    log.info("getAddressByNameIncorrect");
     Optional<Address> address = dataProvider.getAddress("[]asd");
     Assertions.assertTrue(address.isPresent());
     log.debug(address);
   }
 
   void createDealCorrect() {
+    log.info("createDealCorrect");
     Deal deal = getTestDeal();
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -247,7 +282,7 @@ public class DataProviderTests {
                     savedUser.getId(),
                     deal.getName(),
                     deal.getDescription(),
-                    deal.getAddress(),
+                    deal.getAddress().getId(),
                     deal.getDealType(),
                     deal.getObject(),
                     deal.getPrice())
@@ -255,14 +290,15 @@ public class DataProviderTests {
   }
 
   void createDealIncorrect() {
+    log.info("createDealIncorrect");
     Deal deal = getTestDeal();
-    Assertions.assertEquals(
-            RequestStatuses.SUCCESS,
+    Assertions.assertThrows(
+            NullPointerException.class, () ->
             dataProvider.createDeal(
-                    UUID.randomUUID(),
+                    UUID.randomUUID().toString(),
                     deal.getName(),
-                    deal.getDescription(),
                     null,
+                    new Address().getId(),
                     deal.getDealType(),
                     deal.getObject(),
                     deal.getPrice())
@@ -270,6 +306,7 @@ public class DataProviderTests {
   }
 
   void createPublicDealCorrect() {
+    log.info("createPublicDealCorrect");
     PublicDeal publicDeal = getTestPublicDeal();
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -277,7 +314,7 @@ public class DataProviderTests {
                     savedUser1.getId(),
                     publicDeal.getName(),
                     publicDeal.getDescription(),
-                    publicDeal.getAddress(),
+                    publicDeal.getAddress().getId(),
                     publicDeal.getCurrentStatus(),
                     publicDeal.getDealType(),
                     publicDeal.getObject(),
@@ -286,67 +323,87 @@ public class DataProviderTests {
   }
 
   void createPublicDealIncorrect() {
+    log.info("createPublicDealIncorrect");
     PublicDeal publicDeal = getTestPublicDeal();
-    Assertions.assertEquals(
-            RequestStatuses.SUCCESS,
+    Assertions.assertThrows(
+        NullPointerException.class, () ->
             dataProvider.createDeal(
-                    UUID.randomUUID(),
-                    publicDeal.getName(),
-                    publicDeal.getDescription(),
-                    null,
-                    publicDeal.getCurrentStatus(),
-                    publicDeal.getDealType(),
-                    publicDeal.getObject(),
-                    publicDeal.getPrice())
+                savedUser1.getId(),
+                publicDeal.getName(),
+                publicDeal.getDescription(),
+                publicDeal.getAddress().getId(),
+                publicDeal.getCurrentStatus(),
+                publicDeal.getDealType(),
+                publicDeal.getObject(),
+                publicDeal.getPrice())
     );
   }
 
   void getGlobalDealsCorrect() {
+    log.info("getGlobalDealsCorrect");
     Assertions.assertTrue(dataProvider.getGlobalDeals(savedUser.getId()).isPresent());
     log.info(dataProvider.getGlobalDeals(savedUser.getId()).get());
   }
 
   void getGlobalDealsIncorrect() {
-    dataProvider.deleteAll();
+    log.info("getGlobalDealsIncorrect");
+    dataProvider.clearDB();
     Assertions.assertTrue(dataProvider.getGlobalDeals(savedUser.getId()).isPresent());
   }
 
   void getMyDealsCorrect() {
+    log.info("getMyDealsCorrect");
     Assertions.assertTrue(dataProvider.getMyDeals(savedUser.getId()).isPresent());
     log.info(dataProvider.getMyDeals(savedUser.getId()).get());
   }
 
   void getMyDealsIncorrect() {
-    Assertions.assertTrue(dataProvider.getMyDeals(UUID.randomUUID()).isPresent());
-    log.info(dataProvider.getMyDeals(UUID.randomUUID()).get());
+    log.info("getMyDealsIncorrect");
+    Assertions.assertTrue(dataProvider.getMyDeals(UUID.randomUUID().toString()).isPresent());
+    log.info(dataProvider.getMyDeals(UUID.randomUUID().toString()).get());
   }
 
   void manageDealCorrect() {
+    log.info("manageDealCorrect");
     Assertions.assertTrue(dataProvider.manageDeal(savedDeal.getId()).isPresent());
     log.info(dataProvider.manageDeal(savedDeal.getId()).get());
   }
 
   void manageDealIncorrect() {
-    Assertions.assertTrue(dataProvider.manageDeal(UUID.randomUUID()).isPresent());
+    log.info("manageDealIncorrect");
+    Assertions.assertTrue(dataProvider.manageDeal(UUID.randomUUID().toString()).isPresent());
     log.info(dataProvider.manageDeal(savedDeal.getId()).get());
   }
 
   void removeDealCorrect() {
+    log.info("removeDealCorrect");
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(savedPublicDeal.getId()));
   }
 
   void removeDealIncorrect() {
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(UUID.randomUUID()));
+    log.info("removeDealIncorrect");
+    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(UUID.randomUUID().toString()));
   }
 
   void updateDealCorrect() {
+    log.info("updateDealCorrect");
     Deal deal = savedDeal;
     deal.setPrice(TestsConstants.TEST_PUBLIC_DEAL_PRICE);
     deal.setName(TestsConstants.TEST_PUBLIC_DEAL_NAME);
     deal.setDescription(TestsConstants.TEST_PUBLIC_DEAL_DESCRIPTION);
     deal.setObject(TestsConstants.TEST_PUBLIC_DEAL_OBJECT);
 
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.updateDeal(deal));
+    Assertions.assertEquals(RequestStatuses.SUCCESS,
+            dataProvider.updateDeal(
+                    deal.getId(),
+                    deal.getName(),
+                    deal.getAddress().getId(),
+                    deal.getDescription(),
+                    deal.getDealType(),
+                    deal.getObject(),
+                    deal.getPrice()
+            )
+    );
     Deal updatedDeal = dataProvider.manageDeal(deal.getId()).get();
 
     Assertions.assertEquals(updatedDeal.getName(), TestsConstants.TEST_PUBLIC_DEAL_NAME);
@@ -356,42 +413,59 @@ public class DataProviderTests {
   }
 
   void updateDealIncorrect() {
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.removeDeal(UUID.randomUUID()));
+    log.info("updateDealIncorrect");
+    Assertions.assertThrows(NullPointerException.class, () ->
+            dataProvider.updateDeal(
+                    "",
+                    "",
+                    1,
+                    "",
+                    DealTypes.PURCHASE,
+                    ObjectTypes.BUILDING,
+                    ""
+            )
+    );
   }
 
   void setStatusCorrect(){
+    log.info("setStatusCorrect");
     log.debug(savedPublicDeal);
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.setStatus(savedPublicDeal.getId(), DealStatus.AD));
     log.debug(dataProvider.manageDeal(savedPublicDeal.getId()).get());
   }
 
   void setStatusIncorrect(){
+    log.info("setStatusIncorrect");
     log.debug(savedDeal);
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.setStatus(savedDeal.getId(), DealStatus.AD));
     log.debug(dataProvider.manageDeal(savedDeal.getId()).get());
   }
 
   void addDealRequestCorrect(){
+    log.info("addDealRequestCorrect");
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId()));
   }
 
   void addDealRequestIncorrect(){
+    log.info("addDealRequestIncorrect");
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId()));
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId()));
   }
 
   void getDealQueueCorrect(){
+    log.info("getDealQueueCorrect");
     Queue queue = dataProvider.getDealQueue(savedDeal.getId()).get();
     Assertions.assertEquals(queue.getId(), savedDeal.getRequests().getId());
     log.debug(queue);
   }
 
   void getDealQueueIncorrect(){
-    Queue queue = dataProvider.getDealQueue(UUID.randomUUID()).get();
-    Assertions.assertEquals(queue.getId(), savedDeal.getRequests().getId());
+    log.info("getDealQueueIncorrect");
+    Assertions.assertTrue(dataProvider.getDealQueue(UUID.randomUUID().toString()).isPresent());
   }
 
   void manageDealRequestQueueCorrect(){
+    log.info("manageDealRequestQueueCorrect");
     dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
 
     Assertions.assertEquals(
@@ -400,13 +474,15 @@ public class DataProviderTests {
   }
 
   void manageDealRequestIncorrect(){
+    log.info("manageDealRequestIncorrect");
     dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.manageDealRequest(UUID.randomUUID(), savedDeal.getId(),  true));
+            dataProvider.manageDealRequest(UUID.randomUUID().toString(), savedDeal.getId(),  true));
   }
 
   void acceptDealRequestCorrect() {
+    log.info("acceptDealRequestCorrect");
     dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -414,12 +490,14 @@ public class DataProviderTests {
   }
 
   void acceptDealRequestIncorrect() {
+    log.info("acceptDealRequestIncorrect");
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.acceptDealRequest(UUID.randomUUID(), savedDeal.getId()));
+            dataProvider.acceptDealRequest(UUID.randomUUID().toString(), savedDeal.getId()));
   }
 
   void refuseDealRequestCorrect() {
+    log.info("refuseDealRequestCorrect");
     dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -427,32 +505,37 @@ public class DataProviderTests {
   }
 
   void refuseDealRequestIncorrect() {
+    log.info("refuseDealRequestIncorrect");
     dataProvider.addDealRequest(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.refuseDealRequest(UUID.randomUUID(),savedDeal.getId()));
+            dataProvider.refuseDealRequest(UUID.randomUUID().toString(),savedDeal.getId()));
   }
 
   void addDealPerformerCorrect(){
+    log.info("addDealPerformerCorrect");
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId()));
   }
 
   void addDealPerformerIncorrect(){
+    log.info("addDealPerformerIncorrect");
     Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId()));
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealPerformer(savedUser.getId(), savedPublicDeal.getId()));
+    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId()));
   }
 
   void getMyQueueCorrect(){
+    log.info("getMyQueueCorrect");
     Queue queue = dataProvider.getMyQueue(savedUser.getId()).get();
     Assertions.assertEquals(queue.getId(), savedUser.getQueue().getId());
   }
 
   void getMyQueueIncorrect(){
-    Queue queue = dataProvider.getDealQueue(UUID.randomUUID()).get();
-    Assertions.assertEquals(queue.getId(), savedUser.getQueue().getId());
+    log.info("getMyQueueIncorrect");
+    Assertions.assertTrue(dataProvider.getDealQueue(UUID.randomUUID().toString()).isPresent());
   }
 
   void manageDealPerformerCorrect(){
+    log.info("manageDealPerformerCorrect");
     dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -460,6 +543,7 @@ public class DataProviderTests {
   }
 
   void manageDealPerformerIncorrect(){
+    log.info("manageDealPerformerIncorrect");
     dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -467,6 +551,7 @@ public class DataProviderTests {
   }
 
   void acceptDealPerformerCorrect() {
+    log.info("acceptDealPerformerCorrect");
     dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -474,6 +559,7 @@ public class DataProviderTests {
   }
 
   void acceptDealPerformerIncorrect() {
+    log.info("acceptDealPerformerIncorrect");
     dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -481,6 +567,7 @@ public class DataProviderTests {
   }
 
   void refuseDealPerformerCorrect() {
+    log.info("refuseDealPerformerCorrect");
     dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
@@ -488,6 +575,7 @@ public class DataProviderTests {
   }
 
   void refuseDealPerformerIncorrect() {
+    log.info("refuseDealPerformerIncorrect");
     dataProvider.addDealPerformer(savedUser.getId(), savedDeal.getId());
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,

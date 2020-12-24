@@ -11,9 +11,7 @@ public class DealHistoryListConvertor extends AbstractBeanField<UUID, Integer> {
 
   @Override
   protected Object convert(String s) {
-    UUID uuid = UUID.fromString(s);
-
-    Optional<List<DealHistory>> dealHistoryList = dataProviderCSV.getDealHistoryByDeal(uuid);
+    Optional<List<DealHistory>> dealHistoryList = dataProviderCSV.getDealHistoryByDeal(s);
 
     return dealHistoryList.orElseGet(ArrayList::new);
   }
@@ -21,6 +19,6 @@ public class DealHistoryListConvertor extends AbstractBeanField<UUID, Integer> {
   @Override
   protected String convertToWrite(Object value) {
     List<DealHistory> dealHistoryList = (List<DealHistory>) value;
-    return dealHistoryList.get(0).getId().toString();
+    return dealHistoryList.get(0).getId();
   }
 }

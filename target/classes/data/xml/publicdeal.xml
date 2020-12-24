@@ -1,12 +1,12 @@
 <List>
-   <object class="ru.sfedu.maven1.model.PublicDeal" object="LAND" name="Новая публичная сделка" description="тестовое описание публичной сделки" dealType="SALE" price="123 000" owner="528468a2-ea6e-40c6-aafc-bcee9454afd4" id="47b85e49-2f31-4f88-98f3-6f657e852767" createdAt="2020-12-19 16:59:49.862 MSK" performer="" model="PUBLIC" currentStatus="NEW_DEAL">
+   <object class="ru.sfedu.maven1.model.PublicDeal" object="LAND" name="Новая публичная сделка" id="121d16d3-18dc-4837-8b68-ee40012aaea0" owner="3b5f433b-2fba-4307-9775-39847c602de9" dealType="SALE" price="123 000" description="тестовое описание публичной сделки" model="PUBLIC" createdAt="2020-12-22 22:23:26.395 MSK" currentStatus="NEW_DEAL">
       <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
-      <requests id="ea9e5719-38f1-4fd4-9f00-d86e7107c337">
+      <requests id="5f50c47f-e96e-4aea-986b-7b902383c074">
          <items class="java.util.ArrayList"/>
       </requests>
       <history class="java.util.ArrayList">
-         <dealHistory status="NEW_DEAL" text="Новая сделка" created_at="2020-12-19 16:59:49.862 MSK">
-            <id>47b85e49-2f31-4f88-98f3-6f657e852767</id>
+         <dealHistory status="NEW_DEAL" created_at="2020-12-22 22:23:26.395 MSK" text="Новая сделка">
+            <id>121d16d3-18dc-4837-8b68-ee40012aaea0</id>
          </dealHistory>
       </history>
    </object>
