@@ -18,9 +18,6 @@ public class DataProviderXMLTest extends DataProviderTests {
   }
 
   @Test
-  void testBeforeAll() { }
-
-  @Test
   void createUserCorrect() {
     super.createUserCorrect();
   }

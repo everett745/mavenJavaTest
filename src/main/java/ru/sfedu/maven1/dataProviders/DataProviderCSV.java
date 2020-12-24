@@ -129,10 +129,10 @@ public class DataProviderCSV implements DataProvider {
   public RequestStatuses createUser(
           @NotNull String name,
           @NotNull String phone,
-          @NotNull Address address) {
-    Optional<User> userOptional = createUserOptional(name, phone, address);
-    if (userOptional.isPresent()) {
-      return RequestStatuses.SUCCESS;
+          long addressId) {
+    Optional<Address> address = getAddress(addressId);
+    if (address.isPresent()) {
+      return createUserOptional(name, phone, address.get());
     } else {
       return RequestStatuses.FAILED;
     }
@@ -161,10 +161,19 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses editUser(@NotNull User editedUser) {
-    Optional<User> user = getUser(editedUser.getId());
-    if (user.isPresent()) {
-      return updateUser(editedUser);
+  public RequestStatuses editUser(
+          @NotNull String userId,
+          @NotNull String name,
+          @NotNull String phone,
+          long addressId) {
+    Optional<User> userOptional = getUser(userId);
+    Optional<Address> addressOptional = getAddress(addressId);
+    if (userOptional.isPresent() && addressOptional.isPresent()) {
+      User user = userOptional.get();
+      user.setName(name);
+      user.setPhone(phone);
+      user.setAddress(addressOptional.get());
+      return updateUser(user);
     } else {
       return RequestStatuses.NOT_FOUNDED;
     }
@@ -182,7 +191,7 @@ public class DataProviderCSV implements DataProvider {
               .equals(userId))
               .collect(Collectors.toList());
 
-      if (deleteUserFromCompany(optionalUser.get().getId()) == RequestStatuses.SUCCESS) {
+      if (deleteUserFromCompany(optionalUser.get().getId()).equals(RequestStatuses.SUCCESS)) {
         deleteQueue(optionalUser.get().getQueue().getId());
         return rewriteUsers(users);
       } else {
@@ -232,6 +241,47 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
+  @Override
+  public RequestStatuses addAddress(
+          @NotNull String city,
+          @NotNull String region,
+          @NotNull String district) {
+    Optional<List<Address>> addresses = getAddresses();
+    try {
+      Address address = new Address();
+      address.setCity(city);
+      address.setRegion(region);
+      address.setDistrict(district);
+      address.setId(addresses.isPresent() ? addresses.get().size() : Constants.INIT_ADDRESS_ID);
+      insertIntoCSV(address);
+      return RequestStatuses.SUCCESS;
+    } catch (IOException e) {
+      log.error(e);
+      return RequestStatuses.SUCCESS;
+    }
+  }
+
+  @Override
+  public RequestStatuses removeAddress(long id) {
+    Optional<List<Address>> addresses = getAddresses();
+    try {
+      if (addresses.isPresent()) {
+        List<Address> addressList = addresses.get();
+        addressList = addressList.stream().filter(item -> item.getId() != id)
+                .collect(Collectors.toList()
+                );
+        insertIntoCSV(Address.class, addressList, true);
+        return RequestStatuses.SUCCESS;
+      } else {
+       log.error(Constants.UNDEFINED_ADDRESSES);
+       return RequestStatuses.FAILED;
+      }
+    } catch (IOException e) {
+      log.error(e);
+      return RequestStatuses.FAILED;
+    }
+  }
+
   public Optional<Queue> getQueue(@NotNull String id) {
     return getQueueById(id);
   }
@@ -241,7 +291,7 @@ public class DataProviderCSV implements DataProvider {
           @NotNull String userId,
           @NotNull String name,
           @NotNull String description,
-          @NotNull Address address,
+          long addressId,
           @NotNull DealTypes dealType,
           @NotNull ObjectTypes objectType,
           @NotNull String price) {
@@ -249,12 +299,13 @@ public class DataProviderCSV implements DataProvider {
       Deal deal = new Deal();
       String uuid = UUID.randomUUID().toString();
       Optional<Queue> queueOptional = createQueue();
+      Optional<Address> addressOptional = getAddress(addressId);
 
-      if (queueOptional.isPresent()) {
+      if (queueOptional.isPresent() && addressOptional.isPresent()) {
         deal.setId(uuid);
         deal.setName(name);
         deal.setDescription(description);
-        deal.setAddress(address);
+        deal.setAddress(addressOptional.get());
         deal.setRequests(queueOptional.get());
         deal.setOwner(userId);
         deal.setDealModel(DealModel.PRIVATE);
@@ -279,7 +330,7 @@ public class DataProviderCSV implements DataProvider {
           @NotNull String userId,
           @NotNull String name,
           @NotNull String description,
-          @NotNull Address address,
+          long addressId,
           @NotNull DealStatus currentStatus,
           @NotNull DealTypes dealType,
           @NotNull ObjectTypes objectType,
@@ -288,12 +339,13 @@ public class DataProviderCSV implements DataProvider {
       PublicDeal publicDeal = new PublicDeal();
       String uuid = UUID.randomUUID().toString();
       Optional<Queue> queueOptional = createQueue();
+      Optional<Address> addressOptional = getAddress(addressId);
 
-      if (queueOptional.isPresent()) {
+      if (queueOptional.isPresent() && addressOptional.isPresent()) {
         publicDeal.setId(uuid);
         publicDeal.setName(name);
         publicDeal.setDescription(description);
-        publicDeal.setAddress(address);
+        publicDeal.setAddress(addressOptional.get());
         publicDeal.setRequests(queueOptional.get());
         publicDeal.setDealModel(DealModel.PUBLIC);
         publicDeal.setCurrentStatus(currentStatus);
@@ -344,16 +396,26 @@ public class DataProviderCSV implements DataProvider {
   }
 
   @Override
-  public RequestStatuses updateDeal(@NotNull Deal updatedDeal) {
-    Optional<Deal> optionalDeal = getDealById(updatedDeal.getId());
-    if (optionalDeal.isPresent()) {
+  public RequestStatuses updateDeal(
+          @NotNull String id,
+          @NotNull String name,
+          long addressId,
+          @NotNull String description,
+          @NotNull DealTypes dealType,
+          @NotNull ObjectTypes objectType,
+          @NotNull String price) {
+    Optional<Deal> optionalDeal = getDealById(id);
+    Optional<Address> addressOptional = getAddress(addressId);
+    if (optionalDeal.isPresent() && addressOptional.isPresent()) {
       Deal deal = optionalDeal.get();
+      deal.setName(name);
+      deal.setDescription(description);
+      deal.setAddress(addressOptional.get());
+      deal.setDealType(dealType);
+      deal.setObject(objectType);
+      deal.setPrice(price);
 
-      switch (deal.getDealModel()) {
-        case PUBLIC: return updatePublicDeal((PublicDeal) updatedDeal);
-        case PRIVATE: return updateSimpleDeal(updatedDeal);
-        default: return RequestStatuses.FAILED;
-      }
+      return updateDeal(deal);
     } else {
       log.error(Constants.UNDEFINED_DEAL);
       return RequestStatuses.FAILED;
@@ -484,11 +546,9 @@ public class DataProviderCSV implements DataProvider {
       if (requests.getItems().contains(userId)) {
         requests.setItems(new ArrayList<>());
         updateQueue(requests);
-
         deal.setPerformer(userId);
-        updateDeal(deal);
 
-        return RequestStatuses.SUCCESS;
+        return updateDeal(deal);
       } else {
         log.error(Constants.UNDEFINED_USER_IN_DEAL_REQUESTS);
         return RequestStatuses.FAILED;
@@ -595,12 +655,11 @@ public class DataProviderCSV implements DataProvider {
                   .collect(Collectors.toList());
 
           deal.setPerformer(userId);
-          updateDeal(deal);
 
           requests.setItems(requestsList);
           updateQueue(requests);
 
-          return RequestStatuses.SUCCESS;
+          return updateDeal(deal);
         } else {
           log.error(Constants.UNDEFINED_PERFORM);
           return RequestStatuses.FAILED;
@@ -806,7 +865,7 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
-  private Optional<User> createUserOptional(
+  private RequestStatuses createUserOptional(
           @NotNull String name,
           @NotNull String phone,
           @NotNull Address address) {
@@ -823,19 +882,20 @@ public class DataProviderCSV implements DataProvider {
         user.setQueue(queueOptional.get());
         insertIntoCSV(user);
         addUserToCompany(company.get().getId(), user);
-        return Optional.of(user);
+        return RequestStatuses.SUCCESS;
       } else {
-        return Optional.empty();
+        return RequestStatuses.FAILED;
       }
     } catch (IOException e) {
       log.error(e);
-      return Optional.empty();
+      return RequestStatuses.FAILED;
     }
   }
 
   private Optional<List<User>> getUsersOptional() {
     try {
-      return Optional.of(getFromCSV(User.class));
+      List<User> users = getFromCSV(User.class);
+      return users.isEmpty() ? Optional.empty() : Optional.of(users);
     } catch (IOException e) {
       log.error(e);
       return Optional.empty();
@@ -1124,6 +1184,14 @@ public class DataProviderCSV implements DataProvider {
     }
   }
 
+  private RequestStatuses updateDeal(Deal deal) {
+    switch (deal.getDealModel()) {
+      case PUBLIC: return updatePublicDeal((PublicDeal) deal);
+      case PRIVATE: return updateSimpleDeal(deal);
+      default: return RequestStatuses.FAILED;
+    }
+  }
+
   private RequestStatuses updateSimpleDeal(Deal updatedDeal) {
     Optional<List<Deal>> dealsList = getDealsList();
     if (dealsList.isPresent()) {
@@ -1134,7 +1202,6 @@ public class DataProviderCSV implements DataProvider {
 
       deals.add(updatedDeal);
       try {
-        updateQueue(updatedDeal.getRequests());
         insertIntoCSV(Deal.class, deals, true);
         return RequestStatuses.SUCCESS;
       } catch (IOException e) {
@@ -1156,7 +1223,6 @@ public class DataProviderCSV implements DataProvider {
 
       deals.add(updatedDeal);
       try {
-        updateQueue(updatedDeal.getRequests());
         insertIntoCSV(PublicDeal.class, deals, true);
         return RequestStatuses.SUCCESS;
       } catch (IOException e) {

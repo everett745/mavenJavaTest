@@ -28,23 +28,63 @@ public class DataProviderJdbc implements DataProvider {
     return INSTANCE;
   }
 
+  private Connection getConnection() throws ClassNotFoundException, SQLException, IOException {
+    Class.forName(PropertyProvider.getProperty(Constants.DB_DRIVER));
+    return DriverManager.getConnection(
+            PropertyProvider.getProperty(Constants.DB_URL),
+            PropertyProvider.getProperty(Constants.DB_USER),
+            PropertyProvider.getProperty(Constants.DB_PASSWORD));
+  }
+
+  private RequestStatuses execute(String sql) {
+    log.info(sql);
+    try {
+      PreparedStatement statement = getConnection().prepareStatement(sql);
+      statement.executeUpdate();
+      statement.close();
+      return RequestStatuses.SUCCESS;
+    } catch (SQLException | IOException | ClassNotFoundException e) {
+      log.error(e);
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private ResultSet getResultSet(String sql) {
+    log.info(sql);
+    try {
+      PreparedStatement statement = getConnection().prepareStatement(sql);
+      return statement.executeQuery();
+    } catch (SQLException | ClassNotFoundException | IOException e) {
+      log.error(e);
+      return null;
+    }
+  }
+
   @Override
-  public RequestStatuses createUser(@NotNull String name, @NotNull String phone, @NotNull Address address) {
+  public RequestStatuses createUser(
+          @NotNull String name,
+          @NotNull String phone,
+          long addressId) {
     try {
       String newId = UUID.randomUUID().toString();
       String queueId = createQueue(newId);
-      if (queueId == null) {
+      Optional<Address> addressOptional = getAddress(addressId);
+      if (queueId != null
+              && createCompany(newId).equals(RequestStatuses.SUCCESS)
+              && addressOptional.isPresent()
+      ) {
+        return execute(
+                String.format(Constants.INSERT_USER,
+                        newId,
+                        addressOptional.get().getId(),
+                        queueId,
+                        name,
+                        phone
+                )
+        );
+      } else {
         return RequestStatuses.FAILED;
       }
-      return execute(
-              String.format(Constants.INSERT_USER,
-                      newId,
-                      address.getId(),
-                      queueId,
-                      name,
-                      phone
-              )
-      );
     } catch (Exception e) {
       log.error(e);
       return RequestStatuses.FAILED;
@@ -58,19 +98,8 @@ public class DataProviderJdbc implements DataProvider {
       if (set != null && set.next()) {
         List<User> list = new ArrayList<>();
         do {
-          Optional<Queue> queue = getQueue(set.getString(Constants.COLUMN_USER_QUEUE));
-          Optional<Address> address = getAddress(set.getLong(Constants.COLUMN_USER_ADDRESS));
-          if (queue.isPresent() && address.isPresent()) {
-            User user = new User();
-            user.setId(set.getString(Constants.COLUMN_USER_ID));
-            user.setAddress(address.get());
-            user.setQueue(queue.get());
-            user.setName(set.getString(Constants.COLUMN_USER_NAME));
-            user.setPhone(set.getString(Constants.COLUMN_USER_PHONE));
-            list.add(user);
-          } else {
-            log.error(Constants.UNDEFINED_USER_DATA);
-          }
+          Optional<User> userOptional = getUserFromResultSet(set);
+          userOptional.ifPresent(list::add);
         } while (set.next());
         return Optional.of(list);
       } else {
@@ -85,43 +114,37 @@ public class DataProviderJdbc implements DataProvider {
 
   @Override
   public Optional<User> getUser(@NotNull String userId) {
-    ResultSet set = this.getResultSet(String.format(Constants.SELECT_USER, userId));
     try {
+      ResultSet set = getResultSet(String.format(Constants.SELECT_USER, userId));
       if (set != null && set.next()) {
-        Optional<Queue> queue = getQueue(set.getString(Constants.COLUMN_USER_QUEUE));
-        Optional<Address> address = getAddress(set.getLong(Constants.COLUMN_USER_ADDRESS));
-
-        if (queue.isPresent() && address.isPresent()) {
-          User user = new User();
-          user.setId(set.getString(Constants.COLUMN_USER_ID));
-          user.setAddress(address.get());
-          user.setQueue(queue.get());
-          user.setName(set.getString(Constants.COLUMN_USER_NAME));
-          user.setPhone(set.getString(Constants.COLUMN_USER_PHONE));
-          return Optional.of(user);
-        }
-        log.error(Constants.UNDEFINED_USER_DATA);
-        return Optional.empty();
+        return getUserFromResultSet(set);
       } else {
         log.error(Constants.UNDEFINED_USER);
         return Optional.empty();
       }
     } catch (SQLException e) {
-      log.error(e);
+      log.error(Constants.UNDEFINED_USER);
       return Optional.empty();
     }
   }
 
   @Override
-  public RequestStatuses editUser(@NotNull User user) {
+  public RequestStatuses editUser(
+          @NotNull String userId,
+          @NotNull String name,
+          @NotNull String phone,
+          long addressId) {
     try {
-      if (getUser(user.getId()).isPresent()) {
+      Optional<User> user = getUser(userId);
+      Optional<Address> address = getAddress(addressId);
+      if (user.isPresent() && address.isPresent()) {
+
         return execute(
                 String.format(Constants.UPDATE_USER,
-                        user.getAddress().getId(),
-                        user.getName(),
-                        user.getPhone(),
-                        user.getId()
+                        addressId,
+                        name,
+                        phone,
+                        userId
                 )
         );
       } else {
@@ -137,7 +160,10 @@ public class DataProviderJdbc implements DataProvider {
   public RequestStatuses deleteUser(@NotNull String userId) {
     try {
       Optional<User> user = getUser(userId);
-      if (user.isPresent()) {
+      if (user.isPresent()
+              && deleteQueue(userId).equals(RequestStatuses.SUCCESS)
+              && deleteCompany(userId).equals(RequestStatuses.SUCCESS)
+      ) {
         return execute(String.format(Constants.DELETE_USER, userId, userId));
       }
       return RequestStatuses.FAILED;
@@ -154,12 +180,8 @@ public class DataProviderJdbc implements DataProvider {
       if (set != null && set.next()) {
         List<Address> list = new ArrayList<>();
         do {
-          Address address = new Address();
-          address.setId(set.getLong(Constants.COLUMN_ADDRESS_ID));
-          address.setCity(set.getString(Constants.COLUMN_ADDRESS_CITY));
-          address.setRegion(set.getString(Constants.COLUMN_ADDRESS_REGION));
-          address.setDistrict(set.getString(Constants.COLUMN_ADDRESS_DISTRICT));
-          list.add(address);
+          Optional<Address> address = getAddressFromResultSet(set);
+          address.ifPresent(list::add);
         } while (set.next());
         return Optional.of(list);
       } else {
@@ -174,15 +196,10 @@ public class DataProviderJdbc implements DataProvider {
 
   @Override
   public Optional<Address> getAddress(long id) {
-    ResultSet set = this.getResultSet(String.format(Constants.SELECT_ADDRESS_BY_ID, id));
     try {
+      ResultSet set = this.getResultSet(String.format(Constants.SELECT_ADDRESS_BY_ID, id));
       if (set != null && set.next()) {
-        Address address = new Address();
-        address.setId(set.getLong(Constants.COLUMN_ADDRESS_ID));
-        address.setCity(set.getString(Constants.COLUMN_ADDRESS_CITY));
-        address.setDistrict(set.getString(Constants.COLUMN_ADDRESS_DISTRICT));
-        address.setRegion(set.getString(Constants.COLUMN_ADDRESS_REGION));
-        return Optional.of(address);
+        return getAddressFromResultSet(set);
       } else {
         log.error(Constants.UNDEFINED_ADDRESS);
         return Optional.empty();
@@ -195,15 +212,10 @@ public class DataProviderJdbc implements DataProvider {
 
   @Override
   public Optional<Address> getAddress(@NotNull String city) {
-    ResultSet set = this.getResultSet(String.format(Constants.SELECT_ADDRESS_BY_NAME, city.toLowerCase()));
     try {
+      ResultSet set = getResultSet(String.format(Constants.SELECT_ADDRESS_BY_NAME, city.toLowerCase()));
       if (set != null && set.next()) {
-        Address address = new Address();
-        address.setId(set.getLong(Constants.COLUMN_ADDRESS_ID));
-        address.setCity(set.getString(Constants.COLUMN_ADDRESS_CITY));
-        address.setDistrict(set.getString(Constants.COLUMN_ADDRESS_DISTRICT));
-        address.setRegion(set.getString(Constants.COLUMN_ADDRESS_REGION));
-        return Optional.of(address);
+        return getAddressFromResultSet(set);
       } else {
         log.error(Constants.UNDEFINED_ADDRESS);
         return Optional.empty();
@@ -215,11 +227,30 @@ public class DataProviderJdbc implements DataProvider {
   }
 
   @Override
+  public RequestStatuses addAddress(
+          @NotNull String city,
+          @NotNull String region,
+          @NotNull String district
+  ) {
+    Optional<List<Address>> addresses = getAddresses();
+    if (addresses.isPresent()) {
+      return execute(String.format(Constants.INSERT_ADDRESS, addresses.get().size(), city, region, district));
+    } else {
+      return execute(String.format(Constants.INSERT_ADDRESS, Constants.INIT_ADDRESS_ID, city, region, district));
+    }
+  }
+
+  @Override
+  public RequestStatuses removeAddress(long id) {
+    return execute(String.format(Constants.DELETE_ADDRESS, id));
+  }
+
+  @Override
   public RequestStatuses createDeal(
           @NotNull String userId,
           @NotNull String name,
           @NotNull String description,
-          @NotNull Address address,
+          long addressId,
           @NotNull DealTypes dealType,
           @NotNull ObjectTypes objectType,
           @NotNull String price
@@ -227,26 +258,33 @@ public class DataProviderJdbc implements DataProvider {
     try {
       String newId = UUID.randomUUID().toString();
       String requestsId = createQueue(newId);
-      if (requestsId == null) {
+      Deal deal = new Deal();
+      deal.setId(newId);
+      deal.setOwner(userId);
+      if (requestsId != null
+              && getAddress(addressId).isPresent()
+              && addDealToCompany(deal).equals(RequestStatuses.SUCCESS)
+      ) {
+        return execute(
+                String.format(Constants.INSERT_DEAL,
+                        newId,
+                        name,
+                        description,
+                        addressId,
+                        requestsId,
+                        userId,
+                        Constants.EMPTY_STRING,
+                        dealType,
+                        objectType,
+                        DealModel.PRIVATE,
+                        new Date().getTime(),
+                        price,
+                        Constants.EMPTY_STRING
+                )
+        );
+      } else {
         return RequestStatuses.FAILED;
       }
-      return execute(
-              String.format(Constants.INSERT_DEAL,
-                      newId,
-                      name,
-                      description,
-                      address.getId(),
-                      requestsId,
-                      userId,
-                      Constants.EMPTY_STRING,
-                      dealType,
-                      objectType,
-                      DealModel.PRIVATE,
-                      new Date().getTime(),
-                      price,
-                      Constants.EMPTY_STRING
-              )
-      );
     } catch (Exception e) {
       log.error(e);
       return RequestStatuses.FAILED;
@@ -258,7 +296,7 @@ public class DataProviderJdbc implements DataProvider {
           @NotNull String userId,
           @NotNull String name,
           @NotNull String description,
-          @NotNull Address address,
+          long addressId,
           @NotNull DealStatus currentStatus,
           @NotNull DealTypes dealType,
           @NotNull ObjectTypes objectType,
@@ -267,27 +305,35 @@ public class DataProviderJdbc implements DataProvider {
     try {
       String newId = UUID.randomUUID().toString();
       String requestsId = createQueue(newId);
-      if (requestsId == null) {
+      PublicDeal deal = new PublicDeal();
+      Optional<Address> addressOptional = getAddress(addressId);
+      deal.setId(newId);
+      deal.setOwner(userId);
+      if (requestsId != null
+              && addressOptional.isPresent()
+              && addDealHistory(newId, currentStatus).equals(RequestStatuses.SUCCESS)
+              && addDealToCompany(deal).equals(RequestStatuses.SUCCESS)
+      ) {
+        return execute(
+                String.format(Constants.INSERT_DEAL,
+                        newId,
+                        name,
+                        description,
+                        addressId,
+                        requestsId,
+                        userId,
+                        Constants.EMPTY_STRING,
+                        dealType,
+                        objectType,
+                        DealModel.PUBLIC,
+                        new Date().getTime(),
+                        price,
+                        currentStatus
+                )
+        );
+      } else {
         return RequestStatuses.FAILED;
       }
-      this.execute(
-              String.format(Constants.INSERT_DEAL,
-                      newId,
-                      name,
-                      description,
-                      address.getId(),
-                      requestsId,
-                      userId,
-                      Constants.EMPTY_STRING,
-                      dealType,
-                      objectType,
-                      DealModel.PUBLIC,
-                      new Date().getTime(),
-                      price,
-                      currentStatus
-              )
-      );
-      return addDealHistory(newId, currentStatus);
     } catch (Exception e) {
       log.error(e);
       return RequestStatuses.FAILED;
@@ -301,45 +347,7 @@ public class DataProviderJdbc implements DataProvider {
       if (set != null && set.next()) {
         List<Deal> list = new ArrayList<>();
         do {
-          Deal deal = new Deal();
-          deal.setId(set.getString(Constants.COLUMN_DEAL_ID));
-          deal.setDealModel(DealModel.valueOf(set.getString(Constants.COLUMN_DEAL_MODEL)));
-          deal.setName(set.getString(Constants.COLUMN_DEAL_NAME));
-          deal.setDescription(set.getString(Constants.COLUMN_DEAL_DESCRIPTION));
-          deal.setAddress(getAddress(set.getLong(Constants.COLUMN_DEAL_ADDRESS)).get());
-          deal.setRequests(getQueue(set.getString(Constants.COLUMN_DEAL_REQUESTS)).get());
-          deal.setOwner(set.getString(Constants.COLUMN_DEAL_OWNER));
-          deal.setPerformer(set.getString(Constants.COLUMN_DEAL_PERFORMER));
-          deal.setDealType(DealTypes.valueOf(set.getString(Constants.COLUMN_DEAL_TYPE)));
-          deal.setObject(ObjectTypes.valueOf(set.getString(Constants.COLUMN_DEAL_OBJECT)));
-          deal.setCreated_at(parseDate(set.getLong(Constants.COLUMN_DEAL_CREATED_AT)));
-          deal.setPrice(set.getString(Constants.COLUMN_DEAL_PRICE));
-
-          switch (deal.getDealModel()) {
-            case PRIVATE: {
-              list.add(deal);
-            } break;
-            case PUBLIC: {
-              Optional<List<DealHistory>> dealHistory = getDealHistory(deal.getId());
-              PublicDeal publicDeal = new PublicDeal();
-              publicDeal.setId(deal.getId());
-              publicDeal.setName(deal.getName());
-              publicDeal.setDescription(deal.getDescription());
-              publicDeal.setAddress(deal.getAddress());
-              publicDeal.setRequests(deal.getRequests());
-              publicDeal.setOwner(deal.getOwner());
-              publicDeal.setPerformer(deal.getPerformer());
-              publicDeal.setDealType(deal.getDealType());
-              publicDeal.setObject(deal.getObject());
-              publicDeal.setDealModel(deal.getDealModel());
-              publicDeal.setCreated_at(deal.getCreated_at());
-              publicDeal.setPrice(deal.getPrice());
-              publicDeal.setCurrentStatus(DealStatus.valueOf(set.getString(Constants.COLUMN_DEAL_STATUS)));
-              publicDeal.setHistory(dealHistory.get());
-              list.add(publicDeal);
-            }
-          }
-
+          list.add(getDealFromResultSet(set));
         } while (set.next());
         return Optional.of(list);
       } else {
@@ -359,24 +367,8 @@ public class DataProviderJdbc implements DataProvider {
       if (set != null && set.next()) {
         List<PublicDeal> list = new ArrayList<>();
         do {
-          PublicDeal deal = new PublicDeal();
-          deal.setId(set.getString(Constants.COLUMN_DEAL_ID));
-          deal.setDealModel(DealModel.valueOf(set.getString(Constants.COLUMN_DEAL_MODEL)));
-          deal.setName(set.getString(Constants.COLUMN_DEAL_NAME));
-          deal.setDescription(set.getString(Constants.COLUMN_DEAL_DESCRIPTION));
-          deal.setAddress(getAddress(set.getLong(Constants.COLUMN_DEAL_ADDRESS)).get());
-          deal.setRequests(getQueue(set.getString(Constants.COLUMN_DEAL_REQUESTS)).get());
-          deal.setOwner(set.getString(Constants.COLUMN_DEAL_OWNER));
-          deal.setPerformer(set.getString(Constants.COLUMN_DEAL_PERFORMER));
-          deal.setDealType(DealTypes.valueOf(set.getString(Constants.COLUMN_DEAL_TYPE)));
-          deal.setObject(ObjectTypes.valueOf(set.getString(Constants.COLUMN_DEAL_OBJECT)));
-          deal.setCreated_at(parseDate(set.getLong(Constants.COLUMN_DEAL_CREATED_AT)));
-          deal.setPrice(set.getString(Constants.COLUMN_DEAL_PRICE));
-          deal.setCurrentStatus(DealStatus.valueOf(set.getString(Constants.COLUMN_DEAL_STATUS)));
-          deal.setHistory(getDealHistory(deal.getId()).get());
-          list.add(deal);
+          list.add((PublicDeal) getDealFromResultSet(set));
         } while (set.next());
-
         return Optional.of(list);
       } else {
         log.info(Constants.UNDEFINED_DEAL);
@@ -393,41 +385,7 @@ public class DataProviderJdbc implements DataProvider {
     ResultSet set = this.getResultSet(String.format(Constants.SELECT_DEAL, id));
     try {
       if (set != null && set.next()) {
-        Deal deal = new Deal();
-        deal.setId(set.getString(Constants.COLUMN_DEAL_ID));
-        deal.setDealModel(DealModel.valueOf(set.getString(Constants.COLUMN_DEAL_MODEL)));
-        deal.setName(set.getString(Constants.COLUMN_DEAL_NAME));
-        deal.setDescription(set.getString(Constants.COLUMN_DEAL_DESCRIPTION));
-        deal.setAddress(getAddress(set.getLong(Constants.COLUMN_DEAL_ADDRESS)).get());
-        deal.setRequests(getQueue(set.getString(Constants.COLUMN_DEAL_REQUESTS)).get());
-        deal.setOwner(set.getString(Constants.COLUMN_DEAL_OWNER));
-        deal.setPerformer(set.getString(Constants.COLUMN_DEAL_PERFORMER));
-        deal.setDealType(DealTypes.valueOf(set.getString(Constants.COLUMN_DEAL_TYPE)));
-        deal.setObject(ObjectTypes.valueOf(set.getString(Constants.COLUMN_DEAL_OBJECT)));
-        deal.setCreated_at(parseDate(set.getLong(Constants.COLUMN_DEAL_CREATED_AT)));
-        deal.setPrice(set.getString(Constants.COLUMN_DEAL_PRICE));
-
-        if (deal.getDealModel() == DealModel.PRIVATE) {
-          return Optional.of(deal);
-        } else {
-          Optional<List<DealHistory>> dealHistory = getDealHistory(deal.getId());
-          PublicDeal publicDeal = new PublicDeal();
-          publicDeal.setId(deal.getId());
-          publicDeal.setName(deal.getName());
-          publicDeal.setDescription(deal.getDescription());
-          publicDeal.setAddress(deal.getAddress());
-          publicDeal.setRequests(deal.getRequests());
-          publicDeal.setOwner(deal.getOwner());
-          publicDeal.setPerformer(deal.getPerformer());
-          publicDeal.setDealType(deal.getDealType());
-          publicDeal.setObject(deal.getObject());
-          publicDeal.setDealModel(deal.getDealModel());
-          publicDeal.setCreated_at(deal.getCreated_at());
-          publicDeal.setPrice(deal.getPrice());
-          publicDeal.setCurrentStatus(DealStatus.valueOf(set.getString(Constants.COLUMN_DEAL_STATUS)));
-          publicDeal.setHistory(dealHistory.get());
-          return Optional.of(publicDeal);
-        }
+        return Optional.of(getDealFromResultSet(set));
       } else {
         log.info(Constants.UNDEFINED_DEAL);
         return Optional.empty();
@@ -441,8 +399,13 @@ public class DataProviderJdbc implements DataProvider {
   @Override
   public RequestStatuses removeDeal(@NotNull String id) {
     try {
-      if (manageDeal(id).isPresent()) {
-        return execute(String.format(Constants.DELETE_DEAL, id, id, id));
+      Optional<Deal> deal = manageDeal(id);
+      if (deal.isPresent()
+              && deleteDealFromCompany(deal.get()).equals(RequestStatuses.SUCCESS)
+              && deleteQueue(deal.get().getId()).equals(RequestStatuses.SUCCESS)
+              && deleteDealHistory(deal.get().getId()).equals(RequestStatuses.SUCCESS)
+      ) {
+        return execute(String.format(Constants.DELETE_DEAL, id));
       } else {
         return RequestStatuses.FAILED;
       }
@@ -453,16 +416,25 @@ public class DataProviderJdbc implements DataProvider {
   }
 
   @Override
-  public RequestStatuses updateDeal(@NotNull Deal deal) {
-    if (manageDeal(deal.getId()).isPresent()) {
+  public RequestStatuses updateDeal(
+          @NotNull String id,
+          @NotNull String name,
+          long addressId,
+          @NotNull String description,
+          @NotNull DealTypes dealType,
+          @NotNull ObjectTypes objectType,
+          @NotNull String price) {
+    if (manageDeal(id).isPresent()
+            && getAddress(addressId).isPresent()
+    ) {
       return execute(String.format(
               Constants.UPDATE_DEAL,
-              deal.getName(),
-              deal.getDescription(),
-              deal.getDealType(),
-              deal.getObject(),
-              deal.getPrice(),
-              deal.getId())
+              name,
+              description,
+              dealType,
+              objectType,
+              price,
+              id)
       );
     } else {
       return RequestStatuses.FAILED;
@@ -472,8 +444,10 @@ public class DataProviderJdbc implements DataProvider {
   @Override
   public RequestStatuses setStatus(@NotNull String id, @NotNull DealStatus newStatus) {
     Optional<Deal> deal = manageDeal(id);
-    if (deal.isPresent() && (deal.get().getDealModel() == DealModel.PUBLIC)) {
-      addDealHistory(id, newStatus);
+    if (deal.isPresent()
+            && deal.get().getDealModel().equals(DealModel.PUBLIC)
+            && addDealHistory(id, newStatus).equals(RequestStatuses.SUCCESS)
+    ) {
       return execute(String.format(Constants.UPDATE_DEAL_STATUS, newStatus, id));
     } else {
       log.error(Constants.DEAL_NOT_PUBLIC);
@@ -484,8 +458,7 @@ public class DataProviderJdbc implements DataProvider {
   @Override
   public RequestStatuses addDealRequest(@NotNull String userId, @NotNull String id) {
     Optional<Deal> dealOptional = manageDeal(id);
-    Optional<User> userOptional = getUser(userId);
-    if (dealOptional.isPresent() && userOptional.isPresent()) {
+    if (dealOptional.isPresent() && getUser(userId).isPresent()) {
       Deal deal = dealOptional.get();
       Queue queue = deal.getRequests();
       List<String> items = new ArrayList<>(queue.getItems());
@@ -681,35 +654,92 @@ public class DataProviderJdbc implements DataProvider {
     }
   }
 
-  private Connection getConnection() throws ClassNotFoundException, SQLException, IOException {
-    Class.forName(PropertyProvider.getProperty(Constants.DB_DRIVER));
-    return DriverManager.getConnection(
-            PropertyProvider.getProperty(Constants.DB_URL),
-            PropertyProvider.getProperty(Constants.DB_USER),
-            PropertyProvider.getProperty(Constants.DB_PASSWORD));
+  private RequestStatuses createCompany(String userId) {
+    Company company = new Company();
+    List<String> employees = new ArrayList<>();
+    employees.add(userId);
+    String id = UUID.randomUUID().toString();
+    return execute(String.format(Constants.INSERT_COMPANY, id, employees, company.getDeals()));
   }
 
-  private RequestStatuses execute(String sql) {
-    log.info(sql);
+  private Optional<Company> getCompanyByUserId(String id) {
+    ResultSet set = this.getResultSet(String.format(Constants.SELECT_COMPANY, id));
     try {
-      PreparedStatement statement = getConnection().prepareStatement(sql);
-      statement.executeUpdate();
-      statement.close();
-      return RequestStatuses.SUCCESS;
-    } catch (SQLException | IOException | ClassNotFoundException e) {
+      if (set != null && set.next()) {
+        List<String> userIds = listConvertor.convert(set.getString(Constants.COLUMN_COMPANY_EMPLOYEES));
+        List<String> dealsIds = listConvertor.convert(set.getString(Constants.COLUMN_COMPANY_DEALS));
+        Company company = new Company();
+        company.setId(set.getString(Constants.COLUMN_COMPANY_ID));
+        company.setEmployees(companyEmployees(userIds));
+        company.setDeals(companyDeals(dealsIds));
+        return Optional.of(company);
+      } else {
+        return Optional.empty();
+      }
+    } catch (SQLException e) {
       log.error(e);
+      return Optional.empty();
+    }
+  }
+
+  private RequestStatuses updateCompany(Company company) {
+    List<String> userIds = new ArrayList<>();
+    List<String> dealsIds = new ArrayList<>();
+    company.getEmployees().forEach(item -> userIds.add(item.getId()));
+    company.getDeals().forEach(item -> dealsIds.add(item.getId()));
+    return execute(String.format(Constants.UPDATE_COMPANY, userIds, dealsIds, company.getId()));
+  }
+
+  private RequestStatuses deleteCompany(String id) {
+    return execute(String.format(Constants.DELETE_COMPANY, id));
+  }
+
+  private List<User> companyEmployees(List<String> userIds) {
+    List<User> userList = new ArrayList<>();
+    userIds.forEach(item -> {
+      if (!item.equals(Constants.EMPTY_STRING)) {
+        Optional<User> user = getUser(item);
+        user.ifPresent(userList::add);
+      }
+    });
+    return userList;
+  }
+
+  private List<Deal> companyDeals(List<String> dealIds) {
+    List<Deal> dealsList = new ArrayList<>();
+    dealIds.forEach(item -> {
+      if (!item.equals(Constants.EMPTY_STRING)) {
+        Optional<Deal> deal = manageDeal(item);
+        deal.ifPresent(dealsList::add);
+      }
+    });
+    return dealsList;
+  }
+
+  private RequestStatuses addDealToCompany(Deal deal) {
+    Optional<Company> companyOptional = getCompanyByUserId(deal.getOwner());
+    if (companyOptional.isPresent()) {
+      Company company = companyOptional.get();
+      List<Deal> deals = company.getDeals();
+      deals.add(deal);
+      company.setDeals(deals);
+      return updateCompany(company);
+    } else {
       return RequestStatuses.FAILED;
     }
   }
 
-  private ResultSet getResultSet(String sql) {
-    log.info(sql);
-    try {
-      PreparedStatement statement = getConnection().prepareStatement(sql);
-      return statement.executeQuery();
-    } catch (SQLException | ClassNotFoundException | IOException e) {
-      log.error(e);
-      return null;
+  private RequestStatuses deleteDealFromCompany(Deal deal) {
+    Optional<Company> optionalCompany = getCompanyByUserId(deal.getOwner());
+    if (optionalCompany.isPresent()) {
+      Company company = optionalCompany.get();
+      company.setDeals(company.getDeals().stream().filter(item -> !item.getId()
+              .equals(deal.getId()))
+              .collect(Collectors.toList())
+      );
+      return updateCompany(company);
+    } else {
+      return RequestStatuses.FAILED;
     }
   }
 
@@ -759,6 +789,10 @@ public class DataProviderJdbc implements DataProvider {
     }
   }
 
+  private RequestStatuses deleteQueue(String id) {
+    return execute(String.format(Constants.DELETE_QUEUE, id));
+  }
+
   private RequestStatuses addDealHistory(String id, DealStatus status) {
     try {
       return execute(String.format(Constants.INSERT_DEAL_HISTORY, id, status.getMessage(), status, new Date().getTime()));
@@ -766,6 +800,10 @@ public class DataProviderJdbc implements DataProvider {
       log.error(e);
       return RequestStatuses.FAILED;
     }
+  }
+
+  private RequestStatuses deleteDealHistory(String id) {
+    return execute(String.format(Constants.DELETE_DEAL_HISTORY, id));
   }
 
   private Optional<List<DealHistory>> getDealHistory(String id) {
@@ -791,8 +829,82 @@ public class DataProviderJdbc implements DataProvider {
     }
   }
 
+  private Deal getDealFromResultSet(ResultSet set) throws SQLException {
+    Deal deal = new Deal();
+    Optional<Address> addressOptional = getAddress(set.getLong(Constants.COLUMN_DEAL_ADDRESS));
+    Optional<Queue> queueOptional = getQueue(set.getString(Constants.COLUMN_DEAL_REQUESTS));
+    if (addressOptional.isPresent() && queueOptional.isPresent()) {
+      deal.setId(set.getString(Constants.COLUMN_DEAL_ID));
+      deal.setDealModel(DealModel.valueOf(set.getString(Constants.COLUMN_DEAL_MODEL)));
+      deal.setName(set.getString(Constants.COLUMN_DEAL_NAME));
+      deal.setDescription(set.getString(Constants.COLUMN_DEAL_DESCRIPTION));
+      deal.setAddress(addressOptional.get());
+      deal.setRequests(queueOptional.get());
+      deal.setOwner(set.getString(Constants.COLUMN_DEAL_OWNER));
+      deal.setPerformer(set.getString(Constants.COLUMN_DEAL_PERFORMER));
+      deal.setDealType(DealTypes.valueOf(set.getString(Constants.COLUMN_DEAL_TYPE)));
+      deal.setObject(ObjectTypes.valueOf(set.getString(Constants.COLUMN_DEAL_OBJECT)));
+      deal.setCreated_at(parseDate(set.getLong(Constants.COLUMN_DEAL_CREATED_AT)));
+      deal.setPrice(set.getString(Constants.COLUMN_DEAL_PRICE));
+    } else {
+      log.error(Constants.SMT_WRONG);
+      throw new SQLException();
+    }
+
+    if (deal.getDealModel() == DealModel.PUBLIC) {
+      return getPublicDealFieldsFromResultSet(deal, set);
+    }
+    return deal;
+  }
+
+  private PublicDeal getPublicDealFieldsFromResultSet(Deal deal, ResultSet set) throws SQLException {
+    PublicDeal publicDeal = new PublicDeal();
+    publicDeal.setId(deal.getId());
+    publicDeal.setDealModel(deal.getDealModel());
+    publicDeal.setName(deal.getName());
+    publicDeal.setDescription(deal.getDescription());
+    publicDeal.setAddress(deal.getAddress());
+    publicDeal.setRequests(deal.getRequests());
+    publicDeal.setOwner(deal.getOwner());
+    publicDeal.setPerformer(deal.getPerformer());
+    publicDeal.setDealType(deal.getDealType());
+    publicDeal.setObject(deal.getObject());
+    publicDeal.setCreated_at(deal.getCreated_at());
+    publicDeal.setPrice(deal.getPrice());
+    publicDeal.setCurrentStatus(DealStatus.valueOf(set.getString(Constants.COLUMN_DEAL_STATUS)));
+    Optional<List<DealHistory>> dealHistory = getDealHistory(publicDeal.getId());
+    publicDeal.setHistory(dealHistory.orElseGet(ArrayList::new));
+    return publicDeal;
+  }
+
+  private Optional<Address> getAddressFromResultSet(ResultSet set) throws SQLException {
+    Address address = new Address();
+    address.setId(set.getLong(Constants.COLUMN_ADDRESS_ID));
+    address.setCity(set.getString(Constants.COLUMN_ADDRESS_CITY));
+    address.setDistrict(set.getString(Constants.COLUMN_ADDRESS_DISTRICT));
+    address.setRegion(set.getString(Constants.COLUMN_ADDRESS_REGION));
+    return Optional.of(address);
+  }
+
   private boolean checkIdInQueue(Queue queue, String id) {
     return queue.getItems().contains(id);
+  }
+
+  private Optional<User> getUserFromResultSet(ResultSet set) throws SQLException {
+    Optional<Queue> queue = getQueue(set.getString(Constants.COLUMN_USER_QUEUE));
+    Optional<Address> address = getAddress(set.getLong(Constants.COLUMN_USER_ADDRESS));
+    if (queue.isPresent() && address.isPresent()) {
+      User user = new User();
+      user.setId(set.getString(Constants.COLUMN_USER_ID));
+      user.setAddress(address.get());
+      user.setQueue(queue.get());
+      user.setName(set.getString(Constants.COLUMN_USER_NAME));
+      user.setPhone(set.getString(Constants.COLUMN_USER_PHONE));
+      return Optional.of(user);
+    } else {
+      log.error(Constants.UNDEFINED_USER_DATA);
+      return Optional.empty();
+    }
   }
 
   private Date parseDate(long s) {
@@ -802,6 +914,5 @@ public class DataProviderJdbc implements DataProvider {
       log.error(e);
       return new Date();
     }
-
   }
 }

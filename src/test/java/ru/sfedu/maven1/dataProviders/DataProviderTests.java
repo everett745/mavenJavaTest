@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import ru.sfedu.maven1.enums.DealStatus;
+import ru.sfedu.maven1.enums.DealTypes;
+import ru.sfedu.maven1.enums.ObjectTypes;
 import ru.sfedu.maven1.enums.RequestStatuses;
 import ru.sfedu.maven1.model.*;
 
@@ -95,13 +97,13 @@ public class DataProviderTests {
     dataProvider.createUser(
             user.getName(),
             user.getPhone(),
-            user.getAddress());
+            user.getAddress().getId());
 
     User user1 = getTestUserB();
     dataProvider.createUser(
             user1.getName(),
             user1.getPhone(),
-            user1.getAddress());
+            user1.getAddress().getId());
 
     savedUser = dataProvider.getUsers().get().get(0);
     savedUser1 = dataProvider.getUsers().get().get(1);
@@ -111,7 +113,7 @@ public class DataProviderTests {
             savedUser.getId(),
             deal.getName(),
             deal.getDescription(),
-            deal.getAddress(),
+            deal.getAddress().getId(),
             deal.getDealType(),
             deal.getObject(),
             deal.getPrice());
@@ -121,7 +123,7 @@ public class DataProviderTests {
             savedUser1.getId(),
             publicDeal.getName(),
             publicDeal.getDescription(),
-            publicDeal.getAddress(),
+            publicDeal.getAddress().getId(),
             publicDeal.getCurrentStatus(),
             publicDeal.getDealType(),
             publicDeal.getObject(),
@@ -139,7 +141,7 @@ public class DataProviderTests {
             dataProvider.createUser(
                     user.getName(),
                     user.getPhone(),
-                    user.getAddress())
+                    user.getAddress().getId())
     );
   }
 
@@ -150,7 +152,8 @@ public class DataProviderTests {
     Assertions.assertThrows(NullPointerException.class, () -> dataProvider.createUser(
             null,
             user.getPhone(),
-            user.getAddress()));
+            user.getAddress().getId())
+    );
   }
 
   void getUserByIdCorrect() {
@@ -177,7 +180,13 @@ public class DataProviderTests {
 
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.editUser(user));
+            dataProvider.editUser(
+                    user.getId(),
+                    user.getName(),
+                    user.getPhone(),
+                    user.getAddress().getId()
+            )
+    );
 
     User newUser = dataProvider.getUser(user.getId()).get();
 
@@ -194,7 +203,13 @@ public class DataProviderTests {
 
     Assertions.assertEquals(
             RequestStatuses.SUCCESS,
-            dataProvider.editUser(user));
+            dataProvider.editUser(
+                    user.getId(),
+                    user.getName(),
+                    user.getPhone(),
+                    user.getAddress().getId()
+            )
+    );
   }
 
   void deleteUserCorrect() {
@@ -267,7 +282,7 @@ public class DataProviderTests {
                     savedUser.getId(),
                     deal.getName(),
                     deal.getDescription(),
-                    deal.getAddress(),
+                    deal.getAddress().getId(),
                     deal.getDealType(),
                     deal.getObject(),
                     deal.getPrice())
@@ -282,8 +297,8 @@ public class DataProviderTests {
             dataProvider.createDeal(
                     UUID.randomUUID().toString(),
                     deal.getName(),
-                    deal.getDescription(),
                     null,
+                    new Address().getId(),
                     deal.getDealType(),
                     deal.getObject(),
                     deal.getPrice())
@@ -299,7 +314,7 @@ public class DataProviderTests {
                     savedUser1.getId(),
                     publicDeal.getName(),
                     publicDeal.getDescription(),
-                    publicDeal.getAddress(),
+                    publicDeal.getAddress().getId(),
                     publicDeal.getCurrentStatus(),
                     publicDeal.getDealType(),
                     publicDeal.getObject(),
@@ -316,7 +331,7 @@ public class DataProviderTests {
                 savedUser1.getId(),
                 publicDeal.getName(),
                 publicDeal.getDescription(),
-                publicDeal.getAddress(),
+                publicDeal.getAddress().getId(),
                 publicDeal.getCurrentStatus(),
                 publicDeal.getDealType(),
                 publicDeal.getObject(),
@@ -378,7 +393,17 @@ public class DataProviderTests {
     deal.setDescription(TestsConstants.TEST_PUBLIC_DEAL_DESCRIPTION);
     deal.setObject(TestsConstants.TEST_PUBLIC_DEAL_OBJECT);
 
-    Assertions.assertEquals(RequestStatuses.SUCCESS, dataProvider.updateDeal(deal));
+    Assertions.assertEquals(RequestStatuses.SUCCESS,
+            dataProvider.updateDeal(
+                    deal.getId(),
+                    deal.getName(),
+                    deal.getAddress().getId(),
+                    deal.getDescription(),
+                    deal.getDealType(),
+                    deal.getObject(),
+                    deal.getPrice()
+            )
+    );
     Deal updatedDeal = dataProvider.manageDeal(deal.getId()).get();
 
     Assertions.assertEquals(updatedDeal.getName(), TestsConstants.TEST_PUBLIC_DEAL_NAME);
@@ -389,7 +414,17 @@ public class DataProviderTests {
 
   void updateDealIncorrect() {
     log.info("updateDealIncorrect");
-    Assertions.assertThrows(NullPointerException.class, () -> dataProvider.updateDeal(new Deal()));
+    Assertions.assertThrows(NullPointerException.class, () ->
+            dataProvider.updateDeal(
+                    "",
+                    "",
+                    1,
+                    "",
+                    DealTypes.PURCHASE,
+                    ObjectTypes.BUILDING,
+                    ""
+            )
+    );
   }
 
   void setStatusCorrect(){

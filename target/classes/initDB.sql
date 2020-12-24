@@ -1,10 +1,3 @@
-drop table if exists company cascade;
-drop table if exists deal cascade;
-drop table if exists deal_history cascade;
-drop table if exists queue cascade;
-drop table if exists user cascade;
-drop table if exists address cascade;
-
 create table user ( id varchar(255) primary key, address long, queue varchar(255), name text, phone text );
 
 create table address ( id long primary key, city text, region text, district text );
@@ -15,6 +8,7 @@ create table deal ( id varchar(255) primary key, name text, description text, ad
 
 create table deal_history ( id text, text text, status text, created_at long);
 
+create table company ( id varchar(255), employees text, deals text);
 
 INSERT INTO ADDRESS VALUES (1, 'Адыгейск', 'Адыгея', 'Южный');
 INSERT INTO ADDRESS VALUES (2, 'Майкоп', 'Адыгея', 'Южный');

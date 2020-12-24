@@ -20,9 +20,6 @@ public class DataProviderJdbcTest extends DataProviderTests {
   }
 
   @Test
-  void testBeforeAll() { }
-
-  @Test
   void createUserCorrect() {
     super.createUserCorrect();
   }

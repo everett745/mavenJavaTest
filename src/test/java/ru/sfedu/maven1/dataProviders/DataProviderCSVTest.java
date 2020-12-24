@@ -19,9 +19,6 @@ public class DataProviderCSVTest extends DataProviderTests {
   }
 
   @Test
-  void testBeforeAll() { }
-
-  @Test
   void createUserCorrect() {
     super.createUserCorrect();
   }

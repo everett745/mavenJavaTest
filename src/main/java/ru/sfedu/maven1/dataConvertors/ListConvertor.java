@@ -7,6 +7,7 @@ import ru.sfedu.maven1.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,13 +28,13 @@ public class ListConvertor {
       } else if (matcherWith.find()) {
         indexString = s.substring(2, s.length() - 2);
       } else {
-        throw new CsvDataTypeMismatchException();
+        throw new InputMismatchException();
       }
 
       String[] list = indexString.split(Constants.ARRAY_DELIMITER);
 
       return Arrays.asList(list);
-    } catch (CsvDataTypeMismatchException e) {
+    } catch (InputMismatchException e) {
       log.error(e);
       return new ArrayList<>();
     }

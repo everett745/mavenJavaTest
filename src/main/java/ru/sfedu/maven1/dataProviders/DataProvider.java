@@ -19,13 +19,13 @@ public interface DataProvider {
    * Метод для создания нового пользователя
    * @param name имя пользователя
    * @param phone телефон пользователя
-   * @param address обьект "Address" для нового пользователя
+   * @param addressId идентификатор ранее созданного адреса
    * @return RequestStatuses
    */
   RequestStatuses createUser(
           @NotNull String name,
           @NotNull String phone,
-          @NotNull Address address);
+          long addressId);
 
   /**
    * Получить отдельного пользователя по личному идентификатору
@@ -36,10 +36,14 @@ public interface DataProvider {
 
   /**
    * Метод редактирования конкретного пользователя
-   * @param user модель пользователя
+   * @param addressId идентификатор ранее созданного адреса
    * @return RequestStatuses
    */
-  RequestStatuses editUser(@NotNull User user);
+  RequestStatuses editUser(
+          @NotNull String userId,
+          @NotNull String name,
+          @NotNull String phone,
+          long addressId);
 
   /**
    * Метод удаления пользователя из системы
@@ -76,6 +80,22 @@ public interface DataProvider {
    */
   Optional<Address> getAddress(@NotNull String city);
 
+  /**
+   * Получить адрес по ключевому слову "Город"
+   * @param city города
+   * @param region область
+   * @param district район
+   * @return объект адреса
+   */
+  RequestStatuses addAddress(@NotNull String city, @NotNull String region, @NotNull String district);
+
+  /**
+   * Получить адрес по ключевому слову "Город"
+   * @param id адреса, который необходимо удалить
+   * @return объект адреса
+   */
+  RequestStatuses removeAddress(long id);
+
 
   /*Deal*/
   /**
@@ -93,7 +113,7 @@ public interface DataProvider {
           @NotNull String userId,
           @NotNull String name,
           @NotNull String description,
-          @NotNull Address address,
+          long address,
           @NotNull DealTypes dealType,
           @NotNull ObjectTypes objectType,
           @NotNull String price);
@@ -103,7 +123,7 @@ public interface DataProvider {
    * @param userId идентификатор пользователя, создающего сделку
    * @param name название сделки
    * @param description описание сделки
-   * @param address объект адрес сделки
+   * @param addressId идентификатор сделки
    * @param currentStatus при передаче статуса сделка становится публичной и ей присваивается указанный статус
    * @param dealType тип сделки
    * @param objectType объект сделки
@@ -114,7 +134,7 @@ public interface DataProvider {
           @NotNull String userId,
           @NotNull String name,
           @NotNull String description,
-          @NotNull Address address,
+          long addressId,
           @NotNull DealStatus currentStatus,
           @NotNull DealTypes dealType,
           @NotNull ObjectTypes objectType,
@@ -148,12 +168,25 @@ public interface DataProvider {
    */
   RequestStatuses removeDeal(@NotNull String id);
 
+
   /**
-   * Обновить информацию сделки
-   * @param deal объект сделки
+   * @param id идентификатор сделки, которную неоходимо изменить
+   * @param name новое имя
+   * @param addressId новый адрес (его идентификатор)
+   * @param description новое описание сделки
+   * @param dealType новый тип сделки
+   * @param objectType новый объект сделки
+   * @param price новая цена
    * @return RequestStatuses
    */
-  RequestStatuses updateDeal(@NotNull Deal deal);
+  RequestStatuses updateDeal(
+          @NotNull String id,
+          @NotNull String name,
+          long addressId,
+          @NotNull String description,
+          @NotNull DealTypes dealType,
+          @NotNull ObjectTypes objectType,
+          @NotNull String price);
 
   /**
    * Обновить статус сделки
