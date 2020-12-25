@@ -15,9 +15,10 @@ public class WrapperXML<T> {
   @ElementList(inline = true, required = false)
   public List<T> list;
 
-  public WrapperXML() { }
+  public WrapperXML() {
+  }
 
-  public WrapperXML(List<T> list){
+  public WrapperXML(List<T> list) {
     this.list = list;
   }
 

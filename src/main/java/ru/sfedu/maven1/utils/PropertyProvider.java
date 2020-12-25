@@ -1,6 +1,9 @@
 package ru.sfedu.maven1.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import ru.sfedu.maven1.Constants;
+import ru.sfedu.maven1.Main;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,47 +18,51 @@ import java.util.Properties;
  * @author Boris Jamalov
  */
 public class PropertyProvider {
-    private static final String DEFAULT_CONFIG_PATH = Constants.DEFAULT_CONFIG_PATH;
-    private static final Properties PROPERTIES = new Properties();
-    /**
-     * Hides default constructor
-     */
-    public PropertyProvider() {
-    }
+  private static final Logger log = (Logger) LogManager.getLogger(PropertyProvider.class);
+  private static final String DEFAULT_CONFIG_PATH = Constants.DEFAULT_CONFIG_PATH;
+  private static final Properties PROPERTIES = new Properties();
 
-    private static Properties getProperties() throws IOException {
-        if (PROPERTIES.isEmpty()) {
-            loadProperty();
-        }
-        return PROPERTIES;
-    }
+  /**
+   * Hides default constructor
+   */
+  public PropertyProvider() {
+  }
 
-    /**
-     * Loads configuration from <code>DEFAULT_CONFIG_PATH</code>
-     * @throws IOException In case of the configuration file read failure
-     */
-    private static void loadProperty() throws IOException {
-        File nf;
-        if (System.getProperty(Constants.CONFIG_PATH) != null) {
-            nf = new File(System.getProperty(Constants.CONFIG_PATH));
-        } else {
-            nf = new File(DEFAULT_CONFIG_PATH);
-        }
-        try (InputStream in = new FileInputStream(nf)) {
-            PROPERTIES.load(in);
-        } catch (IOException ex) {
-            throw new IOException(ex);
-        }
+  private static Properties getProperties() throws IOException {
+    if (PROPERTIES.isEmpty()) {
+      loadProperty();
     }
+    return PROPERTIES;
+  }
 
-    /**
-     * Gets configuration entry value
-     * @param key Entry key
-     * @return Entry value by key
-     * @throws IOException In case of the configuration file read failure
-     */
-    public static String getProperty(String key) throws IOException {
-        return getProperties().getProperty(key);
+  /**
+   * Loads configuration from <code>DEFAULT_CONFIG_PATH</code>
+   *
+   * @throws IOException In case of the configuration file read failure
+   */
+  private static void loadProperty() throws IOException {
+    File nf;
+    if (System.getProperty(Constants.CONFIG_PATH) != null) {
+      nf = new File(System.getProperty(Constants.CONFIG_PATH));
+    } else {
+      nf = new File(DEFAULT_CONFIG_PATH);
     }
+    try (InputStream in = new FileInputStream(nf)) {
+      PROPERTIES.load(in);
+    } catch (IOException ex) {
+      throw new IOException(ex);
+    }
+  }
+
+  /**
+   * Gets configuration entry value
+   *
+   * @param key Entry key
+   * @return Entry value by key
+   * @throws IOException In case of the configuration file read failure
+   */
+  public static String getProperty(String key) throws IOException {
+    return getProperties().getProperty(key);
+  }
 
 }

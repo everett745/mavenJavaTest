@@ -4,12 +4,15 @@ import com.opencsv.bean.AbstractBeanField;
 import ru.sfedu.maven1.dataProviders.DataProviderCSV;
 import ru.sfedu.maven1.model.Address;
 
+import java.util.Optional;
+
 public class AddressConvertor extends AbstractBeanField<Address, Integer> {
   private final DataProviderCSV dataProviderCSV = new DataProviderCSV();
 
   @Override
   protected Object convert(String s) {
-    return dataProviderCSV.getAddress(Long.parseLong(s)).get();
+    Optional<Address> address = dataProviderCSV.getAddress(Long.parseLong(s));
+    return address.orElseGet(Address::new);
   }
 
   @Override

@@ -16,12 +16,19 @@ import java.util.*;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-public class DataProviderJdbc implements DataProvider {
-  private static DataProvider INSTANCE = null;
+public class DataProviderJdbc implements IDataProvider {
+  private static IDataProvider INSTANCE = null;
   private static final Logger log = LogManager.getLogger(DataProviderJdbc.class);
   private static final ListConvertor listConvertor = new ListConvertor();
 
-  public static DataProvider getInstance() {
+  public DataProviderJdbc() {
+  }
+
+  public DataProviderJdbc(boolean withInit) {
+    initDB();
+  }
+
+  public static IDataProvider getInstance() {
     if (INSTANCE == null) {
       INSTANCE = new DataProviderJdbc();
     }
@@ -148,7 +155,7 @@ public class DataProviderJdbc implements DataProvider {
                 )
         );
       } else {
-        return RequestStatuses.FAILED;
+        return RequestStatuses.NOT_FOUNDED;
       }
     } catch (Exception e) {
       log.error(e);
@@ -185,7 +192,6 @@ public class DataProviderJdbc implements DataProvider {
         } while (set.next());
         return Optional.of(list);
       } else {
-        log.error(Constants.UNDEFINED_ADDRESSES);
         return Optional.empty();
       }
     } catch (SQLException e) {
@@ -242,7 +248,21 @@ public class DataProviderJdbc implements DataProvider {
 
   @Override
   public RequestStatuses removeAddress(long id) {
-    return execute(String.format(Constants.DELETE_ADDRESS, id));
+      return getAddress(id).isPresent()
+              ? execute(String.format(Constants.DELETE_ADDRESS, id))
+              : RequestStatuses.FAILED;
+  }
+
+  @Override
+  public RequestStatuses updateAddress(
+          long id,
+          @NotNull String city,
+          @NotNull String region,
+          @NotNull String district
+  ) {
+    return getAddress(id).isPresent()
+            ? execute(String.format(Constants.UPDATE_ADDRESS, city, region, district, id))
+            : RequestStatuses.FAILED;
   }
 
   @Override
@@ -635,23 +655,26 @@ public class DataProviderJdbc implements DataProvider {
 
   @Override
   public void clearDB() {
-    execute(Constants.CLEAR_BD);
+    log.info(execute(Constants.DROP_USER_TABLE
+            + Constants.DROP_ADDRESS_TABLE
+            + Constants.DROP_QUEUE_TABLE
+            + Constants.DROP_DEAL_TABLE
+            + Constants.DROP_DEAL_HISTORY_TABLE
+            + Constants.DROP_COMPANY_TABLE)
+    );
   }
 
   @Override
   public void initDB() {
-    try {
-      String s;
-      FileReader fr = new FileReader(new File(PropertyProvider.getProperty(Constants.DB_INIT_PATH)));
-      BufferedReader br = new BufferedReader(fr);
+    log.info(execute(
+            Constants.CREATE_USER_TABLE
+                    + Constants.CREATE_ADDRESS_TABLE
+                    + Constants.CREATE_QUEUE_TABLE
+                    + Constants.CREATE_DEAL_TABLE
+                    + Constants.CREATE_DEAL_HISTORY_TABLE
+                    + Constants.CREATE_COMPANY_TABLE)
+    );
 
-      while((s = br.readLine()) != null){
-        execute(s);
-      }
-      br.close();
-    } catch (Exception e) {
-      log.error(e);
-    }
   }
 
   private RequestStatuses createCompany(String userId) {

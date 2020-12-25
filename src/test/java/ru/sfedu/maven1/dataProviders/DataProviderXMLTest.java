@@ -5,16 +5,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataProviderXMLTest extends DataProviderTests {
-  private static final DataProvider dataProvider = DataProviderXML.getInstance();
+  private static final IDataProvider I_DATA_PROVIDER = DataProviderXML.getInstance();
 
   @BeforeAll
   static void refreshDB() {
-    refreshDB(dataProvider);
+    refreshDB(I_DATA_PROVIDER);
   }
 
   @BeforeEach
   void setUp() {
-    setUp(dataProvider);
+    setUp(I_DATA_PROVIDER);
   }
 
   @Test
@@ -68,8 +68,13 @@ public class DataProviderXMLTest extends DataProviderTests {
   }
 
   @Test
-  void getAddresses() {
-    super.getAddresses();
+  void getAddressesCorrect() {
+    super.getAddressesCorrect();
+  }
+
+  @Test
+  void getAddressesIncorrect() {
+    super.getAddressesIncorrect();
   }
 
   @Test
@@ -90,6 +95,26 @@ public class DataProviderXMLTest extends DataProviderTests {
   @Test
   void getAddressByNameIncorrect() {
     super.getAddressByNameIncorrect();
+  }
+
+  @Test
+  void removeAddressCorrect() {
+    super.removeAddressCorrect();
+  }
+
+  @Test
+  void removeAddressIncorrect() {
+    super.removeAddressIncorrect();
+  }
+
+  @Test
+  void updateAddressCorrect() {
+    super.updateAddressCorrect();
+  }
+
+  @Test
+  void updateAddressIncorrect() {
+    super.updateAddressIncorrect();
   }
 
   @Test

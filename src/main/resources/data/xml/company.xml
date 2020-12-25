@@ -1,40 +1,40 @@
 <List>
-   <object class="ru.sfedu.maven1.model.Company" id="022a3e74-7a24-4829-850d-7709f3b3d5c2">
+   <object class="ru.sfedu.maven1.model.Company" id="2556ab57-b6f9-4bc5-9f1b-06b5a2e83e57">
       <employees class="java.util.ArrayList">
-         <User name="Иван Тест" id="40104968-ee49-4d46-a2ca-8a5bf4d9eade" phone="8922222222">
-            <queue id="472787d4-d5de-4da9-b134-c1aa530fc74c">
+         <User name="Ivan Test" id="b76aa99a-e42f-4d71-ac2b-d29d75adfca4" phone="8922222222">
+            <queue id="9b52237a-bcd0-47fe-aa11-838acc534d43">
                <items class="java.util.ArrayList"/>
             </queue>
-            <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
+            <address id="0" region="Rostov region" city="Rostov-on-Don" district="Southern"/>
          </User>
       </employees>
       <deals class="java.util.ArrayList">
-         <deal object="LAND" name="Новая обычная сделка" id="0693d152-69e2-4a7d-8adc-1a46651dd7e4" owner="40104968-ee49-4d46-a2ca-8a5bf4d9eade" description="Новая обычная сделка" price="150 000" dealType="PURCHASE" model="PRIVATE" createdAt="2020-12-22 22:39:23.178 MSK">
-            <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
-            <requests id="ab77563e-272e-4b44-ae6f-e2776af3fd7c">
+         <deal object="LAND" name="New simple deal" id="34e4c536-b135-4781-b2e9-92c0eab49d08" owner="b76aa99a-e42f-4d71-ac2b-d29d75adfca4" description="New simple deal" dealType="PURCHASE" price="150 000" model="PRIVATE" createdAt="2020-12-25 15:06:46.409 MSK">
+            <address id="0" region="Rostov region" city="Rostov-on-Don" district="Southern"/>
+            <requests id="70b0fcef-1b41-4ea9-a3e3-2c2a45e41c02">
                <items class="java.util.ArrayList"/>
             </requests>
          </deal>
       </deals>
    </object>
-   <object class="ru.sfedu.maven1.model.Company" id="3ca47685-1d04-42c3-bb33-1f2b35f99b6e">
+   <object class="ru.sfedu.maven1.model.Company" id="65139d8c-12db-4965-9618-5bb96767b1bd">
       <employees class="java.util.ArrayList">
-         <User name="Петр Тест" id="e53a792e-52e6-4f8b-baf8-b5ddfc480897" phone="0000000">
-            <queue id="b0ac168f-ec1b-4fa6-a445-c1a434598712">
+         <User name="Semen Test" id="85f89a8e-3d65-4b54-badb-0b9d0e0692eb" phone="0000000">
+            <queue id="65a019c4-c098-4666-946c-a5ee12252608">
                <items class="java.util.ArrayList"/>
             </queue>
-            <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
+            <address id="0" region="Rostov region" city="Rostov-on-Don" district="Southern"/>
          </User>
       </employees>
       <deals class="java.util.ArrayList">
-         <deal class="ru.sfedu.maven1.model.PublicDeal" object="LAND" name="Новая публичная сделка" id="1b4d5fc2-5299-46e6-8062-5911756b7bfb" owner="e53a792e-52e6-4f8b-baf8-b5ddfc480897" description="тестовое описание публичной сделки" price="123 000" dealType="SALE" model="PUBLIC" createdAt="2020-12-22 22:39:23.185 MSK" currentStatus="NEW_DEAL">
-            <address id="744" region="Ростовская область" district="Южный" city="Ростов-на-Дону"/>
-            <requests id="256b3e89-992d-4c1f-9f99-63c86a317292">
+         <deal class="ru.sfedu.maven1.model.PublicDeal" object="LAND" name="New public deal" id="fca54446-defa-4b71-b522-bb4385d723c1" owner="85f89a8e-3d65-4b54-badb-0b9d0e0692eb" description="public deal description" dealType="SALE" price="123 000" model="PUBLIC" createdAt="2020-12-25 15:06:46.415 MSK" currentStatus="NEW_DEAL">
+            <address id="0" region="Rostov region" city="Rostov-on-Don" district="Southern"/>
+            <requests id="b7f1db9d-4fd8-4b44-afdd-f360596996a1">
                <items class="java.util.ArrayList"/>
             </requests>
             <history class="java.util.ArrayList">
-               <dealHistory status="NEW_DEAL" created_at="2020-12-22 22:39:23.185 MSK" text="Новая сделка">
-                  <id>1b4d5fc2-5299-46e6-8062-5911756b7bfb</id>
+               <dealHistory status="NEW_DEAL" created_at="2020-12-25 15:06:46.415 MSK" text="Новая сделка">
+                  <id>fca54446-defa-4b71-b522-bb4385d723c1</id>
                </dealHistory>
             </history>
          </deal>

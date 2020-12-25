@@ -21,28 +21,32 @@ public class PublicDeal extends Deal {
   @CsvCustomBindByName(converter = DealHistoryListConvertor.class)
   private List<DealHistory> history;
 
-  public PublicDeal () { };
+  public PublicDeal() {
+  }
 
   /**
    * Set the value of history
+   *
    * @param newVar the new value of history
    */
   @ElementList(name = "history")
-  public void setHistory (List<DealHistory> newVar) {
+  public void setHistory(List<DealHistory> newVar) {
     history = newVar;
   }
 
   /**
    * Get the value of history
+   *
    * @return the value of history
    */
   @ElementList(name = "history")
-  public List<DealHistory> getHistory () {
+  public List<DealHistory> getHistory() {
     return history;
   }
 
   /**
    * Get the value of currentStatus
+   *
    * @return the value of currentStatus
    */
   @Attribute(name = "currentStatus")
@@ -52,6 +56,7 @@ public class PublicDeal extends Deal {
 
   /**
    * Set the value of history
+   *
    * @param currentStatus the new value of currentStatus
    */
   @Attribute(name = "currentStatus")
@@ -93,9 +98,5 @@ public class PublicDeal extends Deal {
             ", price='" + this.getPrice() + '\'' +
             '}';
   }
-
-  //
-  // Other methods
-  //
 
 }

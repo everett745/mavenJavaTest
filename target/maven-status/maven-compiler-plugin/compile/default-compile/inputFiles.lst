@@ -2,12 +2,14 @@ D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\enums\DealTypes.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\enums\DealModel.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\model\Deal.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\dataProviders\DataProviderCSV.java
-D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\dataProviders\DataProvider.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\dataProviders\DataProviderXML.java
+D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\dataProviders\IDataProvider.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\dataConvertors\UsersListConvertor.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\dataProviders\WrapperXML.java
+D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\enums\CliKeys.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\model\PublicDeal.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\Constants.java
+D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\enums\QueueEvent.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\model\Address.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\enums\ObjectTypes.java
 D:\Study\4\jaba\maven1\src\main\java\ru\sfedu\maven1\model\Company.java
