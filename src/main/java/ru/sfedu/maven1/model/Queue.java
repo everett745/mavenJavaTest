@@ -18,51 +18,47 @@ public class Queue {
   @CsvCustomBindByName(converter = UUIDListConvertor.class)
   private List<String> items = new ArrayList<>();
 
-  public Queue () { };
+  public Queue() {
+  }
 
   /**
    * Set the value of id
+   *
    * @param newVar the new value of id
    */
   @Attribute(name = "id")
-  public void setId (String newVar) {
+  public void setId(String newVar) {
     id = newVar;
   }
 
   /**
    * Get the value of id
+   *
    * @return the value of id
    */
   @Attribute(name = "id")
-  public String getId () {
+  public String getId() {
     return id;
   }
 
   /**
    * Set the value of items
+   *
    * @param newVar the new value of items
    */
   @ElementList(name = "items")
-  public void setItems (List<String> newVar) {
+  public void setItems(List<String> newVar) {
     items = newVar;
   }
 
   /**
    * Get the value of items
+   *
    * @return the value of items
    */
   @ElementList(name = "items")
-  public List<String> getItems () {
+  public List<String> getItems() {
     return items;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Queue queue = (Queue) o;
-    return getId() == queue.getId() &&
-            List.of(getItems()).equals(queue.getItems());
   }
 
   @Override
@@ -73,11 +69,19 @@ public class Queue {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Queue queue = (Queue) o;
+    return Objects.equals(getId(), queue.getId()) &&
+            Objects.equals(getItems(), queue.getItems());
+  }
+
+  @Override
   public String toString() {
     return "Queue{" +
             "id=" + id +
             ", items=" + items.toString() +
             '}';
   }
-
 }

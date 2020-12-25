@@ -29,95 +29,106 @@ public class User implements Serializable {
   @CsvBindByName
   private String phone;
 
-  public User() { };
+  public User() {
+  }
 
   /**
    * Set the value of id
+   *
    * @param newVar the new value of id
    */
   @Attribute(name = "id")
-  public void setId (String newVar) {
+  public void setId(String newVar) {
     id = newVar;
   }
 
   /**
    * Get the value of id
+   *
    * @return the value of id
    */
   @Attribute(name = "id")
-  public String getId () {
+  public String getId() {
     return id;
   }
 
   /**
    * Set the value of address
+   *
    * @param newVar the new value of address
    */
   @Element(name = "address")
-  public void setAddress (Address newVar) {
+  public void setAddress(Address newVar) {
     address = newVar;
   }
 
   /**
    * Get the value of address
+   *
    * @return the value of address
    */
   @Element(name = "address")
-  public Address getAddress () {
+  public Address getAddress() {
     return address;
   }
 
   /**
    * Set the value of queue
+   *
    * @param newVar the new value of queue
    */
   @Element(name = "queue", required = false)
-  public void setQueue (Queue newVar) {
+  public void setQueue(Queue newVar) {
     queue = newVar;
   }
 
   /**
    * Get the value of queue
+   *
    * @return the value of queue
    */
   @Element(name = "queue", required = false)
-  public Queue getQueue () {
+  public Queue getQueue() {
     return queue;
   }
 
   /**
    * Set the value of name
+   *
    * @param newVar the new value of name
    */
   @Attribute(name = "name")
-  public void setName (String newVar) {
+  public void setName(String newVar) {
     name = newVar;
   }
 
   /**
    * Get the value of name
+   *
    * @return the value of name
    */
   @Attribute(name = "name")
-  public String getName () {
+  public String getName() {
     return name;
   }
 
   /**
    * Set the value of phone
+   *
    * @param newVar the new value of phone
    */
   @Attribute(name = "phone")
-  public void setPhone (String newVar) {
+  public void setPhone(String newVar) {
     phone = newVar;
   }
 
   /**
    * Get the value of phone
+   *
    * @return the value of phone
    */
   @Attribute(name = "phone")
-  public String getPhone () {
+  public String getPhone() {
     return phone;
   }
 
@@ -134,10 +145,11 @@ public class User implements Serializable {
 
   @Override
   public boolean equals(Object o) {
+
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     User user = (User) o;
-    return getId() == user.getId() &&
+    return Objects.equals(getId(), user.getId()) &&
             Objects.equals(getAddress(), user.getAddress()) &&
             Objects.equals(getQueue(), user.getQueue()) &&
             Objects.equals(getName(), user.getName()) &&
@@ -148,5 +160,4 @@ public class User implements Serializable {
   public int hashCode() {
     return Objects.hash(getId(), getAddress(), getQueue(), getName(), getPhone());
   }
-
 }

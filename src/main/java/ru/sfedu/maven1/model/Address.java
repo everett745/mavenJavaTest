@@ -23,77 +23,86 @@ public class Address implements Serializable {
   @CsvBindByName(column = "DISTRICT")
   private String district;
 
-  public Address () { };
+  public Address() {
+  }
 
   /**
    * Set the value of id
+   *
    * @param newVar the new value of id
    */
   @Attribute(name = "id")
-  public void setId (long newVar) {
+  public void setId(long newVar) {
     id = newVar;
   }
 
   /**
    * Get the value of id
+   *
    * @return the value of id
    */
   @Attribute(name = "id")
-  public long getId () {
+  public long getId() {
     return id;
   }
 
   /**
    * Set the value of city
+   *
    * @param newVar the new value of city
    */
   @Attribute(name = "city")
-  public void setCity (String newVar) {
+  public void setCity(String newVar) {
     city = newVar;
   }
 
   /**
    * Get the value of city
+   *
    * @return the value of city
    */
   @Attribute(name = "city")
-  public String getCity () {
+  public String getCity() {
     return city;
   }
 
   /**
    * Set the value of country
+   *
    * @param newVar the new value of country
    */
   @Attribute(name = "region")
-  public void setRegion (String newVar) {
+  public void setRegion(String newVar) {
     region = newVar;
   }
 
   /**
    * Get the value of country
+   *
    * @return the value of country
    */
   @Attribute(name = "region")
-  public String getRegion () {
+  public String getRegion() {
     return region;
   }
 
   /**
    * Set the value of region
+   *
    * @param newVar the new value of region
    */
   @Attribute(name = "district")
-  public void setDistrict (String newVar) {
+  public void setDistrict(String newVar) {
     district = newVar;
   }
 
   /**
    * Get the value of region
+   *
    * @return the value of region
    */
   @Attribute(name = "district")
-  public String getDistrict () {
+  public String getDistrict() {
     return district;
   }
 

@@ -20,11 +20,11 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DataProviderXML implements DataProvider {
+public class DataProviderXML implements IDataProvider {
   private static final Logger log = LogManager.getLogger(DataProviderXML.class);
-  private static DataProvider INSTANCE;
+  private static IDataProvider INSTANCE;
 
-  public static DataProvider getInstance() {
+  public static IDataProvider getInstance() {
     if (INSTANCE == null) {
       INSTANCE = new DataProviderXML();
     }
@@ -67,7 +67,6 @@ public class DataProviderXML implements DataProvider {
       reader.close();
       return xmlList.getList() == null ? new ArrayList<>() : xmlList.getList();
     } catch (Exception e) {
-      log.error(e);
       return new ArrayList<>();
     }
   }
@@ -109,13 +108,7 @@ public class DataProviderXML implements DataProvider {
 
   @Override
   public Optional<List<User>> getUsers() {
-    Optional<List<User>> userList = getUsersOptional();
-    if (userList.isPresent()) {
-      return userList;
-    } else {
-      log.error(Constants.UNDEFINED_USERS_LIST_EMPTY);
-      return Optional.empty();
-    }
+    return getUsersOptional();
   }
 
   @Override
@@ -173,7 +166,12 @@ public class DataProviderXML implements DataProvider {
   @Override
   public Optional<List<Address>> getAddresses() {
     try {
-      return Optional.of(getFromXML(Address.class));
+      List<Address> addressList = getFromXML(Address.class);
+      if (addressList.isEmpty()) {
+        return Optional.empty();
+      } else {
+        return Optional.of(addressList);
+      }
     } catch (IOException e) {
       log.error(e);
       return Optional.empty();
@@ -184,10 +182,15 @@ public class DataProviderXML implements DataProvider {
   public Optional<Address> getAddress(long id) {
     Optional<List<Address>> optionalAddresses = getAddresses();
     if (optionalAddresses.isPresent()) {
-      List<Address> addresses = optionalAddresses.get();
-      return addresses.stream()
-              .filter(address -> address.getId() == id)
+      Optional<Address> address = optionalAddresses.get().stream()
+              .filter(item -> item.getId() == id)
               .findFirst();
+      if (address.isPresent()) {
+        return address;
+      } else {
+        log.error(Constants.UNDEFINED_ADDRESS);
+        return Optional.empty();
+      }
     } else {
       return Optional.empty();
     }
@@ -231,9 +234,9 @@ public class DataProviderXML implements DataProvider {
 
   @Override
   public RequestStatuses removeAddress(long id) {
-    Optional<List<Address>> addresses = getAddresses();
     try {
-      if (addresses.isPresent()) {
+      Optional<List<Address>> addresses = getAddresses();
+      if (addresses.isPresent() && getAddress(id).isPresent()) {
         List<Address> addressList = addresses.get();
         addressList = addressList.stream().filter(item -> item.getId() != id)
                 .collect(Collectors.toList()
@@ -241,11 +244,38 @@ public class DataProviderXML implements DataProvider {
         insertIntoXML(Address.class, addressList, true);
         return RequestStatuses.SUCCESS;
       } else {
-        log.error(Constants.UNDEFINED_ADDRESSES);
         return RequestStatuses.FAILED;
       }
     } catch (IOException e) {
       log.error(e);
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  @Override
+  public RequestStatuses updateAddress(
+          long id,
+          @NotNull String city,
+          @NotNull String region,
+          @NotNull String district
+  ) {
+    try {
+      Optional<List<Address>> addresses = getAddresses();
+      Optional<Address> addressOptional = getAddress(id);
+      if (addressOptional.isPresent() && addresses.isPresent()) {
+        List<Address> addressList = addresses.get();
+        Address updatedAddress = addressOptional.get();
+        addressList = addressList.stream().filter(item -> item.getId() != id).collect(Collectors.toList());
+        updatedAddress.setCity(city);
+        updatedAddress.setRegion(region);
+        updatedAddress.setDistrict(district);
+        addressList.add(updatedAddress);
+        insertIntoXML(Address.class, addressList, true);
+        return RequestStatuses.SUCCESS;
+      } else {
+        return RequestStatuses.FAILED;
+      }
+    } catch (IOException e) {
       return RequestStatuses.FAILED;
     }
   }
@@ -375,9 +405,12 @@ public class DataProviderXML implements DataProvider {
       Deal deal = optionalDeal.get();
 
       switch (deal.getDealModel()) {
-        case PUBLIC: return removePublicDeal((PublicDeal) deal);
-        case PRIVATE: return removeSimpleDeal(deal);
-        default: return RequestStatuses.FAILED;
+        case PUBLIC:
+          return removePublicDeal((PublicDeal) deal);
+        case PRIVATE:
+          return removeSimpleDeal(deal);
+        default:
+          return RequestStatuses.FAILED;
       }
     } else {
       log.error(Constants.UNDEFINED_DEAL);
@@ -651,6 +684,7 @@ public class DataProviderXML implements DataProvider {
     classList.add(DealHistory.class);
     classList.add(Queue.class);
     classList.add(User.class);
+    classList.add(Address.class);
     classList.add(Company.class);
     classList.forEach(this::deleteFile);
   }
@@ -661,34 +695,10 @@ public class DataProviderXML implements DataProvider {
       insertIntoXML(Deal.class, new ArrayList<>(), true);
       insertIntoXML(PublicDeal.class, new ArrayList<>(), true);
       insertIntoXML(User.class, new ArrayList<>(), true);
+      insertIntoXML(Address.class, new ArrayList<>(), true);
       insertIntoXML(Company.class, new ArrayList<>(), true);
     } catch (IOException e) {
       log.error(e);
-    }
-  }
-
-  private RequestStatuses createUserOptional(
-          @NotNull String name,
-          @NotNull String phone,
-          @NotNull Address address) {
-    try {
-      String uuid = UUID.randomUUID().toString();
-      Optional<Company> company = createCompany();
-      if (company.isPresent()) {
-        User user = new User();
-        user.setId(uuid);
-        user.setName(name);
-        user.setPhone(phone);
-        user.setAddress(address);
-        user.setQueue(new Queue());
-        insertIntoXML(user);
-        return addUserToCompany(company.get().getId(), user);
-      } else {
-        return RequestStatuses.FAILED;
-      }
-    } catch (IOException e) {
-      log.error(e);
-      return RequestStatuses.FAILED;
     }
   }
 
@@ -705,16 +715,7 @@ public class DataProviderXML implements DataProvider {
     }
   }
 
-  private Optional<List<Company>> getCompanies() {
-    try {
-      return Optional.of(getFromXML(Company.class));
-    } catch (IOException e) {
-      log.error(e);
-      return Optional.empty();
-    }
-  }
-
-  private Optional<Company> getCompany(String id){
+  private Optional<Company> getCompany(String id) {
     Optional<List<Company>> optionalCompanies = getCompanies();
     if (optionalCompanies.isPresent()) {
       List<Company> companies = optionalCompanies.get();
@@ -726,16 +727,12 @@ public class DataProviderXML implements DataProvider {
     }
   }
 
-  private RequestStatuses addUserToCompany(String id, User user) {
-    Optional<Company> companyOptional = getCompany(id);
-    if (companyOptional.isPresent()) {
-      Company company = companyOptional.get();
-      List<User> employees = company.getEmployees();
-      employees.add(user);
-      company.setEmployees(employees);
-      return updateCompany(company);
-    } else {
-      return RequestStatuses.FAILED;
+  private Optional<List<Company>> getCompanies() {
+    try {
+      return Optional.of(getFromXML(Company.class));
+    } catch (IOException e) {
+      log.error(e);
+      return Optional.empty();
     }
   }
 
@@ -764,69 +761,36 @@ public class DataProviderXML implements DataProvider {
     }
   }
 
-  private void deleteCompany(String id) {
+  private RequestStatuses deleteCompany(String id) {
     Optional<List<Company>> optionalCompanies = getCompanies();
     Optional<Company> optionalCompany = getCompany(id);
     if (optionalCompanies.isPresent() && optionalCompany.isPresent()) {
       List<Company> companies = optionalCompanies.get();
       companies = companies.stream()
-              .filter(company -> !company.getId().equals(id) )
+              .filter(company -> !company.getId().equals(id))
               .collect(Collectors.toList());
       try {
         optionalCompany.get().getDeals().forEach(deal -> removeDeal(deal.getId()));
         insertIntoXML(Company.class, companies, true);
+        return RequestStatuses.SUCCESS;
       } catch (IOException e) {
         log.error(e);
+        return RequestStatuses.FAILED;
       }
-    }
-  }
-
-  private Optional<List<User>> getUsersOptional() {
-    try {
-      List<User> users = getFromXML(User.class);
-      return users.isEmpty() ? Optional.empty() : Optional.of(users);
-    } catch (IOException e) {
-      log.error(e);
-      return Optional.empty();
-    }
-  }
-
-  private Optional<User> getUserOptional(String userId) {
-    Optional<List<User>> userList = getUsers();
-    if (userList.isPresent()) {
-      List<User> users = userList.get();
-      return users
-              .stream()
-              .filter(user -> user.getId().equals(userId))
-              .findFirst();
-    } else {
-      return Optional.empty();
-    }
-  }
-
-  private RequestStatuses updateUser(@NotNull User editedUser) {
-    Optional<List<User>> userList = getUsers();
-    Optional<User> userOptional = getUser(editedUser.getId());
-    if (userList.isPresent() && userOptional.isPresent()) {
-      List<User> users = userList.get();
-
-      users = users.stream()
-              .filter(user -> !user.getId().equals(editedUser.getId()))
-              .collect(Collectors.toList());
-      users.add(editedUser);
-
-      return rewriteUsers(users);
     } else {
       return RequestStatuses.FAILED;
     }
   }
 
-  private RequestStatuses rewriteUsers(List<User> users) {
-    try {
-      insertIntoXML(User.class, users, true);
-      return RequestStatuses.SUCCESS;
-    } catch (IOException e) {
-      log.error(e);
+  private RequestStatuses addUserToCompany(String id, User user) {
+    Optional<Company> companyOptional = getCompany(id);
+    if (companyOptional.isPresent()) {
+      Company company = companyOptional.get();
+      List<User> employees = company.getEmployees();
+      employees.add(user);
+      company.setEmployees(employees);
+      return updateCompany(company);
+    } else {
       return RequestStatuses.FAILED;
     }
   }
@@ -864,14 +828,123 @@ public class DataProviderXML implements DataProvider {
     }
   }
 
-  private void addDealToCompany(String userId, Deal deal) {
+  private RequestStatuses addDealToCompany(String userId, Deal deal) {
     Optional<Company> companyOptional = getUserCompany(userId);
     if (companyOptional.isPresent()) {
       Company company = companyOptional.get();
       List<Deal> deals = company.getDeals();
       deals.add(deal);
       company.setDeals(deals);
-      updateCompany(company);
+      return updateCompany(company);
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private RequestStatuses deleteCompanyDeal(Deal deal) {
+    Optional<Company> companyOptional = getUserCompany(deal.getOwner());
+    if (companyOptional.isPresent()) {
+      Company company = companyOptional.get();
+      List<Deal> deals = company.getDeals();
+      deals = deals.stream()
+              .filter(dealE -> !dealE.getId().equals(deal.getId()))
+              .collect(Collectors.toList());
+      company.setDeals(deals);
+      return updateCompany(company);
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private RequestStatuses updateCompanyDeal(Deal updatedDeal) {
+    Optional<Company> companyOptional = getUserCompany(updatedDeal.getOwner());
+    if (companyOptional.isPresent()) {
+      Company company = companyOptional.get();
+      List<Deal> deals = company.getDeals();
+      deals = deals.stream()
+              .filter(dealE -> !dealE.getId().equals(updatedDeal.getId()))
+              .collect(Collectors.toList());
+
+      deals.add(updatedDeal);
+      company.setDeals(deals);
+      return updateCompany(company);
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private RequestStatuses createUserOptional(
+          @NotNull String name,
+          @NotNull String phone,
+          @NotNull Address address) {
+    try {
+      String uuid = UUID.randomUUID().toString();
+      Optional<Company> company = createCompany();
+      if (company.isPresent()) {
+        User user = new User();
+        user.setId(uuid);
+        user.setName(name);
+        user.setPhone(phone);
+        user.setAddress(address);
+        user.setQueue(new Queue());
+        insertIntoXML(user);
+        return addUserToCompany(company.get().getId(), user);
+      } else {
+        return RequestStatuses.FAILED;
+      }
+    } catch (IOException e) {
+      log.error(e);
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private Optional<User> getUserOptional(String userId) {
+    Optional<List<User>> userList = getUsers();
+    if (userList.isPresent()) {
+      List<User> users = userList.get();
+      return users
+              .stream()
+              .filter(user -> user.getId().equals(userId))
+              .findFirst();
+    } else {
+      return Optional.empty();
+    }
+  }
+
+  private Optional<List<User>> getUsersOptional() {
+    try {
+      List<User> users = getFromXML(User.class);
+      return users.isEmpty() ? Optional.empty() : Optional.of(users);
+    } catch (IOException e) {
+      log.error(e);
+      return Optional.empty();
+    }
+  }
+
+  private RequestStatuses updateUser(@NotNull User editedUser) {
+    Optional<List<User>> userList = getUsers();
+    Optional<User> userOptional = getUser(editedUser.getId());
+    if (userList.isPresent() && userOptional.isPresent()) {
+      List<User> users = userList.get();
+
+      users = users.stream()
+              .filter(user -> !user.getId().equals(editedUser.getId()))
+              .collect(Collectors.toList());
+      users.add(editedUser);
+
+      return rewriteUsers(users);
+    } else {
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  private RequestStatuses rewriteUsers(List<User> users) {
+    try {
+      insertIntoXML(User.class, users, true);
+      return RequestStatuses.SUCCESS;
+    } catch (IOException e) {
+      log.error(e);
+      return RequestStatuses.FAILED;
     }
   }
 
@@ -884,22 +957,6 @@ public class DataProviderXML implements DataProvider {
     dealHistory.setCreated_at(new Date());
     dealHistoryList.add(dealHistory);
     return dealHistoryList;
-  }
-
-  private Optional<List<PublicDeal>> getPublicDealsList() {
-    try {
-      List<PublicDeal> dealList = getFromXML(PublicDeal.class);
-      if (dealList.isEmpty()) {
-        log.debug(Constants.EMPTY_PUBLIC_DEALS);
-        return Optional.empty();
-      }
-
-      return Optional.of(dealList);
-    } catch (IOException e) {
-      log.error(e);
-      log.error(Constants.UNDEFINED_DEALS_LIST);
-      return Optional.empty();
-    }
   }
 
   private Optional<List<Deal>> getAllDeals() {
@@ -927,37 +984,25 @@ public class DataProviderXML implements DataProvider {
     }
   }
 
-  private void deleteCompanyDeal(Deal deal) {
-    Optional<Company> companyOptional = getUserCompany(deal.getOwner());
-    if (companyOptional.isPresent()) {
-      Company company = companyOptional.get();
-      List<Deal> deals = company.getDeals();
-      deals = deals.stream()
-              .filter(dealE -> !dealE.getId().equals(deal.getId()))
-              .collect(Collectors.toList());
-      company.setDeals(deals);
-      updateCompany(company);
-    }
-  }
-
-  private void updateCompanyDeal(Deal updatedDeal) {
-    Optional<Company> companyOptional = getUserCompany(updatedDeal.getOwner());
-    if (companyOptional.isPresent()) {
-      Company company = companyOptional.get();
-      List<Deal> deals = company.getDeals();
-      deals = deals.stream()
-              .filter(dealE -> !dealE.getId().equals(updatedDeal.getId()))
-              .collect(Collectors.toList());
-
-      deals.add(updatedDeal);
-      company.setDeals(deals);
-      updateCompany(company);
-    }
-  }
-
   private Optional<List<Deal>> getDealsList() {
     try {
       return Optional.of(getFromXML(Deal.class));
+    } catch (IOException e) {
+      log.error(e);
+      log.error(Constants.UNDEFINED_DEALS_LIST);
+      return Optional.empty();
+    }
+  }
+
+  private Optional<List<PublicDeal>> getPublicDealsList() {
+    try {
+      List<PublicDeal> dealList = getFromXML(PublicDeal.class);
+      if (dealList.isEmpty()) {
+        log.debug(Constants.EMPTY_PUBLIC_DEALS);
+        return Optional.empty();
+      }
+
+      return Optional.of(dealList);
     } catch (IOException e) {
       log.error(e);
       log.error(Constants.UNDEFINED_DEALS_LIST);
@@ -1008,9 +1053,12 @@ public class DataProviderXML implements DataProvider {
 
   private RequestStatuses updateDeal(Deal deal) {
     switch (deal.getDealModel()) {
-      case PUBLIC: return updatePublicDeal((PublicDeal) deal);
-      case PRIVATE: return updateSimpleDeal(deal);
-      default: return RequestStatuses.FAILED;
+      case PUBLIC:
+        return updatePublicDeal((PublicDeal) deal);
+      case PRIVATE:
+        return updateSimpleDeal(deal);
+      default:
+        return RequestStatuses.FAILED;
     }
   }
 

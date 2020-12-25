@@ -28,77 +28,86 @@ public class DealHistory implements Serializable {
   @CsvDate(value = Constants.DATE_FORMAT)
   private Date created_at;
 
-  public DealHistory () { };
+  public DealHistory() {
+  }
 
   /**
    * Set the value of id
+   *
    * @param newVar the new value of id
    */
   @Element(name = "id")
-  public void setId (String newVar) {
+  public void setId(String newVar) {
     id = newVar;
   }
 
   /**
    * Get the value of id
+   *
    * @return the value of id
    */
   @Element(name = "id")
-  public String getId () {
+  public String getId() {
     return id;
   }
 
   /**
    * Set the value of text
+   *
    * @param newVar the new value of text
    */
   @Attribute(name = "text")
-  public void setText (String newVar) {
+  public void setText(String newVar) {
     text = newVar;
   }
 
   /**
    * Get the value of text
+   *
    * @return the value of text
    */
   @Attribute(name = "text")
-  public String getText () {
+  public String getText() {
     return text;
   }
 
   /**
    * Set the value of status
+   *
    * @param newVar the new value of status
    */
   @Attribute(name = "status")
-  public void setStatus (DealStatus newVar) {
+  public void setStatus(DealStatus newVar) {
     status = newVar;
   }
 
   /**
    * Get the value of status
+   *
    * @return the value of status
    */
   @Attribute(name = "status")
-  public DealStatus getStatus () {
+  public DealStatus getStatus() {
     return status;
   }
 
   /**
    * Set the value of created_at
+   *
    * @param newVar the new value of created_at
    */
   @Attribute(name = "created_at")
-  public void setCreated_at (Date newVar) {
+  public void setCreated_at(Date newVar) {
     created_at = newVar;
   }
 
   /**
    * Get the value of created_at
+   *
    * @return the value of created_at
    */
   @Attribute(name = "created_at")
-  public Date getCreated_at () {
+  public Date getCreated_at() {
     return created_at;
   }
 
@@ -127,9 +136,5 @@ public class DealHistory implements Serializable {
             ", created_at=" + created_at +
             '}';
   }
-
-  //
-  // Other methods
-  //
 
 }

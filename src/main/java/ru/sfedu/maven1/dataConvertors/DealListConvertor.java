@@ -1,8 +1,6 @@
 package ru.sfedu.maven1.dataConvertors;
 
 import com.opencsv.bean.AbstractBeanField;
-import com.opencsv.exceptions.CsvConstraintViolationException;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.maven1.Constants;
@@ -10,11 +8,10 @@ import ru.sfedu.maven1.dataProviders.DataProviderCSV;
 import ru.sfedu.maven1.model.Deal;
 import ru.sfedu.maven1.model.User;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,9 +43,10 @@ public class DealListConvertor extends AbstractBeanField<Deal, Integer> {
       } else {
         List<Deal> deals = new ArrayList<>();
         Arrays.asList(uuids)
-                .forEach(uuid -> deals.add(dataProviderCSV
-                        .manageDeal(uuid).get())
-                );
+                .forEach(uuid -> {
+                  Optional<Deal> optionalDeal = dataProviderCSV.manageDeal(uuid);
+                  optionalDeal.ifPresent(deals::add);
+                });
         return deals;
       }
     } catch (Exception e) {

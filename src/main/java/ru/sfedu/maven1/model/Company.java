@@ -19,64 +19,71 @@ public class Company {
   private String id;
 
   @CsvCustomBindByName(converter = UsersListConvertor.class)
-  private List<User> employees = new ArrayList<User>();
+  private List<User> employees = new ArrayList<>();
 
   @CsvCustomBindByName(converter = DealListConvertor.class)
-  private List<Deal> deals  = new ArrayList<Deal>();
+  private List<Deal> deals = new ArrayList<>();
 
-  public Company () { };
+  public Company() {
+  }
 
   /**
    * Set the value of id
+   *
    * @param newVar the new value of id
    */
   @Attribute(name = "id")
-  public void setId (String newVar) {
+  public void setId(String newVar) {
     id = newVar;
   }
 
   /**
    * Get the value of id
+   *
    * @return the value of id
    */
   @Attribute(name = "id")
-  public String getId () {
+  public String getId() {
     return id;
   }
 
   /**
    * Set the value of employees
+   *
    * @param newVar the new value of employees
    */
   @ElementList(name = "employees")
-  public void setEmployees (List<User> newVar) {
+  public void setEmployees(List<User> newVar) {
     employees = newVar;
   }
 
   /**
    * Get the value of employees
+   *
    * @return the value of employees
    */
   @ElementList(name = "employees")
-  public List<User> getEmployees () {
+  public List<User> getEmployees() {
     return employees;
   }
 
   /**
    * Set the value of deals
+   *
    * @param newVar the new value of deals
    */
   @ElementList(name = "deals")
-  public void setDeals (List<Deal> newVar) {
+  public void setDeals(List<Deal> newVar) {
     deals = newVar;
   }
 
   /**
    * Get the value of deals
+   *
    * @return the value of deals
    */
   @ElementList(name = "deals")
-  public List<Deal> getDeals () {
+  public List<Deal> getDeals() {
     return deals;
   }
 

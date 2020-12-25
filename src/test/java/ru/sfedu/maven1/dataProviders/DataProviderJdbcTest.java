@@ -5,18 +5,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataProviderJdbcTest extends DataProviderTests {
-  private static final DataProvider dataProvider = DataProviderJdbc.getInstance();
+  private static final IDataProvider I_DATA_PROVIDER = DataProviderJdbc.getInstance();
 
   @Test
   @BeforeAll
   static void refreshDB() {
-    refreshDB(dataProvider);
+    refreshDB(I_DATA_PROVIDER);
   }
 
   @Test
   @BeforeEach
   void setUp() {
-    setUp(dataProvider);
+    setUp(I_DATA_PROVIDER);
   }
 
   @Test
@@ -70,8 +70,13 @@ public class DataProviderJdbcTest extends DataProviderTests {
   }
 
   @Test
-  void getAddresses() {
-    super.getAddresses();
+  void getAddressesCorrect() {
+    super.getAddressesCorrect();
+  }
+
+  @Test
+  void getAddressesIncorrect() {
+    super.getAddressesIncorrect();
   }
 
   @Test
@@ -92,6 +97,26 @@ public class DataProviderJdbcTest extends DataProviderTests {
   @Test
   void getAddressByNameIncorrect() {
     super.getAddressByNameIncorrect();
+  }
+
+  @Test
+  void removeAddressCorrect() {
+    super.removeAddressCorrect();
+  }
+
+  @Test
+  void removeAddressIncorrect() {
+    super.removeAddressIncorrect();
+  }
+
+  @Test
+  void updateAddressCorrect() {
+    super.updateAddressCorrect();
+  }
+
+  @Test
+  void updateAddressIncorrect() {
+    super.updateAddressIncorrect();
   }
 
   @Test
