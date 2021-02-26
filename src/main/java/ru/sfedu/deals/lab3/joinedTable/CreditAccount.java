@@ -1,0 +1,46 @@
+package ru.sfedu.deals.lab3.joinedTable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import java.math.BigDecimal;
+import java.util.Objects;
+
+@Entity(name = "CreditAccount")
+public class CreditAccount extends Account {
+  @Column(name = "creditLimit", nullable = false)
+  private BigDecimal creditLimit;
+
+  public BigDecimal getCreditLimit() {
+    return creditLimit;
+  }
+
+  public void setCreditLimit(BigDecimal creditLimit) {
+    this.creditLimit = creditLimit;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    CreditAccount that = (CreditAccount) o;
+    return Objects.equals(getCreditLimit(), that.getCreditLimit());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), getCreditLimit());
+  }
+
+  @Override
+  public String toString() {
+    return "CreditAccount{" +
+            "id=" + super.getId() +
+            "owner=" + super.getOwner() +
+            "balance=" + super.getBalance() +
+            "interestRate=" + super.getInterestRate() +
+            "creditLimit=" + creditLimit +
+            '}';
+  }
+}

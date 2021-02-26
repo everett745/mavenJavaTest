@@ -8,10 +8,16 @@ import org.simpleframework.xml.Root;
 import ru.sfedu.deals.dataConvertors.DealListConvertor;
 import ru.sfedu.deals.dataConvertors.UsersListConvertor;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "COMPANY", schema = "PUBLIC", catalog = "DEALSDB")
 @Root(name = "Company")
 public class Company {
 
@@ -42,6 +48,8 @@ public class Company {
    *
    * @return the value of id
    */
+  @Basic
+  @Column(name = "ID", nullable = true, length = 255)
   @Attribute(name = "id")
   public String getId() {
     return id;
@@ -62,6 +70,8 @@ public class Company {
    *
    * @return the value of employees
    */
+  @Basic
+  @Column(name = "EMPLOYEES", nullable = true, length = -1)
   @ElementList(name = "employees")
   public List<User> getEmployees() {
     return employees;
@@ -82,6 +92,8 @@ public class Company {
    *
    * @return the value of deals
    */
+  @Basic
+  @Column(name = "DEALS", nullable = true, length = -1)
   @ElementList(name = "deals")
   public List<Deal> getDeals() {
     return deals;

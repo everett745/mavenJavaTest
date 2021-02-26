@@ -7,6 +7,10 @@ import org.simpleframework.xml.Element;
 import ru.sfedu.deals.Constants;
 import ru.sfedu.deals.enums.DealStatus;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -14,6 +18,8 @@ import java.util.Objects;
 /**
  * Class DealHistory
  */
+@Entity
+@Table(name = "DEAL_HISTORY", schema = "PUBLIC", catalog = "DEALSDB")
 public class DealHistory implements Serializable {
 
   @CsvBindByName
@@ -46,6 +52,8 @@ public class DealHistory implements Serializable {
    *
    * @return the value of id
    */
+  @Basic
+  @Column(name = "ID", nullable = true, length = -1)
   @Element(name = "id")
   public String getId() {
     return id;
@@ -66,6 +74,8 @@ public class DealHistory implements Serializable {
    *
    * @return the value of text
    */
+  @Basic
+  @Column(name = "TEXT", nullable = true, length = -1)
   @Attribute(name = "text")
   public String getText() {
     return text;
@@ -86,6 +96,8 @@ public class DealHistory implements Serializable {
    *
    * @return the value of status
    */
+  @Basic
+  @Column(name = "STATUS", nullable = true, length = -1)
   @Attribute(name = "status")
   public DealStatus getStatus() {
     return status;
@@ -106,6 +118,8 @@ public class DealHistory implements Serializable {
    *
    * @return the value of created_at
    */
+  @Basic
+  @Column(name = "CREATED_AT", nullable = true)
   @Attribute(name = "created_at")
   public Date getCreated_at() {
     return created_at;

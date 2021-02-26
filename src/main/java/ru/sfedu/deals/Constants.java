@@ -3,6 +3,14 @@ package ru.sfedu.deals;
 public class Constants {
   public static final String CONFIG_PATH = "config";
   public static final String DEFAULT_CONFIG_PATH = "./src/main/resources/environment.properties";
+  public static final String HIBERNATE_PATH = "config";
+  public static final String DEFAULT_HIBERNATE_PATH = "./src/main/resources/hibernate.cfg.xml";
+
+  public static final String HIBERNATE_MAPPED_SOURCE_CLASS_PATH = "./src/main/resources/hibernate-mapSup.cfg.xml";
+  public static final String HIBERNATE_TABLE_PER_CLASS_PATH = "./src/main/resources/hibernate-tablePerClass.cfg.xml";
+  public static final String HIBERNATE_SINGLE_TABLE_PATH = "./src/main/resources/hibernate-single.cfg.xml";
+  public static final String HIBERNATE_JOINED_TABLE_PATH = "./src/main/resources/hibernate-joined.cfg.xml";
+
 
   public static final String CSV_PATH = "csv.path";
   public static final String CSV_EXTENSION = "csv.extension";

@@ -8,9 +8,12 @@ import org.simpleframework.xml.Root;
 import ru.sfedu.deals.dataConvertors.AddressConvertor;
 import ru.sfedu.deals.dataConvertors.QueueConvertor;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "USER", schema = "PUBLIC", catalog = "DEALSDB")
 @Root(name = "User")
 public class User implements Serializable {
 
@@ -47,6 +50,8 @@ public class User implements Serializable {
    *
    * @return the value of id
    */
+  @Id
+  @Column(name = "ID", nullable = false, length = 255)
   @Attribute(name = "id")
   public String getId() {
     return id;
@@ -67,6 +72,8 @@ public class User implements Serializable {
    *
    * @return the value of address
    */
+  @Basic
+  @Column(name = "ADDRESS", nullable = true)
   @Element(name = "address")
   public Address getAddress() {
     return address;
@@ -87,6 +94,8 @@ public class User implements Serializable {
    *
    * @return the value of queue
    */
+  @Basic
+  @Column(name = "QUEUE", nullable = true, length = 255)
   @Element(name = "queue", required = false)
   public Queue getQueue() {
     return queue;
@@ -107,6 +116,8 @@ public class User implements Serializable {
    *
    * @return the value of name
    */
+  @Basic
+  @Column(name = "NAME", nullable = true, length = -1)
   @Attribute(name = "name")
   public String getName() {
     return name;
@@ -127,6 +138,8 @@ public class User implements Serializable {
    *
    * @return the value of phone
    */
+  @Basic
+  @Column(name = "PHONE", nullable = true, length = -1)
   @Attribute(name = "phone")
   public String getPhone() {
     return phone;
