@@ -9,14 +9,12 @@ import ru.sfedu.deals.Constants;
 import ru.sfedu.deals.SqlQueriesConstants;
 import ru.sfedu.deals.enums.RequestStatuses;
 import ru.sfedu.deals.model.Address;
-import ru.sfedu.deals.model.Lab4Entity;
 import ru.sfedu.deals.model.TestEntity;
 import ru.sfedu.deals.utils.HibernateUtil;
 
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class HibernateDataProvider {
   private static IDataProvider INSTANCE = null;
@@ -126,6 +124,22 @@ public class HibernateDataProvider {
     }
   }
 
+  public Optional<TestEntity> selectById(long id) {
+    Session session = getSession();
+    session.beginTransaction();
+
+    try {
+      TestEntity item = session.get(TestEntity.class, id);
+
+      session.close();
+      return item != null ? Optional.of(item) : Optional.empty();
+    } catch (Exception e) {
+      log.error(e);
+      session.close();
+      return Optional.empty();
+    }
+  }
+
   public RequestStatuses deleteTestEntity(@NotNull TestEntity entity) {
     Session session = getSession();
     session.beginTransaction();
@@ -142,76 +156,28 @@ public class HibernateDataProvider {
     }
   }
 
+  public RequestStatuses deleteTestEntity(long id) {
+    Session session = getSession();
+    session.beginTransaction();
+
+    try {
+      Optional<TestEntity> entity = selectById(id);
+      if (entity.isPresent()) {
+        session.delete(entity.get());
+        session.getTransaction().commit();
+        session.close();
+        return RequestStatuses.SUCCESS;
+      } else {
+        return RequestStatuses.FAILED;
+      }
+    } catch (Exception e) {
+      log.error(e);
+      session.close();
+      return RequestStatuses.FAILED;
+    }
+  }
+
   public RequestStatuses updateTestEntity(TestEntity entity) {
-    Session session = getSession();
-    session.beginTransaction();
-
-    try {
-      session.update(entity);
-      session.getTransaction().commit();
-      session.close();
-      return RequestStatuses.SUCCESS;
-    } catch (Exception e) {
-      log.error(e);
-      session.close();
-      return RequestStatuses.FAILED;
-    }
-  }
-
-
-  /* Lab4Entity */
-  public RequestStatuses createLab4Entity(Lab4Entity entity) {
-    Session session = getSession();
-    session.beginTransaction();
-
-    try {
-      session.save(entity);
-      session.getTransaction().commit();
-
-      session.close();
-
-      return RequestStatuses.SUCCESS;
-    } catch (Exception e) {
-      log.error(e);
-      session.close();
-      return RequestStatuses.FAILED;
-    }
-  }
-
-  public Optional<List<Lab4Entity>> selectAllLab4Entity() {
-    Session session = getSession();
-    session.beginTransaction();
-
-    try {
-      Query query = session.createQuery(SqlQueriesConstants.SQL_SELECT_LAB4_ENTITY);
-      List<Lab4Entity> resList = query.getResultList();
-
-      session.close();
-      return resList != null ? Optional.of(resList) : Optional.empty();
-    } catch (Exception e) {
-      log.error(e);
-      session.close();
-      return Optional.empty();
-    }
-  }
-
-  public RequestStatuses deleteLab4Entity(@NotNull Lab4Entity entity) {
-    Session session = getSession();
-    session.beginTransaction();
-
-    try {
-      session.delete(entity);
-      session.getTransaction().commit();
-      session.close();
-      return RequestStatuses.SUCCESS;
-    } catch (Exception e) {
-      log.error(e);
-      session.close();
-      return RequestStatuses.FAILED;
-    }
-  }
-
-  public RequestStatuses updateLab4Entity(Lab4Entity entity) {
     Session session = getSession();
     session.beginTransaction();
 

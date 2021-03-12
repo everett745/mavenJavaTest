@@ -1,0 +1,14 @@
+<List>
+   <object class="ru.sfedu.deals.model.User" phone="8922222222" name="Ivan Test" id="048b3010-0b72-4819-88a0-06762fa060c8">
+      <queue id="e8d83682-c54c-4912-8c97-e13ad1bc17f2">
+         <items class="java.util.ArrayList"/>
+      </queue>
+      <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
+   </object>
+   <object class="ru.sfedu.deals.model.User" phone="0000000" name="Semen Test" id="fa660d4c-c854-43f5-8884-1154a5ea5222">
+      <queue id="43365603-77d1-4d12-94eb-9e7fb2351fc2">
+         <items class="java.util.ArrayList"/>
+      </queue>
+      <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
+   </object>
+</List>

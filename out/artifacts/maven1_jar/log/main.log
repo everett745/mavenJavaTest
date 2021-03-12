@@ -1,0 +1,4 @@
+2021-03-08 18:57:21 INFO  Main:13 - Log info
+2021-03-08 18:57:21 ERROR Main:14 - Log error
+2021-03-08 18:57:21 DEBUG Main:15 - Log debug
+2021-03-08 18:57:21 INFO  Main:16 - 33

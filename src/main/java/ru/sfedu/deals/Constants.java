@@ -3,13 +3,21 @@ package ru.sfedu.deals;
 public class Constants {
   public static final String CONFIG_PATH = "config";
   public static final String DEFAULT_CONFIG_PATH = "./src/main/resources/environment.properties";
-  public static final String HIBERNATE_PATH = "config";
-  public static final String DEFAULT_HIBERNATE_PATH = "./src/main/resources/hibernate.cfg.xml";
+  public static final String HIBERNATE_PATH = "hbConfig";
+  public static final String DEFAULT_HIBERNATE_PATH = "hibernate.cfg.xml";
 
-  public static final String HIBERNATE_MAPPED_SOURCE_CLASS_PATH = "./src/main/resources/hibernate-mapSup.cfg.xml";
-  public static final String HIBERNATE_TABLE_PER_CLASS_PATH = "./src/main/resources/hibernate-tablePerClass.cfg.xml";
-  public static final String HIBERNATE_SINGLE_TABLE_PATH = "./src/main/resources/hibernate-single.cfg.xml";
-  public static final String HIBERNATE_JOINED_TABLE_PATH = "./src/main/resources/hibernate-joined.cfg.xml";
+  public static final String HIBERNATE_MAPPED_SOURCE_CLASS_PATH = "./src/main/resources/lab3HibernateConfigs/hibernate-mapSup.cfg.xml";
+  public static final String HIBERNATE_TABLE_PER_CLASS_PATH = "./src/main/resources/lab3HibernateConfigs/hibernate-tablePerClass.cfg.xml";
+  public static final String HIBERNATE_SINGLE_TABLE_PATH = "./src/main/resources/lab3HibernateConfigs/hibernate-single.cfg.xml";
+  public static final String HIBERNATE_JOINED_TABLE_PATH = "./src/main/resources/lab3HibernateConfigs/hibernate-joined.cfg.xml";
+
+  public static final String HIBERNATE_SET_PATH = "./src/main/resources/lab4HibernateConfigs/hibernate-set.cfg.xml";
+  public static final String HIBERNATE_MAP_PATH = "./src/main/resources/lab4HibernateConfigs/hibernate-map.cfg.xml";
+  public static final String HIBERNATE_LIST_PATH = "./src/main/resources/lab4HibernateConfigs/hibernate-list.cfg.xml";
+  public static final String HIBERNATE_ENTITY_SET_PATH = "./src/main/resources/lab4HibernateConfigs/hibernate-eSet.cfg.xml";
+  public static final String HIBERNATE_ENTITY_MAP_PATH = "./src/main/resources/lab4HibernateConfigs/hibernate-eMap.cfg.xml";
+
+  public static final String HIBERNATE_LAB5_PATH = "./src/main/resources/hibernate_lab5.cfg.xml";
 
 
   public static final String CSV_PATH = "csv.path";

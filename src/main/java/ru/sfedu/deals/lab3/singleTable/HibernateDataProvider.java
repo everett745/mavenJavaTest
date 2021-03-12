@@ -8,6 +8,7 @@ import ru.sfedu.deals.SqlQueriesConstants;
 import ru.sfedu.deals.dataProviders.DataProviderJdbc;
 import ru.sfedu.deals.dataProviders.IDataProvider;
 import ru.sfedu.deals.enums.RequestStatuses;
+import ru.sfedu.deals.utils.HibernateUtil;
 
 import javax.persistence.Query;
 import java.util.List;
@@ -80,6 +81,22 @@ public class HibernateDataProvider {
     }
   }
 
+  public Optional<Account> selectById(long id) {
+    Session session = getSession();
+    session.beginTransaction();
+
+    try {
+      Account item = session.get(Account.class, id);
+
+      session.close();
+      return item != null ? Optional.of(item) : Optional.empty();
+    } catch (Exception e) {
+      log.error(e);
+      session.close();
+      return Optional.empty();
+    }
+  }
+
   public RequestStatuses deleteAccount(@NotNull Account account) {
     Session session = getSession();
     session.beginTransaction();
@@ -89,6 +106,27 @@ public class HibernateDataProvider {
       session.getTransaction().commit();
       session.close();
       return RequestStatuses.SUCCESS;
+    } catch (Exception e) {
+      log.error(e);
+      session.close();
+      return RequestStatuses.FAILED;
+    }
+  }
+
+  public RequestStatuses deleteAccount(long id) {
+    Session session = getSession();
+    session.beginTransaction();
+
+    try {
+      Optional<Account> account = selectById(id);
+      if (account.isPresent()) {
+        session.delete(account.get());
+        session.getTransaction().commit();
+        session.close();
+        return RequestStatuses.SUCCESS;
+      } else {
+        return RequestStatuses.FAILED;
+      }
     } catch (Exception e) {
       log.error(e);
       session.close();

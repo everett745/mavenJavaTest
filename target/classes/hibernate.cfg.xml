@@ -21,8 +21,44 @@
 <!--    <property name="show_sql">true</property>-->
     <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-    <mapping class="ru.sfedu.deals.model.AddressT"/>
-    <mapping class="ru.sfedu.deals.model.TestEntity"/>
-    <mapping class="ru.sfedu.deals.model.Lab4Entity"/>
+    <!-- lab_2 -->
+<!--    <mapping class="ru.sfedu.deals.model.AddressT"/>-->
+<!--    <mapping class="ru.sfedu.deals.model.TestEntity"/>-->
+
+    <!-- lab_3 -->
+
+<!--    <mapping class="ru.sfedu.deals.lab3.joinedTable.Account"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab3.joinedTable.CreditAccount"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab3.joinedTable.DebitAccount"/>-->
+
+<!--    <mapping class="ru.sfedu.deals.lab3.mapSupClass.Account"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab3.mapSupClass.CreditAccount"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab3.mapSupClass.DebitAccount"/>-->
+
+
+<!--    <mapping class="ru.sfedu.deals.lab3.singleTable.Account"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab3.singleTable.CreditAccount"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab3.singleTable.DebitAccount"/>-->
+
+<!--    <mapping class="ru.sfedu.deals.lab3.tablePerClass.Account"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab3.tablePerClass.CreditAccount"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab3.tablePerClass.DebitAccount"/>-->
+
+
+    <!-- lab_4 -->
+
+<!--    <mapping class="ru.sfedu.deals.lab4.set.User"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab4.list.User"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab4.map.User"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab4.entitySet.User"/>-->
+<!--    <mapping class="ru.sfedu.deals.lab4.entityMap.User"/>-->
+
+    <!-- lab_5 -->
+
+    <mapping class="ru.sfedu.deals.lab5.Address"/>
+    <mapping class="ru.sfedu.deals.lab5.Deal"/>
+    <mapping class="ru.sfedu.deals.lab5.User"/>
+    <mapping class="ru.sfedu.deals.lab5.Company"/>
+
   </session-factory>
 </hibernate-configuration>

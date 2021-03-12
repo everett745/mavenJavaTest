@@ -176,5 +176,134 @@
     <collation id="161" parent="2" name="UKRAINIAN_UKRAINE"/>
     <collation id="162" parent="2" name="VIETNAMESE"/>
     <collation id="163" parent="2" name="VIETNAMESE_VIETNAM"/>
+    <table id="164" parent="4" name="ACCOUNT">
+      <ObjectId>3</ObjectId>
+    </table>
+    <table id="165" parent="4" name="CREDITACCOUNT">
+      <ObjectId>6</ObjectId>
+    </table>
+    <table id="166" parent="4" name="DEBITACCOUNT">
+      <ObjectId>9</ObjectId>
+    </table>
+    <table id="167" parent="4" name="HIBERNATE_SEQUENCES">
+      <ObjectId>12</ObjectId>
+    </table>
+    <column id="168" parent="164" name="ID">
+      <Position>1</Position>
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="169" parent="164" name="BALANCE">
+      <Position>2</Position>
+      <DataType>DECIMAL(19,2)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="170" parent="164" name="INTEREST_RATE">
+      <Position>3</Position>
+      <DataType>DECIMAL(19,2)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="171" parent="164" name="OWNER">
+      <Position>4</Position>
+      <DataType>VARCHAR(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="172" parent="164" name="PRIMARY_KEY_E">
+      <ObjectId>4</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <SourceTextLength>71</SourceTextLength>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+      <AutoCreated>1</AutoCreated>
+    </index>
+    <key id="173" parent="164" name="CONSTRAINT_E">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="174" parent="165" name="CREDITLIMIT">
+      <Position>1</Position>
+      <DataType>DECIMAL(19,2)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="175" parent="165" name="ID">
+      <Position>2</Position>
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="176" parent="165" name="PRIMARY_KEY_2">
+      <ObjectId>7</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <SourceTextLength>77</SourceTextLength>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+      <AutoCreated>1</AutoCreated>
+    </index>
+    <key id="177" parent="165" name="CONSTRAINT_2">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="178" parent="165" name="FKRYYSKT13GS28KBHWC30TVWF8T">
+      <ColNames>ID</ColNames>
+      <RefTableName>ACCOUNT</RefTableName>
+      <RefKeyName>PRIMARY_KEY_E</RefKeyName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+    </foreign-key>
+    <column id="179" parent="166" name="OVERDRAFTFEE">
+      <Position>1</Position>
+      <DataType>DECIMAL(19,2)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="180" parent="166" name="ID">
+      <Position>2</Position>
+      <DataType>BIGINT|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="181" parent="166" name="PRIMARY_KEY_6">
+      <ObjectId>10</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <SourceTextLength>76</SourceTextLength>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+      <AutoCreated>1</AutoCreated>
+    </index>
+    <key id="182" parent="166" name="CONSTRAINT_6">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="183" parent="166" name="FK5MRCDPAIG21OQ5BBX9XE279HT">
+      <ColNames>ID</ColNames>
+      <RefTableName>ACCOUNT</RefTableName>
+      <RefKeyName>PRIMARY_KEY_E</RefKeyName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+    </foreign-key>
+    <column id="184" parent="167" name="SEQUENCE_NAME">
+      <Position>1</Position>
+      <DataType>VARCHAR(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="185" parent="167" name="NEXT_VAL">
+      <Position>2</Position>
+      <DataType>BIGINT|0s</DataType>
+    </column>
+    <index id="186" parent="167" name="PRIMARY_KEY_5">
+      <ObjectId>13</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <SourceTextLength>94</SourceTextLength>
+      <ColNames>SEQUENCE_NAME</ColNames>
+      <Unique>1</Unique>
+      <AutoCreated>1</AutoCreated>
+    </index>
+    <key id="187" parent="167" name="CONSTRAINT_5">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>SEQUENCE_NAME</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

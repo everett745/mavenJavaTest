@@ -1,0 +1,8 @@
+<List>
+   <object class="ru.sfedu.deals.model.Deal" dealType="PURCHASE" description="New simple deal" price="150 000" createdAt="2020-12-26 12:48:39.199 MSK" model="PRIVATE" object="LAND" name="New simple deal" id="aea320bd-1645-4c70-be5a-a93d00025576" owner="048b3010-0b72-4819-88a0-06762fa060c8">
+      <requests id="8ce5f556-4a08-4fe2-9e54-df18f50edee9">
+         <items class="java.util.ArrayList"/>
+      </requests>
+      <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
+   </object>
+</List>

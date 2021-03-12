@@ -24,7 +24,7 @@ public class JoinedTableTest {
     account.setBalance(BigDecimal.valueOf(123.0));
     account.setInterestRate(BigDecimal.valueOf(3.0));
     account.setOwner("Owner");
-    account.setCreditLimit(BigDecimal.valueOf(500.0));
+    account.setCreditLimit(BigDecimal.valueOf(5600.0));
 
     Assertions.assertEquals(provider.insertAccount(account), RequestStatuses.SUCCESS);
   }
@@ -68,8 +68,9 @@ public class JoinedTableTest {
   void deleteAccountDebitAccount() {
     log.debug("deleteAccountDebitAccount");
     insertDebitAccount();
+    log.debug(provider.selectAllDebitAccount());
     DebitAccount account = provider.selectAllDebitAccount().get().get(0);
-    Assertions.assertEquals(provider.deleteAccount(account), RequestStatuses.SUCCESS);
+    Assertions.assertEquals(provider.deleteAccount(account.getId()), RequestStatuses.SUCCESS);
   }
 
   @Test

@@ -1,3 +1,18 @@
+
+java "-Dlog4j2.configurationFile=log4j2.properties" "-Dconfig=environment.properties" -jar deals.jar hb HB_LAB1 GET_ALL_SCHEMAS 123
+
+
+
+
+
+
+
+
+
+
+
+
+
 Пример установки проперти файлов для .bat файла (windows):
 
 @echo off
