@@ -1,0 +1,8 @@
+<List>
+   <object class="ru.sfedu.deals.model.Queue" id="048b3010-0b72-4819-88a0-06762fa060c8">
+      <items class="java.util.ArrayList"/>
+   </object>
+   <object class="ru.sfedu.deals.model.Queue" id="fa660d4c-c854-43f5-8884-1154a5ea5222">
+      <items class="java.util.ArrayList"/>
+   </object>
+</List>

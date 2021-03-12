@@ -1,14 +1,14 @@
 <List>
-   <object class="ru.sfedu.maven1.model.User" name="Ivan Test" id="b76aa99a-e42f-4d71-ac2b-d29d75adfca4" phone="8922222222">
-      <queue id="9b52237a-bcd0-47fe-aa11-838acc534d43">
+   <object class="ru.sfedu.deals.model.User" phone="8922222222" name="Ivan Test" id="048b3010-0b72-4819-88a0-06762fa060c8">
+      <queue id="e8d83682-c54c-4912-8c97-e13ad1bc17f2">
          <items class="java.util.ArrayList"/>
       </queue>
-      <address id="0" region="Rostov region" city="Rostov-on-Don" district="Southern"/>
+      <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
    </object>
-   <object class="ru.sfedu.maven1.model.User" name="Semen Test" id="85f89a8e-3d65-4b54-badb-0b9d0e0692eb" phone="0000000">
-      <queue id="65a019c4-c098-4666-946c-a5ee12252608">
+   <object class="ru.sfedu.deals.model.User" phone="0000000" name="Semen Test" id="fa660d4c-c854-43f5-8884-1154a5ea5222">
+      <queue id="43365603-77d1-4d12-94eb-9e7fb2351fc2">
          <items class="java.util.ArrayList"/>
       </queue>
-      <address id="0" region="Rostov region" city="Rostov-on-Don" district="Southern"/>
+      <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
    </object>
 </List>

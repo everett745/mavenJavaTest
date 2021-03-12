@@ -2,8 +2,8 @@
   <artifact type="jar" name="maven1:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/maven1_jar</output-path>
     <root id="archive" name="maven1.jar">
-      <element id="module-output" name="maven1" />
-      <element id="module-test-output" name="maven1" />
+      <element id="module-output" name="deals" />
+      <element id="module-test-output" name="deals" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/tukaani/xz/1.5/xz-1.5.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/sonatype/aether/aether-util/1.7/aether-util-1.7.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar" path-in-jar="/" />
