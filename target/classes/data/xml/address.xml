@@ -1,3 +1,3 @@
 <List>
-   <object class="ru.sfedu.maven1.model.Address" id="0" region="Rostov region" city="Rostov-on-Don" district="Southern"/>
+   <object class="ru.sfedu.deals.model.Address" region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
 </List>
