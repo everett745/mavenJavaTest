@@ -3,28 +3,36 @@ package ru.sfedu.deals.model;
 import com.opencsv.bean.CsvBindByName;
 import org.simpleframework.xml.Attribute;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Class Address
  */
+@Entity
+@Embeddable
+@Table(name = "ADDRESS", schema = "PUBLIC", catalog = "DEALSDB")
 public class Address implements Serializable {
 
+  @Id
+  @Column(name = "ID", unique = true, nullable = false)
   @CsvBindByName(column = "ID")
   private long id;
 
+  @Column(name = "CITY", unique = true, nullable = false)
   @CsvBindByName(column = "CITY")
   private String city;
 
+  @Column(name = "REGION", unique = true, nullable = false)
   @CsvBindByName(column = "REGION")
   private String region;
 
+  @Column(name = "DISTRICT", unique = true, nullable = false)
   @CsvBindByName(column = "DISTRICT")
   private String district;
 
-  public Address() {
-  }
+  public Address() { }
 
   /**
    * Set the value of id
@@ -41,6 +49,8 @@ public class Address implements Serializable {
    *
    * @return the value of id
    */
+  @Id
+  @Column(name = "ID", nullable = false)
   @Attribute(name = "id")
   public long getId() {
     return id;
@@ -61,6 +71,8 @@ public class Address implements Serializable {
    *
    * @return the value of city
    */
+  @Basic
+  @Column(name = "CITY", nullable = true, length = -1)
   @Attribute(name = "city")
   public String getCity() {
     return city;
@@ -81,6 +93,8 @@ public class Address implements Serializable {
    *
    * @return the value of country
    */
+  @Basic
+  @Column(name = "REGION", nullable = true, length = -1)
   @Attribute(name = "region")
   public String getRegion() {
     return region;
@@ -101,6 +115,8 @@ public class Address implements Serializable {
    *
    * @return the value of region
    */
+  @Basic
+  @Column(name = "DISTRICT", nullable = true, length = -1)
   @Attribute(name = "district")
   public String getDistrict() {
     return district;

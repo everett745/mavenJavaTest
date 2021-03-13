@@ -17,7 +17,6 @@ import java.util.Properties;
  * @author Boris Jamalov
  */
 public class PropertyProvider {
-  private static final Logger log = (Logger) LogManager.getLogger(PropertyProvider.class);
   private static final String DEFAULT_CONFIG_PATH = Constants.DEFAULT_CONFIG_PATH;
   private static final Properties PROPERTIES = new Properties();
 

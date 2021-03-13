@@ -10,6 +10,7 @@ import ru.sfedu.deals.enums.DealModel;
 import ru.sfedu.deals.enums.DealTypes;
 import ru.sfedu.deals.enums.ObjectTypes;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -17,6 +18,8 @@ import java.util.Objects;
 /**
  * Class Deal
  */
+@Entity
+@Table(name = "DEAL", schema = "PUBLIC", catalog = "DEALSDB")
 public class Deal implements Serializable {
 
   @CsvBindByName
@@ -55,6 +58,8 @@ public class Deal implements Serializable {
   @CsvBindByName
   private String price;
 
+  private Object currentStatus;
+
   public Deal() {
   }
 
@@ -73,6 +78,8 @@ public class Deal implements Serializable {
    *
    * @return the value of id
    */
+  @Id
+  @Column(name = "ID", nullable = false, length = 255)
   @Attribute(name = "id")
   public String getId() {
     return id;
@@ -93,6 +100,8 @@ public class Deal implements Serializable {
    *
    * @return the value of name
    */
+  @Basic
+  @Column(name = "NAME", nullable = true, length = -1)
   @Attribute(name = "name")
   public String getName() {
     return name;
@@ -113,6 +122,8 @@ public class Deal implements Serializable {
    *
    * @return the value of description
    */
+  @Basic
+  @Column(name = "DESCRIPTION", nullable = true, length = -1)
   @Attribute(name = "description")
   public String getDescription() {
     return description;
@@ -133,6 +144,8 @@ public class Deal implements Serializable {
    *
    * @return the value of address
    */
+  @Basic
+  @Column(name = "ADDRESS", nullable = true)
   @Element(name = "address")
   public Address getAddress() {
     return address;
@@ -153,6 +166,8 @@ public class Deal implements Serializable {
    *
    * @return the value of requests
    */
+  @Basic
+  @Column(name = "REQUESTS", nullable = true, length = 255)
   @Element(name = "requests")
   public Queue getRequests() {
     return requests;
@@ -173,6 +188,8 @@ public class Deal implements Serializable {
    *
    * @return the value of owner
    */
+  @Basic
+  @Column(name = "OWNER", nullable = true, length = 255)
   @Attribute(name = "owner")
   public String getOwner() {
     return owner;
@@ -193,6 +210,8 @@ public class Deal implements Serializable {
    *
    * @return the value of performer
    */
+  @Basic
+  @Column(name = "PERFORMER", nullable = true, length = 255)
   @Attribute(name = "performer", required = false)
   public String getPerformer() {
     return performer;
@@ -213,6 +232,8 @@ public class Deal implements Serializable {
    *
    * @return the value of dealType
    */
+  @Basic
+  @Column(name = "DEALTYPE", nullable = true, length = -1)
   @Attribute(name = "dealType")
   public DealTypes getDealType() {
     return dealType;
@@ -233,6 +254,8 @@ public class Deal implements Serializable {
    *
    * @return the value of object
    */
+  @Basic
+  @Column(name = "OBJECT", nullable = true, length = -1)
   @Attribute(name = "object")
   public ObjectTypes getObject() {
     return object;
@@ -253,6 +276,8 @@ public class Deal implements Serializable {
    *
    * @param dealModel the new value of DealModel
    */
+  @Basic
+  @Column(name = "DEALMODEL", nullable = true, length = -1)
   @Attribute(name = "model")
   public void setDealModel(DealModel dealModel) {
     this.dealModel = dealModel;
@@ -273,6 +298,8 @@ public class Deal implements Serializable {
    *
    * @return the value of created_at
    */
+  @Basic
+  @Column(name = "CREATED_AT", nullable = true)
   @Attribute(name = "createdAt")
   public Date getCreated_at() {
     return created_at;
@@ -293,10 +320,23 @@ public class Deal implements Serializable {
    *
    * @return the value of price
    */
+  @Basic
+  @Column(name = "PRICE", nullable = true, length = -1)
   @Attribute(name = "price")
   public String getPrice() {
     return price;
   }
+
+  @Basic
+  @Column(name = "CURRENT_STATUS", nullable = true, length = -1)
+  public Object getCurrentStatus() {
+    return currentStatus;
+  }
+
+  public void setCurrentStatus(Object currentStatus) {
+    this.currentStatus = currentStatus;
+  }
+
 
   @Override
   public boolean equals(Object o) {

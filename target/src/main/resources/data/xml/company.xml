@@ -1,0 +1,43 @@
+<List>
+   <object class="ru.sfedu.deals.model.Company" id="587f59de-909d-4861-be3a-e4fef4364369">
+      <deals class="java.util.ArrayList">
+         <deal dealType="PURCHASE" description="New simple deal" price="150 000" createdAt="2020-12-26 12:48:39.199 MSK" model="PRIVATE" object="LAND" name="New simple deal" id="aea320bd-1645-4c70-be5a-a93d00025576" owner="048b3010-0b72-4819-88a0-06762fa060c8">
+            <requests id="8ce5f556-4a08-4fe2-9e54-df18f50edee9">
+               <items class="java.util.ArrayList"/>
+            </requests>
+            <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
+         </deal>
+      </deals>
+      <employees class="java.util.ArrayList">
+         <User phone="8922222222" name="Ivan Test" id="048b3010-0b72-4819-88a0-06762fa060c8">
+            <queue id="e8d83682-c54c-4912-8c97-e13ad1bc17f2">
+               <items class="java.util.ArrayList"/>
+            </queue>
+            <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
+         </User>
+      </employees>
+   </object>
+   <object class="ru.sfedu.deals.model.Company" id="3e5efd5b-069b-46e6-9b97-5ba2904711b5">
+      <deals class="java.util.ArrayList">
+         <deal class="ru.sfedu.deals.model.PublicDeal" dealType="SALE" description="public deal description" price="123 000" createdAt="2020-12-26 12:48:39.201 MSK" model="PUBLIC" object="LAND" name="New public deal" id="10ea5101-ffce-478b-b7f4-e67b8b85d8c6" owner="fa660d4c-c854-43f5-8884-1154a5ea5222" currentStatus="NEW_DEAL">
+            <requests id="5ae999e9-c673-4a0e-9474-0967e9679340">
+               <items class="java.util.ArrayList"/>
+            </requests>
+            <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
+            <history class="java.util.ArrayList">
+               <dealHistory status="NEW_DEAL" created_at="2020-12-26 12:48:39.201 MSK" text="Новая сделка">
+                  <id>10ea5101-ffce-478b-b7f4-e67b8b85d8c6</id>
+               </dealHistory>
+            </history>
+         </deal>
+      </deals>
+      <employees class="java.util.ArrayList">
+         <User phone="0000000" name="Semen Test" id="fa660d4c-c854-43f5-8884-1154a5ea5222">
+            <queue id="43365603-77d1-4d12-94eb-9e7fb2351fc2">
+               <items class="java.util.ArrayList"/>
+            </queue>
+            <address region="Rostov region" district="Southern" city="Rostov-on-Don" id="0"/>
+         </User>
+      </employees>
+   </object>
+</List>

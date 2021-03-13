@@ -1,3 +1,18 @@
+
+java "-Dlog4j2.configurationFile=log4j2.properties" "-Dconfig=environment.properties" -jar deals.jar hb HB_LAB1 GET_ALL_SCHEMAS 123
+
+
+
+
+
+
+
+
+
+
+
+
+
 Пример установки проперти файлов для .bat файла (windows):
 
 @echo off
@@ -26,32 +41,22 @@ JDBC - DataProviderJdbc
 java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar jdbc add_address "Moscow,Moscow region,Central"
 
 
-Примеры команд для .bat (windows):
+Примеры команд для .sh (linux):
 
 добавить новые адрес с использованием jdbc датапровайдера
-java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar jdbc add_address "Moscow,Moscow region,Central"
-
-добавить нового пользователя с использованием xml датапровайдера
-java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar xml create_user Ivan,8921312342,0
-
-удалить пользователя, не передавая параметры
-java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar jdbc DELETE_USER 2fccca71-34e3-4b16-9d28-3cb2d5a0577c
-
-редактировать пользователя
-java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar xml edit_user 2fccca71-34e3-4b16-9d28-3cb2d5a0577c,IvanNew,81111111,0
-
-получить адрес с id=1 с помощью датапровайдера xml (из хранилища xml)
-java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar xml GET_ADDRESS_BY_ID 1
+java -Dlog4j2.configurationFile=$LOG4J2 -Dconfig=$PROPERTIES -jar deals.jar jdbc ADD_ADDRESS "Moscow,Moscow region,Central"
 
 получить все адреса (в рамках переданного датапровайдера)
-java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar jdbc GET_ADDRESSES
+java -Dlog4j2.configurationFile=$LOG4J2 -Dconfig=$PROPERTIES -jar deals.jar jdbc GET_ADDRESSES
+
+получить адрес с id=0 с помощью датапровайдера jdbc (из хранилища jdbc)
+java -Dlog4j2.configurationFile=$LOG4J2 -Dconfig=$PROPERTIES -jar deals.jar jdbc GET_ADDRESS_BY_ID 1
+
+добавить нового пользователя с использованием xml датапровайдера
+java -Dlog4j2.configurationFile=$LOG4J2 -Dconfig=$PROPERTIES -jar deals.jar xml CREATE_USER Ivan,8921312342,0
 
 получить всех пользователей (в рамках переданного датапровайдера)
-java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar xml get_users
-
-получить информацию о сделке
-java -Dlog4j2.configurationFile=%log4j% -Dconfig=%properties% -jar deals.jar csv manage_deal 2fccca71-34e3-4b16-9d28-3cb2d5a0577c
-
+java -Dlog4j2.configurationFile=$LOG4J2 -Dconfig=$PROPERTIES -jar deals.jar xml GET_USERS
 
 
 Весь перечень команд <COMMAND_KEY>:

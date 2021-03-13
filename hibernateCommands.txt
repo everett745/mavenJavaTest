@@ -1,0 +1,142 @@
+samples:
+java -jar deals.jar hb HB_LAB1 GET_SQL_HELP
+java -jar deals.jar hb HB_LAB1 GET_ALL_SCHEMAS
+
+java -jar deals.jar hb HB_LAB2 INSERT_TEST_ENTITY "Имя,Описание,true,Москва,Регион,Оыфвд"
+java -jar deals.jar hb HB_LAB2 GET_ALL_TEST_ENTITY 1
+
+java "-DhbConfig=hibernate.cfg.xml" -jar deals.jar hb HB_LAB3 JT_INSERT_CREDIT_ACCOUNT "Владелец,1500,5,2"
+java "-DhbConfig=hibernate.cfg.xml" -jar deals.jar hb HB_LAB3 JT_DELETE_ACCOUNT 1
+
+java -jar deals.jar hb HB_LAB4 LIST_INSERT_USER "Петр,Петров"
+java -jar deals.jar hb HB_LAB4 LIST_UPDATE_USER "Петр,Петров,1"
+java -jar deals.jar hb HB_LAB4 LIST_SELECT_USER 1
+
+java -jar deals.jar hb HB_LAB5 LIST_UPDATE_USER "Петр,Петров,1"
+java -jar deals.jar hb HB_LAB5 LIST_SELECT_USER 1
+
+
+
+
+HB_LAB1:
+
+GET_ALL_SCHEMAS
+GET_SQL_HELP
+GET_ALL_TABLES
+GET_ALL_USERS
+
+--HB_LAB2---------------------------------------------------
+
+INSERT_TEST_ENTITY
+6: name, description, check, city, region, district
+GET_ALL_TEST_ENTITY: 
+0
+DELETE_TEST_ENTITY:
+1: id
+UPDATE_TEST_ENTITY:
+7: name, description, check, city, region, district, id
+
+--HB_LAB3-----------------------------------------------
+
+JT_INSERT_CREDIT_ACCOUNT:
+4: owner, balance, interestRate, creditLimit
+JT_SELECT_CREDIT_ACCOUNT:
+0
+JT_DELETE_ACCOUNT:
+1: id
+JT_UPDATE_ACCOUNT:
+5: owner, balance, interestRate, creditLimit, id
+
+MSC_INSERT_CREDIT_ACCOUNT:
+4: owner, balance, interestRate, creditLimit
+MSC_SELECT_CREDIT_ACCOUNT:
+0
+MSC_DELETE_ACCOUNT:
+1: id
+MSC_UPDATE_ACCOUNT:
+5: owner, balance, interestRate, creditLimit, id
+
+ST_INSERT_CREDIT_ACCOUNT:
+4: owner, balance, interestRate, creditLimit
+ST_SELECT_CREDIT_ACCOUNT:
+0
+ST_DELETE_ACCOUNT:
+1: id
+ST_UPDATE_ACCOUNT:
+5: owner, balance, interestRate, creditLimit, id
+
+TCP_INSERT_CREDIT_ACCOUNT:
+4: owner, balance, interestRate, creditLimit
+TCP_SELECT_CREDIT_ACCOUNT:
+0
+TCP_DELETE_ACCOUNT:
+1: id
+TCP_UPDATE_ACCOUNT:
+5: owner, balance, interestRate, creditLimit, id
+
+
+--HB_LAB4-----------------------------------------------
+
+SET_INSERT_USER:
+2: name, last_name
+SET_SELECT_USER:
+0
+SET_DELETE_USER:
+1: id
+SET_UPDATE_USER:
+3: name, last_name, id
+
+LIST_INSERT_USER:
+2: name, last_name
+LIST_SELECT_USER:
+0
+LIST_DELETE_USER:
+1: id
+LIST_UPDATE_USER:
+3: name, last_name, id
+
+MAP_INSERT_USER:
+2: name, last_name
+MAP_SELECT_USER:
+0
+MAP_DELETE_USER:
+1: id
+MAP_UPDATE_USER:
+3: name, last_name, id
+
+ESET_INSERT_USER:
+2: name, last_name
+ESET_SELECT_USER:
+0
+ESET_DELETE_USER:
+1: id
+ESET_UPDATE_USER:
+3: name, last_name, id
+
+EMAP_INSERT_USER:
+2: name, last_name
+EMAP_SELECT_USER:
+0
+EMAP_DELETE_USER:
+1: id
+EMAP_UPDATE_USER:
+3: name, last_name, id
+
+
+java -jar deals.jar hb HB_LAB5 LIST_UPDATE_USER "Петр,Петров,1"
+java -jar deals.jar hb HB_LAB5 LIST_SELECT_USER 1
+
+
+--HB_LAB5-----------------------------------------------
+
+HQL_INSERT_USER:
+2: name, phone, city, region, district
+
+HQL_SELECT_USER:
+0
+
+HQL_DELETE_USER:
+1: id
+
+HQL_UPDATE_USER:
+3: name, phone, id

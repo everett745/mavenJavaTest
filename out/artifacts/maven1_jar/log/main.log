@@ -1,8 +1,4 @@
-2020-10-18 16:22:45 INFO  Main:13 - Log info
-2020-10-18 16:22:45 ERROR Main:14 - Log error
-2020-10-18 16:22:45 DEBUG Main:15 - Log debug
-2020-10-18 16:22:45 INFO  Main:16 - 33
-2020-10-18 16:23:07 INFO  Main:13 - Log info
-2020-10-18 16:23:07 ERROR Main:14 - Log error
-2020-10-18 16:23:07 DEBUG Main:15 - Log debug
-2020-10-18 16:23:07 INFO  Main:16 - 33
+2021-03-08 18:57:21 INFO  Main:13 - Log info
+2021-03-08 18:57:21 ERROR Main:14 - Log error
+2021-03-08 18:57:21 DEBUG Main:15 - Log debug
+2021-03-08 18:57:21 INFO  Main:16 - 33

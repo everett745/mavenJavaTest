@@ -7,8 +7,11 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import ru.sfedu.deals.dataConvertors.UUIDListConvertor;
 
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
+@Table(name = "QUEUE", schema = "PUBLIC", catalog = "DEALSDB")
 @Root(name = "Queue")
 public class Queue {
 
@@ -36,6 +39,8 @@ public class Queue {
    *
    * @return the value of id
    */
+  @Id
+  @Column(name = "ID", nullable = false, length = 255)
   @Attribute(name = "id")
   public String getId() {
     return id;
@@ -56,6 +61,8 @@ public class Queue {
    *
    * @return the value of items
    */
+  @Basic
+  @Column(name = "ITEMS", nullable = true, length = -1)
   @ElementList(name = "items")
   public List<String> getItems() {
     return items;
